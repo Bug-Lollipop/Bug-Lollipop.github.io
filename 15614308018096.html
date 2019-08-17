@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	DOM - Akira's blog
+  	
+	</title
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="Akira's blog" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	#sub-nav .social a.weibo {
+		background: url('asset/images/social/weibo.png?1419407210') center no-repeat #4ec4fa;
+		border: 1px solid #4ec4fa;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	article .entry-content table th,article .entry-content table td{ padding: 4px;border-collapse: collapse; border:solid 1px #ddd;}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="asset/icon.jpg" style="width:160px;">
+					</div>
+					<h1><a href="index.html">Akira's blog</a></h1>
+					<p class="subtitle">记录一些技术文章</p>
+					<nav id="main-nav">
+						<ul class="main">
+							<li><a href="index.html">Home</a></li>
+						    <li><a href="all.html">Blog</a></li>
+						    <li><a href="archives.html">Archives</a></li>
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+<!-- 
+			<a class="email" href="mailto:" title="Email">Email</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+			<a class="google" href="https://plus.google.com/" rel="author" title="Google+">Google+</a>
+			<a class="twitter" href="http://twitter.com/" title="Twitter">Twitter</a>
+			<a class="github" href="https://github.com/" title="GitHub">GitHub</a>
+			<a class="coderwall" href="https://coderwall.com/" title="Coderwall">Coderwall</a>
+		    <a class="stackoverflow" href="http://stackoverflow.com/users/" title="StackOverflow"></a>
+			<a class="linkedin" href="http://www.linkedin.com/in/" title="LinkedIn">LinkedIn</a>
+			<a class="pinterest" href="https://pinterest.com/" title="Pinterest">Pinterest</a>
+			<a class="delicious" href="http://delicious.com/" title="Delicious">Delicious</a>
+			<a class="pinboard" href="https://pinboard.in/u:" title="Pinboard">Pinboard</a>
+			<a class="douban" href="https://www.douban.com/people/" title="Douban">Douban</a>
+			<a class="quora" href="https://quora.com/" title="Quora">Quora</a>
+			<a class="instagram" href="https://instagram.com/" title="Instagram">Instagram</a>
+			<a class="behance" href="https://www.behance.net/" title="Behance">Behance</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+-->	
+								<a class="email" href="mailto:huixiao1008@gmail.com" title="Email">Email</a>
+								<a class="weibo" target="_blank" href="https://weibo.com/u/2554601764" title="weibo">Weibo</a>
+								
+								<a class="github" target="_blank" href="https://github.com/Bug-Lollipop" title="GitHub">GitHub</a>
+								<!-- <a class="twitter" target="_blank" href="http://twitter.com/oulvhai" title="Twitter">Twitter</a> -->
+								<!-- <a class="rss" href="atom.xml" title="RSS">RSS</a> -->
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+
+			<div class="mid-col-container">
+		
+
+			
+ <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">DOM</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<p><a href="https://www.jianshu.com/p/0bfb8be7428e">https://www.jianshu.com/p/0bfb8be7428e</a><br/>
+<a href="https://coderlt.coding.me/2016/11/22/js-event/">https://coderlt.coding.me/2016/11/22/js-event/</a></p>
+
+<p><a href="https://zhuanlan.zhihu.com/p/51611590">https://zhuanlan.zhihu.com/p/51611590</a><br/>
+<a href="https://www.html.cn/archives/10207">https://www.html.cn/archives/10207</a><br/>
+<a href="https://stackoverflow.com/questions/854253/document-getelementbyid-vs-getelementbyid">https://stackoverflow.com/questions/854253/document-getelementbyid-vs-getelementbyid</a></p>
+
+<p><a href="https://stackoverflow.com/questions/41752170/why-am-i-getting-window-getelementbyid-is-not-a-function">https://stackoverflow.com/questions/41752170/why-am-i-getting-window-getelementbyid-is-not-a-function</a></p>
+
+<p><a href="https://www.quora.com/What-is-the-difference-between-getElementById-and-document-form-0-element-for-accessing-elements-in-JavaScript-or-do-both-solve-the-same-purpose">https://www.quora.com/What-is-the-difference-between-getElementById-and-document-form-0-element-for-accessing-elements-in-JavaScript-or-do-both-solve-the-same-purpose</a></p>
+
+<hr/>
+
+<p><img src="media/15614308018096/15658819221295.jpg" alt=""/></p>
+
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/this">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/this</a></p>
+
+<hr/>
+
+<p><img src="media/15614308018096/15658834584966.jpg" alt=""/></p>
+
+<p><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-attributes">https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-attributes</a></p>
+
+<p><a href="https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window">https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window</a></p>
+
+<p><img src="media/15614308018096/15658835955655.jpg" alt=""/></p>
+
+<p>DOM: Document Object Module, 文档对象模型。我们通过JavaScript操作页面的元素，进行添加、移动、改变或移除的方法和属性, 都是DOM提供的。</p>
+
+<p>如果将文档的内容视为一栋办公楼，那DOM就是一种对办公楼内空间分配的标准，它规定了，这个办公楼的空间，应该是先分楼层，再分房间的方式，方便访客找到这个房间。</p>
+
+<p>有什么用？举例说明：你要去一个叫201的房间（获取对象），你怎么去呢? 用DOM的方法，你只需要走到二层，然后到第一个房间就行了，而你是用走，爬，甚至跳舞的方式过去（即：使用不同的编程语言）都没关系，你只要按照DOM的规定，最终都能找到这个房间。</p>
+
+<p>全世界的房子都是分楼层，再分房间的结构，于是，你去哪个办公楼找人，你都能通过上某个楼层、按照房间的排列顺序去找到某个房间。</p>
+
+<p>同理全世界的网页内容都是DOM的结构，于是，你去找网页中的某个对象时，都能通过某个标签的某个子标签找到某个对象。</p>
+
+<h3 id="toc_0">BOM</h3>
+
+<p>BOM，browser object model，浏览器对象模型，这个对象就是对应着浏览器窗口window。</p>
+
+<p>它提供了一些方法用于访问浏览器的功能，这些功能和网页内容无关。</p>
+
+<h4 id="toc_1">window 对象</h4>
+
+<p>window对象是BOM的核心，表示浏览器正打开的窗口，它是一个全局对象。</p>
+
+<p>它还有一些属性方法和子对象，我们其实已经默默的使用过它了。比如alert()方法，但因为它是widow对象的直接后代，所以不需要加上window前缀。</p>
+
+<p>另外我们定义的全局变量，其实也是定义到了window上的。</p>
+
+		</div>
+	</article>
+<div class="share-comment">
+
+</div>
+
+
+</div>        </div>
+	
+	</div>
+<script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

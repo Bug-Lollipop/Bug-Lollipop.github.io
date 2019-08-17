@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	应用包打包体积优化 - Akira's blog
+  	
+	</title
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="Akira's blog" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	#sub-nav .social a.weibo {
+		background: url('asset/images/social/weibo.png?1419407210') center no-repeat #4ec4fa;
+		border: 1px solid #4ec4fa;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	article .entry-content table th,article .entry-content table td{ padding: 4px;border-collapse: collapse; border:solid 1px #ddd;}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="asset/icon.jpg" style="width:160px;">
+					</div>
+					<h1><a href="index.html">Akira's blog</a></h1>
+					<p class="subtitle">记录一些技术文章</p>
+					<nav id="main-nav">
+						<ul class="main">
+							<li><a href="index.html">Home</a></li>
+						    <li><a href="all.html">Blog</a></li>
+						    <li><a href="archives.html">Archives</a></li>
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+<!-- 
+			<a class="email" href="mailto:" title="Email">Email</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+			<a class="google" href="https://plus.google.com/" rel="author" title="Google+">Google+</a>
+			<a class="twitter" href="http://twitter.com/" title="Twitter">Twitter</a>
+			<a class="github" href="https://github.com/" title="GitHub">GitHub</a>
+			<a class="coderwall" href="https://coderwall.com/" title="Coderwall">Coderwall</a>
+		    <a class="stackoverflow" href="http://stackoverflow.com/users/" title="StackOverflow"></a>
+			<a class="linkedin" href="http://www.linkedin.com/in/" title="LinkedIn">LinkedIn</a>
+			<a class="pinterest" href="https://pinterest.com/" title="Pinterest">Pinterest</a>
+			<a class="delicious" href="http://delicious.com/" title="Delicious">Delicious</a>
+			<a class="pinboard" href="https://pinboard.in/u:" title="Pinboard">Pinboard</a>
+			<a class="douban" href="https://www.douban.com/people/" title="Douban">Douban</a>
+			<a class="quora" href="https://quora.com/" title="Quora">Quora</a>
+			<a class="instagram" href="https://instagram.com/" title="Instagram">Instagram</a>
+			<a class="behance" href="https://www.behance.net/" title="Behance">Behance</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+-->	
+								<a class="email" href="mailto:huixiao1008@gmail.com" title="Email">Email</a>
+								<a class="weibo" target="_blank" href="https://weibo.com/u/2554601764" title="weibo">Weibo</a>
+								
+								<a class="github" target="_blank" href="https://github.com/Bug-Lollipop" title="GitHub">GitHub</a>
+								<!-- <a class="twitter" target="_blank" href="http://twitter.com/oulvhai" title="Twitter">Twitter</a> -->
+								<!-- <a class="rss" href="atom.xml" title="RSS">RSS</a> -->
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+
+			<div class="mid-col-container">
+		
+
+			
+ <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">应用包打包体积优化</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<p>一个接手的Vue外部项目，build 非常慢，试着去优化一波。<br/>
+首先使用 webpack-bundle-analyzer 来分析一波是哪些文件造成的：</p>
+
+<h3 id="toc_0">安装</h3>
+
+<p>项目根目录运行：</p>
+
+<pre><code>npm install --save-dev webpack-bundle-analyzer
+</code></pre>
+
+<h3 id="toc_1">配置</h3>
+
+<p>在使用vue-cli生成的脚手架文件中，通过修改build文件夹下的webpack.prod.conf.js：</p>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_2">引入模块</h3>
+
+<pre><code>const BundleAnalyzerPlugin = require(&#39;webpack-bundle-analyzer&#39;).BundleAnalyzerPlugin;
+
+// ...
+plugins: [
+  // ...
+  new BundleAnalyzerPlugin(),
+]
+// ...
+</code></pre>
+
+<p>通过插件生成的包结构图如下：</p>
+
+<p><img src="media/15284430142953/15284434767551.jpg" alt=""/></p>
+
+<p><img src="media/15284430142953/15284434902123.jpg" alt="img" style="width:300px;"/></p>
+
+<p>可以看出vendor.js 很大了，首先开始拆vendor:</p>
+
+<h4 id="toc_3">lodash</h4>
+
+<p>这里lodash 没有按需加载，导致包很大，我们可以按需打包lodash<br/>
+lodash 官方为每个方法都维护了独立的 npm 包：</p>
+
+<h5 id="toc_4">method packages</h5>
+
+<pre><code>// npm install lodash.add
+import add from &#39;lodash.add&#39;;
+// npm install lodash.cloneDeep
+import cloneDeep from &#39;lodash.cloneDeep&#39;;
+</code></pre>
+
+<p>但是这种方式有着以下缺陷：</p>
+
+<ul>
+<li>每当使用一个新的方法就需要安装一个新的 npm package</li>
+<li>npm packge 间存在一些重复公用方法且无法优化</li>
+<li>每一个方法都需要单独写一行 import</li>
+<li>lodash V5.0.0 将会放弃对这些模块的维护</li>
+</ul>
+
+<h5 id="toc_5">cherry-pick</h5>
+
+<p>在 lodash 源码中，所有的方法被组织在一个个同名的文件中，开发者可以根据自己的需要直接引用源码来实现按需引入的目的，这种方式被官方称为 cherry-pick。</p>
+
+<pre><code>import add from &#39;lodash/add&#39;;
+import cloneDeep from &#39;lodash/cloneDeep&#39;;
+</code></pre>
+
+<p>cherry-pick 虽然只需安装一个 lodash 包，但是有时还是要写很多行的 import。</p>
+
+<p>这这个项目中 我们发现只用到了lodash 的一个方法，那么可以使用cherry-pick 引入该方法。重新build 之后，我们再看一下包体积：</p>
+
+<p><img src="media/15284430142953/15284449340411.jpg" alt=""/></p>
+
+<p>此时lodash 打包肉眼可见的变小了，再看一下整个包体积变化：</p>
+
+<p><img src="media/15284430142953/15284449761856.jpg" alt="img" style="width:400px;"/></p>
+
+<p>相比较之前，小了0.4MB，接着我们再对moment.js 进行改造：<br/>
+对于 moment.js 这种全而大的 JS 时间库，虽然很方便，但是真的是太重了，而且一个项目可能只需要使用其中几个常见的API。此时如果想要优化moment 的体积，可以使用Day.js 代替，Day.js 是一个轻量的 JavaScript 时间日期处理库，和 Moment.js 的 API 设计保持完全一样. 如果你曾经用过 Moment.js, 那么你已经知道如何使用 Day.js</p>
+
+<p>Day.js 的基本操作如下，相同的API，相同的链式操作：</p>
+
+<pre><code>dayjs().startOf(&#39;month&#39;).add(1, &#39;day&#39;).set(&#39;year&#39;, 2018).format(&#39;YYYY-MM-DD HH:mm:ss&#39;);
+</code></pre>
+
+<p>特点：<br/>
+🕒 和 Moment.js 相同的 API 和用法<br/>
+💪 不可变数据 (Immutable)<br/>
+🔥 支持链式操作 (Chainable)<br/>
+🌐 I18n 国际化<br/>
+📦 仅 2kb 大小的微型库<br/>
+👫 全浏览器兼容</p>
+
+<p>麻雀虽小，五脏俱全，Day.js 包含了时间处理的全部常用方法，并且仅仅有 2kb 大小。因此想缩小打包体积，提升开发体验只需要replace(/moment/g, &#39;dayjs&#39;) 全局替换一下。就能从 Moment.js + locals 200kb 减小成 dayjs 2kb的体积。所有的API调用都保持不变，无需修改。</p>
+
+<p>这次我们再看一下 改为Day.js 之后的打包体积大小：<br/>
+<img src="media/15284430142953/15284471455127.jpg" alt=""/></p>
+
+<p><img src="media/15284430142953/15284471595449.jpg" alt="img" style="width:400px;"/></p>
+
+<p>此时Day.js 已经小到在这张图上消失了，而TreeMap 大小又缩小了 0.5M 。</p>
+
+<p>接下来最后的大头是 element-ui ，element-ui本身支持按需引入，不过对于该项目，全局搜索了一遍，发现被用到的组件非常多，这个时候要仔细文件，防止被漏掉某些组件。具体按需引入的的方式element-ui 官方文档有很详细的介绍，现在我们看一下打包的体积：<br/>
+<img src="media/15284430142953/15284544180604.jpg" alt=""/><br/>
+<img src="media/15284430142953/15284544340569.jpg" alt="img" style="width:400px;"/></p>
+
+<p>此时Treemap size 又减少了0.2MB。最后我们可以 Code Splitting，将代码分成一块一块，提升加载速度：<br/>
+具体可以看<a href="https://zhuanlan.zhihu.com/p/26710831">Webpack 大法之 Code Splitting</a> 最后我们打包出来的体积结构如下：<br/>
+<img src="media/15284430142953/15284560084587.jpg" alt=""/></p>
+
+<p><img src="media/15284430142953/15284560220358.jpg" alt="img" style="width:400px;"/></p>
+
+<p>我们看到 每个router 的 js 都单独出来了，这样子有缩小了 0.2MB 的体积。</p>
+
+<p>我们可以看到Vendor 还是很大，但是毕竟对于这个项目来说，业务很重的大系统，不可避免会这样，但是相比优化之前，已经好很多了，Treemap size 2.06M =&gt; 1.85M。</p>
+
+		</div>
+	</article>
+<div class="share-comment">
+
+</div>
+
+
+</div>        </div>
+	
+	</div>
+<script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

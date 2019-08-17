@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	CSS outline 自动填满屏幕剩余空间 - Akira's blog
+  	
+	</title
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="Akira's blog" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	#sub-nav .social a.weibo {
+		background: url('asset/images/social/weibo.png?1419407210') center no-repeat #4ec4fa;
+		border: 1px solid #4ec4fa;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	article .entry-content table th,article .entry-content table td{ padding: 4px;border-collapse: collapse; border:solid 1px #ddd;}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="asset/icon.jpg" style="width:160px;">
+					</div>
+					<h1><a href="index.html">Akira's blog</a></h1>
+					<p class="subtitle">记录一些技术文章</p>
+					<nav id="main-nav">
+						<ul class="main">
+							<li><a href="index.html">Home</a></li>
+						    <li><a href="all.html">Blog</a></li>
+						    <li><a href="archives.html">Archives</a></li>
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+<!-- 
+			<a class="email" href="mailto:" title="Email">Email</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+			<a class="google" href="https://plus.google.com/" rel="author" title="Google+">Google+</a>
+			<a class="twitter" href="http://twitter.com/" title="Twitter">Twitter</a>
+			<a class="github" href="https://github.com/" title="GitHub">GitHub</a>
+			<a class="coderwall" href="https://coderwall.com/" title="Coderwall">Coderwall</a>
+		    <a class="stackoverflow" href="http://stackoverflow.com/users/" title="StackOverflow"></a>
+			<a class="linkedin" href="http://www.linkedin.com/in/" title="LinkedIn">LinkedIn</a>
+			<a class="pinterest" href="https://pinterest.com/" title="Pinterest">Pinterest</a>
+			<a class="delicious" href="http://delicious.com/" title="Delicious">Delicious</a>
+			<a class="pinboard" href="https://pinboard.in/u:" title="Pinboard">Pinboard</a>
+			<a class="douban" href="https://www.douban.com/people/" title="Douban">Douban</a>
+			<a class="quora" href="https://quora.com/" title="Quora">Quora</a>
+			<a class="instagram" href="https://instagram.com/" title="Instagram">Instagram</a>
+			<a class="behance" href="https://www.behance.net/" title="Behance">Behance</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+-->	
+								<a class="email" href="mailto:huixiao1008@gmail.com" title="Email">Email</a>
+								<a class="weibo" target="_blank" href="https://weibo.com/u/2554601764" title="weibo">Weibo</a>
+								
+								<a class="github" target="_blank" href="https://github.com/Bug-Lollipop" title="GitHub">GitHub</a>
+								<!-- <a class="twitter" target="_blank" href="http://twitter.com/oulvhai" title="Twitter">Twitter</a> -->
+								<!-- <a class="rss" href="atom.xml" title="RSS">RSS</a> -->
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+
+			<div class="mid-col-container">
+		
+
+			
+ <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">CSS outline 自动填满屏幕剩余空间</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<p>有不少网站的主要背景是白色的，底部是深色的，于是就会出现这样一个场景，当主内容很少的时候，包括底部在内的都不足一瓶，或者用户的显示器是竖屏，则很可能出现下图所示的情况：</p>
+
+<p><img src="media/15284430152022/15284588736488.jpg" alt="img" style="width:300px;"/></p>
+
+<span id="more"></span><!-- more -->
+
+<p>如何让底部背景颜色正好填满剩余屏幕区域呢？这个时候可以用 <code>outline</code> 属性。假设HTML代码是这样的：</p>
+
+<pre><code>&lt;div class=&quot;header&quot;&gt;
+  &lt;h1&gt;header&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div class=&quot;main&quot;&gt;
+  &lt;p&gt;main&lt;/p&gt;   
+&lt;/div&gt;
+&lt;div class=&quot;footer&quot;&gt;
+  &lt;p&gt;footer&lt;/p&gt;  
+&lt;/div&gt;
+</code></pre>
+
+<p>然后设置的CSS为：</p>
+
+<pre><code>.header {
+  height: 66px;
+  background: #0097ff;
+  color: #fff;
+  text-align: center;
+}
+.main {
+  text-align: center;
+}
+
+.footer {
+  height: 50px;
+}
+
+.footer &gt; p {
+  position: absolute;
+  left: 0; 
+  right: 0;
+  text-align: center;
+  padding: 15px 0;
+  background-color: #3b4045;
+  outline: 9999px solid #3b4045;
+  clip: rect(0 9999px 9999px 0);
+  color: #fff;
+} 
+
+</code></pre>
+
+<p>实现效果的关键 CSS 就是设置一个超大轮廓范围的 <code>outline</code> 属性。例如这里设置成9999px，作用是保证无论屏幕多高，轮廓色块也一定能够覆盖。</p>
+
+<p>但是和 border 属性不一样，outline 是无法指定方位的，只是被动地向四周扩散。因此<code>outline: 9999px solid #3b4045;</code> 不仅会填满底部方位的屏幕空间，还会把上面的空间内容也填满。因此还要进一步进行处理。这里可以用 <code>clip</code> 剪裁策略，让底部元素绝对定位，同时以上边缘和左边缘为界进行裁剪，这样完全不用担心outline 会覆盖上面的内容。代码组合为：</p>
+
+<pre><code>position: absolute;
+clip: rect(0 9999px 9999px 0);
+</code></pre>
+
+<p>使用 9999px 这么大的值也是为了确保100% 填满屏幕。于是最终效果图为：</p>
+
+<p><img src="media/15284430152022/15284586407309.jpg" alt="img" style="width:300px;"/></p>
+
+		</div>
+	</article>
+<div class="share-comment">
+
+</div>
+
+
+</div>        </div>
+	
+	</div>
+<script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

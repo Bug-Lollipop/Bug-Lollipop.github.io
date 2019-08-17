@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	多种方式判断Javascript 对象中属性值为空 - Akira's blog
+  	
+	</title
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="Akira's blog" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	#sub-nav .social a.weibo {
+		background: url('asset/images/social/weibo.png?1419407210') center no-repeat #4ec4fa;
+		border: 1px solid #4ec4fa;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	article .entry-content table th,article .entry-content table td{ padding: 4px;border-collapse: collapse; border:solid 1px #ddd;}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="asset/icon.jpg" style="width:160px;">
+					</div>
+					<h1><a href="index.html">Akira's blog</a></h1>
+					<p class="subtitle">记录一些技术文章</p>
+					<nav id="main-nav">
+						<ul class="main">
+							<li><a href="index.html">Home</a></li>
+						    <li><a href="all.html">Blog</a></li>
+						    <li><a href="archives.html">Archives</a></li>
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+<!-- 
+			<a class="email" href="mailto:" title="Email">Email</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+			<a class="google" href="https://plus.google.com/" rel="author" title="Google+">Google+</a>
+			<a class="twitter" href="http://twitter.com/" title="Twitter">Twitter</a>
+			<a class="github" href="https://github.com/" title="GitHub">GitHub</a>
+			<a class="coderwall" href="https://coderwall.com/" title="Coderwall">Coderwall</a>
+		    <a class="stackoverflow" href="http://stackoverflow.com/users/" title="StackOverflow"></a>
+			<a class="linkedin" href="http://www.linkedin.com/in/" title="LinkedIn">LinkedIn</a>
+			<a class="pinterest" href="https://pinterest.com/" title="Pinterest">Pinterest</a>
+			<a class="delicious" href="http://delicious.com/" title="Delicious">Delicious</a>
+			<a class="pinboard" href="https://pinboard.in/u:" title="Pinboard">Pinboard</a>
+			<a class="douban" href="https://www.douban.com/people/" title="Douban">Douban</a>
+			<a class="quora" href="https://quora.com/" title="Quora">Quora</a>
+			<a class="instagram" href="https://instagram.com/" title="Instagram">Instagram</a>
+			<a class="behance" href="https://www.behance.net/" title="Behance">Behance</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+-->	
+								<a class="email" href="mailto:huixiao1008@gmail.com" title="Email">Email</a>
+								<a class="weibo" target="_blank" href="https://weibo.com/u/2554601764" title="weibo">Weibo</a>
+								
+								<a class="github" target="_blank" href="https://github.com/Bug-Lollipop" title="GitHub">GitHub</a>
+								<!-- <a class="twitter" target="_blank" href="http://twitter.com/oulvhai" title="Twitter">Twitter</a> -->
+								<!-- <a class="rss" href="atom.xml" title="RSS">RSS</a> -->
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+
+			<div class="mid-col-container">
+		
+
+			
+ <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">多种方式判断Javascript 对象中属性值为空</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<p>我们在做接口请求的时候，会出现在某种条件下某个参数是不需要传的，一般情况下，赋值时不需要的参数的属性值为null，undefined。这个时候需要过滤出属性值为null，undefined 的key，并删除。</p>
+
+<p>下面总结了几种方式：</p>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_0">遍历该对象</h3>
+
+<pre><code>const test = {
+  test1 : null,
+  test2 : &#39;somestring&#39;,
+  test3 : 3,
+}
+function removeNullsInObject(obj) {
+  for (var propName in obj) { 
+    if (obj[propName] === null || obj[propName] === undefined) {
+      delete obj[propName];
+    }
+  }
+}
+clean(removeNullsInObject);
+
+</code></pre>
+
+<p>如果担心此属性删除未运行对象的propttype 链，还可以：</p>
+
+<pre><code>function removeNullsInObject(obj) {
+  const propNames = Object.getOwnPropertyNames(obj);
+  for (var i = 0; i &lt; propNames.length; i++) {
+    let propName = propNames[i];
+    if (obj[propName] === null || obj[propName] === undefined) {
+      delete obj[propName];
+    }
+  }
+}
+</code></pre>
+
+<h3 id="toc_1">使用lodash</h3>
+
+<p>lodash 中提供了 深度搜索对象中移除undefined值的方法：</p>
+
+<pre><code>var _ = require(&#39;lodash&#39;);
+
+const test = {
+  test1 : null,
+  test2 : &#39;somestring&#39;,
+  test3 : 3,
+}
+
+var compacted = _.pick(obj, function(value) {
+  return value !== null &amp;&amp; value !== undefined;
+});
+
+console.log(compacted)
+</code></pre>
+
+<h3 id="toc_2">使用JSON.stringify</h3>
+
+<p>将对象JSON.stringify之后，在JSON.parse组合将其重新转换为对象：</p>
+
+<pre><code>const test = {
+    test1 : null,
+    test2 : &#39;somestring&#39;,
+    test3 : 3,
+}
+function removeNullsInObject(key, value) {
+  if (value === null || value === undefined) {
+    return undefined;
+  }
+return value;
+}
+
+console.log(JSON.parse(JSON.stringify(test, removeNullsInObject)));
+</code></pre>
+
+<p>看一下官方定义：</p>
+
+<blockquote>
+<p>JSON.stringify(value[, replacer [, space]]) 的第二个参数replacer 可以是一个函数或者一个数组。<br/>
+作为函数，它有两个参数，键(key)值(value)都会被序列化。<br/>
+如果返回一个 Number, 转换成相应的字符串被添加入JSON字符串。<br/>
+如果返回一个 String, 该字符串作为属性值被添加入JSON。<br/>
+如果返回一个 Boolean, &quot;true&quot; 或者 &quot;false&quot;被作为属性值被添加入JSON字符串。<br/>
+如果返回任何其他对象，该对象递归地序列化成JSON字符串，对每个属性调用replacer方法。除非该对象是一个函数，这种情况将不会被序列化成JSON字符串。<br/>
+如果返回undefined，该属性值不会在JSON字符串中输出。<br/>
+注意: 不能用replacer方法，从数组中移除值(values)，如若返回undefined或者一个函数，将会被null取代。</p>
+</blockquote>
+
+<p>因此首先replacer 参数将值为null 或者undefined 通通转换成 undefined，然后其undefined 属性值不会在JSON字符串中输出的特性使得 值为null 的属性删除，然后再通过JSON.parse 还原成对象。</p>
+
+<h3 id="toc_3">使用非空的键创建新对象</h3>
+
+<pre><code>const test = {
+    test1 : null,
+    test2 : &#39;somestring&#39;,
+    test3 : 3,
+}
+const removeNullsInObject = (obj) =&gt; {
+  return Object.keys(obj).filter(key =&gt; obj[key]).reduce(
+    (newObj, key) =&gt; {
+      newObj[key] = obj[key]
+      return newObj
+    }, {}
+  )
+}
+
+console.log(removeNullsInObject(test))
+</code></pre>
+
+<h3 id="toc_4">ES7/2016 Object.entries</h3>
+
+<pre><code>const test = {
+    test1 : null,
+    test2 : &#39;somestring&#39;,
+    test3 : 3,
+}
+const removeNullsInObject = (obj) =&gt; {
+  Object.entries(obj).forEach(([key, val]) =&gt;
+    if (val &amp;&amp; typeof val === &#39;object&#39;) removeEmpty(val)
+    else if (val == null) delete obj[key]
+  );
+  return obj;
+};
+
+console.log(removeNullsInObject(test))
+</code></pre>
+
+		</div>
+	</article>
+<div class="share-comment">
+
+</div>
+
+
+</div>        </div>
+	
+	</div>
+<script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

@@ -1,0 +1,795 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	快应用的实践 - Akira's blog
+  	
+	</title
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="Akira's blog" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	#sub-nav .social a.weibo {
+		background: url('asset/images/social/weibo.png?1419407210') center no-repeat #4ec4fa;
+		border: 1px solid #4ec4fa;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	article .entry-content table th,article .entry-content table td{ padding: 4px;border-collapse: collapse; border:solid 1px #ddd;}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="asset/icon.jpg" style="width:160px;">
+					</div>
+					<h1><a href="index.html">Akira's blog</a></h1>
+					<p class="subtitle">记录一些技术文章</p>
+					<nav id="main-nav">
+						<ul class="main">
+							<li><a href="index.html">Home</a></li>
+						    <li><a href="all.html">Blog</a></li>
+						    <li><a href="archives.html">Archives</a></li>
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+<!-- 
+			<a class="email" href="mailto:" title="Email">Email</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+			<a class="google" href="https://plus.google.com/" rel="author" title="Google+">Google+</a>
+			<a class="twitter" href="http://twitter.com/" title="Twitter">Twitter</a>
+			<a class="github" href="https://github.com/" title="GitHub">GitHub</a>
+			<a class="coderwall" href="https://coderwall.com/" title="Coderwall">Coderwall</a>
+		    <a class="stackoverflow" href="http://stackoverflow.com/users/" title="StackOverflow"></a>
+			<a class="linkedin" href="http://www.linkedin.com/in/" title="LinkedIn">LinkedIn</a>
+			<a class="pinterest" href="https://pinterest.com/" title="Pinterest">Pinterest</a>
+			<a class="delicious" href="http://delicious.com/" title="Delicious">Delicious</a>
+			<a class="pinboard" href="https://pinboard.in/u:" title="Pinboard">Pinboard</a>
+			<a class="douban" href="https://www.douban.com/people/" title="Douban">Douban</a>
+			<a class="quora" href="https://quora.com/" title="Quora">Quora</a>
+			<a class="instagram" href="https://instagram.com/" title="Instagram">Instagram</a>
+			<a class="behance" href="https://www.behance.net/" title="Behance">Behance</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+-->	
+								<a class="email" href="mailto:huixiao1008@gmail.com" title="Email">Email</a>
+								<a class="weibo" target="_blank" href="https://weibo.com/u/2554601764" title="weibo">Weibo</a>
+								
+								<a class="github" target="_blank" href="https://github.com/Bug-Lollipop" title="GitHub">GitHub</a>
+								<!-- <a class="twitter" target="_blank" href="http://twitter.com/oulvhai" title="Twitter">Twitter</a> -->
+								<!-- <a class="rss" href="atom.xml" title="RSS">RSS</a> -->
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+
+			<div class="mid-col-container">
+		
+
+			
+ <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">快应用的实践</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<h2 id="toc_0">面向的场景？</h2>
+
+<p>目前快应用在饿了么中的用户场景为： <br/>
+用户在【应用商店】【浏览器】【自带搜索助手】搜索饿了么，出现快应用的条目，用户点击饿了么快应用，无需安装，直接打开快应用。同时会提示用户是否生成桌面图标，并且用户可以收到来自服务进行的推送，体验和原生APP 相差无异。</p>
+
+<h2 id="toc_1">开发工具与条件</h2>
+
+<p>开发快应用的前提是拥有一台九大厂商品牌之一的安卓手机，然后注册快应用联盟账号，接着与该手机对应品牌的开发者账号进行绑定，然后照着快应用的开发文档进行开发，最后上传至快应用官网进行测试审核并分发。目前快应用还不能实现自动统一分发到各个平台去审核。如果想要在每个品牌的应用市场都上架自己的快应用，就需要每个平台的开发者账号都要去填写开发者信息，1-2工作日审核，然后再上架自己的快应用。</p>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_2">与前端的对比</h2>
+
+<h3 id="toc_3">页面布局</h3>
+
+<p>快应用整体基于flex 布局：<br/>
+display 默认 flex，支持的参数为 flex | none<br/>
+position 默认 none，支持的参数为 fixed | none<br/>
+宽 高 长度值只能使用px 或 %</p>
+
+<h3 id="toc_4">页面标签</h3>
+
+<p>如果要将原生 HTML 布局迁移至快应用，需要注意的是快应用中没有 h1~h6 标签，同时一些 HTML5 标签例如<code>&lt;header&gt;</code> <code>&lt;footer&gt;</code> <code>&lt;article&gt;</code> 等都要做改动。</p>
+
+<p>另外文本不能单纯放在<code>&lt;div&gt;</code> 中，只能放在 <code>&lt;a&gt;</code> <code>&lt;span&gt;</code> <code>&lt;text&gt;</code> 标签中。</p>
+
+<p>使用时要注意好嵌套关系，比如  <code>&lt;a&gt;</code> 标签的子组件只支持 <code>&lt;span&gt;</code> 标签，<code>&lt;text&gt;</code> 标签的子组件只支持 <code>&lt;a&gt;</code> <code>&lt;span&gt;</code>。</p>
+
+<p><code>&lt;img&gt;</code> 图片标签在快应用中用 <code>&lt;image&gt;</code> 标签替代。<br/>
+<code>&lt;rating&gt;</code> 是原生html 没有的，是用来显示星级的组件，显示星级在饿了么App 中处处可见，这个功能非常实用，省去了我们手写去实现的时间。</p>
+
+<h3 id="toc_5">Storage</h3>
+
+<p>快应用中打包后是一个 .rpk 程序，因此并不需要 sessionStorage，在快应用中，若想要做本地存储，可以直接使用 Storage 方法：</p>
+
+<p>例如读取存储的用户信息<br/>
+storage.js</p>
+
+<pre><code>import storage from &#39;@system.storage&#39;
+
+const User = () =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    storage.get({
+      key: &#39;USER&#39;,
+      success: (currentUser) =&gt; {
+        currentUser = currentUser &amp;&amp; JSON.parse(currentUser)
+        if (!currentUser) {
+          currentUser = undefined
+        }
+        resolve(currentUser)
+      },
+      fail: (err) =&gt; {
+        reject(err)
+      }
+    })
+  })
+}
+
+export default {
+  User
+}
+
+</code></pre>
+
+<p>Home.ux：</p>
+
+<pre><code>import { User } from &#39;../Common/service/storage&#39;
+
+User().then((currentUser) =&gt; {
+  this.currentUser = currentUser;
+  this.loadData()
+})
+</code></pre>
+
+<p>通过<code>storage.get</code>，<code>storage.set</code>，<code>storage.clear</code>，<code>storage.delete</code>可以随心所欲的操作存储我们的数据了。</p>
+
+<h2 id="toc_6">与Vue.js 的对比</h2>
+
+<p>使用过 Vue.js 的同学再来开发快应用会发现快应用的的API 大量的借鉴了 Vue.js，甚至一些方法名也是一样的。二者一个是类 App 应用框架，一个是 Web 应用框架，因此还是各有各的特点，下面简单总结介绍一下二者的异同。</p>
+
+<h3 id="toc_7">开发环境及工具</h3>
+
+<p>快应用的开发环境对 NodeJS 的版本要求很严格，官方推荐安装 v6.11.3， 如果开发者本地的 NodeJS 版本过高，快应用的 Toolkit 工具安装时会报错，官方给的解释是：内部 ZipStream 实现与 node-archive 包不兼容。安装完 Toolkit 之后，也可以像 Vue.js 一样通过脚手架工具快速生成一个项目模板：</p>
+
+<pre><code>hap init &lt;ProjectName&gt;
+</code></pre>
+
+<p>除此之外，快应用还需要在手机上安装调试器和平台预览版，用来在开发过程中实时预览界面和开发调试平台新功能，最后可以按照官方的文档跑起这个文档项目。本地开发快应用推荐使用 VSCode，因为可以在 VScode 里下载官方推荐的 Hap Extension 插件。</p>
+
+<p>而对于 Vue.js 而言，所有支持 Language Server Protocol 的编辑器都适合 Vue.js。因此主流的前端编辑器都支持 Vue.js 语法开发。</p>
+
+<p>相对比而言，Vue.js 的对开发环境和开发工具的限制更小一些。但是一个是新起的快应用，另一个是有四年时间积累的 Vue.js ，自然不能这么去对比，快应用的开发条件的完善目前只是时间问题。</p>
+
+<h3 id="toc_8">模板</h3>
+
+<h4 id="toc_9">模板定义</h4>
+
+<p>快应用和 Vue.js 都是使用<code>&lt;template&gt;</code> 标签来定义模板，小程序也是如此。但是 Vue.js 中的模板的定义类型会更多一些。</p>
+
+<h4 id="toc_10">自定义组件在模板中的引用</h4>
+
+<p>快应用中在模板中直接通过<code>import</code> 进行引入，例如：</p>
+
+<pre><code>&lt;import name=&#39;comp&#39; src=&#39;./comp&#39;&gt;&lt;/import&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;comp prop1=&#39;xxxx&#39; onevent1=&quot;bindParentVmMethod1&quot; @event-type1=&quot;bindParentVmMethod1&quot;&gt;&lt;/comp&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+</code></pre>
+
+<p>它也可以通过(on|@)语法绑定自定义子组件上的事件，Vue.js 是将自定义组件注册到 components 中再去引用。</p>
+
+<h3 id="toc_11">生命周期</h3>
+
+<p>快应用的常用的生命周期如下：</p>
+
+<table>
+<thead>
+<tr>
+<th>生命周期</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>onInit</td>
+<td>可以开始使用页面中的数据</td>
+</tr>
+<tr>
+<td>onReady</td>
+<td>开始获取DOM节点（如：this.$element(idxxx)</td>
+</tr>
+<tr>
+<td>onShow</td>
+<td>页面被切换重新显示时会被调用onShow</td>
+</tr>
+<tr>
+<td>onHide</td>
+<td>页面被切换隐藏时调用onHide</td>
+</tr>
+<tr>
+<td>onDestroy</td>
+<td>页面被销毁时调用</td>
+</tr>
+</tbody>
+</table>
+
+<p>通过描述，我们可以用实践总结出一些这些生命周期实际的使用场景：</p>
+
+<h4 id="toc_12">onInit</h4>
+
+<p>获取或修改<code>localstorage</code>中存储的内容；<br/>
+获取全局对象及方法 例如：<code>this.$app.$data.place.address</code>；<br/>
+获取请求接口返回的数据；</p>
+
+<h4 id="toc_13">onReady</h4>
+
+<p>组件自定义事件的触发 例如：<code>this.$dispatch(&#39;shopMenuReady&#39;)</code></p>
+
+<h4 id="toc_14">onShow</h4>
+
+<p>页面后退时触发，数据需重置，例如用户进入饿了么首页 =&gt; 点击左上角进行修改地址 =&gt; 进入地址页面 =&gt; 选择地址 =&gt; 自动返回到首页 =&gt; onShow() 事件监听 =&gt; 更新左上角的地址</p>
+
+<h4 id="toc_15">onHide</h4>
+
+<p>场景与 onShow 相反</p>
+
+<h4 id="toc_16">onDestroy</h4>
+
+<p>该页面某个行为使用了 <code>setInterval()</code>方法，离开该页面时在onDestroy() 中<code>clearInterval</code> 保证下次进入时仍是初始化的状态。<br/>
+在Vue 中生命周期除了上面的<code>onShow</code> 和<code>onHide</code> 其他差别不大，对于Vue.js 中 <code>onShow</code> 可以用 watch 去监听路由变化来上述<code>onShow</code>中的场景，例如：</p>
+
+<pre><code>  watch: {
+    // 如果路由有变化，会再次执行该方法
+    $route: &#39;initPageData&#39;
+  },
+  methods: {
+    initPageData () {
+    // do something
+    }
+  }
+</code></pre>
+
+<h3 id="toc_17">数据绑定：</h3>
+
+<p>内容绑定，两者采用的都是 Mustache 语法（双大括号），两者都可以在内容中插入html。</p>
+
+<p>Vue :</p>
+
+<pre><code>&lt;div&gt;{{ title }}&lt;/div&gt;
+&lt;div v-html=&quot;message&quot;&gt;
+
+</code></pre>
+
+<p>quickapp:</p>
+
+<pre><code>&lt;text&gt;{{ title }}&lt;/text&gt;
+&lt;richtext&gt;{{ message }}&lt;/text&gt;
+</code></pre>
+
+<p>但是需要注意的是在快应用中文本只能在 <code>&lt;text&gt;&lt;/text&gt;</code> 标签中，直接放在 <code>div</code> 中不会显示。</p>
+
+<h3 id="toc_18">条件与列表渲染：</h3>
+
+<p>快应用：<br/>
+条件渲染有 <code>if/elif/else</code> 这3个相关指令，用于控制是否增加或者删除组件</p>
+
+<pre><code>&lt;text if=&quot;{{conditionVar === 1}}&quot;&gt;if: if条件&lt;/text&gt;
+&lt;text elif=&quot;{{conditionVar === 2}}&quot;&gt;elif: elif条件&lt;/text&gt;
+&lt;text else&gt;else: 其余&lt;/text&gt;
+</code></pre>
+
+<p>同时还有 show 指令，用于控制组件的显示状态，并不会从 DOM 结构中删除：</p>
+
+<pre><code>&lt;text show=&quot;{{showVar}}&quot;&gt;show: 渲染但控制是否显示&lt;/text&gt;
+</code></pre>
+
+<p>列表渲染：</p>
+
+<pre><code> &lt;div class=&quot;city&quot; for=&quot;city in cities&quot;&gt;
+  &lt;text&gt;城市：{{city.name}}&lt;/text&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Vue.js 的条件渲染：</p>
+
+<pre><code>&lt;div v-if=&quot;type === &#39;A&#39;&quot;&gt;
+  A
+&lt;/div&gt;
+&lt;div v-else-if=&quot;type === &#39;B&#39;&quot;&gt;
+  B
+&lt;/div&gt;
+&lt;div v-else-if=&quot;type === &#39;C&#39;&quot;&gt;
+  C
+&lt;/div&gt;
+&lt;div v-else&gt;
+  Not A/B/C
+&lt;/div&gt;
+
+</code></pre>
+
+<pre><code>&lt;h1 v-show=&quot;ok&quot;&gt;Hello!&lt;/h1&gt;
+</code></pre>
+
+<p>列表渲染：</p>
+
+<pre><code>&lt;li v-for=&quot;todo in todos&quot;&gt;
+  {{ todo }}
+&lt;/li&gt;
+
+</code></pre>
+
+<p>两者从使用逻辑上来说几乎没有什么区别，只是写法略有不同，但是快应用中增加了一个组件<code>block</code>，可以使用<code>&lt;block&gt;</code>实现更为灵活的&quot;列表/条件渲染&quot;。</p>
+
+<p><code>block</code> 是一个仅表达逻辑的组件，并不会在页面渲染中生成 DOM 节点，这个可以说是很得人心。Vue.js 里面也有一些内置的不会产生DOM 节点的组件，例如 <code>component</code>，<code>keep-alive</code>，<code>transition</code> ，<code>transition-group</code>，<code>&lt;slot&gt;</code>。简单举个例子：<br/>
+使用 Vue 保留的 <code>&lt;component&gt;</code> 元素，将多个组件动态地绑定到 <code>&lt;component&gt;</code> 元素的 is 属性上</p>
+
+<pre><code>&lt;template&gt;
+&lt;component :is=&quot;isSignedIn ? &#39;home&#39; : &#39;welcome&#39;&quot;&gt;&lt;/component&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import Vue from &#39;vue&#39;
+import Home from &#39;./home.vue&#39;
+import Welcome from &#39;./welcome.vue&#39;
+export default Vue.extend({
+    components: {
+        Home,
+        Welcome
+    }
+})
+&lt;/script&gt;
+
+</code></pre>
+
+<p>在Vue.js 中只有上述几个内置组件，使用时组件自身不产生 DOM 节点，在除了这几种内置组件之外的需求我们只能在循环块的外面加一个div 去用<code>v-if</code>来判断循环块的显示隐藏，但是有时候父<code>div</code>可能会对内部块的样式带来不好的影响，我们还要在此<code>div</code> 加上一些样式来消除该影响，同时也让 DOM 数层级会变得沉重冗余。但是有了<code>block</code>组件就很开心了，需要隐藏这个块，直接在外围加<code>block</code>就好了，渲染出来的<code>DOM</code>清爽干净。</p>
+
+<h3 id="toc_19">属性的获取</h3>
+
+<p>快应用中也有 event，可以通过点击事件来传入相应的函数，通过打印log，可以看一下具体包含什么：</p>
+
+<pre><code>&lt;input id=&quot;test-link&quot; class=&quot;link&quot; data-detail=&quot;点击这里&quot; @click=&quot;handleClick&quot; type=&quot;button&quot;&gt;去点餐&lt;/button&gt;
+</code></pre>
+
+<p>打印出来的信息：</p>
+
+<pre><code>{
+    &quot;type&quot;: &quot;click&quot;, 
+    &quot;target&quot;: {
+        &quot;ref&quot;: &quot;5&quot;, 
+        &quot;type&quot;: &quot;input&quot;, 
+        &quot;attr&quot;: {
+            &quot;type&quot;: &quot;button&quot;, 
+            &quot;dataDetail&quot;: &quot;点击这里&quot;, 
+            &quot;id&quot;: &quot;test-link&quot;
+        }, 
+        &quot;style&quot;: { }, 
+        &quot;event&quot;: [
+            &quot;click&quot;
+        ]
+    }, 
+    &quot;timestamp&quot;: 1522837358823
+}
+
+</code></pre>
+
+<p>通过 event 我们可以发现 <code>target.attr.id</code> 就是该元素的 id，在 event 中我们还可以看到 定义的<code>data-detail</code> 在 <code>target.attr</code>中出现了。可见快应用中也可以自定义元素属性参数值。这样子就可以利用这个<code>target.attr</code> 做一些事情了，比如我们想获取这个按钮上的文本，可以在input 标签上加入 <code>data-name=&quot;去点餐&quot;</code> 那么就可以将其绑定到<code>attr</code> 中，我们可以通过 <code>event.target.attr.dataName</code> 去获得这个按钮的名字。但是这并不是被快应用中所推荐，这样使用，控制台会有warning 的提醒： </p>
+
+<pre><code>ERROR: 组件 `input` 不支持属性 `data-detail`，
+支持的属性有 [type, checked, name, value, placeholder, id, style, class, disabled, if, elif, else, for, tid, show]
+</code></pre>
+
+<p>Vue.js 支持通过 <code>ref</code> 属性来访问其它组件和 HTML 元素。并通过 <code>this.$refs</code> 可以得到组件或 HTML 元素的上下文。在大多数情况下，通过 <code>this.$refs</code>来访问其它组件的上下文同样也是不被 Vue.js 所推荐。</p>
+
+<h3 id="toc_20">事件绑定</h3>
+
+<p>快应用中支持的事件有：</p>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>click</td>
+<td>-</td>
+<td>组件被点击时触发</td>
+</tr>
+<tr>
+<td>longpress</td>
+<td>-</td>
+<td>组件被长按时触发</td>
+</tr>
+<tr>
+<td>blur</td>
+<td>-</td>
+<td>组件获得焦点时触发</td>
+</tr>
+<tr>
+<td>appear</td>
+<td>-</td>
+<td>组件出现时触发</td>
+</tr>
+<tr>
+<td>disappear</td>
+<td>-</td>
+<td>组件消失时触发</td>
+</tr>
+<tr>
+<td>swipe 正式版本可用</td>
+<td></td>
+<td>组件上快速滑动后触发</td>
+</tr>
+</tbody>
+</table>
+
+<p>使用的时候使用 on 或者简写@ 绑定事件，例如 </p>
+
+<pre><code>&lt;a @click=&quot;handleClick&quot;&gt;开始&lt;/a&gt;
+</code></pre>
+
+<p>这种方式与 Vue.js 也很相似，不过 Vue.js 额外提供了事件修饰符，可以阻止一些事件的传播等，例如：</p>
+
+<pre><code>&lt;!-- 阻止单击事件继续传播 --&gt;
+&lt;a @click.stop=&quot;handleClick&quot;&gt;开始&lt;/a&gt;
+</code></pre>
+
+<h3 id="toc_21">事件监听</h3>
+
+<p>快应用的事件监听与 Vue.js 相似，都是 使用 <code>$on()</code>、<code>$off</code> <code>$emit()</code>去监听，移除，触发事件，但是还是有一些区别。</p>
+
+<h4 id="toc_22">监听原生组件事件</h4>
+
+<p>监听快应用的原生组件事件就用到了我们上面所说的提过的event 的 target 来获取当前组件的信息，<br/>
+例如用户选择取餐人的性别功能：<br/>
+<img src="media/15220657399375/15228497526439.jpg" alt=""/></p>
+
+<pre><code>&lt;block for=&quot;{{ sex }}&quot;&gt;
+  &lt;input 
+    type=&quot;button&quot; 
+    checked=&quot;{{ address.sex === $item.label ? true : false }}&quot;    
+    class=&quot;tag {{ address.sex === $item.label ? &#39;tag-active&#39; : &#39;&#39; }}&quot; 
+    @click=&quot;setGender($item.label)&quot;
+    value=&quot;{{ $item.name }}&quot;&gt;
+  &lt;/input&gt;
+&lt;/block&gt;
+
+</code></pre>
+
+<pre><code>data () {
+  return {
+    address: {
+     sex: 1
+    },
+    sex: [
+      { label: 1, name: &#39;先生&#39; },
+      { label: 2, name: &#39;女士&#39; }
+    ]
+  }
+},
+setGender(label, e) {
+  // 事件参数，target
+  let isChecked = e.target.attr.checked
+  Object.assign(this.address, {
+    sex: !isChecked ? label : &#39;&#39;
+  })
+  isChecked = !isChecked
+}
+</code></pre>
+
+<h4 id="toc_23">触发原生组件事件</h4>
+
+<p>快应用可以通过 <code>$emitElement</code> 动态触发事件，但是以饿了么快应用为例，没有想到特别适合使用它的场景，因此在实际在业务中没有被用到，对此有兴趣的同学可以查看快应用的具体文档，这里就不一一阐述了。</p>
+
+<h3 id="toc_24">组件中的通信</h3>
+
+<p>和 Vue.js 类似，快应用也通过 props 进行组件之间的数据传递</p>
+
+<pre><code>&lt;script&gt;
+  // 子组件
+  export default {
+    props: [
+      &#39;restaurants&#39;
+    ],
+    data: {},
+    onInit () {
+      console.log(&#39;props&#39;, restaurants)
+    }
+  }
+&lt;/script&gt;
+
+</code></pre>
+
+<h3 id="toc_25">页面路由定义及页面间的切换</h3>
+
+<p>快应用的页面路由放在<code>manifest.json</code> 中，通过设置 <code>entry</code> 和 <code>page</code> 来实现：</p>
+
+<pre><code>&quot;router&quot;: {
+    &quot;entry&quot;: &quot;Home&quot;,
+    &quot;pages&quot;: {
+      &quot;Home&quot;: {
+        &quot;component&quot;: &quot;index&quot;
+      },
+      &quot;Detail&quot;: {
+        &quot;component&quot;: &quot;index&quot;
+      },
+      &quot;About&quot;: {
+        &quot;component&quot;: &quot;index&quot;
+      }
+    }
+  }
+</code></pre>
+
+<p><code>pages</code> 的<code>key</code>对应页面目录，<code>value</code> 对应页面详细的<code>page</code><br/>
+在页面间的切换中 也可以像 Vue.js 一样 使用<code>router.push</code> 和<code>router.replace</code>控制页面之间的跳转，同时<code>router</code> 的接口参数<code>params</code> 可配置页面跳转需要传递的参数 。</p>
+
+<pre><code> import router from &#39;@system.router&#39;
+</code></pre>
+
+<pre><code>router.push({
+    uri: &#39;Detail&#39;,
+    params: {
+      id
+    }
+})
+</code></pre>
+
+<p>或者</p>
+
+<pre><code>history.push({
+uri: &#39;Detail&#39;,
+params: {
+  id: id.toString()
+}
+})
+
+</code></pre>
+
+<p>需要注意的一点是，在<code>mainifest.json</code>添加完<code>router</code> 之后，配置可能不会马上生效，如果找不到<code>router</code>，快应用不会报错，只会跳过检查，然后进入一个未知的空白页面。如果发生这种情况，只需要重新 npm run <code>build =&gt; server =&gt; watch</code> 一下 就可以了。</p>
+
+<h3 id="toc_26">数据请求方面：</h3>
+
+<p>快应用对外发布的最新版本已经支持了 <code>async/await</code> 是一件很让人开心的事情，目前饿了么快应用的数据请求依然用的是 fetch 。在新的项目里面，我们尝试使用了<code>async / await</code> ，根据官方给的示例，使用感比较顺畅，如果是 Vue.js 的项目使用的是<code>axios</code> HTTP 库，迁移至快应用，在网络请求方面花费的时间成本很低，下面我们来演示对比一下：<br/>
+Vue 项目：</p>
+
+<p>request.js</p>
+
+<pre><code>import axios from &#39;axios
+import { BASE_HOST } from &#39;./constants&#39;
+const fetch = axios.create({
+baseUrl: `${BASE_HOST}`,
+withCredentials: true
+})
+export { fetch as default }
+
+
+</code></pre>
+
+<p>api.js</p>
+
+<pre><code>import fetch from &#39;./axios&#39;
+export const getProductDetail = ({ fpId }) =&gt; {
+  return axios({
+    url: `/demo/getProductDetail/${fpId}`,
+    method: &#39;get&#39;
+  })
+}
+
+</code></pre>
+
+<p>Detail.vue</p>
+
+<pre><code>async fetchDetail () {
+const { fpId } = this
+ const detail = await getProductDetail({ fpId })
+ console.log(&#39;detail&#39;, detail)
+}
+
+</code></pre>
+
+<p>下面是快应用中接入 <code>async/ await</code> 的官方推荐的使用姿势，在此基础上做了一些状态的判断和处理：<br/>
+request.js</p>
+
+<pre><code>import nativeFetch from &#39;@system.fetch&#39;
+import prompt from &#39;@system.prompt&#39;
+
+const natives = {
+  async fetch(options) {
+    const p1 = new Promise((resolve, reject) =&gt; {
+      options.success = function(res) {
+        if (res.data &amp;&amp; res.code === 200) {
+          const data = res.data
+          try {
+            resolve(JSON.parse(data))
+          } catch (err) {
+            resolve(data)
+          }
+        } else {
+          try {
+            const { message, name } = JSON.parse(res.data)
+            if (name !== &#39;JSON_BODY_ERROR&#39; &amp;&amp; message) {
+              prompt.showToast({
+                message,
+                duration: 1
+              })
+            }
+            reject(res)
+          } catch (error) {
+            reject(res)
+          }
+        }
+      }
+      options.fail = function(res, code) {
+        resolve({ res, code })
+      }
+      nativeFetch.fetch(options)
+    })
+    return p1
+  }
+}
+
+// 注入到全局
+const hookTo = global.__proto__ || global
+hookTo.natives = natives
+
+export default natives
+
+</code></pre>
+
+<p>我们在调用时完善一下：</p>
+
+<p>api.js</p>
+
+<pre><code>import natives from &#39;./request&#39;
+import { BASE_HOST } from &#39;./constants&#39;
+export const getProductDetail = ({ fpId }) =&gt; {
+  return natives.fetch({
+    url: `${BASE_HOST}/demo/getProductDetail/${fpId}`,
+    method: &#39;get&#39;
+  })
+}
+</code></pre>
+
+<p>Detail.ux</p>
+
+<pre><code>async fetchDetail () {
+const { fpId } = this
+ const detail = await getProductDetail({ fpId })
+ console.log(&#39;detail&#39;, JSON.stringify(detail))
+}
+
+</code></pre>
+
+<p>这样子就可以愉快的使用<code>async / await</code> 去处理网络请求了。这里需要注意的也有一点：接口返回的数据要进行<code>JSON.parse</code>。而返回的数据如果想要在控制台打印出来，必须要<code>JSON.stringify</code>，因为 Chrome 浏览器的 devtools 目前不支持 Object 的展开。</p>
+
+<h3 id="toc_27">哪些是Vue.js 没有，而快应用有的</h3>
+
+<h4 id="toc_28">原生性</h4>
+
+<p>快应用是基于手机硬件平台的新形态，可以直接使用原生 App 的很多功能，例如扫描二维码、传感器、地理位、设备信息、系统音量、应用管理等等，开发者不需要借助外部插件，可以轻松实现这些功能，而这些原生功能的使用也是让快应用的使用感无限接近传统App。</p>
+
+<h4 id="toc_29">封装组件</h4>
+
+<p>快应用是基于移动端的开发平台，因此对于移动端的标准化显示做了很好的封装，<code>&lt;list&gt;</code> 组件， <code>&lt;tab&gt;</code> 组件的加入，可以使开发者快速的在页面实现长列表或者屏幕滚动等效果。并且在 <code>&lt;list&gt;</code> 组件中还可以直接使用<code>onscrollbottom</code> ，<code>scrolltop</code> 事件等来监听列表滚动，接入方便快捷，不用再去经历重复造轮子的过程。</p>
+
+<h4 id="toc_30">第三方服务的支持</h4>
+
+<p>快应用支持 微信支付、支付宝支付、第三方分享等功能，无需用户再去查找 支付宝，微信等 web 接入的API 文档，这些繁琐浪费时间的接入，快应用都替你封装的很完善了。</p>
+
+<h3 id="toc_31">哪些是 Vue.js 有，而快应用没有的</h3>
+
+<h4 id="toc_32">应用组件的状态管理</h4>
+
+<p>做大型的项目的时候，我们在 Vue.js 中我们会习惯用<code>Vuex</code> 来存储管理应用的所有组件的状态，但是在快应用中 并没有store 这个概念，数据传递都只能依赖<code>props</code>或者赋值在$app对象上成为一个全局变量，例如：</p>
+
+<pre><code>// 获取经纬度
+const latitude = this.$app.$data.place.latitude
+const longitude = this.$app.$data.place.longitude
+
+</code></pre>
+
+<h4 id="toc_33">目前存在的痛点</h4>
+
+<ol>
+<li>快应用缺少集成的 IDE 和 模拟器，饿了么接入快应用的初期只能使用 log 在控制台打印日志去排查问题，现在有了 Chrome 浏览器中的 devtools 工具进行调试，可以解决一部分调试的问题，但是在排查页面的样式问题时不能通过该工具进行审查元素，只能手动一个一个标签的去展开。同时开发时不支持断点调试。</li>
+<li>不同厂商之间的规则不统一，各家的审核规则有差异，饿了么快应用若要在每个厂商都上线，时间线会很长。</li>
+<li>开发时做的修改操作，<code>npm run watch</code> 监听到之后，只能热重载，并不能热更新。每次调试非首页的页面，更新一下，都需要重新走一遍操作流程。</li>
+<li>.rpk 文件最大只能为 1M，大型应用必须要考虑将图片和较大的 JS 、CSS 资源丢到 CDN 上去。</li>
+<li>开发工具的模板插件目前只支持 VSCode</li>
+<li>开发文档还不够完善，很多 API 缺少更详细的示例。</li>
+</ol>
+
+<h2 id="toc_34">总结</h2>
+
+<p>说了这些，可能有的人会问： 是不是学习开发快应用就得先学 Vue，其实不然，Vue 的简单上手的优点同样适用于快应用。因为快应用才刚起步，网络上除了官方文档之外的文献，教程还比较少，对于开发者来说如果开发时困难可能要一步步摸索排查，比较每一门新技术都是需要耐心的学习和认真对待，随着快应用开发者的越多涌入，九大厂商的全力支持，相信快应用生态圈更加完善，美好！</p>
+
+		</div>
+	</article>
+<div class="share-comment">
+
+</div>
+
+
+</div>        </div>
+	
+	</div>
+<script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

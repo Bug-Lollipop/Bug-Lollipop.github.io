@@ -1,0 +1,618 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	CSS - Akira's blog
+  	
+	</title
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="Akira's blog" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	#sub-nav .social a.weibo {
+		background: url('asset/images/social/weibo.png?1419407210') center no-repeat #4ec4fa;
+		border: 1px solid #4ec4fa;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	article .entry-content table th,article .entry-content table td{ padding: 4px;border-collapse: collapse; border:solid 1px #ddd;}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="asset/icon.jpg" style="width:160px;">
+					</div>
+					<h1><a href="index.html">Akira's blog</a></h1>
+					<p class="subtitle">记录一些技术文章</p>
+					<nav id="main-nav">
+						<ul class="main">
+							<li><a href="index.html">Home</a></li>
+						    <li><a href="all.html">Blog</a></li>
+						    <li><a href="archives.html">Archives</a></li>
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+<!-- 
+			<a class="email" href="mailto:" title="Email">Email</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+			<a class="google" href="https://plus.google.com/" rel="author" title="Google+">Google+</a>
+			<a class="twitter" href="http://twitter.com/" title="Twitter">Twitter</a>
+			<a class="github" href="https://github.com/" title="GitHub">GitHub</a>
+			<a class="coderwall" href="https://coderwall.com/" title="Coderwall">Coderwall</a>
+		    <a class="stackoverflow" href="http://stackoverflow.com/users/" title="StackOverflow"></a>
+			<a class="linkedin" href="http://www.linkedin.com/in/" title="LinkedIn">LinkedIn</a>
+			<a class="pinterest" href="https://pinterest.com/" title="Pinterest">Pinterest</a>
+			<a class="delicious" href="http://delicious.com/" title="Delicious">Delicious</a>
+			<a class="pinboard" href="https://pinboard.in/u:" title="Pinboard">Pinboard</a>
+			<a class="douban" href="https://www.douban.com/people/" title="Douban">Douban</a>
+			<a class="quora" href="https://quora.com/" title="Quora">Quora</a>
+			<a class="instagram" href="https://instagram.com/" title="Instagram">Instagram</a>
+			<a class="behance" href="https://www.behance.net/" title="Behance">Behance</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+-->	
+								<a class="email" href="mailto:huixiao1008@gmail.com" title="Email">Email</a>
+								<a class="weibo" target="_blank" href="https://weibo.com/u/2554601764" title="weibo">Weibo</a>
+								
+								<a class="github" target="_blank" href="https://github.com/Bug-Lollipop" title="GitHub">GitHub</a>
+								<!-- <a class="twitter" target="_blank" href="http://twitter.com/oulvhai" title="Twitter">Twitter</a> -->
+								<!-- <a class="rss" href="atom.xml" title="RSS">RSS</a> -->
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+
+			<div class="mid-col-container">
+		
+
+			
+ <div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2019-06-24T15:56:55+08:00" itemprop="datePublished">2019/6/24</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15613630158706.html" itemprop="url">
+		将 div 按钮变成可访问性</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>我们平时写按钮的时候，大部分会使用html 元素 span div 等转换为按钮，但是 button 标签存在不用的原因是什么呢？ 因为button 按钮的速度慢，如果页面上有很多 button， 无疑会增加很多开销。因此我们可能会习惯选用其他html 标签去实现。</p>
+
+<p>但是div 按钮只能点击起来像一个按钮，它并不具有按钮本身的附带功能，比如按钮的可访问性（）。那么如果让 div 按钮变得具有 button 按钮本身具有的功能呢？</p>
+
+<h3 id="toc_0">添加角色 role</h3>
+
+<blockquote>
+<p>添加role =“button”将使元素显示为屏幕阅读器的按钮控件。此角色可与aria-pressed属性结合使用以创建切换按钮。</p>
+</blockquote>
+
+<p>因此此时按钮可以表示为：</p>
+
+<pre><code>&lt;div class=&quot;btn&quot; role=&quot;button&quot;&gt;a Div&lt;/div&gt;
+</code></pre>
+
+<h3 id="toc_1">明确当前状态</h3>
+
+<p>使用 <code>aria-expanded</code> 属性，可以向屏幕阅读器明确定义该元素当前的折叠状态 【展开、关闭】。这样div 元素就可以和menu 有一样的功能，通过<code>aria-expanded = &quot;true&quot;</code> 展开和 aria-expanded = &quot;false&quot; 关闭折叠按钮。</p>
+
+<p>因此此时可以表示为：</p>
+
+<pre><code>&lt;div class=&quot;btn&quot; role=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;a div&lt;/div&gt;
+</code></pre>
+
+<h3 id="toc_2">tabIndex 属性聚焦</h3>
+
+<p>我们希望按键盘 <code>tab</code> 键时，按钮可以聚焦选中，默认情况将其设置为0，遵循正常顺序，表示可以聚焦，现在看起来是这样：</p>
+
+<pre><code>&lt;div class=&quot;btn&quot; role=&quot;button&quot; aria-pressed=&quot;false&quot; tabindex=&quot;0&quot;&gt;a div&lt;/div&gt;
+</code></pre>
+
+<h3 id="toc_3">制作disabled 效果</h3>
+
+<pre><code>[data-disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+</code></pre>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-12-03T20:02:48+08:00" itemprop="datePublished">2018/12/3</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15438385685306.html" itemprop="url">
+		如何使用Chrome DevTools 的动画检查工具</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>今天介绍一个很有用但是平时也很少用的工具，那就是Chrome 开发者工具中的动画检查功能。</p>
+
+<p>对于业务开发而言，我们平常用的动画一般都比较常见且基础，比如渐隐，滚动，飞入飞出等，大部分情况下可以直接一次性实现，但是对于动画效果要求比较高的项目，为了保证动画的精确性，就需要该工具了。</p>
+
+<h3 id="toc_0">打开 Animations 选项卡</h3>
+
+<p>视图 =&gt; 开发者 =&gt; 开发者工具 =&gt; 更多工具 =&gt; Animations</p>
+
+<p>当你第一次打开动画选项卡的时候，并不会看到和动画有关的内容，只会看到一个 Listening for animations...  的提示。如果要想运行这个工具，需要在第一次加载页面时打开选项卡</p>
+
+<p><img src="media/15438385685306/15438404296292.jpg" alt=""/></p>
+
+<p>要让Animations面板捕捉到消息，我们刷新一下再看一下：</p>
+
+<p><img src="media/15438385685306/15438405515477.jpg" alt=""/></p>
+
+<p>左上角的开始结束图标可以控制动画检查工具的打开和关闭</p>
+
+<p>点击开始图标打开该检查工具：</p>
+
+<p><img src="media/15438385685306/15438414390506.jpg" alt=""/></p>
+
+<p>点击播放按钮：<br/>
+<img src="media/15438385685306/15438415273008.jpg" alt=""/></p>
+
+<h3 id="toc_1">时间轴和关键帧</h3>
+
+<p>随着动画的播放，你回看到红色的【时间轴】会在时间轴上移动。可以用鼠标手动控制它的播放，将其放置到某个特定的点</p>
+
+<p>界面上每个条目的每一行代表了页面的单个动画。可以看到每条线都有个颜色更深更饱和的部分，这部分表示的是动画的长度，之后出现的较浅的部分表示重复该动画。</p>
+
+<p>每个动画线上有几个小圆圈，这些小圈与动画的关键帧相对应。实心的圈代表动画的开始和结束，「空心的圈表示内部关键帧的任意位置」</p>
+
+<h3 id="toc_2">内部关键帧</h3>
+
+<p>每行上的插页式关键帧（每个动画周期的开始和结束之间的关键帧）可以拖动到不同的位置，当您移动它们时，您将看到浏览器窗口中的动画更改其时间。这对于试验间隙关键帧的确切百分点来说非常有用。</p>
+
+<p>比较棘手的是，这些实验不会在&quot;样式&quot;选项卡中看到代码的任何更新。相反，当你将插页式关键帧放在正确位置时，你可以手动确定关键帧的百分比值。</p>
+
+<p>将播放头直接放在相关的关键帧上，您将在面板的左上角看到一个时间戳，告诉您动画在几秒钟内的距离。然后，您可以确定此时间占整个动画持续时间的百分比。在下面的示例中，播放头大约是1s动画的300ms，所以我们知道这个关键帧是33%。</p>
+
+<p><img src="media/15438385685306/15445092575812.jpg" alt=""/></p>
+
+<h3 id="toc_3">动画延迟和持续时间</h3>
+
+<p>在“动画”选项卡做的更改会更新“样式”选项卡的代码，以便我们能准确的查看移植到CSS的值。animation-delay是动画开始播放前的延迟，animation-duration是持续时间。</p>
+
+<p>要在播放动画之前调整延迟，请将鼠标悬停在其直线上，直到看到手形光标，然后水平拖动。您将在“ 样式”选项卡中看到更新延迟值：</p>
+
+<p>要修改动画的持续时间，请将鼠标悬停在其最后一个关键帧上，直到看到双端箭头光标，然后水平拖动。同样，将在“ 样式”选项卡中看到该值的更新。</p>
+
+<h3 id="toc_4">动画计时功能</h3>
+
+<p>您还可以使用Chrome的开发工具修改控制动画时序的速度曲线。首先检查应用了动画的元素。在当前指定的计时功能的左侧，您将看到一个带有“波浪形”的小盒子。单击它打开立方贝塞尔编辑器：</p>
+
+<p>将打开一个框，显示一条贝塞尔曲线，说明当前的计时功能。在这里，您可以通过单击左侧的缩略图之一来选择现有预​​设，也可以将主曲线图像的手柄拖动到左右，以创建自定义的cubic-bezier值，随后可以将其复制到CSS中：</p>
+
+<p>当你走的时候，你会看到一个紫色的小球在编辑器的顶部从左到右动画，让你预览你的计时功能。 </p>
+
+<h3 id="toc_5">可旋转图层可视化</h3>
+
+<p>另一个有用的功能是能够可视化动画中使用的图层，包括旋转所述可视化并从各个角度查看它以更好地了解事物的工作方式。</p>
+
+<p>要打开“ 图层”面板，请转到Chrome开发者工具菜单，然后选择更多工具&gt;图层。</p>
+
+<h3 id="toc_6">总结</h3>
+
+<p>让我们快速总结Chrome的动画开发工具：</p>
+
+<p>首先打开Chrome开发工具打开动画工具，然后在开发工具菜单下选择更多工具&gt;动画。<br/>
+该动画面板需要已被打开时，页面加载捕捉信息上的动画，刷新该页面以实现这一目标。<br/>
+单击小彩色图缩略图以查看动画信息。<br/>
+每一行代表一个动画。<br/>
+填充圆圈表示开始和结束关键帧。<br/>
+空心圆表示间隙关键帧。<br/>
+可以移动插页式关键帧，但是您不会在“ 样式”选项卡中看到相关的代码更新，而是手动计算它们所处的百分点。<br/>
+通过将鼠标悬停在其直线上来修改动画的延迟值，直到看到手形光标，然后水平拖动。<br/>
+通过将鼠标悬停在最后一个关键帧上来修改动画的持续时间值，直到看到双端箭头光标，然后将其水平拖动。<br/>
+在样式选项卡中，单击现有计时功能左侧的图标以打开立方贝塞尔编辑器。<br/>
+在此处选择计时功能预设，或通过修改主曲线图像创建自己的预设功能。<br/>
+转到Chrome开发者工具菜单，然后选择更多工具&gt;图层，打开“ 图层”面板。<br/>
+在此面板中，使用“ 旋转”模式从任何角度查看动画图层。</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-08-10T18:47:07+08:00" itemprop="datePublished">2018/8/10</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15338980271932.html" itemprop="url">
+		Font 和Typeface 的区别</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>Font 和Typeface <br/>
+今天对 Font 和 Typeface 这两个比较容易混淆的概念了解了一下，看了知乎的 <a href="https://www.zhihu.com/question/19566628">英语术语「typeface」和「font」的区别是什么？</a><br/>
+然后又看了一片外文： <a href="https://techstacker.com/the-difference-between-font-and-typeface/EJpFJd6QLi3fLEJxo">Font vs Typeface? What’s the Difference?</a> </p>
+
+<p>大体区别如下：<br/>
+<strong>typeface</strong>是指整个字体设计的集合/系列（style，weight，variation）。 像Georgia(衬线字体)，Helvetica（无衬线字体），FF Meta和Chaparral Pro(英文衬线字体)。 这些是不同的字体，可以称为字体家族。</p>
+
+<p><strong>font</strong>指的是原始字体设计的版本，例如 字体样式，尺寸，粗细等。</p>
+
+<p>知乎上的一句总结很到位：</p>
+
+<blockquote>
+<p>方正兰亭黑是 typeface<br/>
+方正兰亭纤黑是 style<br/>
+五号、regular的方正兰亭纤黑是 font</p>
+</blockquote>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-06-22T17:12:43+08:00" itemprop="datePublished">2018/6/22</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15296587634371.html" itemprop="url">
+		link preload 实现预加载</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p><code>&lt;link&gt;</code> 元素的 <code>rel</code> 属性的属性值<code>preload</code>能够让你在你的HTML页面中 <code>&lt;head&gt;</code>元素内部书写一些声明式的资源获取请求，可以指明哪些资源是在页面加载完成后即刻需要的。对于这种即刻需要的资源，你可能希望在页面加载的生命周期的早期阶段就开始获取，在浏览器的主渲染机制介入前就进行预加载。这一机制使得资源可以更早的得到加载并可用，且更不易阻塞页面的初步渲染，进而提升性能。</p>
+
+
+
+			 
+			<a href="15296587634371.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-06-20T17:34:09+08:00" itemprop="datePublished">2018/6/20</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15294872496049.html" itemprop="url">
+		input 输入框的步长问题</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>问题：在使用 <code>&lt;input type=&quot;number&quot;&gt;</code>输入框时，如果输入了当前输入框中值不以1为单位增减的值时会出现：请输入有效值 两个最接近的有效分别为...的提示，这是因为浏览器默认认为<code>&lt;input type=&quot;number&quot;&gt;</code>的步长为1。</p>
+
+<p>解决办法：指定<code>&lt;input type=&quot;number&quot;&gt;</code>输入框的步长，如果增加属性<code>step=&quot;0.01&quot;</code>，可以根据具体的精度调整step属性的值。</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-06-08T15:30:15+08:00" itemprop="datePublished">2018/6/8</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15284430152022.html" itemprop="url">
+		CSS outline 自动填满屏幕剩余空间</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>有不少网站的主要背景是白色的，底部是深色的，于是就会出现这样一个场景，当主内容很少的时候，包括底部在内的都不足一瓶，或者用户的显示器是竖屏，则很可能出现下图所示的情况：</p>
+
+<p><img src="media/15284430152022/15284588736488.jpg" alt="img" style="width:300px;"/></p>
+
+
+
+			 
+			<a href="15284430152022.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-05-18T19:16:12+08:00" itemprop="datePublished">2018/5/18</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15266421723260.html" itemprop="url">
+		优雅的增加点击区域的大小</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>移动端我们点击屏幕上很小的箭头时候，经常会很费经，要不就点不到，要不就误点到其他的地方，正常我们都是按照这个图标的原始尺寸写的，例如：</p>
+
+<pre><code>.icon-arrow {
+  width: 16px;
+  height: 16px;
+}
+
+</code></pre>
+
+<p>效果没问题，但是肯定体验不友好，因为尺寸仅仅16px，我们很容易点不中。<br/>
+稳妥的方法是外部在嵌套一层标签，专门控制点击区域大小，如果对代码要求比较高，则可以使用<code>padding</code> 或透明的<code>border</code>增加元素的点击区域大小。</p>
+
+<p>其中首推透明 <code>border</code>方法，原因是如果我们的图标是工具生成的，那么<code>background-position</code> 就是限定死的值，若用 <code>padding</code> 撑开间距，就会遇到定位不准的问题。但是若用透明的<code>border</code> 增加点击区域，就没这个问题，只要合并时留下足够的间距就可以了，例如：</p>
+
+<pre><code>.icon-arrow {
+  width: 16px;
+  height: 16px;
+  border: 11px solid transparent;
+}
+</code></pre>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-05-14T14:51:05+08:00" itemprop="datePublished">2018/5/14</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15262806655861.html" itemprop="url">
+		没必要的 currentColor 变量</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>我们知道 currentColor 变量是个好东西，可以使用当前 color 计算值，IE9 + 都能支持。 <br/>
+实际上， CSS 中很多属性值默认就是 <code>currentColor</code>的表现，我们一般 无需再画蛇添足去再声明这个关键字。如 <code>border</code> 、 <code>text-shadow</code>、 <code>box-shadow</code> 等，尤其是 <code>border</code>。<br/>
+因此有需要元素 hover 改变颜色和边框的情况，只需要控制 <code>color</code> 的值就可以了，例如：</p>
+
+<pre><code>.btn {
+  color: red;
+  border: 2px solid;
+}
+
+.btn:hover {
+  color: blue;
+}
+</code></pre>
+
+<p>而不需要去这样加：<br/>
+ <code>border: 2px solid currentColor</code></p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-05-04T15:49:54+08:00" itemprop="datePublished">2018/5/4</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15254201948309.html" itemprop="url">
+		CSS writing-mode 的更多使用</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>writing-mode 通常可以用来实现文字的竖向呈现。<br/>
+属性对应的关键字有下面几个：</p>
+
+<pre><code>writing-mode: horizonal-tb;  /* 默认值，表示文本流是水平方向的，元素是从上向下的*/
+writing-mode: vertical-rl;  /* 表示文本是垂直方向展示 ，阅读顺序是从右向左（right-left）*/
+writing-mode: vertival-lr;  /* 表示文本是垂直方向展示 ，阅读顺序是从左向右（left-right）*/
+</code></pre>
+
+<p>除了竖直排版的时候需要writing-mode，其实还可以实现很多其他的效果。</p>
+
+<p>writing-mode 将页面默认的水平文档流改成了垂直流，基于水平方向的规则都可以适用于垂直方向，比如：</p>
+
+<ul>
+<li>margin 合并</li>
+<li>用 text-align: center  实现图片垂直居中</li>
+<li>使用 text-indent 实现文字下沉效果</li>
+<li>可以实现全兼容的 icon-fonts 图标的旋转效果</li>
+</ul>
+
+<p>具体的各个效果可以看这个 <a href="http://demo.cssworld.cn/">http://demo.cssworld.cn/</a> 中的 （12-2-1） ~ （12-2-5） 里面的代码效果</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-04-28T18:09:41+08:00" itemprop="datePublished">2018/4/28</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15249101811632.html" itemprop="url">
+		min-width 与 width 之类的属性之间的相互覆盖</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2 id="toc_0">1.超越important</h2>
+
+<p>超越 <code>!important</code> 是指 <code>max-width</code> 会覆盖<code>width</code>，并且比 <code>!important</code> 的权重更高。<br/>
+例如下面的代码：</p>
+
+<pre><code>&lt;img src=&quot;1.jpg&quot; style=&quot;width: 480px!important&quot;&gt;
+img {
+  max-width: 250px;
+}
+</code></pre>
+
+<p>最终图片呈现的效果是 250px。因为 <code>max-width</code> 覆盖了 <code>width</code></p>
+
+<h2 id="toc_1">2.超越最大</h2>
+
+<p>超越最大是指 <code>min-width</code> 覆盖<code>max-width</code>，此规则发生在<code>min-width</code> 和<code>max-width</code> 冲突的时候，例如下面： </p>
+
+<pre><code>.container {
+  min-width: 1400px;
+  max-width: 1200px;
+}
+</code></pre>
+
+
+
+			 
+			<a href="15249101811632.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+  
+
+</div>
+<nav id="pagenavi">
+	 
+	 <a class="next" href="CSS_1.html">Next</a> 
+	<div class="center"><a href="archives.html">Blog Archives</a></div>
+
+</nav>
+
+</div>
+
+
+
+        </div>
+	
+	</div>
+<script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

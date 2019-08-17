@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	【译】在不到5分钟的时间内学习这些简洁的JavaScript技巧 - Akira's blog
+  	
+	</title
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="Akira's blog" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	#sub-nav .social a.weibo {
+		background: url('asset/images/social/weibo.png?1419407210') center no-repeat #4ec4fa;
+		border: 1px solid #4ec4fa;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	article .entry-content table th,article .entry-content table td{ padding: 4px;border-collapse: collapse; border:solid 1px #ddd;}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="asset/icon.jpg" style="width:160px;">
+					</div>
+					<h1><a href="index.html">Akira's blog</a></h1>
+					<p class="subtitle">记录一些技术文章</p>
+					<nav id="main-nav">
+						<ul class="main">
+							<li><a href="index.html">Home</a></li>
+						    <li><a href="all.html">Blog</a></li>
+						    <li><a href="archives.html">Archives</a></li>
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+<!-- 
+			<a class="email" href="mailto:" title="Email">Email</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+			<a class="google" href="https://plus.google.com/" rel="author" title="Google+">Google+</a>
+			<a class="twitter" href="http://twitter.com/" title="Twitter">Twitter</a>
+			<a class="github" href="https://github.com/" title="GitHub">GitHub</a>
+			<a class="coderwall" href="https://coderwall.com/" title="Coderwall">Coderwall</a>
+		    <a class="stackoverflow" href="http://stackoverflow.com/users/" title="StackOverflow"></a>
+			<a class="linkedin" href="http://www.linkedin.com/in/" title="LinkedIn">LinkedIn</a>
+			<a class="pinterest" href="https://pinterest.com/" title="Pinterest">Pinterest</a>
+			<a class="delicious" href="http://delicious.com/" title="Delicious">Delicious</a>
+			<a class="pinboard" href="https://pinboard.in/u:" title="Pinboard">Pinboard</a>
+			<a class="douban" href="https://www.douban.com/people/" title="Douban">Douban</a>
+			<a class="quora" href="https://quora.com/" title="Quora">Quora</a>
+			<a class="instagram" href="https://instagram.com/" title="Instagram">Instagram</a>
+			<a class="behance" href="https://www.behance.net/" title="Behance">Behance</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+-->	
+								<a class="email" href="mailto:huixiao1008@gmail.com" title="Email">Email</a>
+								<a class="weibo" target="_blank" href="https://weibo.com/u/2554601764" title="weibo">Weibo</a>
+								
+								<a class="github" target="_blank" href="https://github.com/Bug-Lollipop" title="GitHub">GitHub</a>
+								<!-- <a class="twitter" target="_blank" href="http://twitter.com/oulvhai" title="Twitter">Twitter</a> -->
+								<!-- <a class="rss" href="atom.xml" title="RSS">RSS</a> -->
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+
+			<div class="mid-col-container">
+		
+
+			
+ <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">【译】在不到5分钟的时间内学习这些简洁的JavaScript技巧</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<p>原文：<a href="https://medium.freecodecamp.org/9-neat-javascript-tricks-e2742f2735c3">https://medium.freecodecamp.org/9-neat-javascript-tricks-e2742f2735c3</a></p>
+
+<h2 id="toc_0">清空或截取数组</h2>
+
+<p>清除或截取数组而不重新分配数组的简单方法是更改其长度属性值：</p>
+
+<pre><code>const arr = [11, 22, 33, 44, 55, 66];
+// truncanting
+arr.length = 3;
+console.log(arr); //=&gt; [11, 22, 33]
+// clearing
+arr.length = 0;
+console.log(arr); //=&gt; []
+console.log(arr[2]); //=&gt; undefined
+</code></pre>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_1">用对象解构来模拟命名参数</h2>
+
+<p>当您需要将一组变量的选项传递给某个函数时，您已经在使用配置对象的可能性很高，如下所示：</p>
+
+<pre><code>doSomething({ foo: &#39;Hello&#39;, bar: &#39;Hey!&#39;, baz: 42 });
+function doSomething(config) {
+  const foo = config.foo !== undefined ? config.foo : &#39;Hi&#39;;
+  const bar = config.bar !== undefined ? config.bar : &#39;Yo!&#39;;
+  const baz = config.baz !== undefined ? config.baz : 13;
+  // ...
+}
+</code></pre>
+
+<p>这是一种成熟又有效的模式，它尝试去模拟JavaScript中的命名参数。 函数调用没有问题。另一方面，配置对象处理逻辑没有必要太冗长。 借助ES2015对象解构，您可以避开这种不利情况：</p>
+
+<pre><code>function doSomething({ foo = &#39;Hi&#39;, bar = &#39;Yo!&#39;, baz = 13 }) {
+  // ...
+}
+</code></pre>
+
+<p>如果你需要使配置对象成为可选的，那也很简单：</p>
+
+<pre><code>function doSomething({ foo = &#39;Hi&#39;, bar = &#39;Yo!&#39;, baz = 13 } = {}) {
+  // ...
+}
+</code></pre>
+
+<h2 id="toc_2">数组项的对象解构</h2>
+
+<p>使用对象解构将数组项赋给单个变量：</p>
+
+<pre><code>const csvFileLine = &#39;1997,John Doe,US,john@doe.com,New York&#39;;
+const { 2: country, 4: state } = csvFileLine.split(&#39;,&#39;);
+</code></pre>
+
+<h2 id="toc_3">范围开关</h2>
+
+<p>以下是在switch语句中使用范围的简单技巧：</p>
+
+<pre><code>function getWaterState(tempInCelsius) {
+  let state;
+  
+  switch (true) {
+    case (tempInCelsius &lt;= 0): 
+      state = &#39;Solid&#39;;
+      break;
+    case (tempInCelsius &gt; 0 &amp;&amp; tempInCelsius &lt; 100): 
+      state = &#39;Liquid&#39;;
+      break;
+    default: 
+      state = &#39;Gas&#39;;
+  }
+  return state;
+}
+</code></pre>
+
+<h2 id="toc_4">等待多个异步函数的同时执行</h2>
+
+<p>可以通过使用Promise.all来等待多个异步函数完成：</p>
+
+<pre><code>await Promise.all([anAsyncCall(), thisIsAlsoAsync(), oneMore()])
+</code></pre>
+
+<h2 id="toc_5">创建纯粹的对象</h2>
+
+<p>您可以创建一个100％纯的对象，它不会从Object继承任何属性或方法（例如，构造函数，toString（）等）。</p>
+
+<pre><code>const pureObject = Object.create(null);
+console.log(pureObject); //=&gt; {}
+console.log(pureObject.constructor); //=&gt; undefined
+console.log(pureObject.toString); //=&gt; undefined
+console.log(pureObject.hasOwnProperty); //=&gt; undefined
+
+</code></pre>
+
+<h2 id="toc_6">格式化 JSON 代码</h2>
+
+<p>JSON.stringify可以做的不仅仅是将对象串化。 你也可以用它美化你的JSON输出：</p>
+
+<pre><code>const obj = { 
+  foo: { bar: [11, 22, 33, 44], baz: { bing: true, boom: &#39;Hello&#39; } } 
+};
+// The third parameter is the number of spaces used to 
+// beautify the JSON output.
+JSON.stringify(obj, null, 4); 
+// =&gt;&quot;{
+// =&gt;    &quot;foo&quot;: {
+// =&gt;        &quot;bar&quot;: [
+// =&gt;            11,
+// =&gt;            22,
+// =&gt;            33,
+// =&gt;            44
+// =&gt;        ],
+// =&gt;        &quot;baz&quot;: {
+// =&gt;            &quot;bing&quot;: true,
+// =&gt;            &quot;boom&quot;: &quot;Hello&quot;
+// =&gt;        }
+// =&gt;    }
+// =&gt;}&quot;
+</code></pre>
+
+<h2 id="toc_7">数组去重</h2>
+
+<p>通过使用ES2015集合以及Spread运算符，您可以轻松地从数组中删除重复的项目：</p>
+
+<pre><code>const removeDuplicateItems = arr =&gt; [...new Set(arr)];
+removeDuplicateItems([42, &#39;foo&#39;, 42, &#39;foo&#39;, true, true]);
+//=&gt; [42, &quot;foo&quot;, true]
+</code></pre>
+
+<h2 id="toc_8">铺平多维数组</h2>
+
+<p>铺平多维数组也可以用Spread 运算符：</p>
+
+<pre><code>const arr = [11, [22, 33], [44, 55], 66];
+const flatArr = [].concat(...arr); //=&gt; [11, 22, 33, 44, 55, 66]
+</code></pre>
+
+<p>不幸的是，上述技巧只适用于二维数组。 但是可以使用递归调用，使它适用于2维以上的数组：</p>
+
+<pre><code>function flattenArray(arr) {
+  const flatten = [].concat(...arr);
+  return flatten.some(item =&gt; Array.isArray(item)) ? 
+    flattenArray(flatten) : flatten;
+}
+
+const arr = [11, [22, 33], [44, [55, 66, [77, [88]], 99]]];
+const flatArr = flattenArray(arr); 
+//=&gt; [11, 22, 33, 44, 55, 66, 77, 88, 99]
+</code></pre>
+
+<p>而且你有它！ 我希望这些巧妙的小技巧能够帮助你写出更好，更漂亮的JavaScript。</p>
+
+		</div>
+	</article>
+<div class="share-comment">
+
+</div>
+
+
+</div>        </div>
+	
+	</div>
+<script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

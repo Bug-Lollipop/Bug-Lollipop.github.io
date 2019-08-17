@@ -1,0 +1,368 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	【译】 理解JavaScript 对象 - Akira's blog
+  	
+	</title
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="Akira's blog" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	#sub-nav .social a.weibo {
+		background: url('asset/images/social/weibo.png?1419407210') center no-repeat #4ec4fa;
+		border: 1px solid #4ec4fa;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	article .entry-content table th,article .entry-content table td{ padding: 4px;border-collapse: collapse; border:solid 1px #ddd;}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="asset/icon.jpg" style="width:160px;">
+					</div>
+					<h1><a href="index.html">Akira's blog</a></h1>
+					<p class="subtitle">记录一些技术文章</p>
+					<nav id="main-nav">
+						<ul class="main">
+							<li><a href="index.html">Home</a></li>
+						    <li><a href="all.html">Blog</a></li>
+						    <li><a href="archives.html">Archives</a></li>
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+<!-- 
+			<a class="email" href="mailto:" title="Email">Email</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+			<a class="google" href="https://plus.google.com/" rel="author" title="Google+">Google+</a>
+			<a class="twitter" href="http://twitter.com/" title="Twitter">Twitter</a>
+			<a class="github" href="https://github.com/" title="GitHub">GitHub</a>
+			<a class="coderwall" href="https://coderwall.com/" title="Coderwall">Coderwall</a>
+		    <a class="stackoverflow" href="http://stackoverflow.com/users/" title="StackOverflow"></a>
+			<a class="linkedin" href="http://www.linkedin.com/in/" title="LinkedIn">LinkedIn</a>
+			<a class="pinterest" href="https://pinterest.com/" title="Pinterest">Pinterest</a>
+			<a class="delicious" href="http://delicious.com/" title="Delicious">Delicious</a>
+			<a class="pinboard" href="https://pinboard.in/u:" title="Pinboard">Pinboard</a>
+			<a class="douban" href="https://www.douban.com/people/" title="Douban">Douban</a>
+			<a class="quora" href="https://quora.com/" title="Quora">Quora</a>
+			<a class="instagram" href="https://instagram.com/" title="Instagram">Instagram</a>
+			<a class="behance" href="https://www.behance.net/" title="Behance">Behance</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+-->	
+								<a class="email" href="mailto:huixiao1008@gmail.com" title="Email">Email</a>
+								<a class="weibo" target="_blank" href="https://weibo.com/u/2554601764" title="weibo">Weibo</a>
+								
+								<a class="github" target="_blank" href="https://github.com/Bug-Lollipop" title="GitHub">GitHub</a>
+								<!-- <a class="twitter" target="_blank" href="http://twitter.com/oulvhai" title="Twitter">Twitter</a> -->
+								<!-- <a class="rss" href="atom.xml" title="RSS">RSS</a> -->
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+
+			<div class="mid-col-container">
+		
+
+			
+ <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">【译】 理解JavaScript 对象</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<p>原文：<a href="https://blog.halolabs.io/understanding-javascript-objects-d31cd24ca60f">https://blog.halolabs.io/understanding-javascript-objects-d31cd24ca60f</a></p>
+
+<p>对象是JavaScript 中一个很核心的概念。当我刚开始学习对象的时候，它看起来似乎很简单，似乎就是一对 Key和Value。</p>
+
+<p>我花了很长时间才意识到这个话题对我想象的要复杂的多。然后我开始从不同的来源去学习更多的关于这方面的知识，但是总是感觉无法掌控全局。</p>
+
+<p>在这篇文章中，我会尽力在JS 中创建一个对象开始全面的概述，而不是太深入到任何一个主题，足够的深入去帮助你理解和感觉更舒适的去阅读学习。</p>
+
+<h3 id="toc_0">对象</h3>
+
+<p><strong>JavaScript对象只是属性的集合，每个属性都是一个键值对。</strong></p>
+
+<p>您可以使用点表示法（<code>obj.a</code>）或括号表示法（<code>obj [&#39;a&#39;]</code>）来访问键值。 请记住，如果您的密钥是以下之一，则应使用括号表示法：</p>
+
+<p>1.不是有效的JavaScript标识符（有空格，短划线，以数字开头……）<br/>
+2.是一个变量</p>
+
+<p>JS中的对象是使用一个名为<code>Prototype</code>的属性创建的，这是一个非常重要的模块。</p>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_1">prototype（原型）:</h3>
+
+<p>JavaScript中的每个对象都有一个名为<code>Prototype</code>的内部属性，在大多数浏览器中，您可以将其作为<code>__proto__</code>来访问。Prototype 是 Javascript的继承解决方案，它允许共享属性和方法而无需复制内存中的代码。 它通过将一个对象链接到另一个对象来实现。<br/>
+简而言之，<code>Prototype</code>创建了从一个对象到另一个对象的引用。</p>
+
+<h3 id="toc_2">Prototype chain（原型链）:</h3>
+
+<p>每次在对象中查找属性时，JS都会尝试在对象上找到它，如果不能，则会查看<code>Prototype</code>对象内部。 如果属性仍然缺失，JS将继续查找链接对象的 <code>Prototype</code>。 这将持续到JS找到相关属性或直到原型链结束。</p>
+
+<p>举个例子：</p>
+
+<pre><code>
+var cons = function () {
+   this.a = 1;
+   this.b = 2;
+}
+var obj = new cons(); 
+
+cons.prototype.b = 3;
+cons.prototype.c = 4;
+</code></pre>
+
+<p>cons是一个构造函数（只是一个可以使用<code>new</code>运算符的函数）。 在第5行，我们创建了一个新对象，一个新的<code>cons</code>实例。 在创建时，<code>obj</code>也获得了一个原型属性。<br/>
+现在我们将属性（<code>&#39;b&#39;，&#39;c&#39;</code>）添加到<code>cons</code>的<code>prototype</code>对象中，让我们看看<code>obj</code>：</p>
+
+<p><code>obj.a // 1 </code> -- 没有新的变化，<code>obj.a</code> 还是1<br/>
+<code>obj.c  // 4</code> -- 这个已经不是在<code>obj</code>中的<code>c</code>元素了！但就像我们之前所说的那样，JS现在会查看<code>obj</code> <code>Prototype</code>并将返回4。</p>
+
+<p>现在问问自己 <code>obj.b</code> 的值是什么？ 删除<code>obj.b</code> 后的值呢？</p>
+
+<p><code>obj.b</code> 值是2.我们确实设置了一个<code>b</code>属性，但是在<code>Prototype</code>上设置的，所以当我们检查<code>obj.b</code>时我们仍然得到2.然而，在我们删除了<code>obj.b</code>之后，JS再也找不到<code>obj</code>上的<code>b</code>了，所以它转到它的原型上了，此时<code>obj.b</code> 返回 3。</p>
+
+<pre><code>delete obj.b
+obj.b // 3
+</code></pre>
+
+<p>我想简要介绍一下创建对象的不同方法，并进一步讨论原型。</p>
+
+<h3 id="toc_3">creating an object （创建一个对象）</h3>
+
+<p><strong>Object literal（对象字面量）</strong>：<code>let obj = { a : 1 };</code> <br/>
+我们创建以下prototype原型链的对象： <code>obj ---&gt; Object.prototype ---&gt; null</code>。 你可以猜测<code>object.prototype</code> 是对象的原型，也是原型链的结束</p>
+
+<p><strong>Object.create()</strong> ： <code>var newObj = Object.create(obj);</code> newObj 的原型链将会是：<br/>
+<code>newObj ---&gt; obj ---&gt; Object.prototype ---&gt; null</code></p>
+
+<p><strong>Constructor（构造函数）</strong>：如上例所示，构造函数只是一个JS函数，它允许我们使用<code>new</code>运算符来创建它的实例。</p>
+
+<p>ES6 类:</p>
+
+<pre><code>class rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  } 
+  getArea() {
+    return this.height * this.width;
+  }
+}
+let square = new rectangle(2, 2);
+</code></pre>
+
+<p><code>Square</code>是<code>rectangle</code>构造函数的一个实例，因此我们可以调用<code>square.getArea() // 4</code>，<code>square.width</code>以及它从<code>object.prototype</code>继承的所有函数。</p>
+
+<p>你应该选择哪种方法？如果你计划去创建几个示例，你最好是使用ES6 / 构造函数 的方法，除非你打算去创建一个时间对象，你可能会去选择字面量，因为它可能更容易一些。</p>
+
+<p>现在我们了解了<code>prototyp</code>并且熟悉了创建新对象的所有方法，我们可以继续讨论对象中最令人困惑的部分之一：</p>
+
+<h3 id="toc_4">Comparing &amp; changing Objects （比较及改变对象）</h3>
+
+<h4 id="toc_5">在JavaScript中，对象是引用类型。</h4>
+
+<p>当我们创建一个对象时，让<code>obj = {a：1};</code> 变量<code>obj</code>接收对象内存中的位置而不是值！ 这一点非常重要，因为它可能会导致各种错误。 当我们创建另一个对象时，让<code>newObj = obj</code>，我们实际上创建了一个指向obj内存中位置的指针，而不是一个全新的对象。<br/>
+这意味着当我们做<code>newObj.a = 2</code>时，我们实际上改变了<code>obj</code>，所以<code>obj.a</code>现在是2！</p>
+
+<p>这很容易出错，许多公司正在使用不可变对象，这意味着您无法更改已创建的对象。 相反，您必须创建一个新对象（原始对象的副本）并进行更改。 这就像 Redux 这样的重要库正在运行，它是函数式编程中最重要的概念之一。 你可以在<a href="https://facebook.github.io/immutable-js/">这里</a>读更多关于它的内容。</p>
+
+<p><strong>平等：</strong>这也意味着两个对象永远不会相等，即使它们具有完全相同的属性。 这是因为JS实际上比较了对象的内存中的位置，并且两个对象永远不能在同一个内存单元中。</p>
+
+<pre><code>// Two distinct objects with the same properties are not equal
+// 具有相同属性的两个不同对象不相等
+var fruit = {name: &#39;apple&#39;};
+var fruitbear = {name: &#39;apple&#39;};
+fruit === fruitbear; // return false
+
+// here fruit and fruitbear are pointing to same object
+// 这里的 fruit 和 fruitbear 指向的都是同一对象
+var fruit = {name: &#39;apple&#39;};
+var fruitbear = fruit;  
+fruit === fruitbear; // return true
+
+</code></pre>
+
+<p>那么到现在为止你可能在想如何比较对象或者我应该如果操作不变的对象？</p>
+
+<p>让我们来看看一些可能性：</p>
+
+<h4 id="toc_6">对象的改变</h4>
+
+<p>我们理解最好不要改变我们的对象，所以我们想创建相关对象的副本并更改其属性，可以用<code>Object.assign()</code> 来做一事情。</p>
+
+<pre><code>var obj = { a : 1, b : 2};
+var newObj = Object.assign({}, obj,{a:2}) // {a : 2, b : 2 }
+</code></pre>
+
+<p>如果我们想要更改obj的属性值，我们可以使用<code>object.assign</code>创建 <code>obj</code> 的副本并进行更改。<br/>
+您可以看到我们如何首先创建一个空对象，然后复制<code>obj</code>的值，然后添加我们的更改，以便最终获得一个新的更新对象。</p>
+
+<p>请注意，这不适用于深拷贝。 深拷贝是指我们要复制具有一个或多个对象属性的对象：</p>
+
+<pre><code>const obj = {a : 1, b : { a : 1 } };  // b property is an object
+</code></pre>
+
+<p><code>Object.assign()</code> 复制属性值，因此当属性值是对象的引用时，它只复制该引用。</p>
+
+<p>对于深拷贝，我们必须递归复制。 我们可以创建一个函数或只使用<a href="https://lodash.com/">Lodash</a>的<a href="https://lodash.com/docs/4.17.10#cloneDeep">_.cloneDeep</a> 去实现。</p>
+
+<h4 id="toc_7">对象的比较</h4>
+
+<p>使用对象中的一个很酷的技巧是对它们进行字符串化（stringify）。<br/>
+我们在这里做的是对两个对象进行字符串化，然后比较结果字符串：</p>
+
+<pre><code>JSON.stringify(obj1) === JSON.stringify(obj2) 
+</code></pre>
+
+<p>因为我们现在比较字符串，这是由值数据类型完成的引用，所以说这是有效，。 坏消息是它并不总是有用，主要是因为对象属性顺序无法保证。</p>
+
+<p>另一个好的解决方案是使用<a href="https://lodash.com/">Lodash</a>的<code>_.isEqual</code>进行深度对象比较。</p>
+
+<p>在我们结束之前，让我们回顾一些对象的面试问题，这将有助于我们更多地学习并练习我们学到的东西。</p>
+
+<p>在继续阅读答案之前尝试考虑解决方案。</p>
+
+<h3 id="toc_8">如何获得一个对象的长度</h3>
+
+<p>为了找到答案，我们需要逐个迭代对象属性并对它们进行计数。 有多种方法可以迭代对象：</p>
+
+<ul>
+<li><strong>for in</strong></li>
+</ul>
+
+<p>此方法遍历对象及其原型链的所有可枚举属性。 <br/>
+现在我们（希望）知道原型我们可以很容易地意识到，如果我们只想获得对象属性，那么<code>for in</code>可能并不适合。</p>
+
+<ul>
+<li><strong>Object.keys</strong></li>
+</ul>
+
+<p>此方法返回一个数组，其中包含对象的所有<strong>自身</strong>（仅对象）<strong>可枚举</strong>属性键。 这样做的好处是因为我们只处理没有<code>prototype</code>属性的对象属性。 您很少将属性的可枚举性（enumerable）设置为false，从而导致<code>object.keys</code>跳过它们，从而可能无法得到想要的结果。 这是<code>getOwnPropertyNames</code>可以派上用场的地方。<br/>
+<code>getOwnPropertyNames</code>返回一个包含所有对象自身键的数组（不管是否可枚举）。</p>
+
+<ul>
+<li><strong>getOwnPropertyNames</strong></li>
+</ul>
+
+<p><code>getOwnPropertyNames</code> 返回一个数组，其中包含对象中所有<strong>自身</strong>的属性键（不管是都可枚举）</p>
+
+<p>另外值得一提的是：</p>
+
+<ul>
+<li><strong>Object.values</strong></li>
+</ul>
+
+<p><code>Object.values</code> 迭代自身和可枚举的属性，并返回一个包含相关<strong>值</strong>的数组。</p>
+
+<ul>
+<li><strong>Object.entries</strong></li>
+</ul>
+
+<p><code>Object.entries</code> 迭代自身和可枚举的属性，并返回一个包含<strong>键和值</strong>的数组。</p>
+
+<p>如您所见，上述大多数方法都返回一个数组，因此您可以利用JavaScript数组可用的所有方法。<br/>
+其中一个方法是<code>array.length</code>，所以我们可以简单地写：</p>
+
+<pre><code>let objLength = Object.getOwnPropertyNames(obj).length;
+</code></pre>
+
+<h3 id="toc_9">如何检查一个对象是空的？</h3>
+
+<ol>
+<li><code>JSON.stringify(myObj) === &quot;{}&quot;</code> —— 我们再次使用序列化工具，它可以让我们很轻松检查一个对象是否为空(比较字符串而非对象) 。</li>
+<li><code>!Object.keys(myobj).length // true</code> —— 正如我们之前所说的，将对象的键转换为数组可以使我们受益。 这里我们利用从<code>Array.prototype</code>继承的 length 属性来检查keys数组的长度。 在JS 中 0转换为false，因此我们使用<code>!</code> 进行取反，将其变为true，而所有其他数字将返回false。</li>
+</ol>
+
+<h3 id="toc_10">总结</h3>
+
+<p>我们介绍了很多，希望您现在能感觉更舒适地创建和处理对象。</p>
+
+<ul>
+<li>请记住，对象是引用类型，这意味着建议您不可变地工作。</li>
+<li>与原型属性和原型链交朋友。</li>
+<li>熟悉帮助我们处理对象的不同工具。 请记住，您可以对其进行字符串化，创建其键的数组，或者使用我们学到的各种方法之一遍历其属性。</li>
+</ul>
+
+<p>祝你好好探索JavaScript对象。 玩得开心！</p>
+
+		</div>
+	</article>
+<div class="share-comment">
+
+</div>
+
+
+</div>        </div>
+	
+	</div>
+<script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

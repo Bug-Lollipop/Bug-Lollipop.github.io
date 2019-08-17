@@ -1,0 +1,875 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	JS - Akira's blog
+  	
+	</title
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="Akira's blog" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	#sub-nav .social a.weibo {
+		background: url('asset/images/social/weibo.png?1419407210') center no-repeat #4ec4fa;
+		border: 1px solid #4ec4fa;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	article .entry-content table th,article .entry-content table td{ padding: 4px;border-collapse: collapse; border:solid 1px #ddd;}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="asset/icon.jpg" style="width:160px;">
+					</div>
+					<h1><a href="index.html">Akira's blog</a></h1>
+					<p class="subtitle">记录一些技术文章</p>
+					<nav id="main-nav">
+						<ul class="main">
+							<li><a href="index.html">Home</a></li>
+						    <li><a href="all.html">Blog</a></li>
+						    <li><a href="archives.html">Archives</a></li>
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+<!-- 
+			<a class="email" href="mailto:" title="Email">Email</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+			<a class="google" href="https://plus.google.com/" rel="author" title="Google+">Google+</a>
+			<a class="twitter" href="http://twitter.com/" title="Twitter">Twitter</a>
+			<a class="github" href="https://github.com/" title="GitHub">GitHub</a>
+			<a class="coderwall" href="https://coderwall.com/" title="Coderwall">Coderwall</a>
+		    <a class="stackoverflow" href="http://stackoverflow.com/users/" title="StackOverflow"></a>
+			<a class="linkedin" href="http://www.linkedin.com/in/" title="LinkedIn">LinkedIn</a>
+			<a class="pinterest" href="https://pinterest.com/" title="Pinterest">Pinterest</a>
+			<a class="delicious" href="http://delicious.com/" title="Delicious">Delicious</a>
+			<a class="pinboard" href="https://pinboard.in/u:" title="Pinboard">Pinboard</a>
+			<a class="douban" href="https://www.douban.com/people/" title="Douban">Douban</a>
+			<a class="quora" href="https://quora.com/" title="Quora">Quora</a>
+			<a class="instagram" href="https://instagram.com/" title="Instagram">Instagram</a>
+			<a class="behance" href="https://www.behance.net/" title="Behance">Behance</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+-->	
+								<a class="email" href="mailto:huixiao1008@gmail.com" title="Email">Email</a>
+								<a class="weibo" target="_blank" href="https://weibo.com/u/2554601764" title="weibo">Weibo</a>
+								
+								<a class="github" target="_blank" href="https://github.com/Bug-Lollipop" title="GitHub">GitHub</a>
+								<!-- <a class="twitter" target="_blank" href="http://twitter.com/oulvhai" title="Twitter">Twitter</a> -->
+								<!-- <a class="rss" href="atom.xml" title="RSS">RSS</a> -->
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+
+			<div class="mid-col-container">
+		
+
+			
+ <div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2019-08-07T10:24:25+08:00" itemprop="datePublished">2019/8/7</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15651446659023.html" itemprop="url">
+		JavaScript 的事件循环</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h3 id="toc_0">宏任务</h3>
+
+<p>(macro)task ： 每次执行栈执行的代码都是一个宏任务（包括每次从事件队列中获取一个事件回调并都放在执行栈中执行）</p>
+
+<pre><code>(macro)task-&gt;渲染-&gt;(macro)task-&gt;...
+</code></pre>
+
+<p>(macro)task： script(整体代码)、setTimeout、setInterval、I/O、UI交互事件、postMessage、MessageChannel、setImmediate(Node.js 环境)</p>
+
+<h3 id="toc_1">微任务</h3>
+
+<p>microtask（又称为微任务），可以理解是在当前 task 执行结束后立即执行的任务。也就是说，在当前task任务后，下一个task之前，在渲染之前。</p>
+
+<p>所以它的响应速度相比setTimeout（setTimeout是task）会更快，因为无需等渲染。也就是说，在某一个macrotask执行完后，就会将在它执行期间产生的所有microtask都执行完毕（在渲染前）。</p>
+
+<p>microtask：Promise.then、MutaionObserver、process.nextTick(Node.js 环境)</p>
+
+<h3 id="toc_2">运行机制</h3>
+
+<p><img src="media/15651446659023/15651452951715.jpg" alt=""/></p>
+
+<h3 id="toc_3">Promise和async中的立即执行</h3>
+
+<p>Promise 中的代码当做同步任务立即执行。<br/>
+async/await中，出现在 await之前的代码立即执行。await 之后的相当于 promise then。</p>
+
+<h4 id="toc_4">await 做了什么</h4>
+
+<p>await 让出线程的标志。await 后面的表达式会执行一遍，将await 后面的代码加入到microtask 中，然后await 后面的表达式执行完，就会跳出整个async 函数来执行后面的代码</p>
+
+<p>async await 本身就是promise+generator的语法糖</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-09-20T15:02:06+08:00" itemprop="datePublished">2018/9/20</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15374269260171.html" itemprop="url">
+		[译]在JavaScript中编写更好的条件的5个技巧</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>原文： <a href="https://scotch.io/tutorials/5-tips-to-write-better-conditionals-in-javascript#toc-summary">https://scotch.io/tutorials/5-tips-to-write-better-conditionals-in-javascript#toc-summary</a></p>
+
+<p>使用JavaScript时，我们处理了很多条件，这里有5个秘诀，可以让你编写更好、更清晰的条件。</p>
+
+<h3 id="toc_0">1. 对多个条件使用Array.includes</h3>
+
+<p>看下面的例子：</p>
+
+<pre><code>// condition
+function test(fruit) {
+  if (fruit == &#39;apple&#39; || fruit == &#39;strawberry&#39;) {
+    console.log(&#39;red&#39;);
+  }
+}
+</code></pre>
+
+<p>乍一看，上面的例子看起来不错。 但是，如果我们得到更多的红色水果，cherry（樱桃）和 cranberries（蔓越莓）呢？ 我们是否要用更多的 <code>||</code> 扩展语句？</p>
+
+<p>我们可以使用Array.includes（<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes">Array.includes</a>）重写上面的条件。</p>
+
+<pre><code>function test(fruit) {
+  // extract conditions to array
+  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
+
+  if (redFruits.includes(fruit)) {
+    console.log(&#39;red&#39;);
+  }
+}
+</code></pre>
+
+<p>我们将红色水果（条件）提取到一个数组中。 通过这样做代码看起来更加整洁。</p>
+
+<h3 id="toc_1">2. 减少嵌套，更早return</h3>
+
+<p>让我们扩展前面的示例以包含另外两个条件：</p>
+
+<pre><code>function test(fruit, quantity) {
+  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
+
+  // 条件 1： 及早抛出错误
+  if (fruit) {
+    // 条件 2： 必须是红色
+    if (redFruits.includes(fruit)) {
+      console.log(&#39;red&#39;);
+
+      // 条件 3： 必须是大数量
+      if (quantity &gt; 10) {
+        console.log(&#39;big quantity&#39;);
+      }
+    }
+  } else {
+    throw(&#39;No fruit!&#39;);
+  }
+}
+
+// test results
+test(null); // error: No fruits
+test(&#39;apple&#39;); // print: red
+test(&#39;apple&#39;, 20); // print: red, big quantity
+</code></pre>
+
+<p>看看上面的代码，我们可以做：</p>
+
+<p>我个人遵循的一般规则是在发现无效条件时提前返回。</p>
+
+<pre><code>/_ 当无效的条件发生时，及早返回 _/
+
+function test(fruit, quantity) {
+  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
+
+  // 条件 1： 及早抛出错误
+  if (!fruit) throw(&#39;No fruit!&#39;);
+
+  // 条件 2： 必须是红色
+  if (redFruits.includes(fruit)) {
+    console.log(&#39;red&#39;);
+
+    // 条件 3： 必须是大数量
+    if (quantity &gt; 10) {
+      console.log(&#39;big quantity&#39;);
+    }
+  }
+}
+</code></pre>
+
+<p>通过这样做，我们有一个较少级别的嵌套语句。 这种编码风格很好，特别是当你有很长的if语句时（想象你需要滚动到最底层才知道有一个else语句，这一点都不酷）。</p>
+
+<p>如果通过反转条件并提前返回，我们可以进一步减少嵌套。 请查看下面的条件2，看看我们是如何做到的：</p>
+
+<pre><code>/_ 当无效的条件发生时，及早返回 _/
+
+function test(fruit, quantity) {
+  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
+
+  if (!fruit) throw(&#39;No fruit!&#39;); // 条件 1： 及早抛出错误
+  if (!redFruits.includes(fruit)) return; // 条件 2： 必须是红色
+
+  console.log(&#39;red&#39;);
+
+  // 条件 3: 必须是大数量
+  if (quantity &gt; 10) {
+    console.log(&#39;big quantity&#39;);
+  }
+}
+</code></pre>
+
+<p>通过反转条件2的条件，我们的代码现在没有嵌套语句。 当我们有很长的逻辑时，这种技术非常有用，我们希望在条件不满足时停止进一步的处理。</p>
+
+<p>这样看来，这并不是一件难事。 想一想，这个版本（没有嵌套）比前一个（条件2嵌套）版本是否更好，可读性更高？</p>
+
+<p>对我来说，我只是将它保留为以前的版本（条件2与嵌套），因为：<br/>
+- 代码简短直接，嵌套if更清晰<br/>
+- 反转条件可能会引发更多的思考过程（增加认知负荷）</p>
+
+<p>因此，始终瞄准较少的嵌套和早期返回，但不要过度。 如果您感兴趣，有一篇文章和StackOverflow讨论会进一步讨论这个主题：</p>
+
+<h3 id="toc_2">3. 使用默认函数参数和解构</h3>
+
+<p>我想下面的代码可能看起来很熟悉，我们总是需要检查null / undefined值并在使用JavaScript时分配默认值：</p>
+
+<pre><code>function test(fruit, quantity) {
+  if (!fruit) return;
+  const q = quantity || 1; // if quantity not provided, default to one
+
+  console.log(`We have ${q} ${fruit}!`);
+}
+
+//test results
+test(&#39;banana&#39;); // We have 1 banana!
+test(&#39;apple&#39;, 2); // We have 2 apple!
+</code></pre>
+
+<p>实际上，我们可以通过分配默认函数参数来消除变量q。</p>
+
+<pre><code>function test(fruit, quantity = 1) { // if quantity not provided, default to one
+  if (!fruit) return;
+  console.log(`We have ${quantity} ${fruit}!`);
+}
+
+//test results
+test(&#39;banana&#39;); // We have 1 banana!
+test(&#39;apple&#39;, 2); // We have 2 apple!
+</code></pre>
+
+<p>更简单直观不是吗？ 请注意，每个参数都有自己的默认函数参数。 例如，我们也可以为<code>fruit</code>分配默认值：test(fruit =&#39;unknown&#39;, quantity = 1)。</p>
+
+<p>如果我们的fruit是一个对象怎么办？ 我们可以指定默认参数吗？</p>
+
+<pre><code>function test(fruit) { 
+  // printing fruit name if value provided
+  if (fruit &amp;&amp; fruit.name)  {
+    console.log (fruit.name);
+  } else {
+    console.log(&#39;unknown&#39;);
+  }
+}
+
+//test results
+test(undefined); // unknown
+test({ }); // unknown
+test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
+</code></pre>
+
+<p>看看上面的例子，如果fruit.name对象和fruit.name 同时存在，打印fruit.name，反之打印出unknown。 我们可以使用默认函数参数＆拆分来避免使用条件fruit&amp;&amp; fruit.name 去检查。</p>
+
+<pre><code>// destructing - get name property only
+// assign default empty object {}
+function test({name} = {}) {
+  console.log (name || &#39;unknown&#39;);
+}
+
+//test results
+test(undefined); // unknown
+test({ }); // unknown
+test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
+</code></pre>
+
+<p>由于我们只需要来自fruit的属性<code>name</code>，我们可以使用<code>{ name }</code>来构造参数，然后我们可以在代码中使用<code>name</code>作为变量而不是<code>fruit.name</code>。</p>
+
+<p>我们还将空对象<code>{}</code>指定为默认值。 如果我们不这样做，你将在执行test(undefined) 时报错 - <code>Cannot destructure property name of &#39;undefined&#39; or &#39;null&#39;.</code>。 因为<code>undefined</code>中没有<code>name</code>属性。</p>
+
+<p>如果您不介意使用第三方库，有几种方法可以减少空检查：</p>
+
+<p>这是一个使用Lodash 的例子：</p>
+
+<pre><code>// Include lodash library, you will get _
+function test(fruit) {
+  console.log(_.get(fruit, &#39;name&#39;, &#39;unknown&#39;); // get property name, if not available, assign default value &#39;unknown&#39;
+}
+
+//test results
+test(undefined); // unknown
+test({ }); // unknown
+test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
+</code></pre>
+
+<p>您可以在<a href="http://jsbin.com/bopovajiye/edit?js,console">此处</a>运行演示代码。 此外，如果您是函数式编程（FP）的粉丝，您可以选择使用<a href="https://github.com/lodash/lodash/wiki/FP-Guide">Lodash fp</a>，这是Lodash的函数式版本（方法更改为get或getOr）。</p>
+
+<h3 id="toc_3">4. 支持Map / Object Literal而不是Switch语句</h3>
+
+<p>一起看下面的例子，我们想要打印出水果对应的基本颜色：</p>
+
+<pre><code>function test(color) {
+  // use switch case to find fruits in color
+  switch (color) {
+    case &#39;red&#39;:
+      return [&#39;apple&#39;, &#39;strawberry&#39;];
+    case &#39;yellow&#39;:
+      return [&#39;banana&#39;, &#39;pineapple&#39;];
+    case &#39;purple&#39;:
+      return [&#39;grape&#39;, &#39;plum&#39;];
+    default:
+      return [];
+  }
+}
+
+//test results
+test(null); // []
+test(&#39;yellow&#39;); // [&#39;banana&#39;, &#39;pineapple&#39;]
+</code></pre>
+
+<p>上面的代码看起来没有什么问题，但是我会觉得它比较冗长。使用具有更清晰语法——对象自变量 可以实现相同的结果：</p>
+
+<pre><code>function test(color) {
+  // use object literal to find fruits in color
+  const fruitColor = {
+    red: [&#39;apple&#39;, &#39;strawberry&#39;],
+    yellow: [&#39;banana&#39;, &#39;pineapple&#39;],
+    purple: [&#39;grape&#39;, &#39;plum&#39;]
+  };
+
+  return fruitColor[color] || [];
+}
+</code></pre>
+
+<p>或者，您可以使用<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"><code>Map</code></a>来实现相同的结果：</p>
+
+<pre><code>function test(color) {
+  // use Map to find fruits in color
+  const fruitColor = new Map()
+    .set(&#39;red&#39;, [&#39;apple&#39;, &#39;strawberry&#39;])
+    .set(&#39;yellow&#39;, [&#39;banana&#39;, &#39;pineapple&#39;])
+    .set(&#39;purple&#39;, [&#39;grape&#39;, &#39;plum&#39;]);
+
+  return fruitColor.get(color) || [];
+}
+</code></pre>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>是自ES2015以来可用的对象类型，允许您存储键值对。</p>
+
+<p>我们应该禁止使用switch语句吗？ 不要局限于此。 就个人而言，我尽可能使用对象字变量，但我不会设置硬规则来阻止它，应根据不同场景选择适合的方式。</p>
+
+<p>Todd Motto有一篇深入研究switch语句与对象字变量的文章，你可以在<a href="https://toddmotto.com/deprecating-the-switch-statement-for-object-literals/">这里</a>阅读。</p>
+
+<h3 id="toc_4">5.代码重构</h3>
+
+<p>对于上面的示例，我们实际上可以重构我们的代码以使用<code>Array.filter</code>实现相同的结果</p>
+
+<pre><code>function test(color) {
+  // use Array filter to find fruits in color
+  const fruits = [
+    { name: &#39;apple&#39;, color: &#39;red&#39; }, 
+    { name: &#39;strawberry&#39;, color: &#39;red&#39; }, 
+    { name: &#39;banana&#39;, color: &#39;yellow&#39; }, 
+    { name: &#39;pineapple&#39;, color: &#39;yellow&#39; }, 
+    { name: &#39;grape&#39;, color: &#39;purple&#39; }, 
+    { name: &#39;plum&#39;, color: &#39;purple&#39; }   ];
+
+  return fruits.filter(f =&gt; f.color == color);
+}
+</code></pre>
+
+<p>总有不止一种方法可以达到相同的效果。 我们在这个例子中，展示了四种实现方式。 编码真的很有趣！</p>
+
+<h3 id="toc_5">6.对所有、部分标准使用Array.every和Array.some</h3>
+
+<p>最后一点更多是关于领用一个新的 javascript Array 函数去减少代码行。看下面的代码，我们想要去见检查在所有的水果中哪些是红颜色的：</p>
+
+<pre><code>function test(fruits) {
+  const fruits = [
+    { name: &#39;apple&#39;, color: &#39;red&#39; },
+    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
+    { name: &#39;grape&#39;, color: &#39;purple&#39; }
+  ];
+
+  let isAllRed = true;
+
+  // condition: all fruits must be red
+  for (let f of fruits) {
+    if (!isAllRed) break;
+    isAllRed = (f.color == &#39;red&#39;);
+  }
+
+  console.log(isAllRed); // false
+}
+</code></pre>
+
+<p>这个代码看起来太长了！我们可以使用 <code>Array.every</code> 减少代码行数量:</p>
+
+<pre><code>function test(fruits) {
+  const fruits = [
+    { name: &#39;apple&#39;, color: &#39;red&#39; },
+    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
+    { name: &#39;grape&#39;, color: &#39;purple&#39; }
+  ];
+
+  // condition: short way, all fruits must be red
+  const isAllRed = fruits.every(f =&gt; f.color == &#39;red&#39;);
+
+  console.log(isAllRed); // false
+}
+</code></pre>
+
+<p>现在是不是干净多了？ 以类似的方式，如果我们想测试水果中是否有红色的，我们可以使用<code>Array.some</code>用一行中实现它。</p>
+
+<pre><code>function test(fruits) {
+  const fruits = [
+    { name: &#39;apple&#39;, color: &#39;red&#39; },
+    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
+    { name: &#39;grape&#39;, color: &#39;purple&#39; }
+  ];
+
+  // condition: if any fruit is red
+  const isAnyRed = fruits.some(f =&gt; f.color == &#39;red&#39;);
+
+  console.log(isAnyRed); // true
+}
+</code></pre>
+
+<h3 id="toc_6">总结</h3>
+
+<p>让我们一起生成更多可读代码。 我希望你能在本文中学到一些新东西。</p>
+
+<p>就这样。 快乐的编码！</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-07-31T14:09:19+08:00" itemprop="datePublished">2018/7/31</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15330173598963.html" itemprop="url">
+		【译】 理解JavaScript 对象</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>原文：<a href="https://blog.halolabs.io/understanding-javascript-objects-d31cd24ca60f">https://blog.halolabs.io/understanding-javascript-objects-d31cd24ca60f</a></p>
+
+<p>对象是JavaScript 中一个很核心的概念。当我刚开始学习对象的时候，它看起来似乎很简单，似乎就是一对 Key和Value。</p>
+
+<p>我花了很长时间才意识到这个话题对我想象的要复杂的多。然后我开始从不同的来源去学习更多的关于这方面的知识，但是总是感觉无法掌控全局。</p>
+
+<p>在这篇文章中，我会尽力在JS 中创建一个对象开始全面的概述，而不是太深入到任何一个主题，足够的深入去帮助你理解和感觉更舒适的去阅读学习。</p>
+
+<h3 id="toc_0">对象</h3>
+
+<p><strong>JavaScript对象只是属性的集合，每个属性都是一个键值对。</strong></p>
+
+<p>您可以使用点表示法（<code>obj.a</code>）或括号表示法（<code>obj [&#39;a&#39;]</code>）来访问键值。 请记住，如果您的密钥是以下之一，则应使用括号表示法：</p>
+
+<p>1.不是有效的JavaScript标识符（有空格，短划线，以数字开头……）<br/>
+2.是一个变量</p>
+
+<p>JS中的对象是使用一个名为<code>Prototype</code>的属性创建的，这是一个非常重要的模块。</p>
+
+
+
+			 
+			<a href="15330173598963.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-06-21T17:40:46+08:00" itemprop="datePublished">2018/6/21</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15295740469652.html" itemprop="url">
+		用 Javascript console 提高开发效率</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>作为开发者，我们开发中用的最多的是 console.log 。但是还有更多的更适合的方式去打印我们想要输出的内容</p>
+
+<h3 id="toc_0">Console.log, Console.error, Console.warn and Console.info 的显示方式</h3>
+
+<p><img src="media/15295740469652/15295766253535.jpg" alt=""/></p>
+
+
+
+			 
+			<a href="15295740469652.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-06-08T15:30:15+08:00" itemprop="datePublished">2018/6/8</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15284430152022.html" itemprop="url">
+		CSS outline 自动填满屏幕剩余空间</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>有不少网站的主要背景是白色的，底部是深色的，于是就会出现这样一个场景，当主内容很少的时候，包括底部在内的都不足一瓶，或者用户的显示器是竖屏，则很可能出现下图所示的情况：</p>
+
+<p><img src="media/15284430152022/15284588736488.jpg" alt="img" style="width:300px;"/></p>
+
+
+
+			 
+			<a href="15284430152022.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-06-06T17:33:18+08:00" itemprop="datePublished">2018/6/6</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15282775980505.html" itemprop="url">
+		多种方式判断Javascript 对象中属性值为空</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>我们在做接口请求的时候，会出现在某种条件下某个参数是不需要传的，一般情况下，赋值时不需要的参数的属性值为null，undefined。这个时候需要过滤出属性值为null，undefined 的key，并删除。</p>
+
+<p>下面总结了几种方式：</p>
+
+
+
+			 
+			<a href="15282775980505.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-06-04T17:06:27+08:00" itemprop="datePublished">2018/6/4</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15281031874240.html" itemprop="url">
+		CDN 是如何工作的</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<ol>
+<li><p>CDN的实现基础是通过将DNS的域名设置为CNAME(就是指向另一个域名，但这个域名也是有A记录的（就是域名对应IP）)。</p></li>
+<li><p>CNAME的作用就是要求浏览器发送域名到CNAME这个域名的服务器去解析得到域名的IP，就是本地DNS不作IP解析，而由CNAME指定的服务器去解析。</p></li>
+<li><p>CNAME指定的服务器去解析的IP地址是CDN的全局负载均衡设备IP </p></li>
+<li><p>浏览器得到这个全局负载均衡设备IP就向这个IP发起内容请求，全局负载均衡设备会跟据IP将请求交给它的区域负载均衡设备处理，区域负载均衡设备会选择一个最近用户的缓存服务器IP返回给全局负载均衡设备,全局负载均衡设备叫用户重定向到缓存服务器获取请求的内容。 </p></li>
+<li><p>这样做需然请求经过了几个服务器的来回碾转，但对于请求内容（数据量）较多的情况还是会缩短内容的下载时间的，毕竟下载内容的距离变短了，网速快了，特别数据量大时前面的开销更显得微不足道。</p></li>
+<li><p>最初缓存服务器是没有数据内容的，但会从CDN中的你指定的目标服务器去获取内容并缓存到缓存服务器中，以便为后面进行服务。 </p></li>
+</ol>
+
+<p>注：</p>
+
+<ol>
+<li>A记录是名称解析的重要记录，它用于将特定的主机名映射到对应主机的IP地址上。你可以在DNS服务器中手动创建或通过DNS客户端动态更新来创建。 </li>
+<li>NS记录此记录指定负责此DNS区域的权威名称服务器。 </li>
+<li>A记录和NS记录的区别是，A记录直接给出目的IP，NS记录将DNS解析任务交给特定的服务器，NS记录中记录的IP即为该特定服务器的IP地址。 </li>
+<li>NS记录优先于A记录，A记录优先于CNAME记录 </li>
+</ol>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-06-02T15:30:14+08:00" itemprop="datePublished">2018/6/2</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15284430142953.html" itemprop="url">
+		应用包打包体积优化</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>一个接手的Vue外部项目，build 非常慢，试着去优化一波。<br/>
+首先使用 webpack-bundle-analyzer 来分析一波是哪些文件造成的：</p>
+
+<h3 id="toc_0">安装</h3>
+
+<p>项目根目录运行：</p>
+
+<pre><code>npm install --save-dev webpack-bundle-analyzer
+</code></pre>
+
+<h3 id="toc_1">配置</h3>
+
+<p>在使用vue-cli生成的脚手架文件中，通过修改build文件夹下的webpack.prod.conf.js：</p>
+
+
+
+			 
+			<a href="15284430142953.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-05-21T13:57:44+08:00" itemprop="datePublished">2018/5/21</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15268822646837.html" itemprop="url">
+		Vue 首屏加载速度</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<ul>
+<li>缩小vendor 体积，拆包</li>
+<li>外部组件按需加载</li>
+<li>资源放到CDN</li>
+<li>接口</li>
+</ul>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-05-11T18:11:26+08:00" itemprop="datePublished">2018/5/11</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15260334862166.html" itemprop="url">
+		千分位分隔符</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>千位分隔符 是很常见的需求，但是输入文本千变万化，如何才能准确添加千分符呢？</p>
+
+<p>纯整数情况：</p>
+
+<p>纯整数大概是所有情况里最简单的一种，我们只要正确匹配出千分位就好了。</p>
+
+<p>观察上面的数字，我们可以得出千分位的特征是 到字符串终止位有 3n 个数字，不包括起始位 。于是可以得到这样的函数：</p>
+
+<pre><code>let miliFormat = (num) =&gt; {  
+    return num &amp;&amp; num.toString().replace(/(?=(?!^)(\d{3})+$)/g, &#39;,&#39;)
+}
+</code></pre>
+
+<p>但是往往现实没有那么乐观：</p>
+
+<p>小数的情况</p>
+
+<p>遇到小数时，我们的希望只针对整数部分添加千分符，这时问题就变得稍稍有些棘手了。</p>
+
+<p>如果正则引擎支持逆序环视 [2] ，我们可以这样构造正则表达式：</p>
+
+<p><code>(?&lt;=\d+)(?=(\d{3})+\b)</code></p>
+
+<p>但是多数语言并不支持逆序环视，所以我们要变通一下：</p>
+
+<ol>
+<li>拿到小数的整数部分
+也就是起始位到小数点（非数字）之间的部分，可以这样实现：</li>
+</ol>
+
+<p><code>^\d+</code><br/>
+2. 为整数部分添加千分符<br/>
+这一步可以利用我们之前的实现，整合在一起如下：</p>
+
+<pre><code>let miliFormat = (num) =&gt; {  
+    return num &amp;&amp; num
+        .toString()
+        .replace(/^\d+/, (m) =&gt; m.replace(/(?=(?!^)(\d{3})+$)/g, &#39;,&#39;))
+}
+</code></pre>
+
+<p>这个函数对整、小数都能正确处理。</p>
+
+
+			
+			
+		</div>
+
+	</article>
+  
+
+</div>
+<nav id="pagenavi">
+	 
+	 <a class="next" href="JS_1.html">Next</a> 
+	<div class="center"><a href="archives.html">Blog Archives</a></div>
+
+</nav>
+
+</div>
+
+
+
+        </div>
+	
+	</div>
+<script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

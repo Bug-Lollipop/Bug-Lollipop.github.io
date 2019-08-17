@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	SSH 多账户使用 - Akira's blog
+  	
+	</title
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="Akira's blog" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	#sub-nav .social a.weibo {
+		background: url('asset/images/social/weibo.png?1419407210') center no-repeat #4ec4fa;
+		border: 1px solid #4ec4fa;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	article .entry-content table th,article .entry-content table td{ padding: 4px;border-collapse: collapse; border:solid 1px #ddd;}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="asset/icon.jpg" style="width:160px;">
+					</div>
+					<h1><a href="index.html">Akira's blog</a></h1>
+					<p class="subtitle">记录一些技术文章</p>
+					<nav id="main-nav">
+						<ul class="main">
+							<li><a href="index.html">Home</a></li>
+						    <li><a href="all.html">Blog</a></li>
+						    <li><a href="archives.html">Archives</a></li>
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+<!-- 
+			<a class="email" href="mailto:" title="Email">Email</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+			<a class="google" href="https://plus.google.com/" rel="author" title="Google+">Google+</a>
+			<a class="twitter" href="http://twitter.com/" title="Twitter">Twitter</a>
+			<a class="github" href="https://github.com/" title="GitHub">GitHub</a>
+			<a class="coderwall" href="https://coderwall.com/" title="Coderwall">Coderwall</a>
+		    <a class="stackoverflow" href="http://stackoverflow.com/users/" title="StackOverflow"></a>
+			<a class="linkedin" href="http://www.linkedin.com/in/" title="LinkedIn">LinkedIn</a>
+			<a class="pinterest" href="https://pinterest.com/" title="Pinterest">Pinterest</a>
+			<a class="delicious" href="http://delicious.com/" title="Delicious">Delicious</a>
+			<a class="pinboard" href="https://pinboard.in/u:" title="Pinboard">Pinboard</a>
+			<a class="douban" href="https://www.douban.com/people/" title="Douban">Douban</a>
+			<a class="quora" href="https://quora.com/" title="Quora">Quora</a>
+			<a class="instagram" href="https://instagram.com/" title="Instagram">Instagram</a>
+			<a class="behance" href="https://www.behance.net/" title="Behance">Behance</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+-->	
+								<a class="email" href="mailto:huixiao1008@gmail.com" title="Email">Email</a>
+								<a class="weibo" target="_blank" href="https://weibo.com/u/2554601764" title="weibo">Weibo</a>
+								
+								<a class="github" target="_blank" href="https://github.com/Bug-Lollipop" title="GitHub">GitHub</a>
+								<!-- <a class="twitter" target="_blank" href="http://twitter.com/oulvhai" title="Twitter">Twitter</a> -->
+								<!-- <a class="rss" href="atom.xml" title="RSS">RSS</a> -->
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+
+			<div class="mid-col-container">
+		
+
+			
+ <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">SSH 多账户使用</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<p>参考github 的 <a href="https://help.github.com/articles/connecting-to-github-with-ssh/">Connecting to GitHub with SSH</a></p>
+
+<h3 id="toc_0">检查 SSH Keys 是否存在</h3>
+
+<pre><code>ls -al ~/.ssh
+</code></pre>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_1">如果不存在，创建一个新的 SSH key</h3>
+
+<pre><code>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;
+</code></pre>
+
+<p>在 “-t” 参数之后，请求建立一个 “RSA” 类型的密钥。<br/>
+RSA 是当前最新并且最安全的一种形式。在 “-C” 参数之后，提供了一个注释，可以把它想象为对这个密钥的一种描述或标签。例如使用email 地址。总之，一个能更容易识别的注释。</p>
+
+<p>在确认此命令后，会询问一些信息：</p>
+
+<p>(1) 给这个新的密钥输入一个名称，保留默认的名字和设置。<br/>
+(2) 提供一个密码。虽然 SSH 公钥可以确保在没有任何密码的情况下安全地使用，但是还是应该设置一个密码，用来进一步提高安全性。</p>
+
+<h3 id="toc_2">查看公钥</h3>
+
+<p>执行上面命令后，会在.ssh 的目录中找到 id_rsa.pub（公钥）， id_rsa（秘钥）文件，如果想看公钥里面的内容，可以使用命令：</p>
+
+<pre><code>cat ~/.ssh/id_rsa.pub
+</code></pre>
+
+<h3 id="toc_3">将SSH Key 添加到 ssh-agent 中</h3>
+
+<ul>
+<li>后台启动ssh-agent</li>
+</ul>
+
+<pre><code>eval“$（ssh-agent -s）”
+</code></pre>
+
+<ul>
+<li>如果使用的是macOS Sierra 10.12.2或更高版本，则需要修改<code>~/.ssh/config</code>文件以自动将密钥加载到<code>ssh-agent</code>中，并将密钥存储在钥匙串中。<br/></li>
+<li>修改config 文件, 如果没有先创建一个 <code>touch ~/.ssh/config</code>
+配置如下：</li>
+</ul>
+
+<pre><code>Host [shortName] // 简称
+HostName [domain] // 对应服务器的域名
+PreferredAuthentications publickey
+IdentityFile [private keyPath] // 私钥绝对路径
+User [user] // 用户名。服务器的用户名，不是你的用户名。eg：大部分的git服务器用户名都为git
+Port [port] // 端口号，默认为22
+</code></pre>
+
+<p>比如如果在 github 上有一个账号，在gitlab上也有个账号，那么config 下的文件内容可以为：</p>
+
+<pre><code>Host github
+HostName github.com
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/id_rsa_github
+User git
+    
+Host gitlab
+HostName gitlab.elenet.me
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/id_rsa)gitlab
+User git
+    
+</code></pre>
+
+<ul>
+<li>验证是否成功
+单个SSH 验证，可以直接 <code>ssh -T git@github.com</code> 进行验证，但是设置了config 之后，是通过简称映射对应的域名和私钥， 命令为：</li>
+</ul>
+
+<pre><code>ssh -T git@github
+ssh -T git@gitlab
+</code></pre>
+
+<ul>
+<li>将SSH私钥添加到ssh-agent并将密码存储在钥匙串中。
+如果使用不同的名称创建密钥，或者要添加具有不同名称的现有密钥，请将该命令中的id_rsa替换为私钥文件的名称。</li>
+</ul>
+
+<pre><code>ssh-add -K〜/ .ssh / id_rsa
+</code></pre>
+
+<p><strong>注意</strong>： 该-K选项是Apple的标准版本ssh-add，当将ssh密钥添加到ssh-agent时，该密钥将密钥存储在您的钥匙串中。</p>
+
+<h3 id="toc_4">复制公钥内容</h3>
+
+<pre><code>pbcopy &lt; ~/.ssh/id_rsa.pub 
+</code></pre>
+
+<h3 id="toc_5">将SSH 秘钥添加到github或gitlab 账户中</h3>
+
+<p><a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/">添加到github 账户</a></p>
+
+<hr/>
+
+<p><strong>补充</strong>：<br/>
+ssh-keygen 的常用参数：<br/>
+ * -b ：指的是位数，默认2048<br/>
+ * -C ：提供一个新注释，自定义一个邮箱<br/>
+ * -c ：要求修改私钥和公钥文件中的注释。本选项只支持 RSA1 密钥。程序将提示输入私钥文件名、密语(如果存在)、新注释。<br/>
+ * -f ：指定密钥文件名。<br/>
+ * -N 创建秘钥的密码<br/>
+ * -q ：安静模式。用于在 /etc/rc 中创建新密钥的时候。<br/>
+ * -t ：指定要创建的密钥类型。</p>
+
+		</div>
+	</article>
+<div class="share-comment">
+
+</div>
+
+
+</div>        </div>
+	
+	</div>
+<script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

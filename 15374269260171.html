@@ -1,0 +1,486 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	[译]在JavaScript中编写更好的条件的5个技巧 - Akira's blog
+  	
+	</title
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="Akira's blog" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	#sub-nav .social a.weibo {
+		background: url('asset/images/social/weibo.png?1419407210') center no-repeat #4ec4fa;
+		border: 1px solid #4ec4fa;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	article .entry-content table th,article .entry-content table td{ padding: 4px;border-collapse: collapse; border:solid 1px #ddd;}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="asset/icon.jpg" style="width:160px;">
+					</div>
+					<h1><a href="index.html">Akira's blog</a></h1>
+					<p class="subtitle">记录一些技术文章</p>
+					<nav id="main-nav">
+						<ul class="main">
+							<li><a href="index.html">Home</a></li>
+						    <li><a href="all.html">Blog</a></li>
+						    <li><a href="archives.html">Archives</a></li>
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+<!-- 
+			<a class="email" href="mailto:" title="Email">Email</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+			<a class="google" href="https://plus.google.com/" rel="author" title="Google+">Google+</a>
+			<a class="twitter" href="http://twitter.com/" title="Twitter">Twitter</a>
+			<a class="github" href="https://github.com/" title="GitHub">GitHub</a>
+			<a class="coderwall" href="https://coderwall.com/" title="Coderwall">Coderwall</a>
+		    <a class="stackoverflow" href="http://stackoverflow.com/users/" title="StackOverflow"></a>
+			<a class="linkedin" href="http://www.linkedin.com/in/" title="LinkedIn">LinkedIn</a>
+			<a class="pinterest" href="https://pinterest.com/" title="Pinterest">Pinterest</a>
+			<a class="delicious" href="http://delicious.com/" title="Delicious">Delicious</a>
+			<a class="pinboard" href="https://pinboard.in/u:" title="Pinboard">Pinboard</a>
+			<a class="douban" href="https://www.douban.com/people/" title="Douban">Douban</a>
+			<a class="quora" href="https://quora.com/" title="Quora">Quora</a>
+			<a class="instagram" href="https://instagram.com/" title="Instagram">Instagram</a>
+			<a class="behance" href="https://www.behance.net/" title="Behance">Behance</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+-->	
+								<a class="email" href="mailto:huixiao1008@gmail.com" title="Email">Email</a>
+								<a class="weibo" target="_blank" href="https://weibo.com/u/2554601764" title="weibo">Weibo</a>
+								
+								<a class="github" target="_blank" href="https://github.com/Bug-Lollipop" title="GitHub">GitHub</a>
+								<!-- <a class="twitter" target="_blank" href="http://twitter.com/oulvhai" title="Twitter">Twitter</a> -->
+								<!-- <a class="rss" href="atom.xml" title="RSS">RSS</a> -->
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+
+			<div class="mid-col-container">
+		
+
+			
+ <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">[译]在JavaScript中编写更好的条件的5个技巧</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<p>原文： <a href="https://scotch.io/tutorials/5-tips-to-write-better-conditionals-in-javascript#toc-summary">https://scotch.io/tutorials/5-tips-to-write-better-conditionals-in-javascript#toc-summary</a></p>
+
+<p>使用JavaScript时，我们处理了很多条件，这里有5个秘诀，可以让你编写更好、更清晰的条件。</p>
+
+<h3 id="toc_0">1. 对多个条件使用Array.includes</h3>
+
+<p>看下面的例子：</p>
+
+<pre><code>// condition
+function test(fruit) {
+  if (fruit == &#39;apple&#39; || fruit == &#39;strawberry&#39;) {
+    console.log(&#39;red&#39;);
+  }
+}
+</code></pre>
+
+<p>乍一看，上面的例子看起来不错。 但是，如果我们得到更多的红色水果，cherry（樱桃）和 cranberries（蔓越莓）呢？ 我们是否要用更多的 <code>||</code> 扩展语句？</p>
+
+<p>我们可以使用Array.includes（<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes">Array.includes</a>）重写上面的条件。</p>
+
+<pre><code>function test(fruit) {
+  // extract conditions to array
+  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
+
+  if (redFruits.includes(fruit)) {
+    console.log(&#39;red&#39;);
+  }
+}
+</code></pre>
+
+<p>我们将红色水果（条件）提取到一个数组中。 通过这样做代码看起来更加整洁。</p>
+
+<h3 id="toc_1">2. 减少嵌套，更早return</h3>
+
+<p>让我们扩展前面的示例以包含另外两个条件：</p>
+
+<pre><code>function test(fruit, quantity) {
+  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
+
+  // 条件 1： 及早抛出错误
+  if (fruit) {
+    // 条件 2： 必须是红色
+    if (redFruits.includes(fruit)) {
+      console.log(&#39;red&#39;);
+
+      // 条件 3： 必须是大数量
+      if (quantity &gt; 10) {
+        console.log(&#39;big quantity&#39;);
+      }
+    }
+  } else {
+    throw(&#39;No fruit!&#39;);
+  }
+}
+
+// test results
+test(null); // error: No fruits
+test(&#39;apple&#39;); // print: red
+test(&#39;apple&#39;, 20); // print: red, big quantity
+</code></pre>
+
+<p>看看上面的代码，我们可以做：</p>
+
+<p>我个人遵循的一般规则是在发现无效条件时提前返回。</p>
+
+<pre><code>/_ 当无效的条件发生时，及早返回 _/
+
+function test(fruit, quantity) {
+  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
+
+  // 条件 1： 及早抛出错误
+  if (!fruit) throw(&#39;No fruit!&#39;);
+
+  // 条件 2： 必须是红色
+  if (redFruits.includes(fruit)) {
+    console.log(&#39;red&#39;);
+
+    // 条件 3： 必须是大数量
+    if (quantity &gt; 10) {
+      console.log(&#39;big quantity&#39;);
+    }
+  }
+}
+</code></pre>
+
+<p>通过这样做，我们有一个较少级别的嵌套语句。 这种编码风格很好，特别是当你有很长的if语句时（想象你需要滚动到最底层才知道有一个else语句，这一点都不酷）。</p>
+
+<p>如果通过反转条件并提前返回，我们可以进一步减少嵌套。 请查看下面的条件2，看看我们是如何做到的：</p>
+
+<pre><code>/_ 当无效的条件发生时，及早返回 _/
+
+function test(fruit, quantity) {
+  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
+
+  if (!fruit) throw(&#39;No fruit!&#39;); // 条件 1： 及早抛出错误
+  if (!redFruits.includes(fruit)) return; // 条件 2： 必须是红色
+
+  console.log(&#39;red&#39;);
+
+  // 条件 3: 必须是大数量
+  if (quantity &gt; 10) {
+    console.log(&#39;big quantity&#39;);
+  }
+}
+</code></pre>
+
+<p>通过反转条件2的条件，我们的代码现在没有嵌套语句。 当我们有很长的逻辑时，这种技术非常有用，我们希望在条件不满足时停止进一步的处理。</p>
+
+<p>这样看来，这并不是一件难事。 想一想，这个版本（没有嵌套）比前一个（条件2嵌套）版本是否更好，可读性更高？</p>
+
+<p>对我来说，我只是将它保留为以前的版本（条件2与嵌套），因为：<br/>
+- 代码简短直接，嵌套if更清晰<br/>
+- 反转条件可能会引发更多的思考过程（增加认知负荷）</p>
+
+<p>因此，始终瞄准较少的嵌套和早期返回，但不要过度。 如果您感兴趣，有一篇文章和StackOverflow讨论会进一步讨论这个主题：</p>
+
+<h3 id="toc_2">3. 使用默认函数参数和解构</h3>
+
+<p>我想下面的代码可能看起来很熟悉，我们总是需要检查null / undefined值并在使用JavaScript时分配默认值：</p>
+
+<pre><code>function test(fruit, quantity) {
+  if (!fruit) return;
+  const q = quantity || 1; // if quantity not provided, default to one
+
+  console.log(`We have ${q} ${fruit}!`);
+}
+
+//test results
+test(&#39;banana&#39;); // We have 1 banana!
+test(&#39;apple&#39;, 2); // We have 2 apple!
+</code></pre>
+
+<p>实际上，我们可以通过分配默认函数参数来消除变量q。</p>
+
+<pre><code>function test(fruit, quantity = 1) { // if quantity not provided, default to one
+  if (!fruit) return;
+  console.log(`We have ${quantity} ${fruit}!`);
+}
+
+//test results
+test(&#39;banana&#39;); // We have 1 banana!
+test(&#39;apple&#39;, 2); // We have 2 apple!
+</code></pre>
+
+<p>更简单直观不是吗？ 请注意，每个参数都有自己的默认函数参数。 例如，我们也可以为<code>fruit</code>分配默认值：test(fruit =&#39;unknown&#39;, quantity = 1)。</p>
+
+<p>如果我们的fruit是一个对象怎么办？ 我们可以指定默认参数吗？</p>
+
+<pre><code>function test(fruit) { 
+  // printing fruit name if value provided
+  if (fruit &amp;&amp; fruit.name)  {
+    console.log (fruit.name);
+  } else {
+    console.log(&#39;unknown&#39;);
+  }
+}
+
+//test results
+test(undefined); // unknown
+test({ }); // unknown
+test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
+</code></pre>
+
+<p>看看上面的例子，如果fruit.name对象和fruit.name 同时存在，打印fruit.name，反之打印出unknown。 我们可以使用默认函数参数＆拆分来避免使用条件fruit&amp;&amp; fruit.name 去检查。</p>
+
+<pre><code>// destructing - get name property only
+// assign default empty object {}
+function test({name} = {}) {
+  console.log (name || &#39;unknown&#39;);
+}
+
+//test results
+test(undefined); // unknown
+test({ }); // unknown
+test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
+</code></pre>
+
+<p>由于我们只需要来自fruit的属性<code>name</code>，我们可以使用<code>{ name }</code>来构造参数，然后我们可以在代码中使用<code>name</code>作为变量而不是<code>fruit.name</code>。</p>
+
+<p>我们还将空对象<code>{}</code>指定为默认值。 如果我们不这样做，你将在执行test(undefined) 时报错 - <code>Cannot destructure property name of &#39;undefined&#39; or &#39;null&#39;.</code>。 因为<code>undefined</code>中没有<code>name</code>属性。</p>
+
+<p>如果您不介意使用第三方库，有几种方法可以减少空检查：</p>
+
+<p>这是一个使用Lodash 的例子：</p>
+
+<pre><code>// Include lodash library, you will get _
+function test(fruit) {
+  console.log(_.get(fruit, &#39;name&#39;, &#39;unknown&#39;); // get property name, if not available, assign default value &#39;unknown&#39;
+}
+
+//test results
+test(undefined); // unknown
+test({ }); // unknown
+test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
+</code></pre>
+
+<p>您可以在<a href="http://jsbin.com/bopovajiye/edit?js,console">此处</a>运行演示代码。 此外，如果您是函数式编程（FP）的粉丝，您可以选择使用<a href="https://github.com/lodash/lodash/wiki/FP-Guide">Lodash fp</a>，这是Lodash的函数式版本（方法更改为get或getOr）。</p>
+
+<h3 id="toc_3">4. 支持Map / Object Literal而不是Switch语句</h3>
+
+<p>一起看下面的例子，我们想要打印出水果对应的基本颜色：</p>
+
+<pre><code>function test(color) {
+  // use switch case to find fruits in color
+  switch (color) {
+    case &#39;red&#39;:
+      return [&#39;apple&#39;, &#39;strawberry&#39;];
+    case &#39;yellow&#39;:
+      return [&#39;banana&#39;, &#39;pineapple&#39;];
+    case &#39;purple&#39;:
+      return [&#39;grape&#39;, &#39;plum&#39;];
+    default:
+      return [];
+  }
+}
+
+//test results
+test(null); // []
+test(&#39;yellow&#39;); // [&#39;banana&#39;, &#39;pineapple&#39;]
+</code></pre>
+
+<p>上面的代码看起来没有什么问题，但是我会觉得它比较冗长。使用具有更清晰语法——对象自变量 可以实现相同的结果：</p>
+
+<pre><code>function test(color) {
+  // use object literal to find fruits in color
+  const fruitColor = {
+    red: [&#39;apple&#39;, &#39;strawberry&#39;],
+    yellow: [&#39;banana&#39;, &#39;pineapple&#39;],
+    purple: [&#39;grape&#39;, &#39;plum&#39;]
+  };
+
+  return fruitColor[color] || [];
+}
+</code></pre>
+
+<p>或者，您可以使用<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"><code>Map</code></a>来实现相同的结果：</p>
+
+<pre><code>function test(color) {
+  // use Map to find fruits in color
+  const fruitColor = new Map()
+    .set(&#39;red&#39;, [&#39;apple&#39;, &#39;strawberry&#39;])
+    .set(&#39;yellow&#39;, [&#39;banana&#39;, &#39;pineapple&#39;])
+    .set(&#39;purple&#39;, [&#39;grape&#39;, &#39;plum&#39;]);
+
+  return fruitColor.get(color) || [];
+}
+</code></pre>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>是自ES2015以来可用的对象类型，允许您存储键值对。</p>
+
+<p>我们应该禁止使用switch语句吗？ 不要局限于此。 就个人而言，我尽可能使用对象字变量，但我不会设置硬规则来阻止它，应根据不同场景选择适合的方式。</p>
+
+<p>Todd Motto有一篇深入研究switch语句与对象字变量的文章，你可以在<a href="https://toddmotto.com/deprecating-the-switch-statement-for-object-literals/">这里</a>阅读。</p>
+
+<h3 id="toc_4">5.代码重构</h3>
+
+<p>对于上面的示例，我们实际上可以重构我们的代码以使用<code>Array.filter</code>实现相同的结果</p>
+
+<pre><code>function test(color) {
+  // use Array filter to find fruits in color
+  const fruits = [
+    { name: &#39;apple&#39;, color: &#39;red&#39; }, 
+    { name: &#39;strawberry&#39;, color: &#39;red&#39; }, 
+    { name: &#39;banana&#39;, color: &#39;yellow&#39; }, 
+    { name: &#39;pineapple&#39;, color: &#39;yellow&#39; }, 
+    { name: &#39;grape&#39;, color: &#39;purple&#39; }, 
+    { name: &#39;plum&#39;, color: &#39;purple&#39; }   ];
+
+  return fruits.filter(f =&gt; f.color == color);
+}
+</code></pre>
+
+<p>总有不止一种方法可以达到相同的效果。 我们在这个例子中，展示了四种实现方式。 编码真的很有趣！</p>
+
+<h3 id="toc_5">6.对所有、部分标准使用Array.every和Array.some</h3>
+
+<p>最后一点更多是关于领用一个新的 javascript Array 函数去减少代码行。看下面的代码，我们想要去见检查在所有的水果中哪些是红颜色的：</p>
+
+<pre><code>function test(fruits) {
+  const fruits = [
+    { name: &#39;apple&#39;, color: &#39;red&#39; },
+    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
+    { name: &#39;grape&#39;, color: &#39;purple&#39; }
+  ];
+
+  let isAllRed = true;
+
+  // condition: all fruits must be red
+  for (let f of fruits) {
+    if (!isAllRed) break;
+    isAllRed = (f.color == &#39;red&#39;);
+  }
+
+  console.log(isAllRed); // false
+}
+</code></pre>
+
+<p>这个代码看起来太长了！我们可以使用 <code>Array.every</code> 减少代码行数量:</p>
+
+<pre><code>function test(fruits) {
+  const fruits = [
+    { name: &#39;apple&#39;, color: &#39;red&#39; },
+    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
+    { name: &#39;grape&#39;, color: &#39;purple&#39; }
+  ];
+
+  // condition: short way, all fruits must be red
+  const isAllRed = fruits.every(f =&gt; f.color == &#39;red&#39;);
+
+  console.log(isAllRed); // false
+}
+</code></pre>
+
+<p>现在是不是干净多了？ 以类似的方式，如果我们想测试水果中是否有红色的，我们可以使用<code>Array.some</code>用一行中实现它。</p>
+
+<pre><code>function test(fruits) {
+  const fruits = [
+    { name: &#39;apple&#39;, color: &#39;red&#39; },
+    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
+    { name: &#39;grape&#39;, color: &#39;purple&#39; }
+  ];
+
+  // condition: if any fruit is red
+  const isAnyRed = fruits.some(f =&gt; f.color == &#39;red&#39;);
+
+  console.log(isAnyRed); // true
+}
+</code></pre>
+
+<h3 id="toc_6">总结</h3>
+
+<p>让我们一起生成更多可读代码。 我希望你能在本文中学到一些新东西。</p>
+
+<p>就这样。 快乐的编码！</p>
+
+		</div>
+	</article>
+<div class="share-comment">
+
+</div>
+
+
+</div>        </div>
+	
+	</div>
+<script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

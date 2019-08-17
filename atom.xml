@@ -1,0 +1,2111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Akira's blog]]></title>
+  <link href="http://233px.com/atom.xml" rel="self"/>
+  <link href="http://233px.com/"/>
+  <updated>2019-08-17T14:16:11+08:00</updated>
+  <id>http://233px.com/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://www.coderforart.com/">CoderForArt</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[JavaScript 的事件循环]]></title>
+    <link href="http://233px.com/15651446659023.html"/>
+    <updated>2019-08-07T10:24:25+08:00</updated>
+    <id>http://233px.com/15651446659023.html</id>
+    <content type="html"><![CDATA[
+<h3 id="toc_0">宏任务</h3>
+
+<p>(macro)task ： 每次执行栈执行的代码都是一个宏任务（包括每次从事件队列中获取一个事件回调并都放在执行栈中执行）</p>
+
+<pre><code>(macro)task-&gt;渲染-&gt;(macro)task-&gt;...
+</code></pre>
+
+<p>(macro)task： script(整体代码)、setTimeout、setInterval、I/O、UI交互事件、postMessage、MessageChannel、setImmediate(Node.js 环境)</p>
+
+<h3 id="toc_1">微任务</h3>
+
+<p>microtask（又称为微任务），可以理解是在当前 task 执行结束后立即执行的任务。也就是说，在当前task任务后，下一个task之前，在渲染之前。</p>
+
+<p>所以它的响应速度相比setTimeout（setTimeout是task）会更快，因为无需等渲染。也就是说，在某一个macrotask执行完后，就会将在它执行期间产生的所有microtask都执行完毕（在渲染前）。</p>
+
+<p>microtask：Promise.then、MutaionObserver、process.nextTick(Node.js 环境)</p>
+
+<h3 id="toc_2">运行机制</h3>
+
+<p><img src="media/15651446659023/15651452951715.jpg" alt=""/></p>
+
+<h3 id="toc_3">Promise和async中的立即执行</h3>
+
+<p>Promise 中的代码当做同步任务立即执行。<br/>
+async/await中，出现在 await之前的代码立即执行。await 之后的相当于 promise then。</p>
+
+<h4 id="toc_4">await 做了什么</h4>
+
+<p>await 让出线程的标志。await 后面的表达式会执行一遍，将await 后面的代码加入到microtask 中，然后await 后面的表达式执行完，就会跳出整个async 函数来执行后面的代码</p>
+
+<p>async await 本身就是promise+generator的语法糖</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[将 div 按钮变成可访问性]]></title>
+    <link href="http://233px.com/15613630158706.html"/>
+    <updated>2019-06-24T15:56:55+08:00</updated>
+    <id>http://233px.com/15613630158706.html</id>
+    <content type="html"><![CDATA[
+<p>我们平时写按钮的时候，大部分会使用html 元素 span div 等转换为按钮，但是 button 标签存在不用的原因是什么呢？ 因为button 按钮的速度慢，如果页面上有很多 button， 无疑会增加很多开销。因此我们可能会习惯选用其他html 标签去实现。</p>
+
+<p>但是div 按钮只能点击起来像一个按钮，它并不具有按钮本身的附带功能，比如按钮的可访问性（）。那么如果让 div 按钮变得具有 button 按钮本身具有的功能呢？</p>
+
+<h3 id="toc_0">添加角色 role</h3>
+
+<blockquote>
+<p>添加role =“button”将使元素显示为屏幕阅读器的按钮控件。此角色可与aria-pressed属性结合使用以创建切换按钮。</p>
+</blockquote>
+
+<p>因此此时按钮可以表示为：</p>
+
+<pre><code>&lt;div class=&quot;btn&quot; role=&quot;button&quot;&gt;a Div&lt;/div&gt;
+</code></pre>
+
+<h3 id="toc_1">明确当前状态</h3>
+
+<p>使用 <code>aria-expanded</code> 属性，可以向屏幕阅读器明确定义该元素当前的折叠状态 【展开、关闭】。这样div 元素就可以和menu 有一样的功能，通过<code>aria-expanded = &quot;true&quot;</code> 展开和 aria-expanded = &quot;false&quot; 关闭折叠按钮。</p>
+
+<p>因此此时可以表示为：</p>
+
+<pre><code>&lt;div class=&quot;btn&quot; role=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;a div&lt;/div&gt;
+</code></pre>
+
+<h3 id="toc_2">tabIndex 属性聚焦</h3>
+
+<p>我们希望按键盘 <code>tab</code> 键时，按钮可以聚焦选中，默认情况将其设置为0，遵循正常顺序，表示可以聚焦，现在看起来是这样：</p>
+
+<pre><code>&lt;div class=&quot;btn&quot; role=&quot;button&quot; aria-pressed=&quot;false&quot; tabindex=&quot;0&quot;&gt;a div&lt;/div&gt;
+</code></pre>
+
+<h3 id="toc_3">制作disabled 效果</h3>
+
+<pre><code>[data-disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[如何使用Chrome DevTools 的动画检查工具]]></title>
+    <link href="http://233px.com/15438385685306.html"/>
+    <updated>2018-12-03T20:02:48+08:00</updated>
+    <id>http://233px.com/15438385685306.html</id>
+    <content type="html"><![CDATA[
+<p>今天介绍一个很有用但是平时也很少用的工具，那就是Chrome 开发者工具中的动画检查功能。</p>
+
+<p>对于业务开发而言，我们平常用的动画一般都比较常见且基础，比如渐隐，滚动，飞入飞出等，大部分情况下可以直接一次性实现，但是对于动画效果要求比较高的项目，为了保证动画的精确性，就需要该工具了。</p>
+
+<h3 id="toc_0">打开 Animations 选项卡</h3>
+
+<p>视图 =&gt; 开发者 =&gt; 开发者工具 =&gt; 更多工具 =&gt; Animations</p>
+
+<p>当你第一次打开动画选项卡的时候，并不会看到和动画有关的内容，只会看到一个 Listening for animations...  的提示。如果要想运行这个工具，需要在第一次加载页面时打开选项卡</p>
+
+<p><img src="media/15438385685306/15438404296292.jpg" alt=""/></p>
+
+<p>要让Animations面板捕捉到消息，我们刷新一下再看一下：</p>
+
+<p><img src="media/15438385685306/15438405515477.jpg" alt=""/></p>
+
+<p>左上角的开始结束图标可以控制动画检查工具的打开和关闭</p>
+
+<p>点击开始图标打开该检查工具：</p>
+
+<p><img src="media/15438385685306/15438414390506.jpg" alt=""/></p>
+
+<p>点击播放按钮：<br/>
+<img src="media/15438385685306/15438415273008.jpg" alt=""/></p>
+
+<h3 id="toc_1">时间轴和关键帧</h3>
+
+<p>随着动画的播放，你回看到红色的【时间轴】会在时间轴上移动。可以用鼠标手动控制它的播放，将其放置到某个特定的点</p>
+
+<p>界面上每个条目的每一行代表了页面的单个动画。可以看到每条线都有个颜色更深更饱和的部分，这部分表示的是动画的长度，之后出现的较浅的部分表示重复该动画。</p>
+
+<p>每个动画线上有几个小圆圈，这些小圈与动画的关键帧相对应。实心的圈代表动画的开始和结束，「空心的圈表示内部关键帧的任意位置」</p>
+
+<h3 id="toc_2">内部关键帧</h3>
+
+<p>每行上的插页式关键帧（每个动画周期的开始和结束之间的关键帧）可以拖动到不同的位置，当您移动它们时，您将看到浏览器窗口中的动画更改其时间。这对于试验间隙关键帧的确切百分点来说非常有用。</p>
+
+<p>比较棘手的是，这些实验不会在&quot;样式&quot;选项卡中看到代码的任何更新。相反，当你将插页式关键帧放在正确位置时，你可以手动确定关键帧的百分比值。</p>
+
+<p>将播放头直接放在相关的关键帧上，您将在面板的左上角看到一个时间戳，告诉您动画在几秒钟内的距离。然后，您可以确定此时间占整个动画持续时间的百分比。在下面的示例中，播放头大约是1s动画的300ms，所以我们知道这个关键帧是33%。</p>
+
+<p><img src="media/15438385685306/15445092575812.jpg" alt=""/></p>
+
+<h3 id="toc_3">动画延迟和持续时间</h3>
+
+<p>在“动画”选项卡做的更改会更新“样式”选项卡的代码，以便我们能准确的查看移植到CSS的值。animation-delay是动画开始播放前的延迟，animation-duration是持续时间。</p>
+
+<p>要在播放动画之前调整延迟，请将鼠标悬停在其直线上，直到看到手形光标，然后水平拖动。您将在“ 样式”选项卡中看到更新延迟值：</p>
+
+<p>要修改动画的持续时间，请将鼠标悬停在其最后一个关键帧上，直到看到双端箭头光标，然后水平拖动。同样，将在“ 样式”选项卡中看到该值的更新。</p>
+
+<h3 id="toc_4">动画计时功能</h3>
+
+<p>您还可以使用Chrome的开发工具修改控制动画时序的速度曲线。首先检查应用了动画的元素。在当前指定的计时功能的左侧，您将看到一个带有“波浪形”的小盒子。单击它打开立方贝塞尔编辑器：</p>
+
+<p>将打开一个框，显示一条贝塞尔曲线，说明当前的计时功能。在这里，您可以通过单击左侧的缩略图之一来选择现有预​​设，也可以将主曲线图像的手柄拖动到左右，以创建自定义的cubic-bezier值，随后可以将其复制到CSS中：</p>
+
+<p>当你走的时候，你会看到一个紫色的小球在编辑器的顶部从左到右动画，让你预览你的计时功能。 </p>
+
+<h3 id="toc_5">可旋转图层可视化</h3>
+
+<p>另一个有用的功能是能够可视化动画中使用的图层，包括旋转所述可视化并从各个角度查看它以更好地了解事物的工作方式。</p>
+
+<p>要打开“ 图层”面板，请转到Chrome开发者工具菜单，然后选择更多工具&gt;图层。</p>
+
+<h3 id="toc_6">总结</h3>
+
+<p>让我们快速总结Chrome的动画开发工具：</p>
+
+<p>首先打开Chrome开发工具打开动画工具，然后在开发工具菜单下选择更多工具&gt;动画。<br/>
+该动画面板需要已被打开时，页面加载捕捉信息上的动画，刷新该页面以实现这一目标。<br/>
+单击小彩色图缩略图以查看动画信息。<br/>
+每一行代表一个动画。<br/>
+填充圆圈表示开始和结束关键帧。<br/>
+空心圆表示间隙关键帧。<br/>
+可以移动插页式关键帧，但是您不会在“ 样式”选项卡中看到相关的代码更新，而是手动计算它们所处的百分点。<br/>
+通过将鼠标悬停在其直线上来修改动画的延迟值，直到看到手形光标，然后水平拖动。<br/>
+通过将鼠标悬停在最后一个关键帧上来修改动画的持续时间值，直到看到双端箭头光标，然后将其水平拖动。<br/>
+在样式选项卡中，单击现有计时功能左侧的图标以打开立方贝塞尔编辑器。<br/>
+在此处选择计时功能预设，或通过修改主曲线图像创建自己的预设功能。<br/>
+转到Chrome开发者工具菜单，然后选择更多工具&gt;图层，打开“ 图层”面板。<br/>
+在此面板中，使用“ 旋转”模式从任何角度查看动画图层。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[译]在JavaScript中编写更好的条件的5个技巧]]></title>
+    <link href="http://233px.com/15374269260171.html"/>
+    <updated>2018-09-20T15:02:06+08:00</updated>
+    <id>http://233px.com/15374269260171.html</id>
+    <content type="html"><![CDATA[
+<p>原文： <a href="https://scotch.io/tutorials/5-tips-to-write-better-conditionals-in-javascript#toc-summary">https://scotch.io/tutorials/5-tips-to-write-better-conditionals-in-javascript#toc-summary</a></p>
+
+<p>使用JavaScript时，我们处理了很多条件，这里有5个秘诀，可以让你编写更好、更清晰的条件。</p>
+
+<h3 id="toc_0">1. 对多个条件使用Array.includes</h3>
+
+<p>看下面的例子：</p>
+
+<pre><code>// condition
+function test(fruit) {
+  if (fruit == &#39;apple&#39; || fruit == &#39;strawberry&#39;) {
+    console.log(&#39;red&#39;);
+  }
+}
+</code></pre>
+
+<p>乍一看，上面的例子看起来不错。 但是，如果我们得到更多的红色水果，cherry（樱桃）和 cranberries（蔓越莓）呢？ 我们是否要用更多的 <code>||</code> 扩展语句？</p>
+
+<p>我们可以使用Array.includes（<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes">Array.includes</a>）重写上面的条件。</p>
+
+<pre><code>function test(fruit) {
+  // extract conditions to array
+  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
+
+  if (redFruits.includes(fruit)) {
+    console.log(&#39;red&#39;);
+  }
+}
+</code></pre>
+
+<p>我们将红色水果（条件）提取到一个数组中。 通过这样做代码看起来更加整洁。</p>
+
+<h3 id="toc_1">2. 减少嵌套，更早return</h3>
+
+<p>让我们扩展前面的示例以包含另外两个条件：</p>
+
+<pre><code>function test(fruit, quantity) {
+  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
+
+  // 条件 1： 及早抛出错误
+  if (fruit) {
+    // 条件 2： 必须是红色
+    if (redFruits.includes(fruit)) {
+      console.log(&#39;red&#39;);
+
+      // 条件 3： 必须是大数量
+      if (quantity &gt; 10) {
+        console.log(&#39;big quantity&#39;);
+      }
+    }
+  } else {
+    throw(&#39;No fruit!&#39;);
+  }
+}
+
+// test results
+test(null); // error: No fruits
+test(&#39;apple&#39;); // print: red
+test(&#39;apple&#39;, 20); // print: red, big quantity
+</code></pre>
+
+<p>看看上面的代码，我们可以做：</p>
+
+<p>我个人遵循的一般规则是在发现无效条件时提前返回。</p>
+
+<pre><code>/_ 当无效的条件发生时，及早返回 _/
+
+function test(fruit, quantity) {
+  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
+
+  // 条件 1： 及早抛出错误
+  if (!fruit) throw(&#39;No fruit!&#39;);
+
+  // 条件 2： 必须是红色
+  if (redFruits.includes(fruit)) {
+    console.log(&#39;red&#39;);
+
+    // 条件 3： 必须是大数量
+    if (quantity &gt; 10) {
+      console.log(&#39;big quantity&#39;);
+    }
+  }
+}
+</code></pre>
+
+<p>通过这样做，我们有一个较少级别的嵌套语句。 这种编码风格很好，特别是当你有很长的if语句时（想象你需要滚动到最底层才知道有一个else语句，这一点都不酷）。</p>
+
+<p>如果通过反转条件并提前返回，我们可以进一步减少嵌套。 请查看下面的条件2，看看我们是如何做到的：</p>
+
+<pre><code>/_ 当无效的条件发生时，及早返回 _/
+
+function test(fruit, quantity) {
+  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
+
+  if (!fruit) throw(&#39;No fruit!&#39;); // 条件 1： 及早抛出错误
+  if (!redFruits.includes(fruit)) return; // 条件 2： 必须是红色
+
+  console.log(&#39;red&#39;);
+
+  // 条件 3: 必须是大数量
+  if (quantity &gt; 10) {
+    console.log(&#39;big quantity&#39;);
+  }
+}
+</code></pre>
+
+<p>通过反转条件2的条件，我们的代码现在没有嵌套语句。 当我们有很长的逻辑时，这种技术非常有用，我们希望在条件不满足时停止进一步的处理。</p>
+
+<p>这样看来，这并不是一件难事。 想一想，这个版本（没有嵌套）比前一个（条件2嵌套）版本是否更好，可读性更高？</p>
+
+<p>对我来说，我只是将它保留为以前的版本（条件2与嵌套），因为：<br/>
+- 代码简短直接，嵌套if更清晰<br/>
+- 反转条件可能会引发更多的思考过程（增加认知负荷）</p>
+
+<p>因此，始终瞄准较少的嵌套和早期返回，但不要过度。 如果您感兴趣，有一篇文章和StackOverflow讨论会进一步讨论这个主题：</p>
+
+<h3 id="toc_2">3. 使用默认函数参数和解构</h3>
+
+<p>我想下面的代码可能看起来很熟悉，我们总是需要检查null / undefined值并在使用JavaScript时分配默认值：</p>
+
+<pre><code>function test(fruit, quantity) {
+  if (!fruit) return;
+  const q = quantity || 1; // if quantity not provided, default to one
+
+  console.log(`We have ${q} ${fruit}!`);
+}
+
+//test results
+test(&#39;banana&#39;); // We have 1 banana!
+test(&#39;apple&#39;, 2); // We have 2 apple!
+</code></pre>
+
+<p>实际上，我们可以通过分配默认函数参数来消除变量q。</p>
+
+<pre><code>function test(fruit, quantity = 1) { // if quantity not provided, default to one
+  if (!fruit) return;
+  console.log(`We have ${quantity} ${fruit}!`);
+}
+
+//test results
+test(&#39;banana&#39;); // We have 1 banana!
+test(&#39;apple&#39;, 2); // We have 2 apple!
+</code></pre>
+
+<p>更简单直观不是吗？ 请注意，每个参数都有自己的默认函数参数。 例如，我们也可以为<code>fruit</code>分配默认值：test(fruit =&#39;unknown&#39;, quantity = 1)。</p>
+
+<p>如果我们的fruit是一个对象怎么办？ 我们可以指定默认参数吗？</p>
+
+<pre><code>function test(fruit) { 
+  // printing fruit name if value provided
+  if (fruit &amp;&amp; fruit.name)  {
+    console.log (fruit.name);
+  } else {
+    console.log(&#39;unknown&#39;);
+  }
+}
+
+//test results
+test(undefined); // unknown
+test({ }); // unknown
+test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
+</code></pre>
+
+<p>看看上面的例子，如果fruit.name对象和fruit.name 同时存在，打印fruit.name，反之打印出unknown。 我们可以使用默认函数参数＆拆分来避免使用条件fruit&amp;&amp; fruit.name 去检查。</p>
+
+<pre><code>// destructing - get name property only
+// assign default empty object {}
+function test({name} = {}) {
+  console.log (name || &#39;unknown&#39;);
+}
+
+//test results
+test(undefined); // unknown
+test({ }); // unknown
+test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
+</code></pre>
+
+<p>由于我们只需要来自fruit的属性<code>name</code>，我们可以使用<code>{ name }</code>来构造参数，然后我们可以在代码中使用<code>name</code>作为变量而不是<code>fruit.name</code>。</p>
+
+<p>我们还将空对象<code>{}</code>指定为默认值。 如果我们不这样做，你将在执行test(undefined) 时报错 - <code>Cannot destructure property name of &#39;undefined&#39; or &#39;null&#39;.</code>。 因为<code>undefined</code>中没有<code>name</code>属性。</p>
+
+<p>如果您不介意使用第三方库，有几种方法可以减少空检查：</p>
+
+<p>这是一个使用Lodash 的例子：</p>
+
+<pre><code>// Include lodash library, you will get _
+function test(fruit) {
+  console.log(_.get(fruit, &#39;name&#39;, &#39;unknown&#39;); // get property name, if not available, assign default value &#39;unknown&#39;
+}
+
+//test results
+test(undefined); // unknown
+test({ }); // unknown
+test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
+</code></pre>
+
+<p>您可以在<a href="http://jsbin.com/bopovajiye/edit?js,console">此处</a>运行演示代码。 此外，如果您是函数式编程（FP）的粉丝，您可以选择使用<a href="https://github.com/lodash/lodash/wiki/FP-Guide">Lodash fp</a>，这是Lodash的函数式版本（方法更改为get或getOr）。</p>
+
+<h3 id="toc_3">4. 支持Map / Object Literal而不是Switch语句</h3>
+
+<p>一起看下面的例子，我们想要打印出水果对应的基本颜色：</p>
+
+<pre><code>function test(color) {
+  // use switch case to find fruits in color
+  switch (color) {
+    case &#39;red&#39;:
+      return [&#39;apple&#39;, &#39;strawberry&#39;];
+    case &#39;yellow&#39;:
+      return [&#39;banana&#39;, &#39;pineapple&#39;];
+    case &#39;purple&#39;:
+      return [&#39;grape&#39;, &#39;plum&#39;];
+    default:
+      return [];
+  }
+}
+
+//test results
+test(null); // []
+test(&#39;yellow&#39;); // [&#39;banana&#39;, &#39;pineapple&#39;]
+</code></pre>
+
+<p>上面的代码看起来没有什么问题，但是我会觉得它比较冗长。使用具有更清晰语法——对象自变量 可以实现相同的结果：</p>
+
+<pre><code>function test(color) {
+  // use object literal to find fruits in color
+  const fruitColor = {
+    red: [&#39;apple&#39;, &#39;strawberry&#39;],
+    yellow: [&#39;banana&#39;, &#39;pineapple&#39;],
+    purple: [&#39;grape&#39;, &#39;plum&#39;]
+  };
+
+  return fruitColor[color] || [];
+}
+</code></pre>
+
+<p>或者，您可以使用<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"><code>Map</code></a>来实现相同的结果：</p>
+
+<pre><code>function test(color) {
+  // use Map to find fruits in color
+  const fruitColor = new Map()
+    .set(&#39;red&#39;, [&#39;apple&#39;, &#39;strawberry&#39;])
+    .set(&#39;yellow&#39;, [&#39;banana&#39;, &#39;pineapple&#39;])
+    .set(&#39;purple&#39;, [&#39;grape&#39;, &#39;plum&#39;]);
+
+  return fruitColor.get(color) || [];
+}
+</code></pre>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>是自ES2015以来可用的对象类型，允许您存储键值对。</p>
+
+<p>我们应该禁止使用switch语句吗？ 不要局限于此。 就个人而言，我尽可能使用对象字变量，但我不会设置硬规则来阻止它，应根据不同场景选择适合的方式。</p>
+
+<p>Todd Motto有一篇深入研究switch语句与对象字变量的文章，你可以在<a href="https://toddmotto.com/deprecating-the-switch-statement-for-object-literals/">这里</a>阅读。</p>
+
+<h3 id="toc_4">5.代码重构</h3>
+
+<p>对于上面的示例，我们实际上可以重构我们的代码以使用<code>Array.filter</code>实现相同的结果</p>
+
+<pre><code>function test(color) {
+  // use Array filter to find fruits in color
+  const fruits = [
+    { name: &#39;apple&#39;, color: &#39;red&#39; }, 
+    { name: &#39;strawberry&#39;, color: &#39;red&#39; }, 
+    { name: &#39;banana&#39;, color: &#39;yellow&#39; }, 
+    { name: &#39;pineapple&#39;, color: &#39;yellow&#39; }, 
+    { name: &#39;grape&#39;, color: &#39;purple&#39; }, 
+    { name: &#39;plum&#39;, color: &#39;purple&#39; }   ];
+
+  return fruits.filter(f =&gt; f.color == color);
+}
+</code></pre>
+
+<p>总有不止一种方法可以达到相同的效果。 我们在这个例子中，展示了四种实现方式。 编码真的很有趣！</p>
+
+<h3 id="toc_5">6.对所有、部分标准使用Array.every和Array.some</h3>
+
+<p>最后一点更多是关于领用一个新的 javascript Array 函数去减少代码行。看下面的代码，我们想要去见检查在所有的水果中哪些是红颜色的：</p>
+
+<pre><code>function test(fruits) {
+  const fruits = [
+    { name: &#39;apple&#39;, color: &#39;red&#39; },
+    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
+    { name: &#39;grape&#39;, color: &#39;purple&#39; }
+  ];
+
+  let isAllRed = true;
+
+  // condition: all fruits must be red
+  for (let f of fruits) {
+    if (!isAllRed) break;
+    isAllRed = (f.color == &#39;red&#39;);
+  }
+
+  console.log(isAllRed); // false
+}
+</code></pre>
+
+<p>这个代码看起来太长了！我们可以使用 <code>Array.every</code> 减少代码行数量:</p>
+
+<pre><code>function test(fruits) {
+  const fruits = [
+    { name: &#39;apple&#39;, color: &#39;red&#39; },
+    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
+    { name: &#39;grape&#39;, color: &#39;purple&#39; }
+  ];
+
+  // condition: short way, all fruits must be red
+  const isAllRed = fruits.every(f =&gt; f.color == &#39;red&#39;);
+
+  console.log(isAllRed); // false
+}
+</code></pre>
+
+<p>现在是不是干净多了？ 以类似的方式，如果我们想测试水果中是否有红色的，我们可以使用<code>Array.some</code>用一行中实现它。</p>
+
+<pre><code>function test(fruits) {
+  const fruits = [
+    { name: &#39;apple&#39;, color: &#39;red&#39; },
+    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
+    { name: &#39;grape&#39;, color: &#39;purple&#39; }
+  ];
+
+  // condition: if any fruit is red
+  const isAnyRed = fruits.some(f =&gt; f.color == &#39;red&#39;);
+
+  console.log(isAnyRed); // true
+}
+</code></pre>
+
+<h3 id="toc_6">总结</h3>
+
+<p>让我们一起生成更多可读代码。 我希望你能在本文中学到一些新东西。</p>
+
+<p>就这样。 快乐的编码！</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git 误操作如何将改动撤销？]]></title>
+    <link href="http://233px.com/15349302652828.html"/>
+    <updated>2018-08-22T17:31:05+08:00</updated>
+    <id>http://233px.com/15349302652828.html</id>
+    <content type="html"><![CDATA[
+<p>上一篇我们介绍了<a href="https://zhuanlan.zhihu.com/p/39148914">团队工作的github flow 流程</a>，文中主要介绍了主流程，对于开发人员主流程的提交每天都会高频去做，熟练于心。但是在主流程操作中产生失误，遇到的情况相比主流程频率很低很多，对于这些低频失误，相信可能大部分人第一时间会去 Google，寻求解决方案。因此，本文对大家在 Git 使用中遇到的常见的误操作问题做总结归纳，并提供救命建议。</p>
+
+<p>笔者本来打算在一篇文章中介绍全基本的误操作解决方式，但奈何每一种方式都扩充较多，为了让大家更理解，本篇只着重讲解两个方面的误操作。后续的其他方面的解决方式会以连载的方式分享给大家。</p>
+
+<p>本篇介绍的误操作类型主要有以下两个方面：</p>
+
+<ul>
+<li>commit - 分支提交错误</li>
+<li>reset - 误删代码 </li>
+</ul>
+
+<h2 id="toc_0">分支提交错误</h2>
+
+<p>有时我们会遇到这种情况：我们从develop 分支新建一个名为feat/home 分支去做A功能，然后由于一些其他原因A 功能需要延后，然后我们新建一个分支去做B功能或者C功能，在多分支多功能开发时，就容易出现做B任务时，忘记切换分支，一直等做完了提交了push之后才发现 push 错了远端的分支，并且 push 的改动与该分支需要开发的功能并没有交集，因此我们需要将已经提交错的分支内容回滚并提交push 到正确的远端分支：<br/>
+ 此时有两种情况：</p>
+
+<p>【记得扩充索引和工作目录】</p>
+
+<h3 id="toc_1">场景1：已经commit，但是未push到远端</h3>
+
+<p>使用 <code>git reset</code> 命令，可以在提交层面在私有分支舍弃一些没有提交的更改：</p>
+
+<pre><code> git reset --hard HEAD^ // 回退到上一个版本
+</code></pre>
+
+<p>git reset 命令主要有三个选项： --soft、--mixed 、--hard。默认参数为 --mixed</p>
+
+<h4 id="toc_2">git reset --soft 提交：</h4>
+
+<p>--soft 会将 HEAD 指向引用给定提交。索引和工作目录内容保持不变。这个版本的命令有”最小“影响，只改变一个符号引用的状态使其指向一个新提交，不会改变其索引①和工作目录②<br/>
+具体体现如下：</p>
+
+<pre><code>git add 1.js &amp;&amp; git commit -m &quot;update part 1&quot;
+git add 2.js &amp;&amp; git commit -m &quot;update part 2&quot;
+git add 3.js &amp;&amp; git commit -m &quot;update part 3&quot;
+git add 4.js &amp;&amp; git commit -m &quot;update part 4&quot;
+git log --oneline --graph -4 --decorate
+</code></pre>
+
+<p><img src="media/15349302652828/15350139273772.jpg" alt=""/></p>
+
+<pre><code>git reset --soft HEAD~1
+</code></pre>
+
+<p>当我们执行--soft 命令时，可以看到控制台无任何输出，此时查看当前提交历史</p>
+
+<pre><code>git log --oneline --graph -4 --decorate
+</code></pre>
+
+<p>如下图，可以看到版本库已经回退了一个版本：</p>
+
+<p><img src="media/15349302652828/15350147685109.jpg" alt=""/></p>
+
+<p>执行 <code>git status</code>，可以看到SHA1为<code>54b1941</code> 的commit 上的更改回到了缓存区：<br/>
+<img src="media/15349302652828/15350166724510.jpg" alt=""/></p>
+
+<p>因此我们可以 --soft 操作是软重置，只撤销了<code>git commit</code>操作，保留了 <code>git add</code> 操作。</p>
+
+<h4 id="toc_3">git reset --hard 提交</h4>
+
+<p>此时接上面的流程，我们再次执行 <code>--hard</code> 操作，这次尝试回退两个版本：</p>
+
+<pre><code>git reset --hard HEAD~2
+</code></pre>
+
+<p>如下图，可以看到版本库回退了两个版本，并且将本地版本库的头指针全部重置到了指定版本，暂存区也会被重置，工作区的代码也回退到了这一版本：</p>
+
+<p><img src="media/15349302652828/15350151330324.jpg" alt=""/></p>
+
+<p>执行<code>git status</code> 可以看到 我们的 “54b1941” commit 上做的修改都&quot;丢失&quot;了，新的文件也被删除了。</p>
+
+<p><img src="media/15349302652828/15350164362840.jpg" alt=""/></p>
+
+<p>因此可以知道，<code>git commit --hard</code> 是具有破坏性，是很危险的操作，它很容易导致数据丢失，如果我们真的进行了该操作想要找回丢失的数据，那么此时可以使用<code>git reflog</code> 命令救命。这个命令的具体使用会在文章后面介绍。 </p>
+
+<h4 id="toc_4">git reset --mixed 提交：</h4>
+
+<p>我们重新造一系列 commit 历史：</p>
+
+<pre><code>git add 1.js &amp;&amp; git commit -m &quot;update 1.js&quot;
+git add 2.js &amp;&amp; git commit -m &quot;update 2.js&quot;
+git add 3.js &amp;&amp; git commit -m &quot;update 3.js&quot;
+git add 4.js &amp;&amp; git commit -m &quot;update 4.js&quot;
+git add 5.js &amp;&amp; git commit -m &quot;update 5.js&quot;
+git log --oneline --graph -4 --decorate
+</code></pre>
+
+<p>可以看到当前的 commit 历史如下：</p>
+
+<p><img src="media/15349302652828/15350212211180.jpg" alt=""/></p>
+
+<p>此时执行--mixed 操作，尝试回退两个版本：</p>
+
+<pre><code># 等价于 git reset HEAD~2
+git reset --mixed HEAD~2 
+</code></pre>
+
+<p>提交历史此时改变为下图所示：</p>
+
+<p><img src="media/15349302652828/15350216633387.jpg" alt=""/></p>
+
+<p>此时执行 <code>git status</code> ，命令行输出如下：</p>
+
+<p><img src="media/15349302652828/15350217304281.jpg" alt=""/></p>
+
+<p>SourceTree 工具上的直观显示如下：</p>
+
+<p><img src="media/15349302652828/15350220384972.jpg" alt=""/></p>
+
+<p>可以看出，该命令加上 --mixed 参数会保留提交的源码改动，只是将索引信息回退到了某一个版本，如果还需要继续提交，再次执行 <code>git add</code> 和 <code>git commit</code></p>
+
+<p>介绍完<code>git reset</code>，那么我们来说一下如何用该命令解决提交分支错误的问题：</p>
+
+<h5 id="toc_5">第一种方法：</h5>
+
+<p>适用于多个分支一起开发的时候将A分支的改动提交到B的场景：</p>
+
+<pre><code># 将该分支的本不应该提交的commit撤销
+git reset HEAD^
+
+# 按需选择想要回到哪个版本
+# 回到HEAD
+git reset --soft HEAD
+
+# 回到HEAD的前一个版本
+git reset --soft HEAD^
+
+# 回到HEAD的前10个版本
+git reset --soft HEAD~5 
+
+# 利用id回到指定版本
+git reset --soft a06ef2f
+
+# 将撤销的代码暂存起来
+git stash
+
+# 切换到正确的分支
+git checkout feat/xxx
+
+# 重新应用缓存
+git stash pop
+
+# 在正确的分支进行提交操作
+git add . &amp;&amp; git commit -m &quot;update xxxx&quot;
+</code></pre>
+
+<h5 id="toc_6">第二种方法：</h5>
+
+<p>适用于在不小心在master 分支上提交了代码，而实际想要在feature 分支上提交代码的场景：</p>
+
+<pre><code># 新检出一个新分支，但是仍在master 分支上，并不会切换到新分支
+git branch feat/update
+
+# 恢复master本身提交的状态
+git reset --hard origin/master
+
+# 提交错的代码已经在新检出的分支上面了，可以继续进行开发或者push
+git checkout feat/update
+</code></pre>
+
+<p>第三种方法：</p>
+
+<ol>
+<li>适用于想要对特定的某一个或几个commit 进行“嫁接”，使其复制一份到正确的feature 分支的场景；</li>
+<li>在功能性迭代开发中发现一个bug，并提交了一个commit 进行修复，但是发现该bug也存在线上的发布版本上，必须要尽快对线上进行修复，此时可以使用<code>git cherry-pick</code> 来将bug 修复的commit 嫁接到 fix 分支上进行代码修复，并及时发布，解决线上bug的场景。</li>
+</ol>
+
+<pre><code># 先切换到正确的分支
+git checkout feat/update
+
+# 取出提交错误的或bug fix的 commit 引入到feat/update 分支中
+git cherry-pick a06ef2f
+
+# 回到错误的分支
+git checkout feat/feedback
+
+# 将 a06ef2f 的改动从当前分支销毁
+git reset --head a06ef2f 
+</code></pre>
+
+<p>上面演示的是“嫁接” 一个commit，如果想要嫁接多个commit可以这样做：</p>
+
+<pre><code># 将三个commit 合并过来
+git cherry-pick b9dabf9 e2c739d dad9e51 
+</code></pre>
+
+<p>如果想加个一个应用范围内的commit，可以这样做：</p>
+
+<pre><code>git cherry-pick 422db47..e2c739d
+</code></pre>
+
+<p>需要主要的是无论是对单个 commit 进行 <code>git cherry-pick</code> ，还是批量处理，注意一定要根据时间线，依照 commit 的先后顺序来处理。</p>
+
+<p>如果你只想把改动转移到目标分支，但是并不想提交，可以这样做：</p>
+
+<pre><code># 嫁接过来的改动不会提交，只会放在暂存区
+git cherry-pick b9dabf9 --no-commit
+</code></pre>
+
+<h5 id="toc_7">第四种方法：</h5>
+
+<p>适用于当多个文件被缓存时，发现其中一个文件是其他分支的功能性改动，想直接取消该文件的缓存：</p>
+
+<pre><code># 编辑了 1.js 2.js 3.js
+# 缓存所有改动的文件
+git add .
+
+# 发现 3.js 不应该出现在此时提交的功能上，要取消它的缓存
+git reset 3.js
+
+# 此时3.js 被取消了缓存，我们继续提交1.js 2.js
+git commit -m &quot;Update 1.js 2.js&quot;
+
+# 将3.js 暂存起来
+git stash
+
+# 切换到提交 3.js 改动的分支
+git checkout feat/update
+
+# 重新应用缓存起来的 stash（3.js）
+#pop 参数会将缓存栈的第一个stash删除，并将对应修改应用到当前分支目录下
+git stash pop
+
+# 继续提交
+git add &amp;&amp; git commit -m &quot;update 3.js&quot;
+
+</code></pre>
+
+<h3 id="toc_8">场景2：Commit之后已经 push 到了远端</h3>
+
+<p>此时我们需要借助 <code>git revert</code> 命令来撤销我们的操作</p>
+
+<p>场景：假设我们在feat/feedback 分支上发现最后一次commit的功能是feat/update 分支的改动，此时想要取消这次commit（update 2.js）</p>
+
+<p>下图是feat/feedback 的提交历史：</p>
+
+<p><img src="media/15349302652828/15350814730126.jpg" alt=""/></p>
+
+<p>解决方式：</p>
+
+<pre><code># 撤销最近的一次提交
+git revert HEAD --no-edit
+</code></pre>
+
+<p>接着我们使用sourceTree ④查看撤销之后的提交历史：</p>
+
+<p><img src="media/15349302652828/15350902771287.jpg" alt=""/></p>
+
+<p>我们看到想要撤销的commit（Update 2.js）记录还在，并且多了一个新的commit（Revert &quot;Update 2.js&quot;），因此可以看出，git revert 是对给定的commit提交进行逆过程，该命令会引入一个新的提交来的小给定提交的影响。<br/>
+和 <code>git cherry-pick</code> 一样，revert命令不修改版本库的现存历史记录，相反它只会在记录添加新的提交</p>
+
+<p>接下来我们已经解决了错误分支的提交，但是还要把这次提交放到正确的分支上，依然可以使用git cherry pick 去操作：</p>
+
+<pre><code># 将revert commit push到远端
+git push origin feat/feedback
+
+# 切换到正确的分支
+git checkout feat/update
+
+将目标commit 嫁接到当前分支
+git cherry pick db6bb3f
+</code></pre>
+
+<p>git revert 后面可以加不同的参数达到不同的撤销效果，常用的如下：</p>
+
+<p><code>--edit</code> ：该参数为<code>git revert</code> 的默认参数，它会自动创建提交日志提醒，此时会弹出编辑器会话，可以在里面修改提交消息，然后再提交。</p>
+
+<p><code><br/>
+git revert 6ac5152 <br/>
+</code></p>
+
+<p><img src="media/15349302652828/15350916473467.jpg" alt=""/></p>
+
+<p><code>--no-edit</code> ：表示不編輯 Commit 訊息，revert的commit 会直接自动变回 Revert + 想要撤销的commit 的message 的格式。上面例子中使用的就是这种方式。</p>
+
+<p><code>--no-commit</code>：该命令会使撤销的commit 里面的改动放到暂存区，不进行提交，用户可以自行再次提交。这种参数并且适用于将多个commit 结果还原到索引中，集体放置在缓冲区，进行用户自定义的操作。</p>
+
+<pre><code>git revert 13b7faf --no-commit
+</code></pre>
+
+<p><img src="media/15349302652828/15350923959888.jpg" alt=""/></p>
+
+<p><img src="media/15349302652828/15350919592687.jpg" alt=""/></p>
+
+<h3 id="toc_9">场景3：改动不仅已经 push 到远端，并且已经合到主仓库</h3>
+
+<p>当我们把本不属于该分支的代码或者不需要提交的改动提交到主仓库，并合并到了develop 仓库之后，解决方式如下：</p>
+
+<h4 id="toc_10">以pull request 的方式进行的合并</h4>
+
+<p>在团队的github flow 流程中，若我们把问题分支的pull request 请求通过并合并到develop 之后，我们可以看到在 open pull request 页面有如下提示：</p>
+
+<p><img src="media/15349302652828/15350949829300.jpg" alt=""/></p>
+
+<p>这时我们可以直接点击 【Revert】按钮进行撤回。该撤回操作会提示你需要创建一个 revert pull request，格式默认为： <code>revert-${问题pr号}-${问题分支}</code></p>
+
+<p><img src="media/15349302652828/15350952135446.jpg" alt=""/></p>
+
+<p><img src="media/15349302652828/15350954062379.jpg" alt=""/></p>
+
+<p>最后我们将revert 产生的pull request 合并到develop 分支。</p>
+
+<p>因此对于团队协作中，推荐的工作流程是如上图所示在一个新分支中恢复错误的提交。在这里有人会问，为什么不直接在 develop 分支进行 git revert 操作，岂不是更方便？</p>
+
+<p>这么做的原因是：在拥有大量开发人员的团队中， develop、master 分支为保护分支，为了安全不允许或建议去直接修改。</p>
+
+<p>通过这次操作我们可以了解到：revert 分支的操作实际上是合并进develop 分支的逆操作，它会新产生一个新的分支，将 feat/feedback 的改动还原。</p>
+
+<p>在团队协作流程中，通常我们会使用 Github 的【Merge pull request】 绿色按钮进行合并pull request 的操作，因为这样会更简单直观，建议始终使用该绿色按钮进行操作。</p>
+
+<h4 id="toc_11">命令行合并</h4>
+
+<p>上面展示了通过界面按钮去操作如何撤销已经合并develop 分支的改动，那么在个人项目中用命令行操作是怎么样的呢？</p>
+
+<pre><code># 添加三个文件
+echo 1 &gt; 1.html
+echo 2 &gt; 2.html
+echo 3 &gt; 3.html
+
+# 以为提交的是1.html 2.html，将改动推到了远端分支
+git add . &amp;&amp; git commit -m &quot;Add 1.html 2.html&quot;
+git push origin feat/update
+
+# 将feat/update的改动创建一个“合并提交”合入develop 分支，生成的 Merge commit 的SHA1 为 f439c6f
+git checkout develop
+git merge feat/update --no-ff
+
+# 如果存在冲突，先解决冲突，然后继续请求合并
+git add . &amp;&amp; git merge --continue
+
+# 将develop 合并的最后结果提交到远端
+git push origin develop
+
+# 合并之后发现不应该将3.html 不应该放入功能迭代中。需要撤销本次合并
+# 做任何操作前，先保证本地的develop 代码是最新状态
+git pull --rebase origin develop
+
+# 从develop分支新建一个 revert 分支
+git checkout -b revert-feat/update
+
+# 用 -m 参数指定父编号（从1开始），因为它是“合并提交⑤”
+git revert -m 1 f439c6f
+
+# push revert 的改动
+git push origin revert-feat/update
+
+# 切换回 develop 分支，将 revert-feat/update 分支进行合并
+git checkout develop
+git merge revert-feat/update --no-ff
+git push origin develop
+</code></pre>
+
+<p>图为新建revert 分支：<br/>
+<img src="media/15349302652828/15351016084946.jpg" alt=""/></p>
+
+<p>图为<code>git revert</code> 弹出编辑器编辑 revert commit message 过程：<br/>
+<img src="media/15349302652828/15351016878245.jpg" alt=""/></p>
+
+<p>图为执行完<code>git revert</code> 之后的 commit 历史记录：<br/>
+<img src="media/15349302652828/15351017135058.jpg" alt=""/></p>
+
+<p>接下来我们想将3.html 的改动撤销的操作就变成了上面场景 2 的操作流程了。</p>
+
+<h3 id="toc_12">场景4 revert 错误，需要再次补救</h3>
+
+<p>当我们的代码合到主仓库，并且成功发布到生产环境，此时发现线上有集中报错，必须马上将线上代码回滚到最新版本。这是我们需要进行revert 操作。revert 的代码发布到生产之后，发现错误仍旧存在，最后排查到是某个外部服务依赖出现问题，本次revert 的改动无关，并且外部服务已经恢复。此时需要将 revert 的改动再次发布上生产环境。</p>
+
+<p>我们可以再用一次<code>git revert</code>，revert 掉我们之前的 revert commit：</p>
+
+<pre><code>git revert HEAD --no-edit
+</code></pre>
+
+<p>这样 revert 撤销的改动又回来了，此时会发现提交历史上又会出现一个新的revert commit。</p>
+
+<h2 id="toc_13">误删代码</h2>
+
+<p>介绍上面提交错误 commit的时候，我们提到了<code>git reset --hard</code>。<br/>
+如果我们真的使用了<code>git reset --hard</code> 之后，发现某些修改还有必要的，这时候就需要借助时光机 <code>git reflog</code> 了</p>
+
+<p><code>git reflog</code> 是非常好用的“后悔药”，它几乎可以恢复我们commit 过的改动，即使这条 commit 记录已经被我们 reset 掉了。</p>
+
+<p>具体演示如下：<br/>
+<img src="media/15349302652828/15351158334047.jpg" alt=""/></p>
+
+<p>如上图，在当前提交历史中，我们想回到 SHA1 为 <code>c48a245</code> 这个commit：</p>
+
+<pre><code># 回到 c48a245 commit
+git reset --hard c48a245
+</code></pre>
+
+<p>此时提交历史变为现在这样：<br/>
+<img src="media/15349302652828/15351159943422.jpg" alt=""/></p>
+
+<p>此时可以看到SHA1 为<code>c48a245</code> 的 commit 时间线之后的改动都已经被撤销了。<br/>
+这时候我们突然想到：commit 信息为 “Add 1.html 2.html” 的提交里面的改动很重要，需要被找回，但是我们使用 <code>git log</code> 已经找不到这条被我们reset 掉的历史记录了。这时候进行如下操作：</p>
+
+<pre><code>git reflog
+</code></pre>
+
+<p><img src="media/15349302652828/15351170241290.jpg" alt=""/></p>
+
+<p>我们看到了曾经提交过的这个想要找回的commit（commit: Add 1.html 2.html），它的 SHA1 为 <code>cf2e245</code></p>
+
+<p>接下来怎么做取决于你具体想要达到什么目的：</p>
+
+<ul>
+<li>想要回到<code>cf2e245</code> 这个特定的commit：</li>
+</ul>
+
+<pre><code>git reset --hard cf2e245
+</code></pre>
+
+<ul>
+<li>想要暂存 <code>cf2e245</code> 中的改动，并且不想马上提交：</li>
+</ul>
+
+<pre><code>git reset --soft cf2e245
+</code></pre>
+
+<ul>
+<li>想要把<code>cf2e245</code> 嫁接到某个分支目录下：</li>
+</ul>
+
+<pre><code>git checkout feat/xxx
+git cherry-pick cf2e245
+</code></pre>
+
+<ul>
+<li>想要找回 <code>cf2e245</code> 某个文件的改动，暂存起来：</li>
+</ul>
+
+<pre><code>git checkout cf2e245 1.html
+</code></pre>
+
+<p><img src="media/15349302652828/15351178789682.jpg" alt=""/></p>
+
+<p>对于 <code>git reflog</code> 需要注意的是： 它不是万能的。Git 会定期清理那些你已经不再用到的”对象“，如果你想找到几个月以前的提交，可能会指望不上它。</p>
+
+<h2 id="toc_14">写在后面</h2>
+
+<p>上面由于篇幅原因只总结了两种撤销操作，后续还会总结归纳一些网络上大家咨询最多的错误的解决方式。</p>
+
+<p>文中的一些想法都是笔者工作学习过程中的思考和一点小小的总结。笔者认为技术某些名词翻译过来可能会有些许词不达意，因此文中某些操作词并没有直接翻译成中文，而是直接以英文形式存在，如果对其中的命令有疑问的同学，可以利用搜索引擎去了解更多。如有错误，欢迎指正！</p>
+
+<hr/>
+
+<p>一些名词注解：</p>
+
+<p>① 索引：</p>
+
+<blockquote>
+<p>Git索引是一个在你的工作目录和项目仓库间的暂存区(staging area)。有了它， 你可以把许多内容的修改一起提交（commit）。 如果你创建了一个提交（commit），那么提交的是当前索引（index）里的内容，而不是工作目录中的内容。</p>
+</blockquote>
+
+<p>② 工作目录：</p>
+
+<blockquote>
+<p>Git工作目录存储着你现在签出(checkout)来用来编辑的文件. 当你在项目的不同分支间切换时， 工作目录里的文件经常会被替换和删除。 所有历史信息都保存在 &#39;Git目录&#39;中；　工作目录只用来临时保存签出（checkout） 文件的地方， 你可以编辑工作目录的文件直到下次提交（commit）为止。</p>
+</blockquote>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git 拼接特定commit 到其他分支]]></title>
+    <link href="http://233px.com/15343215883524.html"/>
+    <updated>2018-08-15T16:26:28+08:00</updated>
+    <id>http://233px.com/15343215883524.html</id>
+    <content type="html"><![CDATA[
+<p><a href="https://blog.csdn.net/ybdesire/article/details/42145597">https://blog.csdn.net/ybdesire/article/details/42145597</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Font 和Typeface 的区别]]></title>
+    <link href="http://233px.com/15338980271932.html"/>
+    <updated>2018-08-10T18:47:07+08:00</updated>
+    <id>http://233px.com/15338980271932.html</id>
+    <content type="html"><![CDATA[
+<p>Font 和Typeface <br/>
+今天对 Font 和 Typeface 这两个比较容易混淆的概念了解了一下，看了知乎的 <a href="https://www.zhihu.com/question/19566628">英语术语「typeface」和「font」的区别是什么？</a><br/>
+然后又看了一片外文： <a href="https://techstacker.com/the-difference-between-font-and-typeface/EJpFJd6QLi3fLEJxo">Font vs Typeface? What’s the Difference?</a> </p>
+
+<p>大体区别如下：<br/>
+<strong>typeface</strong>是指整个字体设计的集合/系列（style，weight，variation）。 像Georgia(衬线字体)，Helvetica（无衬线字体），FF Meta和Chaparral Pro(英文衬线字体)。 这些是不同的字体，可以称为字体家族。</p>
+
+<p><strong>font</strong>指的是原始字体设计的版本，例如 字体样式，尺寸，粗细等。</p>
+
+<p>知乎上的一句总结很到位：</p>
+
+<blockquote>
+<p>方正兰亭黑是 typeface<br/>
+方正兰亭纤黑是 style<br/>
+五号、regular的方正兰亭纤黑是 font</p>
+</blockquote>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JS 基本类型与引用类型]]></title>
+    <link href="http://233px.com/15331089829869.html"/>
+    <updated>2018-08-01T15:36:22+08:00</updated>
+    <id>http://233px.com/15331089829869.html</id>
+    <content type="html"><![CDATA[
+<p><a href="https://juejin.im/post/595616ea5188250da205da91">https://juejin.im/post/595616ea5188250da205da91</a></p>
+
+<p><a href="https://segmentfault.com/a/1190000002953364">https://segmentfault.com/a/1190000002953364</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git 笔记一 —— 对象类型]]></title>
+    <link href="http://233px.com/15330343829802.html"/>
+    <updated>2018-07-31T18:53:02+08:00</updated>
+    <id>http://233px.com/15330343829802.html</id>
+    <content type="html"><![CDATA[
+<p>对象库是Git 版本库的心脏，包含所有舒适数据文件和所有日志消息、作业信息、日期、以及其他用来重建项目任何版本和分支的信息。</p>
+
+<p>Git 放在对象库的对象只有四种类型： 块（blob）、目录树（tree）、提交（commit）和标签（tag）。</p>
+
+<h4 id="toc_0">块（blob）</h4>
+
+<p>文件的每个版本表示为一个块（blob）。blob 是 “二进制大对象”（binary large object） </p>
+
+<h4 id="toc_1">目录树（tree）</h4>
+
+<p>一个目录树（tree）对象代表一层目录信息。它记录blob 标识符、路径名和在一个目录里所有文件的一些元数据</p>
+
+<h4 id="toc_2">提交（commit）</h4>
+
+<p>一个提交对象保存版本库中每一次变化的元数据，包括作者、提交者、提交日期和日志消息。每一个提交对象指向一个目录树对象</p>
+
+<h4 id="toc_3">标签（tag）</h4>
+
+<p>一个标签对象分配一个任意的且人类可读的名字给一个特定的对象，通常是一个提交对象。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[【译】 理解JavaScript 对象]]></title>
+    <link href="http://233px.com/15330173598963.html"/>
+    <updated>2018-07-31T14:09:19+08:00</updated>
+    <id>http://233px.com/15330173598963.html</id>
+    <content type="html"><![CDATA[
+<p>原文：<a href="https://blog.halolabs.io/understanding-javascript-objects-d31cd24ca60f">https://blog.halolabs.io/understanding-javascript-objects-d31cd24ca60f</a></p>
+
+<p>对象是JavaScript 中一个很核心的概念。当我刚开始学习对象的时候，它看起来似乎很简单，似乎就是一对 Key和Value。</p>
+
+<p>我花了很长时间才意识到这个话题对我想象的要复杂的多。然后我开始从不同的来源去学习更多的关于这方面的知识，但是总是感觉无法掌控全局。</p>
+
+<p>在这篇文章中，我会尽力在JS 中创建一个对象开始全面的概述，而不是太深入到任何一个主题，足够的深入去帮助你理解和感觉更舒适的去阅读学习。</p>
+
+<h3 id="toc_0">对象</h3>
+
+<p><strong>JavaScript对象只是属性的集合，每个属性都是一个键值对。</strong></p>
+
+<p>您可以使用点表示法（<code>obj.a</code>）或括号表示法（<code>obj [&#39;a&#39;]</code>）来访问键值。 请记住，如果您的密钥是以下之一，则应使用括号表示法：</p>
+
+<p>1.不是有效的JavaScript标识符（有空格，短划线，以数字开头……）<br/>
+2.是一个变量</p>
+
+<p>JS中的对象是使用一个名为<code>Prototype</code>的属性创建的，这是一个非常重要的模块。</p>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_1">prototype（原型）:</h3>
+
+<p>JavaScript中的每个对象都有一个名为<code>Prototype</code>的内部属性，在大多数浏览器中，您可以将其作为<code>__proto__</code>来访问。Prototype 是 Javascript的继承解决方案，它允许共享属性和方法而无需复制内存中的代码。 它通过将一个对象链接到另一个对象来实现。<br/>
+简而言之，<code>Prototype</code>创建了从一个对象到另一个对象的引用。</p>
+
+<h3 id="toc_2">Prototype chain（原型链）:</h3>
+
+<p>每次在对象中查找属性时，JS都会尝试在对象上找到它，如果不能，则会查看<code>Prototype</code>对象内部。 如果属性仍然缺失，JS将继续查找链接对象的 <code>Prototype</code>。 这将持续到JS找到相关属性或直到原型链结束。</p>
+
+<p>举个例子：</p>
+
+<pre><code>
+var cons = function () {
+   this.a = 1;
+   this.b = 2;
+}
+var obj = new cons(); 
+
+cons.prototype.b = 3;
+cons.prototype.c = 4;
+</code></pre>
+
+<p>cons是一个构造函数（只是一个可以使用<code>new</code>运算符的函数）。 在第5行，我们创建了一个新对象，一个新的<code>cons</code>实例。 在创建时，<code>obj</code>也获得了一个原型属性。<br/>
+现在我们将属性（<code>&#39;b&#39;，&#39;c&#39;</code>）添加到<code>cons</code>的<code>prototype</code>对象中，让我们看看<code>obj</code>：</p>
+
+<p><code>obj.a // 1 </code> -- 没有新的变化，<code>obj.a</code> 还是1<br/>
+<code>obj.c  // 4</code> -- 这个已经不是在<code>obj</code>中的<code>c</code>元素了！但就像我们之前所说的那样，JS现在会查看<code>obj</code> <code>Prototype</code>并将返回4。</p>
+
+<p>现在问问自己 <code>obj.b</code> 的值是什么？ 删除<code>obj.b</code> 后的值呢？</p>
+
+<p><code>obj.b</code> 值是2.我们确实设置了一个<code>b</code>属性，但是在<code>Prototype</code>上设置的，所以当我们检查<code>obj.b</code>时我们仍然得到2.然而，在我们删除了<code>obj.b</code>之后，JS再也找不到<code>obj</code>上的<code>b</code>了，所以它转到它的原型上了，此时<code>obj.b</code> 返回 3。</p>
+
+<pre><code>delete obj.b
+obj.b // 3
+</code></pre>
+
+<p>我想简要介绍一下创建对象的不同方法，并进一步讨论原型。</p>
+
+<h3 id="toc_3">creating an object （创建一个对象）</h3>
+
+<p><strong>Object literal（对象字面量）</strong>：<code>let obj = { a : 1 };</code> <br/>
+我们创建以下prototype原型链的对象： <code>obj ---&gt; Object.prototype ---&gt; null</code>。 你可以猜测<code>object.prototype</code> 是对象的原型，也是原型链的结束</p>
+
+<p><strong>Object.create()</strong> ： <code>var newObj = Object.create(obj);</code> newObj 的原型链将会是：<br/>
+<code>newObj ---&gt; obj ---&gt; Object.prototype ---&gt; null</code></p>
+
+<p><strong>Constructor（构造函数）</strong>：如上例所示，构造函数只是一个JS函数，它允许我们使用<code>new</code>运算符来创建它的实例。</p>
+
+<p>ES6 类:</p>
+
+<pre><code>class rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  } 
+  getArea() {
+    return this.height * this.width;
+  }
+}
+let square = new rectangle(2, 2);
+</code></pre>
+
+<p><code>Square</code>是<code>rectangle</code>构造函数的一个实例，因此我们可以调用<code>square.getArea() // 4</code>，<code>square.width</code>以及它从<code>object.prototype</code>继承的所有函数。</p>
+
+<p>你应该选择哪种方法？如果你计划去创建几个示例，你最好是使用ES6 / 构造函数 的方法，除非你打算去创建一个时间对象，你可能会去选择字面量，因为它可能更容易一些。</p>
+
+<p>现在我们了解了<code>prototyp</code>并且熟悉了创建新对象的所有方法，我们可以继续讨论对象中最令人困惑的部分之一：</p>
+
+<h3 id="toc_4">Comparing &amp; changing Objects （比较及改变对象）</h3>
+
+<h4 id="toc_5">在JavaScript中，对象是引用类型。</h4>
+
+<p>当我们创建一个对象时，让<code>obj = {a：1};</code> 变量<code>obj</code>接收对象内存中的位置而不是值！ 这一点非常重要，因为它可能会导致各种错误。 当我们创建另一个对象时，让<code>newObj = obj</code>，我们实际上创建了一个指向obj内存中位置的指针，而不是一个全新的对象。<br/>
+这意味着当我们做<code>newObj.a = 2</code>时，我们实际上改变了<code>obj</code>，所以<code>obj.a</code>现在是2！</p>
+
+<p>这很容易出错，许多公司正在使用不可变对象，这意味着您无法更改已创建的对象。 相反，您必须创建一个新对象（原始对象的副本）并进行更改。 这就像 Redux 这样的重要库正在运行，它是函数式编程中最重要的概念之一。 你可以在<a href="https://facebook.github.io/immutable-js/">这里</a>读更多关于它的内容。</p>
+
+<p><strong>平等：</strong>这也意味着两个对象永远不会相等，即使它们具有完全相同的属性。 这是因为JS实际上比较了对象的内存中的位置，并且两个对象永远不能在同一个内存单元中。</p>
+
+<pre><code>// Two distinct objects with the same properties are not equal
+// 具有相同属性的两个不同对象不相等
+var fruit = {name: &#39;apple&#39;};
+var fruitbear = {name: &#39;apple&#39;};
+fruit === fruitbear; // return false
+
+// here fruit and fruitbear are pointing to same object
+// 这里的 fruit 和 fruitbear 指向的都是同一对象
+var fruit = {name: &#39;apple&#39;};
+var fruitbear = fruit;  
+fruit === fruitbear; // return true
+
+</code></pre>
+
+<p>那么到现在为止你可能在想如何比较对象或者我应该如果操作不变的对象？</p>
+
+<p>让我们来看看一些可能性：</p>
+
+<h4 id="toc_6">对象的改变</h4>
+
+<p>我们理解最好不要改变我们的对象，所以我们想创建相关对象的副本并更改其属性，可以用<code>Object.assign()</code> 来做一事情。</p>
+
+<pre><code>var obj = { a : 1, b : 2};
+var newObj = Object.assign({}, obj,{a:2}) // {a : 2, b : 2 }
+</code></pre>
+
+<p>如果我们想要更改obj的属性值，我们可以使用<code>object.assign</code>创建 <code>obj</code> 的副本并进行更改。<br/>
+您可以看到我们如何首先创建一个空对象，然后复制<code>obj</code>的值，然后添加我们的更改，以便最终获得一个新的更新对象。</p>
+
+<p>请注意，这不适用于深拷贝。 深拷贝是指我们要复制具有一个或多个对象属性的对象：</p>
+
+<pre><code>const obj = {a : 1, b : { a : 1 } };  // b property is an object
+</code></pre>
+
+<p><code>Object.assign()</code> 复制属性值，因此当属性值是对象的引用时，它只复制该引用。</p>
+
+<p>对于深拷贝，我们必须递归复制。 我们可以创建一个函数或只使用<a href="https://lodash.com/">Lodash</a>的<a href="https://lodash.com/docs/4.17.10#cloneDeep">_.cloneDeep</a> 去实现。</p>
+
+<h4 id="toc_7">对象的比较</h4>
+
+<p>使用对象中的一个很酷的技巧是对它们进行字符串化（stringify）。<br/>
+我们在这里做的是对两个对象进行字符串化，然后比较结果字符串：</p>
+
+<pre><code>JSON.stringify(obj1) === JSON.stringify(obj2) 
+</code></pre>
+
+<p>因为我们现在比较字符串，这是由值数据类型完成的引用，所以说这是有效，。 坏消息是它并不总是有用，主要是因为对象属性顺序无法保证。</p>
+
+<p>另一个好的解决方案是使用<a href="https://lodash.com/">Lodash</a>的<code>_.isEqual</code>进行深度对象比较。</p>
+
+<p>在我们结束之前，让我们回顾一些对象的面试问题，这将有助于我们更多地学习并练习我们学到的东西。</p>
+
+<p>在继续阅读答案之前尝试考虑解决方案。</p>
+
+<h3 id="toc_8">如何获得一个对象的长度</h3>
+
+<p>为了找到答案，我们需要逐个迭代对象属性并对它们进行计数。 有多种方法可以迭代对象：</p>
+
+<ul>
+<li><strong>for in</strong></li>
+</ul>
+
+<p>此方法遍历对象及其原型链的所有可枚举属性。 <br/>
+现在我们（希望）知道原型我们可以很容易地意识到，如果我们只想获得对象属性，那么<code>for in</code>可能并不适合。</p>
+
+<ul>
+<li><strong>Object.keys</strong></li>
+</ul>
+
+<p>此方法返回一个数组，其中包含对象的所有<strong>自身</strong>（仅对象）<strong>可枚举</strong>属性键。 这样做的好处是因为我们只处理没有<code>prototype</code>属性的对象属性。 您很少将属性的可枚举性（enumerable）设置为false，从而导致<code>object.keys</code>跳过它们，从而可能无法得到想要的结果。 这是<code>getOwnPropertyNames</code>可以派上用场的地方。<br/>
+<code>getOwnPropertyNames</code>返回一个包含所有对象自身键的数组（不管是否可枚举）。</p>
+
+<ul>
+<li><strong>getOwnPropertyNames</strong></li>
+</ul>
+
+<p><code>getOwnPropertyNames</code> 返回一个数组，其中包含对象中所有<strong>自身</strong>的属性键（不管是都可枚举）</p>
+
+<p>另外值得一提的是：</p>
+
+<ul>
+<li><strong>Object.values</strong></li>
+</ul>
+
+<p><code>Object.values</code> 迭代自身和可枚举的属性，并返回一个包含相关<strong>值</strong>的数组。</p>
+
+<ul>
+<li><strong>Object.entries</strong></li>
+</ul>
+
+<p><code>Object.entries</code> 迭代自身和可枚举的属性，并返回一个包含<strong>键和值</strong>的数组。</p>
+
+<p>如您所见，上述大多数方法都返回一个数组，因此您可以利用JavaScript数组可用的所有方法。<br/>
+其中一个方法是<code>array.length</code>，所以我们可以简单地写：</p>
+
+<pre><code>let objLength = Object.getOwnPropertyNames(obj).length;
+</code></pre>
+
+<h3 id="toc_9">如何检查一个对象是空的？</h3>
+
+<ol>
+<li><code>JSON.stringify(myObj) === &quot;{}&quot;</code> —— 我们再次使用序列化工具，它可以让我们很轻松检查一个对象是否为空(比较字符串而非对象) 。</li>
+<li><code>!Object.keys(myobj).length // true</code> —— 正如我们之前所说的，将对象的键转换为数组可以使我们受益。 这里我们利用从<code>Array.prototype</code>继承的 length 属性来检查keys数组的长度。 在JS 中 0转换为false，因此我们使用<code>!</code> 进行取反，将其变为true，而所有其他数字将返回false。</li>
+</ol>
+
+<h3 id="toc_10">总结</h3>
+
+<p>我们介绍了很多，希望您现在能感觉更舒适地创建和处理对象。</p>
+
+<ul>
+<li>请记住，对象是引用类型，这意味着建议您不可变地工作。</li>
+<li>与原型属性和原型链交朋友。</li>
+<li>熟悉帮助我们处理对象的不同工具。 请记住，您可以对其进行字符串化，创建其键的数组，或者使用我们学到的各种方法之一遍历其属性。</li>
+</ul>
+
+<p>祝你好好探索JavaScript对象。 玩得开心！</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JS 数组对象属性重命名方法]]></title>
+    <link href="http://233px.com/15316650214337.html"/>
+    <updated>2018-07-15T22:30:21+08:00</updated>
+    <id>http://233px.com/15316650214337.html</id>
+    <content type="html"><![CDATA[
+<p>经常会遇到后端接口返回的数据字段的key 值和组件需要的数据字段不一致，此时需要进行属性的重命名，下面总结一下重命名的一些方式：</p>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_0">键值对匹配替换</h3>
+
+<pre><code>// 需要重命名的对象
+const oldObj = {
+  folder_name: &quot;test&quot;,
+  user_email: &quot;test@example.com&quot;,
+  user_agreed: 1,
+  site: &quot;example.com&quot;
+};
+
+// 旧 key 与新 key 的映射
+const newKeys = {
+  folder_name: &quot;FolderName&quot;,
+  user_email: &quot;UserEmail&quot;,
+  user_agreed: &quot;UserAgreed&quot;,
+  site: &quot;Site&quot;
+};
+
+</code></pre>
+
+<h3 id="toc_1">reduce</h3>
+
+<pre><code>function renameKeys(obj, newKeys) {
+  let mapped = Object.keys(oldObj).reduce((acc, key) =&gt; {
+    acc[newKeys[key]] = oldObj[key];
+    return acc;
+  }, {});   
+  return Object.assign({}, ...mapped);
+}
+</code></pre>
+
+<h3 id="toc_2">map</h3>
+
+<pre><code>function renameKeys(obj, newKeys) {
+  const mapped = Object.keys(obj).map(key =&gt; {
+    const newKey = newKeys[key] || key;
+    return { [newKey]: obj[key] };
+  });
+  return Object.assign({}, ...mapped);
+}
+</code></pre>
+
+<h3 id="toc_3">ES6(ES2015) 对象解构</h3>
+
+<pre><code>const oldObj = {
+    k1: `111`,
+    k2: `222`,
+    k3: `333`
+};
+
+const {
+    k1: kA, 
+    k2: kB, 
+    k3: kC,
+} = {...oldObj}
+
+const newObj = Object.assign({},{
+    kA,
+    kB,
+    kC
+  }
+)
+</code></pre>
+
+<h3 id="toc_4">Object prototype</h3>
+
+<pre><code>
+Object.prototype.renameProperty = function (oldName, newName) {
+ // 如果名字相等不做任何操作
+ if (oldName == newName) {
+     return this;
+ }
+// 检测老的key 是否存在
+if (this.hasOwnProperty(oldName)) {
+    this[newName] = this[oldName];
+    delete this[oldName];
+}
+return this
+
+</code></pre>
+
+<h3 id="toc_5">replace</h3>
+
+<p>可以作为一个过滤器使用：</p>
+
+<pre><code>//这是一个全局过滤器的例子
+var filters = {
+  //修改键名成得过滤器
+  keyChange: function (val, oldKey, newKey) {
+    if (val === [] || val === {}) {
+      return val;
+    } else {
+      let tempString = JSON.stringify(val);
+      let flag = true;
+      while (flag) {
+        let temp = tempString;
+        tempString = tempString.replace(oldKey, newKey);
+        if (temp === tempString) {
+          flag = false;
+        }
+      }
+      return JSON.parse(tempString);
+    }
+  }
+};
+
+export default filters
+</code></pre>
+
+<p>更多链接：<br/>
+<a href="https://medium.com/front-end-hacking/immutably-rename-object-keys-in-javascript-5f6353c7b6dd">https://medium.com/front-end-hacking/immutably-rename-object-keys-in-javascript-5f6353c7b6dd</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[link preload 实现预加载]]></title>
+    <link href="http://233px.com/15296587634371.html"/>
+    <updated>2018-06-22T17:12:43+08:00</updated>
+    <id>http://233px.com/15296587634371.html</id>
+    <content type="html"><![CDATA[
+<p><code>&lt;link&gt;</code> 元素的 <code>rel</code> 属性的属性值<code>preload</code>能够让你在你的HTML页面中 <code>&lt;head&gt;</code>元素内部书写一些声明式的资源获取请求，可以指明哪些资源是在页面加载完成后即刻需要的。对于这种即刻需要的资源，你可能希望在页面加载的生命周期的早期阶段就开始获取，在浏览器的主渲染机制介入前就进行预加载。这一机制使得资源可以更早的得到加载并可用，且更不易阻塞页面的初步渲染，进而提升性能。</p>
+
+<span id="more"></span><!-- more -->
+
+<p>使用姿势如下：</p>
+
+<pre><code>&lt;link rel=&quot;preload&quot; href=&quot;style.css&quot; as=&quot;style&quot;&gt;
+&lt;link rel=&quot;preload&quot; href=&quot;main.js&quot; as=&quot;script&quot;&gt;
+</code></pre>
+
+<p>在这里，我们预加载了CSS和JavaScript文件，所以在随后的页面渲染中，一旦需要使用它们，它们就会立即可用。</p>
+
+<p>比较好用的使用场景：</p>
+
+<h3 id="toc_0">响应式预加载</h3>
+
+<pre><code> 
+&lt;link rel=&quot;preload&quot; href=&quot;bg-image-narrow.png&quot; as=&quot;image&quot; media=&quot;(max-width: 600px)&quot;&gt;
+
+&lt;link rel=&quot;preload&quot; href=&quot;bg-image-wide.png&quot; as=&quot;image&quot; media=&quot;(min-width: 601px)&quot;&gt;
+
+</code></pre>
+
+<p><code>&lt;link&gt;</code>元素中包含了一个<code>media</code>属性，因此，当用户在使用较窄屏幕的设备时，较窄的图片将会被预加载，而在较宽的设备上，较宽的图片将被预加载。</p>
+
+<h3 id="toc_1">字体预先加载</h3>
+
+<p>预加载文件可以减少无样式字体闪烁：</p>
+
+<pre><code>&lt;link rel=preload href=&#39;font.woff2&#39; as=font type=&#39;font/woff2&#39; crossorigin /&gt;
+</code></pre>
+
+<h3 id="toc_2">动态加载，但不执行</h3>
+
+<p>当你需要预加载一个脚本，但需要推迟到需要的时候才令其执行时时候，用preload 会非常好用，可以创建HTMLLinkElement 示例，然后把他们附在 DOM 上：</p>
+
+<pre><code>var preloadLink = document.createElement(&quot;link&quot;);
+preloadLink.href = &quot;myscript.js&quot;;
+preloadLink.rel = &quot;preload&quot;;
+preloadLink.as = &quot;script&quot;;
+document.head.appendChild(preloadLink);
+</code></pre>
+
+<p>浏览器先加载JavaScript 文件，但不去执行，等到需要的时候再去执行：</p>
+
+<pre><code>var preloadedScript = document.createElement(&quot;script&quot;);
+preloadedScript.src = &quot;myscript.js&quot;;
+document.body.appendChild(preloadedScript);
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用 Javascript console 提高开发效率]]></title>
+    <link href="http://233px.com/15295740469652.html"/>
+    <updated>2018-06-21T17:40:46+08:00</updated>
+    <id>http://233px.com/15295740469652.html</id>
+    <content type="html"><![CDATA[
+<p>作为开发者，我们开发中用的最多的是 console.log 。但是还有更多的更适合的方式去打印我们想要输出的内容</p>
+
+<h3 id="toc_0">Console.log, Console.error, Console.warn and Console.info 的显示方式</h3>
+
+<p><img src="media/15295740469652/15295766253535.jpg" alt=""/></p>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_1">Console.group</h3>
+
+<p>这个方法可以将系列的console.log(包括错误信息等)集合到一个组内，并且可以展开折叠。这个语法非常简单： 在console.group) 之后输入所有想分为一组的console ，然后用console.groupEnd() 结束这个分组。</p>
+
+<pre><code>function doSomething(obj) {
+    console.group(&#39;do Something Profile&#39;);
+    const date = new Date();
+    console.log(&#39;evauating data:&#39;, date);
+    const fullName = `${obj.firstName} ${obj.lastName}`
+    console.log(&#39;fullName:&#39;, fullName);
+    const id = Math.random(1);
+    console.log(&#39;id&#39;, id);
+    console.groupEnd();
+}
+
+doSomething({firstName: &#39;hui&#39;, lastName: &#39;xiao&#39;});
+</code></pre>
+
+<p>运行结果如下：</p>
+
+<p><img src="media/15295740469652/15296387104742.jpg" alt=""/></p>
+
+<h3 id="toc_2">Console.table</h3>
+
+<p>console.table 很强大，它可以展示非常大的JSON 数组，以往我们在console.log 里面输出它们阅读性很差。而console.table 可以生成很美观的table 数据表，可以命名这些列并将它们作为参数传递。</p>
+
+<pre><code>const sexList = [
+{ name: &#39;kimi&#39;, sex: &#39;0&#39;},
+{ name: &#39;david&#39;, sex: &#39;0&#39;},
+{ name: &#39;lily&#39;, sex: &#39;1&#39;}
+]
+console.table(sexList)
+
+
+const skills = {
+ C: true,
+ Java: false,
+ Javascript: true,
+ Python: true
+}
+
+console.table(skills)
+</code></pre>
+
+<p>运行结果如下：<br/>
+<img src="media/15295740469652/15296493025282.jpg" alt=""/></p>
+
+<h3 id="toc_3">Console.count, Console.time and Console.timeEnd</h3>
+
+<p>这三个方法是每个开发者在debug 时，都需要掌握的利器。</p>
+
+<p>console.count 用来统计代码被执行的次数。console.time 计时器，搭配console.timeEnd，可以用来记录某个方法从开始到结束运行的时间。并将已用的时间打印打印到控制台上。</p>
+
+<pre><code>console.time(&#39;total&#39;)
+console.time(&#39;init arr&#39;)
+const arr = new Array(10)
+console.timeEnd(&#39;init arr&#39;)
+
+for (var i = 0; i &lt; arr.length; i++) {
+    arr[i] = new Object();
+    const type = (i % 2 === 0) ? &#39;even&#39;: &#39;odd&#39;
+    console.count(type + &#39;added&#39;);
+}
+console.timeEnd(&#39;total&#39;);
+
+</code></pre>
+
+<p>运行结果如下：</p>
+
+<p><img src="media/15295740469652/15296515826026.jpg" alt=""/></p>
+
+<h3 id="toc_4">Console.trace and Console.assert</h3>
+
+<p>这些方法从被调用的地方打印堆栈跟踪。例如写的一个 JS =库，想告诉用户错误产生的地方。 在这种情况下，这些方法很有用。 console.assert与console.trace类似，但只有在传递条件未通过时才会打印。</p>
+
+<pre><code>function lesserThan(a, b) {
+console.assert(a &lt; b, { message: &#39;a is nit lesser than b&#39;, a: a, b: b})
+}
+lesserThan(6, 5);
+console.trace(&#39;End&#39;);
+</code></pre>
+
+<p>运行结果如下：<br/>
+<img src="media/15295740469652/15296524088802.jpg" alt=""/></p>
+
+<h3 id="toc_5">删除控制台内容</h3>
+
+<p>控制台输出内容，会给我们的开发过程提供便利，但是有时候我们并不希望开发时所打印的log 在生产环境中显示。因此不能滥用控制台，应该在开发模式下保留错误日志或跟踪日志，在生产环境删除这些日志。这里可以用webpack 的<a href="https://github.com/webpack-contrib/uglifyjs-webpack-plugin">uglifyjs-webpack-plugin</a>  删除生产环境不想保留的控制台输出：</p>
+
+<pre><code>const UglifyJsPlugin = require(&#39;uglifyjs-webpack-plugin&#39;)
+var debug = process.env.NODE_ENV !== &quot;production&quot;;
+
+.....
+optimization: {
+    minimizer: !debug ? [
+        new UglifyJsPlugin({
+            // Compression specific options
+            uglifyOptions: {
+                // Eliminate comments
+                comments: false,
+                compress: {
+                   // remove warnings
+                   warnings: false,
+                   // Drop console statements
+                   drop_console: true
+                },
+            }
+       })] : []
+}
+</code></pre>
+
+<p>这样就可以在开发环境开开心心的打印log 了。但是无用的log 请不要提交到生产，保持代码的干净整洁。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vue SSR 初探 （一）]]></title>
+    <link href="http://233px.com/15295515875535.html"/>
+    <updated>2018-06-21T11:26:27+08:00</updated>
+    <id>http://233px.com/15295515875535.html</id>
+    <content type="html"><![CDATA[
+<h3 id="toc_0">什么是 SSR</h3>
+
+<p>SSR，英文全称叫 Server side rendering ，国内翻译为 服务器端渲染。</p>
+
+<blockquote>
+<p>服务器渲染的 Vue.js 应用程序也可以被认为是&quot;同构&quot;或&quot;通用&quot;，因为应用程序的大部分代码都可以在服务器和客户端上运行。</p>
+</blockquote>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_1">为什么要用 vue-ssr</h3>
+
+<p>Vue SSR 官方给的解释如下：</p>
+
+<blockquote>
+<ul>
+<li><p>更好的 SEO，由于搜索引擎爬虫抓取工具可以直接查看完全渲染的页面</p></li>
+<li><p>更快的内容到达时间(time-to-content)，特别是对于缓慢的网络情况或运行缓慢的设备。无需等待所有的 JavaScript 都完成下载并执行，才显示服务器渲染的标记，所以你的用户将会更快速地看到完整渲染的页面</p></li>
+</ul>
+</blockquote>
+
+<ul>
+<li>那么对于我们的实际业务中，如果我们前端使用的是Vue.js ，那么后端渲染使用Vue SSR 可以无缝与前端连接起来</li>
+<li>使用Vue SSR 可以把数据渲染成HTML，并在首屏进行显示，用户体验好，再也不用看到首页的“转菊花” 了。而 传统的前端 Vue.js 开发，若 ajax 和 js 没有请求完成，页面只返回 #app 的空DOM，体验太差</li>
+<li>利于SEO，对于很多对外网站来说，很多流量的来源都依赖于搜索引擎，因此更好的SEO有利于搜索引擎爬虫获取工具获得更完全的渲染页面</li>
+</ul>
+
+<h3 id="toc_2">难度如何，是否容易上手</h3>
+
+<p>不太容易，官放文档给的例子太复杂，不利于上手。目前准备一点点学习，做一个学习笔记。</p>
+
+<h3 id="toc_3">技术栈</h3>
+
+<p>Vue2 + webpack 2 + Vuex + Vue-Router + axios</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[input 输入框的步长问题]]></title>
+    <link href="http://233px.com/15294872496049.html"/>
+    <updated>2018-06-20T17:34:09+08:00</updated>
+    <id>http://233px.com/15294872496049.html</id>
+    <content type="html"><![CDATA[
+<p>问题：在使用 <code>&lt;input type=&quot;number&quot;&gt;</code>输入框时，如果输入了当前输入框中值不以1为单位增减的值时会出现：请输入有效值 两个最接近的有效分别为...的提示，这是因为浏览器默认认为<code>&lt;input type=&quot;number&quot;&gt;</code>的步长为1。</p>
+
+<p>解决办法：指定<code>&lt;input type=&quot;number&quot;&gt;</code>输入框的步长，如果增加属性<code>step=&quot;0.01&quot;</code>，可以根据具体的精度调整step属性的值。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CSS outline 自动填满屏幕剩余空间]]></title>
+    <link href="http://233px.com/15284430152022.html"/>
+    <updated>2018-06-08T15:30:15+08:00</updated>
+    <id>http://233px.com/15284430152022.html</id>
+    <content type="html"><![CDATA[
+<p>有不少网站的主要背景是白色的，底部是深色的，于是就会出现这样一个场景，当主内容很少的时候，包括底部在内的都不足一瓶，或者用户的显示器是竖屏，则很可能出现下图所示的情况：</p>
+
+<p><img src="media/15284430152022/15284588736488.jpg" alt="img" style="width:300px;"/></p>
+
+<span id="more"></span><!-- more -->
+
+<p>如何让底部背景颜色正好填满剩余屏幕区域呢？这个时候可以用 <code>outline</code> 属性。假设HTML代码是这样的：</p>
+
+<pre><code>&lt;div class=&quot;header&quot;&gt;
+  &lt;h1&gt;header&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div class=&quot;main&quot;&gt;
+  &lt;p&gt;main&lt;/p&gt;   
+&lt;/div&gt;
+&lt;div class=&quot;footer&quot;&gt;
+  &lt;p&gt;footer&lt;/p&gt;  
+&lt;/div&gt;
+</code></pre>
+
+<p>然后设置的CSS为：</p>
+
+<pre><code>.header {
+  height: 66px;
+  background: #0097ff;
+  color: #fff;
+  text-align: center;
+}
+.main {
+  text-align: center;
+}
+
+.footer {
+  height: 50px;
+}
+
+.footer &gt; p {
+  position: absolute;
+  left: 0; 
+  right: 0;
+  text-align: center;
+  padding: 15px 0;
+  background-color: #3b4045;
+  outline: 9999px solid #3b4045;
+  clip: rect(0 9999px 9999px 0);
+  color: #fff;
+} 
+
+</code></pre>
+
+<p>实现效果的关键 CSS 就是设置一个超大轮廓范围的 <code>outline</code> 属性。例如这里设置成9999px，作用是保证无论屏幕多高，轮廓色块也一定能够覆盖。</p>
+
+<p>但是和 border 属性不一样，outline 是无法指定方位的，只是被动地向四周扩散。因此<code>outline: 9999px solid #3b4045;</code> 不仅会填满底部方位的屏幕空间，还会把上面的空间内容也填满。因此还要进一步进行处理。这里可以用 <code>clip</code> 剪裁策略，让底部元素绝对定位，同时以上边缘和左边缘为界进行裁剪，这样完全不用担心outline 会覆盖上面的内容。代码组合为：</p>
+
+<pre><code>position: absolute;
+clip: rect(0 9999px 9999px 0);
+</code></pre>
+
+<p>使用 9999px 这么大的值也是为了确保100% 填满屏幕。于是最终效果图为：</p>
+
+<p><img src="media/15284430152022/15284586407309.jpg" alt="img" style="width:300px;"/></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[多种方式判断Javascript 对象中属性值为空]]></title>
+    <link href="http://233px.com/15282775980505.html"/>
+    <updated>2018-06-06T17:33:18+08:00</updated>
+    <id>http://233px.com/15282775980505.html</id>
+    <content type="html"><![CDATA[
+<p>我们在做接口请求的时候，会出现在某种条件下某个参数是不需要传的，一般情况下，赋值时不需要的参数的属性值为null，undefined。这个时候需要过滤出属性值为null，undefined 的key，并删除。</p>
+
+<p>下面总结了几种方式：</p>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_0">遍历该对象</h3>
+
+<pre><code>const test = {
+  test1 : null,
+  test2 : &#39;somestring&#39;,
+  test3 : 3,
+}
+function removeNullsInObject(obj) {
+  for (var propName in obj) { 
+    if (obj[propName] === null || obj[propName] === undefined) {
+      delete obj[propName];
+    }
+  }
+}
+clean(removeNullsInObject);
+
+</code></pre>
+
+<p>如果担心此属性删除未运行对象的propttype 链，还可以：</p>
+
+<pre><code>function removeNullsInObject(obj) {
+  const propNames = Object.getOwnPropertyNames(obj);
+  for (var i = 0; i &lt; propNames.length; i++) {
+    let propName = propNames[i];
+    if (obj[propName] === null || obj[propName] === undefined) {
+      delete obj[propName];
+    }
+  }
+}
+</code></pre>
+
+<h3 id="toc_1">使用lodash</h3>
+
+<p>lodash 中提供了 深度搜索对象中移除undefined值的方法：</p>
+
+<pre><code>var _ = require(&#39;lodash&#39;);
+
+const test = {
+  test1 : null,
+  test2 : &#39;somestring&#39;,
+  test3 : 3,
+}
+
+var compacted = _.pick(obj, function(value) {
+  return value !== null &amp;&amp; value !== undefined;
+});
+
+console.log(compacted)
+</code></pre>
+
+<h3 id="toc_2">使用JSON.stringify</h3>
+
+<p>将对象JSON.stringify之后，在JSON.parse组合将其重新转换为对象：</p>
+
+<pre><code>const test = {
+    test1 : null,
+    test2 : &#39;somestring&#39;,
+    test3 : 3,
+}
+function removeNullsInObject(key, value) {
+  if (value === null || value === undefined) {
+    return undefined;
+  }
+return value;
+}
+
+console.log(JSON.parse(JSON.stringify(test, removeNullsInObject)));
+</code></pre>
+
+<p>看一下官方定义：</p>
+
+<blockquote>
+<p>JSON.stringify(value[, replacer [, space]]) 的第二个参数replacer 可以是一个函数或者一个数组。<br/>
+作为函数，它有两个参数，键(key)值(value)都会被序列化。<br/>
+如果返回一个 Number, 转换成相应的字符串被添加入JSON字符串。<br/>
+如果返回一个 String, 该字符串作为属性值被添加入JSON。<br/>
+如果返回一个 Boolean, &quot;true&quot; 或者 &quot;false&quot;被作为属性值被添加入JSON字符串。<br/>
+如果返回任何其他对象，该对象递归地序列化成JSON字符串，对每个属性调用replacer方法。除非该对象是一个函数，这种情况将不会被序列化成JSON字符串。<br/>
+如果返回undefined，该属性值不会在JSON字符串中输出。<br/>
+注意: 不能用replacer方法，从数组中移除值(values)，如若返回undefined或者一个函数，将会被null取代。</p>
+</blockquote>
+
+<p>因此首先replacer 参数将值为null 或者undefined 通通转换成 undefined，然后其undefined 属性值不会在JSON字符串中输出的特性使得 值为null 的属性删除，然后再通过JSON.parse 还原成对象。</p>
+
+<h3 id="toc_3">使用非空的键创建新对象</h3>
+
+<pre><code>const test = {
+    test1 : null,
+    test2 : &#39;somestring&#39;,
+    test3 : 3,
+}
+const removeNullsInObject = (obj) =&gt; {
+  return Object.keys(obj).filter(key =&gt; obj[key]).reduce(
+    (newObj, key) =&gt; {
+      newObj[key] = obj[key]
+      return newObj
+    }, {}
+  )
+}
+
+console.log(removeNullsInObject(test))
+</code></pre>
+
+<h3 id="toc_4">ES7/2016 Object.entries</h3>
+
+<pre><code>const test = {
+    test1 : null,
+    test2 : &#39;somestring&#39;,
+    test3 : 3,
+}
+const removeNullsInObject = (obj) =&gt; {
+  Object.entries(obj).forEach(([key, val]) =&gt;
+    if (val &amp;&amp; typeof val === &#39;object&#39;) removeEmpty(val)
+    else if (val == null) delete obj[key]
+  );
+  return obj;
+};
+
+console.log(removeNullsInObject(test))
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CDN 是如何工作的]]></title>
+    <link href="http://233px.com/15281031874240.html"/>
+    <updated>2018-06-04T17:06:27+08:00</updated>
+    <id>http://233px.com/15281031874240.html</id>
+    <content type="html"><![CDATA[
+<ol>
+<li><p>CDN的实现基础是通过将DNS的域名设置为CNAME(就是指向另一个域名，但这个域名也是有A记录的（就是域名对应IP）)。</p></li>
+<li><p>CNAME的作用就是要求浏览器发送域名到CNAME这个域名的服务器去解析得到域名的IP，就是本地DNS不作IP解析，而由CNAME指定的服务器去解析。</p></li>
+<li><p>CNAME指定的服务器去解析的IP地址是CDN的全局负载均衡设备IP </p></li>
+<li><p>浏览器得到这个全局负载均衡设备IP就向这个IP发起内容请求，全局负载均衡设备会跟据IP将请求交给它的区域负载均衡设备处理，区域负载均衡设备会选择一个最近用户的缓存服务器IP返回给全局负载均衡设备,全局负载均衡设备叫用户重定向到缓存服务器获取请求的内容。 </p></li>
+<li><p>这样做需然请求经过了几个服务器的来回碾转，但对于请求内容（数据量）较多的情况还是会缩短内容的下载时间的，毕竟下载内容的距离变短了，网速快了，特别数据量大时前面的开销更显得微不足道。</p></li>
+<li><p>最初缓存服务器是没有数据内容的，但会从CDN中的你指定的目标服务器去获取内容并缓存到缓存服务器中，以便为后面进行服务。 </p></li>
+</ol>
+
+<p>注：</p>
+
+<ol>
+<li>A记录是名称解析的重要记录，它用于将特定的主机名映射到对应主机的IP地址上。你可以在DNS服务器中手动创建或通过DNS客户端动态更新来创建。 </li>
+<li>NS记录此记录指定负责此DNS区域的权威名称服务器。 </li>
+<li>A记录和NS记录的区别是，A记录直接给出目的IP，NS记录将DNS解析任务交给特定的服务器，NS记录中记录的IP即为该特定服务器的IP地址。 </li>
+<li>NS记录优先于A记录，A记录优先于CNAME记录 </li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[应用包打包体积优化]]></title>
+    <link href="http://233px.com/15284430142953.html"/>
+    <updated>2018-06-08T15:30:14+08:00</updated>
+    <id>http://233px.com/15284430142953.html</id>
+    <content type="html"><![CDATA[
+<p>一个接手的Vue外部项目，build 非常慢，试着去优化一波。<br/>
+首先使用 webpack-bundle-analyzer 来分析一波是哪些文件造成的：</p>
+
+<h3 id="toc_0">安装</h3>
+
+<p>项目根目录运行：</p>
+
+<pre><code>npm install --save-dev webpack-bundle-analyzer
+</code></pre>
+
+<h3 id="toc_1">配置</h3>
+
+<p>在使用vue-cli生成的脚手架文件中，通过修改build文件夹下的webpack.prod.conf.js：</p>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_2">引入模块</h3>
+
+<pre><code>const BundleAnalyzerPlugin = require(&#39;webpack-bundle-analyzer&#39;).BundleAnalyzerPlugin;
+
+// ...
+plugins: [
+  // ...
+  new BundleAnalyzerPlugin(),
+]
+// ...
+</code></pre>
+
+<p>通过插件生成的包结构图如下：</p>
+
+<p><img src="media/15284430142953/15284434767551.jpg" alt=""/></p>
+
+<p><img src="media/15284430142953/15284434902123.jpg" alt="img" style="width:300px;"/></p>
+
+<p>可以看出vendor.js 很大了，首先开始拆vendor:</p>
+
+<h4 id="toc_3">lodash</h4>
+
+<p>这里lodash 没有按需加载，导致包很大，我们可以按需打包lodash<br/>
+lodash 官方为每个方法都维护了独立的 npm 包：</p>
+
+<h5 id="toc_4">method packages</h5>
+
+<pre><code>// npm install lodash.add
+import add from &#39;lodash.add&#39;;
+// npm install lodash.cloneDeep
+import cloneDeep from &#39;lodash.cloneDeep&#39;;
+</code></pre>
+
+<p>但是这种方式有着以下缺陷：</p>
+
+<ul>
+<li>每当使用一个新的方法就需要安装一个新的 npm package</li>
+<li>npm packge 间存在一些重复公用方法且无法优化</li>
+<li>每一个方法都需要单独写一行 import</li>
+<li>lodash V5.0.0 将会放弃对这些模块的维护</li>
+</ul>
+
+<h5 id="toc_5">cherry-pick</h5>
+
+<p>在 lodash 源码中，所有的方法被组织在一个个同名的文件中，开发者可以根据自己的需要直接引用源码来实现按需引入的目的，这种方式被官方称为 cherry-pick。</p>
+
+<pre><code>import add from &#39;lodash/add&#39;;
+import cloneDeep from &#39;lodash/cloneDeep&#39;;
+</code></pre>
+
+<p>cherry-pick 虽然只需安装一个 lodash 包，但是有时还是要写很多行的 import。</p>
+
+<p>这这个项目中 我们发现只用到了lodash 的一个方法，那么可以使用cherry-pick 引入该方法。重新build 之后，我们再看一下包体积：</p>
+
+<p><img src="media/15284430142953/15284449340411.jpg" alt=""/></p>
+
+<p>此时lodash 打包肉眼可见的变小了，再看一下整个包体积变化：</p>
+
+<p><img src="media/15284430142953/15284449761856.jpg" alt="img" style="width:400px;"/></p>
+
+<p>相比较之前，小了0.4MB，接着我们再对moment.js 进行改造：<br/>
+对于 moment.js 这种全而大的 JS 时间库，虽然很方便，但是真的是太重了，而且一个项目可能只需要使用其中几个常见的API。此时如果想要优化moment 的体积，可以使用Day.js 代替，Day.js 是一个轻量的 JavaScript 时间日期处理库，和 Moment.js 的 API 设计保持完全一样. 如果你曾经用过 Moment.js, 那么你已经知道如何使用 Day.js</p>
+
+<p>Day.js 的基本操作如下，相同的API，相同的链式操作：</p>
+
+<pre><code>dayjs().startOf(&#39;month&#39;).add(1, &#39;day&#39;).set(&#39;year&#39;, 2018).format(&#39;YYYY-MM-DD HH:mm:ss&#39;);
+</code></pre>
+
+<p>特点：<br/>
+🕒 和 Moment.js 相同的 API 和用法<br/>
+💪 不可变数据 (Immutable)<br/>
+🔥 支持链式操作 (Chainable)<br/>
+🌐 I18n 国际化<br/>
+📦 仅 2kb 大小的微型库<br/>
+👫 全浏览器兼容</p>
+
+<p>麻雀虽小，五脏俱全，Day.js 包含了时间处理的全部常用方法，并且仅仅有 2kb 大小。因此想缩小打包体积，提升开发体验只需要replace(/moment/g, &#39;dayjs&#39;) 全局替换一下。就能从 Moment.js + locals 200kb 减小成 dayjs 2kb的体积。所有的API调用都保持不变，无需修改。</p>
+
+<p>这次我们再看一下 改为Day.js 之后的打包体积大小：<br/>
+<img src="media/15284430142953/15284471455127.jpg" alt=""/></p>
+
+<p><img src="media/15284430142953/15284471595449.jpg" alt="img" style="width:400px;"/></p>
+
+<p>此时Day.js 已经小到在这张图上消失了，而TreeMap 大小又缩小了 0.5M 。</p>
+
+<p>接下来最后的大头是 element-ui ，element-ui本身支持按需引入，不过对于该项目，全局搜索了一遍，发现被用到的组件非常多，这个时候要仔细文件，防止被漏掉某些组件。具体按需引入的的方式element-ui 官方文档有很详细的介绍，现在我们看一下打包的体积：<br/>
+<img src="media/15284430142953/15284544180604.jpg" alt=""/><br/>
+<img src="media/15284430142953/15284544340569.jpg" alt="img" style="width:400px;"/></p>
+
+<p>此时Treemap size 又减少了0.2MB。最后我们可以 Code Splitting，将代码分成一块一块，提升加载速度：<br/>
+具体可以看<a href="https://zhuanlan.zhihu.com/p/26710831">Webpack 大法之 Code Splitting</a> 最后我们打包出来的体积结构如下：<br/>
+<img src="media/15284430142953/15284560084587.jpg" alt=""/></p>
+
+<p><img src="media/15284430142953/15284560220358.jpg" alt="img" style="width:400px;"/></p>
+
+<p>我们看到 每个router 的 js 都单独出来了，这样子有缩小了 0.2MB 的体积。</p>
+
+<p>我们可以看到Vendor 还是很大，但是毕竟对于这个项目来说，业务很重的大系统，不可避免会这样，但是相比优化之前，已经好很多了，Treemap size 2.06M =&gt; 1.85M。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Phabricator 代码审查工具]]></title>
+    <link href="http://233px.com/15275891246807.html"/>
+    <updated>2018-05-29T18:18:44+08:00</updated>
+    <id>http://233px.com/15275891246807.html</id>
+    <content type="html"><![CDATA[
+<p>Phabricator是Facebook一个开源可视化的代码审查工具，它集成了一系列开源的Web应用，其中包括审查代码、代码（git/svn）托管、语法检查、单元测试、wiki等功能，还可以bug跟踪，直接做jira与代码review关联，支持两种代码审查工作流：“review”（提交前审查）和 “audit”（提交后审查）。</p>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_0">主要功能</h3>
+
+<ul>
+<li>代码管理：添加 Git, Mercurial 和 SVN 仓库，查看源码，review 代码</li>
+<li>bug 追踪：测试人员、开发人员协同工作</li>
+<li>项目管理：项目的启动、进展、完成</li>
+<li>工作板：所有任务一目了然</li>
+<li>wiki：构建文档</li>
+<li>任务系统：创建任务、指派任务、完成任务、增加或降低优先级</li>
+<li>博客系统：甚至可以写博客</li>
+</ul>
+
+<p>试用了一下，感觉很赞。配合用于Code review的命令行工具Arcanist，整个提交Code review 的过程都可以在命令行上进行：</p>
+
+<p>整个代码审核preview 流程为：</p>
+
+<h4 id="toc_1">1. 本地提交代码</h4>
+
+<pre><code>$ git add .
+$ git commit -m &#39;提交信息&#39;
+</code></pre>
+
+<h4 id="toc_2">2. 提交审核</h4>
+
+<p>运行arc diff，弹出vi编辑窗口里Reviewers项添加审核人，多个审核人中间用逗号隔开，保存退出，生成一个审核url，拷贝发给审核人或让审核人查收邮件，完成审核</p>
+
+<pre><code>$ arc diff
+</code></pre>
+
+<p>若审核未通过，需要改代码，修改之后，可再次提交审核：</p>
+
+<pre><code>$ arc diff --update D
+</code></pre>
+
+<h4 id="toc_3">3. 审核通过</h4>
+
+<p>审核通过后，通过执行下面命令审核通完成提交，此时不需要你在push，工具自动去做push、delete feature分支的操作：</p>
+
+<pre><code>$ arc land
+</code></pre>
+
+<h3 id="toc_4">常用命令</h3>
+
+<pre><code>$ arc help                # 获得arc中包装的可用指令/工具
+$ arc diff                # 提交代码去审核
+$ arc diff --update D(n)  # 审核未通过，修改后，再次提交审核
+$ arc diff --create       # 创建一个新的提交审核
+$ arc land         # 审核通过后提交，已包括git push的动作，所以无需再push了
+$ arc amend                     # 审核Git更新提交后的信息
+$ arc list                      # 显示未提交修改的代码信息
+$ arc lint                      # 检查代码的语法
+$ arc get-config                # 查看已设置过的配置
+$ arc set-config &lt;key&gt; &lt;value&gt;  # 修改配置，使用--local参数为全局配置
+</code></pre>
+
+]]></content>
+  </entry>
+  
+</feed>
