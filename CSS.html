@@ -136,6 +136,43 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2019-08-17T15:13:09+08:00" itemprop="datePublished">2019/8/17</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15660259894496.html" itemprop="url">
+		document.getElementById（）VS getElementById（）</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>根据规范，getElementById 是一个 DOM 方法，常以 document.getElementById(id) 的形式调用。但在如下代码中，两种调用方式前均未写 document. 。两个按钮一个可以工作，另一个不能，原因是什么？</p>
+
+<pre><code>&lt;p id=&quot;text&quot;&gt;Click the button and I&#39;ll be blue.&lt;/p&gt;
+&lt;button onclick=&quot;getElementById(&#39;text&#39;).style.color = &#39;blue&#39;&quot;&gt;This works&lt;/button&gt;
+&lt;button onclick=&quot;changeColor(&#39;text&#39;, &#39;blue&#39;)&quot;&gt;This doesn&#39;t work&lt;/button&gt;
+&lt;script&gt;
+  function changeColor (id, color) {
+    getElementById(id).style.color = color
+  }
+&lt;/script&gt;
+</code></pre>
+
+
+
+			 
+			<a href="15660259894496.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2019-06-24T15:56:55+08:00" itemprop="datePublished">2019/6/24</time>
 			</div>
 			<div class="tags">posted in 
@@ -152,43 +189,11 @@
 
 <p>但是div 按钮只能点击起来像一个按钮，它并不具有按钮本身的附带功能，比如按钮的可访问性（）。那么如果让 div 按钮变得具有 button 按钮本身具有的功能呢？</p>
 
-<h3 id="toc_0">添加角色 role</h3>
-
-<blockquote>
-<p>添加role =“button”将使元素显示为屏幕阅读器的按钮控件。此角色可与aria-pressed属性结合使用以创建切换按钮。</p>
-</blockquote>
-
-<p>因此此时按钮可以表示为：</p>
-
-<pre><code>&lt;div class=&quot;btn&quot; role=&quot;button&quot;&gt;a Div&lt;/div&gt;
-</code></pre>
-
-<h3 id="toc_1">明确当前状态</h3>
-
-<p>使用 <code>aria-expanded</code> 属性，可以向屏幕阅读器明确定义该元素当前的折叠状态 【展开、关闭】。这样div 元素就可以和menu 有一样的功能，通过<code>aria-expanded = &quot;true&quot;</code> 展开和 aria-expanded = &quot;false&quot; 关闭折叠按钮。</p>
-
-<p>因此此时可以表示为：</p>
-
-<pre><code>&lt;div class=&quot;btn&quot; role=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;a div&lt;/div&gt;
-</code></pre>
-
-<h3 id="toc_2">tabIndex 属性聚焦</h3>
-
-<p>我们希望按键盘 <code>tab</code> 键时，按钮可以聚焦选中，默认情况将其设置为0，遵循正常顺序，表示可以聚焦，现在看起来是这样：</p>
-
-<pre><code>&lt;div class=&quot;btn&quot; role=&quot;button&quot; aria-pressed=&quot;false&quot; tabindex=&quot;0&quot;&gt;a div&lt;/div&gt;
-</code></pre>
-
-<h3 id="toc_3">制作disabled 效果</h3>
-
-<pre><code>[data-disabled] {
-  pointer-events: none;
-  opacity: 0.5;
-}
-</code></pre>
 
 
-			
+			 
+			<a href="15613630158706.html#more" class="more-link">Read on &rarr;</a>
+    		
 			
 		</div>
 
@@ -219,81 +224,11 @@
 
 <p>当你第一次打开动画选项卡的时候，并不会看到和动画有关的内容，只会看到一个 Listening for animations...  的提示。如果要想运行这个工具，需要在第一次加载页面时打开选项卡</p>
 
-<p><img src="media/15438385685306/15438404296292.jpg" alt=""/></p>
-
-<p>要让Animations面板捕捉到消息，我们刷新一下再看一下：</p>
-
-<p><img src="media/15438385685306/15438405515477.jpg" alt=""/></p>
-
-<p>左上角的开始结束图标可以控制动画检查工具的打开和关闭</p>
-
-<p>点击开始图标打开该检查工具：</p>
-
-<p><img src="media/15438385685306/15438414390506.jpg" alt=""/></p>
-
-<p>点击播放按钮：<br/>
-<img src="media/15438385685306/15438415273008.jpg" alt=""/></p>
-
-<h3 id="toc_1">时间轴和关键帧</h3>
-
-<p>随着动画的播放，你回看到红色的【时间轴】会在时间轴上移动。可以用鼠标手动控制它的播放，将其放置到某个特定的点</p>
-
-<p>界面上每个条目的每一行代表了页面的单个动画。可以看到每条线都有个颜色更深更饱和的部分，这部分表示的是动画的长度，之后出现的较浅的部分表示重复该动画。</p>
-
-<p>每个动画线上有几个小圆圈，这些小圈与动画的关键帧相对应。实心的圈代表动画的开始和结束，「空心的圈表示内部关键帧的任意位置」</p>
-
-<h3 id="toc_2">内部关键帧</h3>
-
-<p>每行上的插页式关键帧（每个动画周期的开始和结束之间的关键帧）可以拖动到不同的位置，当您移动它们时，您将看到浏览器窗口中的动画更改其时间。这对于试验间隙关键帧的确切百分点来说非常有用。</p>
-
-<p>比较棘手的是，这些实验不会在&quot;样式&quot;选项卡中看到代码的任何更新。相反，当你将插页式关键帧放在正确位置时，你可以手动确定关键帧的百分比值。</p>
-
-<p>将播放头直接放在相关的关键帧上，您将在面板的左上角看到一个时间戳，告诉您动画在几秒钟内的距离。然后，您可以确定此时间占整个动画持续时间的百分比。在下面的示例中，播放头大约是1s动画的300ms，所以我们知道这个关键帧是33%。</p>
-
-<p><img src="media/15438385685306/15445092575812.jpg" alt=""/></p>
-
-<h3 id="toc_3">动画延迟和持续时间</h3>
-
-<p>在“动画”选项卡做的更改会更新“样式”选项卡的代码，以便我们能准确的查看移植到CSS的值。animation-delay是动画开始播放前的延迟，animation-duration是持续时间。</p>
-
-<p>要在播放动画之前调整延迟，请将鼠标悬停在其直线上，直到看到手形光标，然后水平拖动。您将在“ 样式”选项卡中看到更新延迟值：</p>
-
-<p>要修改动画的持续时间，请将鼠标悬停在其最后一个关键帧上，直到看到双端箭头光标，然后水平拖动。同样，将在“ 样式”选项卡中看到该值的更新。</p>
-
-<h3 id="toc_4">动画计时功能</h3>
-
-<p>您还可以使用Chrome的开发工具修改控制动画时序的速度曲线。首先检查应用了动画的元素。在当前指定的计时功能的左侧，您将看到一个带有“波浪形”的小盒子。单击它打开立方贝塞尔编辑器：</p>
-
-<p>将打开一个框，显示一条贝塞尔曲线，说明当前的计时功能。在这里，您可以通过单击左侧的缩略图之一来选择现有预​​设，也可以将主曲线图像的手柄拖动到左右，以创建自定义的cubic-bezier值，随后可以将其复制到CSS中：</p>
-
-<p>当你走的时候，你会看到一个紫色的小球在编辑器的顶部从左到右动画，让你预览你的计时功能。 </p>
-
-<h3 id="toc_5">可旋转图层可视化</h3>
-
-<p>另一个有用的功能是能够可视化动画中使用的图层，包括旋转所述可视化并从各个角度查看它以更好地了解事物的工作方式。</p>
-
-<p>要打开“ 图层”面板，请转到Chrome开发者工具菜单，然后选择更多工具&gt;图层。</p>
-
-<h3 id="toc_6">总结</h3>
-
-<p>让我们快速总结Chrome的动画开发工具：</p>
-
-<p>首先打开Chrome开发工具打开动画工具，然后在开发工具菜单下选择更多工具&gt;动画。<br/>
-该动画面板需要已被打开时，页面加载捕捉信息上的动画，刷新该页面以实现这一目标。<br/>
-单击小彩色图缩略图以查看动画信息。<br/>
-每一行代表一个动画。<br/>
-填充圆圈表示开始和结束关键帧。<br/>
-空心圆表示间隙关键帧。<br/>
-可以移动插页式关键帧，但是您不会在“ 样式”选项卡中看到相关的代码更新，而是手动计算它们所处的百分点。<br/>
-通过将鼠标悬停在其直线上来修改动画的延迟值，直到看到手形光标，然后水平拖动。<br/>
-通过将鼠标悬停在最后一个关键帧上来修改动画的持续时间值，直到看到双端箭头光标，然后将其水平拖动。<br/>
-在样式选项卡中，单击现有计时功能左侧的图标以打开立方贝塞尔编辑器。<br/>
-在此处选择计时功能预设，或通过修改主曲线图像创建自己的预设功能。<br/>
-转到Chrome开发者工具菜单，然后选择更多工具&gt;图层，打开“ 图层”面板。<br/>
-在此面板中，使用“ 旋转”模式从任何角度查看动画图层。</p>
 
 
-			
+			 
+			<a href="15438385685306.html#more" class="more-link">Read on &rarr;</a>
+    		
 			
 		</div>
 
@@ -542,54 +477,6 @@ writing-mode: vertival-lr;  /* 表示文本是垂直方向展示 ，阅读顺序
 
 
 			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-04-28T18:09:41+08:00" itemprop="datePublished">2018/4/28</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15249101811632.html" itemprop="url">
-		min-width 与 width 之类的属性之间的相互覆盖</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h2 id="toc_0">1.超越important</h2>
-
-<p>超越 <code>!important</code> 是指 <code>max-width</code> 会覆盖<code>width</code>，并且比 <code>!important</code> 的权重更高。<br/>
-例如下面的代码：</p>
-
-<pre><code>&lt;img src=&quot;1.jpg&quot; style=&quot;width: 480px!important&quot;&gt;
-img {
-  max-width: 250px;
-}
-</code></pre>
-
-<p>最终图片呈现的效果是 250px。因为 <code>max-width</code> 覆盖了 <code>width</code></p>
-
-<h2 id="toc_1">2.超越最大</h2>
-
-<p>超越最大是指 <code>min-width</code> 覆盖<code>max-width</code>，此规则发生在<code>min-width</code> 和<code>max-width</code> 冲突的时候，例如下面： </p>
-
-<pre><code>.container {
-  min-width: 1400px;
-  max-width: 1200px;
-}
-</code></pre>
-
-
-
-			 
-			<a href="15249101811632.html#more" class="more-link">Read on &rarr;</a>
-    		
 			
 		</div>
 

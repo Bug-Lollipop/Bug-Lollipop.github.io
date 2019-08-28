@@ -4,7 +4,7 @@
   <title><![CDATA[Akira's blog]]></title>
   <link href="http://233px.com/atom.xml" rel="self"/>
   <link href="http://233px.com/"/>
-  <updated>2019-08-17T14:17:14+08:00</updated>
+  <updated>2019-08-28T19:25:35+08:00</updated>
   <id>http://233px.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,451 @@
   </author>
   <generator uri="http://www.coderforart.com/">CoderForArt</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Common JS 、ES Module 差异]]></title>
+    <link href="http://233px.com/15669039790320.html"/>
+    <updated>2019-08-27T19:06:19+08:00</updated>
+    <id>http://233px.com/15669039790320.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">Common JS</h2>
+
+<p>CommonJS模块就是对象，每个文件就是一个模块，有自己的作用域</p>
+
+<h3 id="toc_1">特点</h3>
+
+<ul>
+<li><p>“运行时加载”，所有代码都运行在模块作用域，不会污染全局作用域</p></li>
+<li><p>模块可以多次加载，但是只会在第一次加载时运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果。要想让模块再次运行，必须清除缓存</p></li>
+<li><p>加载顺序按照其在代码中出现的顺序</p></li>
+</ul>
+
+<h3 id="toc_2">模块组成</h3>
+
+<span id="more"></span><!-- more -->
+
+<h4 id="toc_3">模块导出（module、module.exports）</h4>
+
+<p>每个模块内部，module代表当前模块，是一个对象，它的exports属性（即module.exports）是对外的接口，其他文件加载该模块，实际上就是读取module.exports 变量；</p>
+
+<p>为了方便，Node为每个模块提供一个exports变量，指向module.exports，即<code>let exports = module.exports</code></p>
+
+<p>所以在对外输出模块接口时，可以向exports对象添加方法；</p>
+
+<p>注意：不能直接将exports变量指向一个值，因为这样等于切断了exports与module.exports的联系</p>
+
+<pre><code>// lib.js
+var counter = 3;
+function incCounter() {}
+// 单个导出
+module.exports.counter = counter
+module.exports.incCounter = incCounter
+// 或者导出一个对象
+module.exports = {
+  counter: counter,
+  incCounter: incCounter,
+}
+</code></pre>
+
+<h4 id="toc_4">模块导入</h4>
+
+<p><strong>require命令用于加载模块文件，脚本代码在require的时候，就会全部执行；</strong></p>
+
+<p>使用require多次加载同一个模块时，<strong>只会在加载第一次时执行一次，后面再加载，都是直接取第一次运行的结果，除非手动清除系统缓存</strong>；</p>
+
+<h3 id="toc_5">commonJS 的循环依赖</h3>
+
+<p>CommonJS模块的重要特性是加载时执行，即脚本代码在require的时候，就会全部执行。在执行过程中，一旦出现某个模块被”循环加载”，就只输出已经执行的部分，还未执行的部分不会输出。</p>
+
+<h4 id="toc_6">官网例子</h4>
+
+<p>a.js</p>
+
+<pre><code>console.log(&#39;a starting&#39;);
+exports.done = false;
+const b = require(&#39;./b.js&#39;);
+console.log(&#39;in a, b.done = %j&#39;, b.done);
+exports.done = true;
+console.log(&#39;a done&#39;);
+</code></pre>
+
+<p>b.js</p>
+
+<pre><code>console.log(&#39;b starting&#39;);
+exports.done = false;
+const a = require(&#39;./a.js&#39;);
+console.log(&#39;in b, a.done = %j&#39;, a.done);
+exports.done = true;
+console.log(&#39;b done&#39;);
+</code></pre>
+
+<p>main.js</p>
+
+<pre><code>console.log(&#39;main starting&#39;);
+const a = require(&#39;./a.js&#39;);
+const b = require(&#39;./b.js&#39;);
+console.log(&#39;in main, a.done = %j, b.done = %j&#39;, a.done, b.done);
+</code></pre>
+
+<p>这里在执行 a.js 时，依赖 b.js，而执行 b.js 时，反过来又依赖 a.js 的输出，造成了循环依赖</p>
+
+<p>当模块被循环依赖时，CommonJS的做法是，<strong>一旦出现某个模块被”循环加载”，就只输出当前执行完成的导出值，还未执行的部分不会输出</strong>。</p>
+
+<p>上面代码之中，b.js执行到第三行，就会去加载a.js，这时，就发生了”循环加载”。系统会去a.js模块对应对象的exports属性取值，可是因为a.js还没有执行完，从exports属性只能取回已经执行的部分，而不是最后的值。</p>
+
+<p>a.js已经执行的部分，只有一行。</p>
+
+<pre><code>exports.done = false;
+</code></pre>
+
+<p>因此，对于b.js来说，它从a.js只输入一个变量done，值为false。</p>
+
+<p>然后，b.js接着往下执行，等到全部执行完毕，再把执行权交还给a.js。于是，a.js接着往下执行，直到执行完毕。我们执行上方的main.js，运行结果如下：</p>
+
+<pre><code>$ node main.js
+
+main starting
+    
+a starting
+    
+b starting
+    
+in b, a.done = false
+    
+b done
+    
+in a, b.done = true
+    
+a done
+    
+in main, a.done = true, b.done = true
+
+</code></pre>
+
+<p>上面的代码证明了两件事：</p>
+
+<ul>
+<li>一是，在b.js之中，a.js没有执行完毕，只执行了第两行。</li>
+<li>二是，main.js执行到第三行时，不会再次执行b.js，而是输出缓存的b.js的执行结果，即它的第五行，即</li>
+</ul>
+
+<pre><code>exports.done = true;
+</code></pre>
+
+<h2 id="toc_7">ES6</h2>
+
+<p>可以取代 CommonJS和AMD规范，成为浏览器和服务器通用的模块解决方案。</p>
+
+<p>ES6 模块不是对象，而是通过export命令显式指定输出的代码，再通过import命令输入</p>
+
+<h3 id="toc_8">特点</h3>
+
+<ul>
+<li><p>它是编译时加载”或者静态加载；</p></li>
+<li><p>import 会自动提升到代码的顶层；</p></li>
+<li><p>输出的是值的引用，即原始值变化，import加载的值也会发生变化；</p></li>
+<li><p>export 和 import 只能出现在模块的顶层；</p></li>
+<li><p>ES6 模块之中，顶层的this指向undefined，即不应该在顶层代码使用this</p></li>
+</ul>
+
+<p>模块功能主要由两个命令构成：export 用于规定模块的对外接口 和 import用于引入其他模块提供的功能</p>
+
+<h3 id="toc_9">模块组成</h3>
+
+<h4 id="toc_10">export 命令</h4>
+
+<pre><code>// export.js  可以对外输出常量、方法和类
+// 变量
+export let a = &#39;xyz&#39;
+// 函数
+export function fn () {}
+// 类
+export class class1 {}
+// 需要特别注意的是，export命令规定的是对外的接口，必须与模块内部的变量建立一一对应关系
+export 1;   // 报错
+var m = 1;
+export m;   // 报错
+
+// 正确写法
+// 写法一
+export var m = 1;
+// 写法二
+var m = 1;
+export {m};
+// 写法三
+var n = 1;
+export {n as m};
+</code></pre>
+
+<h3 id="toc_11">import 命令</h3>
+
+<p>使用export命令定义了模块的对外接口以后，其他 JS 文件就可以通过import命令加载这个模块</p>
+
+<p>大括号里面的变量名，必须与被导入模块（export.js）对外接口的名称相同。<br/>
+import命令是编译阶段执行的，在代码运行之前，所以会被提升到模块的头部，首先执行</p>
+
+<p>import命令输入的变量都是只读的，因为它的本质是输入接口。也就是说，不允许在加载模块的脚本里面，改写接口</p>
+
+<pre><code>// 静态加载,只加载export.js 文件中两个变量，其他不加载
+import {a, fn} from &#39;./export.js&#39;
+a=22 // Syntax Error : &#39;a&#39; is read-only
+a.name = &#39;xyz&#39;  // 如果a是一个对象，改写a的属性是允许的
+
+//import命令要使用as关键字，将输入的变量重命名
+import {fn as fn1} from &#39;./export.js&#39;
+
+// 整体加载
+import * as all from &#39;./export.js&#39;
+</code></pre>
+
+<blockquote>
+<p>目前阶段，通过 Babel 转码，CommonJS 模块的require命令和 ES6 模块的import命令，可以写在同一个模块里面，但是最好不要这样做。因为import在静态解析阶段执行，所以它是一个模块之中最早执行的。</p>
+</blockquote>
+
+<h3 id="toc_12">export default 命令</h3>
+
+<p>模块指定默认输出</p>
+
+<p>本质上，<code>export default</code>就是输出一个叫做<code>default</code>的变量或方法</p>
+
+<p>1.使用<code>export default</code>时，对应的<code>import</code>语句不需要使用大括号</p>
+
+<pre><code>export default function crc32() { // 输出
+  // ...
+}
+import crc32 from &#39;crc32&#39;; // 输入
+</code></pre>
+
+<p>2.不使用<code>export default</code>时，对应的<code>import</code>语句需要使用大括号。</p>
+
+<pre><code>export function crc32() { // 输出
+  // ...
+};
+import { crc32 } from &#39;crc32&#39;; // 输入
+</code></pre>
+
+<p>正是因为export default命令其实只是输出一个叫做default的变量，所以它后面<strong>不能跟变量声明语句</strong>。</p>
+
+<pre><code>// 正确
+export var a = 1;
+// 正确
+var a = 1;
+export default a;   // 将变量a的值赋给变量default
+// 错误
+export default var a = 1;   
+// export default命令是输出一个叫做default的变量，所以它后面不能跟变量声明语句
+// 正确
+export default 42;  // 指定了对外接口为default
+// 报错
+export 42;  // 没有指定对外的接口
+</code></pre>
+
+<h3 id="toc_13">ES6模块的循环依赖</h3>
+
+<p>ES6模块的运行机制与CommonJS不一样，它遇到模块加载命令import时，不会去执行模块，而是只生成一个引用。等到真的需要用到时，再到模块里面去取值。<br/>
+因此，ES6模块是动态引用，不存在缓存值的问题，而且模块里面的变量，绑定其所在的模块。</p>
+
+<p>m1.js</p>
+
+<pre><code>export var foo = &#39;bar&#39;;
+setTimeout(() =&gt; foo = &#39;baz&#39;, 500);
+</code></pre>
+
+<p>m2.js</p>
+
+<pre><code>import { foo } from &#39;./m1.js&#39;;
+console.log(foo);
+setTimeout(() =&gt; console.log(foo), 500);
+
+$ babel-node m2.js
+bar
+baz
+</code></pre>
+
+<p>通过上述的输出可以看出：ES6模块不会缓存运行结果，而是动态地去被加载的模块取值，以及变量总是绑定其所在的模块</p>
+
+<p>ES6根本不会关心是否发生了”循环加载”，只是生成一个指向被加载模块的引用，需要开发者自己保证，真正取值的时候能够取到值。</p>
+
+<pre><code>// a.js
+import {bar} from &#39;./b.js&#39;;
+export function foo() {
+  bar();  
+  console.log(&#39;执行完毕&#39;);
+}
+foo();
+// b.js
+import {foo} from &#39;./a.js&#39;;
+export function bar() {  
+  if (Math.random() &gt; 0.5) {
+    foo();
+  }
+}
+</code></pre>
+
+<p>按照CommonJS规范，上面的代码是没法执行的。a先加载b，然后b又加载a，这时a还没有任何执行结果，所以输出结果为null，即对于b.js来说，变量foo的值等于null，后面的foo()就会报错。</p>
+
+<p>但是ES6可以执行上面的代码</p>
+
+<pre><code>$ babel-node a.js
+执行完毕
+</code></pre>
+
+<p>a.js之所以能够执行，原因就在于ES6加载的变量，都是动态引用其所在的模块。只要引用是存在的，代码就能执行。</p>
+
+<h2 id="toc_14">CommonJS  和ES6 模块的差异</h2>
+
+<ul>
+<li>CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
+<li>CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。</li>
+<li>ES6 中 import/export 最终都是编译为 CommonJS 中 require/exports 来执行的。</li>
+</ul>
+
+<h3 id="toc_15">CommonJS</h3>
+
+<p>CommonJS 模块输出的是值的拷贝，也就是说，一旦输出一个值，模块内部的变化就影响不到这个值：</p>
+
+<p>lib.js</p>
+
+<pre><code>var counter = 3;
+function incCounter() {
+  counter++;
+}
+module.exports = {
+  counter: counter,
+  incCounter: incCounter,
+};
+</code></pre>
+
+<p>main.js</p>
+
+<pre><code>var mod = require(&#39;./lib&#39;);
+console.log(mod.counter);  // 3
+mod.incCounter();
+console.log(mod.counter); // 3
+</code></pre>
+
+<p>lib.js模块加载以后，它的内部变化就影响不到输出的<code>mod.counter</code>了。<br/>
+这是因为<code>mod.counter</code>是一个原始类型的值，会被缓存。</p>
+
+<h3 id="toc_16">ES6</h3>
+
+<p>ES6 模块是动态引用，并且不会缓存值，模块里面的变量绑定其所在的模块。</p>
+
+<p>lib.js</p>
+
+<pre><code>export let counter = 3;
+export function incCounter() {
+  counter++;
+}
+</code></pre>
+
+<p>main.js</p>
+
+<pre><code>import { counter, incCounter } from &#39;./lib&#39;;
+console.log(counter); // 3
+incCounter();
+console.log(counter); // 4
+
+</code></pre>
+
+<p>ES6 模块输入的变量counter是活的，完全反应其所在模块lib.js内部的变化。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[document.getElementById（）VS getElementById（）]]></title>
+    <link href="http://233px.com/15660259894496.html"/>
+    <updated>2019-08-17T15:13:09+08:00</updated>
+    <id>http://233px.com/15660259894496.html</id>
+    <content type="html"><![CDATA[
+<p>根据规范，getElementById 是一个 DOM 方法，常以 document.getElementById(id) 的形式调用。但在如下代码中，两种调用方式前均未写 document. 。两个按钮一个可以工作，另一个不能，原因是什么？</p>
+
+<pre><code>&lt;p id=&quot;text&quot;&gt;Click the button and I&#39;ll be blue.&lt;/p&gt;
+&lt;button onclick=&quot;getElementById(&#39;text&#39;).style.color = &#39;blue&#39;&quot;&gt;This works&lt;/button&gt;
+&lt;button onclick=&quot;changeColor(&#39;text&#39;, &#39;blue&#39;)&quot;&gt;This doesn&#39;t work&lt;/button&gt;
+&lt;script&gt;
+  function changeColor (id, color) {
+    getElementById(id).style.color = color
+  }
+&lt;/script&gt;
+</code></pre>
+
+<span id="more"></span><!-- more -->
+
+<p><img src="media/15660259894496/15665406147421.jpg" alt=""/></p>
+
+<h2 id="toc_0">this</h2>
+
+<p>DOM事件的处理器</p>
+
+<h2 id="toc_1">事件</h2>
+
+<p>JS和HTML交互是通过事件来实现的：预先通过对HTML元素添加监听器来定义事件，然后等事件触发，执行相关的代码。从设计模式上来说，是观察者模式。</p>
+
+<p>在事件发生的时候，如点击按钮<code>onclick</code>事件，JS会生成一个<code>event</code>事件对象，当作入参传给处理函数，这个对象里包含了该事件的各种信息，而event对象的会在事件处理程序结束的时候销毁。</p>
+
+<p>在事件处理函数中，容易混淆的就是<code>this</code>、<code>event.currentTarget</code>和<code>event.target</code>三个东东。</p>
+
+<p><code>this</code>指的是正在处理的HTML元素，也就是“绑定事务”的元素，和<code>event.currentTarget</code>永远是一致的。而<code>event.target</code>的值，它是事件的目标，是”触发事务“的元素，通常情况下（没有事件冒泡和事件捕获），绑定事件的元素和触发事件的元素是一样的，也就是<code>event.currentTarget</code>和<code>event.target</code>他们恒等于<code>this</code>，都是目标HTML元素：</p>
+
+<pre><code>var btn = document.getElementById(&quot;myBtn&quot;);
+btn.onclick = function(event){
+    alert(event.currentTarget === this);    //true
+    alert(event.target === this);           //true
+};
+</code></pre>
+
+<p>当绑定事件的元素和触发事件的元素不一样的时候，<code>event.currentTarget</code>和<code>event.target</code>的区别就明显了，看了下面这个例子就能理解了：</p>
+
+<pre><code>var btn = document.getElementById(&quot;myBtn&quot;);
+document.body.onclick = function(event){
+    alert(event.currentTarget === this);//true
+    alert(event.currentTarget === document.body); //true
+    alert(this === document.body); //true
+    alert(event.target === btn); //点击btn的时候是true，点击body其他地方时是false
+};
+</code></pre>
+
+<h3 id="toc_2">事件流</h3>
+
+<h4 id="toc_3">概念</h4>
+
+<p>浏览器端的JavaScript采用的是事件驱动的异步编程模型。在这种设置模式下，当文档、浏览器、元素或与之相关的对象发生某些事情时，浏览器就会产生对应的事件（event）。</p>
+
+<ul>
+<li><p>DOM事件：当文档或浏览器窗口中发生变化时，我们可以通过监听或注册来预定某些事件的发生。事件是JavaScript和HTML DOM交互的基础。</p></li>
+<li><p>DOM事件处理程序：事件是HTML文档执行某种操作时需要执行的动作，响应事件的函数就叫做事件处理程序，又叫做事件监听器。</p></li>
+<li><p>DOM事件流：记录DOM事件发生的顺序。</p></li>
+</ul>
+
+<h4 id="toc_4">事件处理程序</h4>
+
+<p>在W3C对DOM事件进行规范化之前的事件处理，如<code>onclick</code>、<code>onload</code>等，一般被称为DOM 0级事件处理程序。W3C在DOM2级文档规范中，包含了DOM事件（DOM Events）规范，则被称为DOM 2级事件处理程序。</p>
+
+<h5 id="toc_5">DOM 0级事件处理程序</h5>
+
+<p>在DOM0级事件处理程序，事件名以&#39;on&#39;开头，因此click事件的事件处理程序就是onclick、load事件的事件处理程序就是onload。</p>
+
+<h3 id="toc_6">内联事件</h3>
+
+<h4 id="toc_7">内联事件处理函数的作用域链</h4>
+
+<p>与其他函数不同，内联事件处理函数的作用域链从头部开始依次是：调用对象、该元素的 DOM 对象、该元素所属 FORM 的 DOM 对象（如果有）、document 对象、window 对象（全局对象）。</p>
+
+<blockquote>
+<p><a href="http://www.w3help.org/zh-cn/causes/SJ9009">http://www.w3help.org/zh-cn/causes/SJ9009</a><br/>
+<a href="https://www.cnblogs.com/rubylouvre/articles/1917958.html">https://www.cnblogs.com/rubylouvre/articles/1917958.html</a><br/>
+<a href="https://zhuanlan.zhihu.com/p/24136312">https://zhuanlan.zhihu.com/p/24136312</a><br/>
+<a href="https://snandy.iteye.com/blog/841055">https://snandy.iteye.com/blog/841055</a><br/>
+<a href="https://github.com/GreyGao/hello-world/issues/5">https://github.com/GreyGao/hello-world/issues/5</a><br/>
+<a href="https://segmentfault.com/q/1010000011637200">https://segmentfault.com/q/1010000011637200</a><br/>
+<a href="https://segmentfault.com/q/1010000008038186">https://segmentfault.com/q/1010000008038186</a><br/>
+<a href="https://segmentfault.com/q/1010000008014089">https://segmentfault.com/q/1010000008014089</a></p>
+</blockquote>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[JavaScript 的事件循环]]></title>
@@ -29,6 +474,8 @@
 <p>(macro)task： script(整体代码)、setTimeout、setInterval、I/O、UI交互事件、postMessage、MessageChannel、setImmediate(Node.js 环境)</p>
 
 <h3 id="toc_1">微任务</h3>
+
+<span id="more"></span><!-- more -->
 
 <p>microtask（又称为微任务），可以理解是在当前 task 执行结束后立即执行的任务。也就是说，在当前task任务后，下一个task之前，在渲染之前。</p>
 
@@ -63,6 +510,8 @@ async/await中，出现在 await之前的代码立即执行。await 之后的相
 <p>我们平时写按钮的时候，大部分会使用html 元素 span div 等转换为按钮，但是 button 标签存在不用的原因是什么呢？ 因为button 按钮的速度慢，如果页面上有很多 button， 无疑会增加很多开销。因此我们可能会习惯选用其他html 标签去实现。</p>
 
 <p>但是div 按钮只能点击起来像一个按钮，它并不具有按钮本身的附带功能，比如按钮的可访问性（）。那么如果让 div 按钮变得具有 button 按钮本身具有的功能呢？</p>
+
+<span id="more"></span><!-- more -->
 
 <h3 id="toc_0">添加角色 role</h3>
 
@@ -117,6 +566,8 @@ async/await中，出现在 await之前的代码立即执行。await 之后的相
 <p>视图 =&gt; 开发者 =&gt; 开发者工具 =&gt; 更多工具 =&gt; Animations</p>
 
 <p>当你第一次打开动画选项卡的时候，并不会看到和动画有关的内容，只会看到一个 Listening for animations...  的提示。如果要想运行这个工具，需要在第一次加载页面时打开选项卡</p>
+
+<span id="more"></span><!-- more -->
 
 <p><img src="media/15438385685306/15438404296292.jpg" alt=""/></p>
 
@@ -215,6 +666,8 @@ function test(fruit) {
   }
 }
 </code></pre>
+
+<span id="more"></span><!-- more -->
 
 <p>乍一看，上面的例子看起来不错。 但是，如果我们得到更多的红色水果，cherry（樱桃）和 cranberries（蔓越莓）呢？ 我们是否要用更多的 <code>||</code> 扩展语句？</p>
 
@@ -560,7 +1013,7 @@ test(&#39;yellow&#39;); // [&#39;banana&#39;, &#39;pineapple&#39;]
 <p>有时我们会遇到这种情况：我们从develop 分支新建一个名为feat/home 分支去做A功能，然后由于一些其他原因A 功能需要延后，然后我们新建一个分支去做B功能或者C功能，在多分支多功能开发时，就容易出现做B任务时，忘记切换分支，一直等做完了提交了push之后才发现 push 错了远端的分支，并且 push 的改动与该分支需要开发的功能并没有交集，因此我们需要将已经提交错的分支内容回滚并提交push 到正确的远端分支：<br/>
  此时有两种情况：</p>
 
-<p>【记得扩充索引和工作目录】</p>
+<span id="more"></span><!-- more -->
 
 <h3 id="toc_1">场景1：已经commit，但是未push到远端</h3>
 
@@ -1912,198 +2365,6 @@ console.log(removeNullsInObject(test))
 <li>A记录和NS记录的区别是，A记录直接给出目的IP，NS记录将DNS解析任务交给特定的服务器，NS记录中记录的IP即为该特定服务器的IP地址。 </li>
 <li>NS记录优先于A记录，A记录优先于CNAME记录 </li>
 </ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[应用包打包体积优化]]></title>
-    <link href="http://233px.com/15284430142953.html"/>
-    <updated>2018-06-08T15:30:14+08:00</updated>
-    <id>http://233px.com/15284430142953.html</id>
-    <content type="html"><![CDATA[
-<p>一个接手的Vue外部项目，build 非常慢，试着去优化一波。<br/>
-首先使用 webpack-bundle-analyzer 来分析一波是哪些文件造成的：</p>
-
-<h3 id="toc_0">安装</h3>
-
-<p>项目根目录运行：</p>
-
-<pre><code>npm install --save-dev webpack-bundle-analyzer
-</code></pre>
-
-<h3 id="toc_1">配置</h3>
-
-<p>在使用vue-cli生成的脚手架文件中，通过修改build文件夹下的webpack.prod.conf.js：</p>
-
-<span id="more"></span><!-- more -->
-
-<h3 id="toc_2">引入模块</h3>
-
-<pre><code>const BundleAnalyzerPlugin = require(&#39;webpack-bundle-analyzer&#39;).BundleAnalyzerPlugin;
-
-// ...
-plugins: [
-  // ...
-  new BundleAnalyzerPlugin(),
-]
-// ...
-</code></pre>
-
-<p>通过插件生成的包结构图如下：</p>
-
-<p><img src="media/15284430142953/15284434767551.jpg" alt=""/></p>
-
-<p><img src="media/15284430142953/15284434902123.jpg" alt="img" style="width:300px;"/></p>
-
-<p>可以看出vendor.js 很大了，首先开始拆vendor:</p>
-
-<h4 id="toc_3">lodash</h4>
-
-<p>这里lodash 没有按需加载，导致包很大，我们可以按需打包lodash<br/>
-lodash 官方为每个方法都维护了独立的 npm 包：</p>
-
-<h5 id="toc_4">method packages</h5>
-
-<pre><code>// npm install lodash.add
-import add from &#39;lodash.add&#39;;
-// npm install lodash.cloneDeep
-import cloneDeep from &#39;lodash.cloneDeep&#39;;
-</code></pre>
-
-<p>但是这种方式有着以下缺陷：</p>
-
-<ul>
-<li>每当使用一个新的方法就需要安装一个新的 npm package</li>
-<li>npm packge 间存在一些重复公用方法且无法优化</li>
-<li>每一个方法都需要单独写一行 import</li>
-<li>lodash V5.0.0 将会放弃对这些模块的维护</li>
-</ul>
-
-<h5 id="toc_5">cherry-pick</h5>
-
-<p>在 lodash 源码中，所有的方法被组织在一个个同名的文件中，开发者可以根据自己的需要直接引用源码来实现按需引入的目的，这种方式被官方称为 cherry-pick。</p>
-
-<pre><code>import add from &#39;lodash/add&#39;;
-import cloneDeep from &#39;lodash/cloneDeep&#39;;
-</code></pre>
-
-<p>cherry-pick 虽然只需安装一个 lodash 包，但是有时还是要写很多行的 import。</p>
-
-<p>这这个项目中 我们发现只用到了lodash 的一个方法，那么可以使用cherry-pick 引入该方法。重新build 之后，我们再看一下包体积：</p>
-
-<p><img src="media/15284430142953/15284449340411.jpg" alt=""/></p>
-
-<p>此时lodash 打包肉眼可见的变小了，再看一下整个包体积变化：</p>
-
-<p><img src="media/15284430142953/15284449761856.jpg" alt="img" style="width:400px;"/></p>
-
-<p>相比较之前，小了0.4MB，接着我们再对moment.js 进行改造：<br/>
-对于 moment.js 这种全而大的 JS 时间库，虽然很方便，但是真的是太重了，而且一个项目可能只需要使用其中几个常见的API。此时如果想要优化moment 的体积，可以使用Day.js 代替，Day.js 是一个轻量的 JavaScript 时间日期处理库，和 Moment.js 的 API 设计保持完全一样. 如果你曾经用过 Moment.js, 那么你已经知道如何使用 Day.js</p>
-
-<p>Day.js 的基本操作如下，相同的API，相同的链式操作：</p>
-
-<pre><code>dayjs().startOf(&#39;month&#39;).add(1, &#39;day&#39;).set(&#39;year&#39;, 2018).format(&#39;YYYY-MM-DD HH:mm:ss&#39;);
-</code></pre>
-
-<p>特点：<br/>
-🕒 和 Moment.js 相同的 API 和用法<br/>
-💪 不可变数据 (Immutable)<br/>
-🔥 支持链式操作 (Chainable)<br/>
-🌐 I18n 国际化<br/>
-📦 仅 2kb 大小的微型库<br/>
-👫 全浏览器兼容</p>
-
-<p>麻雀虽小，五脏俱全，Day.js 包含了时间处理的全部常用方法，并且仅仅有 2kb 大小。因此想缩小打包体积，提升开发体验只需要replace(/moment/g, &#39;dayjs&#39;) 全局替换一下。就能从 Moment.js + locals 200kb 减小成 dayjs 2kb的体积。所有的API调用都保持不变，无需修改。</p>
-
-<p>这次我们再看一下 改为Day.js 之后的打包体积大小：<br/>
-<img src="media/15284430142953/15284471455127.jpg" alt=""/></p>
-
-<p><img src="media/15284430142953/15284471595449.jpg" alt="img" style="width:400px;"/></p>
-
-<p>此时Day.js 已经小到在这张图上消失了，而TreeMap 大小又缩小了 0.5M 。</p>
-
-<p>接下来最后的大头是 element-ui ，element-ui本身支持按需引入，不过对于该项目，全局搜索了一遍，发现被用到的组件非常多，这个时候要仔细文件，防止被漏掉某些组件。具体按需引入的的方式element-ui 官方文档有很详细的介绍，现在我们看一下打包的体积：<br/>
-<img src="media/15284430142953/15284544180604.jpg" alt=""/><br/>
-<img src="media/15284430142953/15284544340569.jpg" alt="img" style="width:400px;"/></p>
-
-<p>此时Treemap size 又减少了0.2MB。最后我们可以 Code Splitting，将代码分成一块一块，提升加载速度：<br/>
-具体可以看<a href="https://zhuanlan.zhihu.com/p/26710831">Webpack 大法之 Code Splitting</a> 最后我们打包出来的体积结构如下：<br/>
-<img src="media/15284430142953/15284560084587.jpg" alt=""/></p>
-
-<p><img src="media/15284430142953/15284560220358.jpg" alt="img" style="width:400px;"/></p>
-
-<p>我们看到 每个router 的 js 都单独出来了，这样子有缩小了 0.2MB 的体积。</p>
-
-<p>我们可以看到Vendor 还是很大，但是毕竟对于这个项目来说，业务很重的大系统，不可避免会这样，但是相比优化之前，已经好很多了，Treemap size 2.06M =&gt; 1.85M。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Phabricator 代码审查工具]]></title>
-    <link href="http://233px.com/15275891246807.html"/>
-    <updated>2018-05-29T18:18:44+08:00</updated>
-    <id>http://233px.com/15275891246807.html</id>
-    <content type="html"><![CDATA[
-<p>Phabricator是Facebook一个开源可视化的代码审查工具，它集成了一系列开源的Web应用，其中包括审查代码、代码（git/svn）托管、语法检查、单元测试、wiki等功能，还可以bug跟踪，直接做jira与代码review关联，支持两种代码审查工作流：“review”（提交前审查）和 “audit”（提交后审查）。</p>
-
-<span id="more"></span><!-- more -->
-
-<h3 id="toc_0">主要功能</h3>
-
-<ul>
-<li>代码管理：添加 Git, Mercurial 和 SVN 仓库，查看源码，review 代码</li>
-<li>bug 追踪：测试人员、开发人员协同工作</li>
-<li>项目管理：项目的启动、进展、完成</li>
-<li>工作板：所有任务一目了然</li>
-<li>wiki：构建文档</li>
-<li>任务系统：创建任务、指派任务、完成任务、增加或降低优先级</li>
-<li>博客系统：甚至可以写博客</li>
-</ul>
-
-<p>试用了一下，感觉很赞。配合用于Code review的命令行工具Arcanist，整个提交Code review 的过程都可以在命令行上进行：</p>
-
-<p>整个代码审核preview 流程为：</p>
-
-<h4 id="toc_1">1. 本地提交代码</h4>
-
-<pre><code>$ git add .
-$ git commit -m &#39;提交信息&#39;
-</code></pre>
-
-<h4 id="toc_2">2. 提交审核</h4>
-
-<p>运行arc diff，弹出vi编辑窗口里Reviewers项添加审核人，多个审核人中间用逗号隔开，保存退出，生成一个审核url，拷贝发给审核人或让审核人查收邮件，完成审核</p>
-
-<pre><code>$ arc diff
-</code></pre>
-
-<p>若审核未通过，需要改代码，修改之后，可再次提交审核：</p>
-
-<pre><code>$ arc diff --update D
-</code></pre>
-
-<h4 id="toc_3">3. 审核通过</h4>
-
-<p>审核通过后，通过执行下面命令审核通完成提交，此时不需要你在push，工具自动去做push、delete feature分支的操作：</p>
-
-<pre><code>$ arc land
-</code></pre>
-
-<h3 id="toc_4">常用命令</h3>
-
-<pre><code>$ arc help                # 获得arc中包装的可用指令/工具
-$ arc diff                # 提交代码去审核
-$ arc diff --update D(n)  # 审核未通过，修改后，再次提交审核
-$ arc diff --create       # 创建一个新的提交审核
-$ arc land         # 审核通过后提交，已包括git push的动作，所以无需再push了
-$ arc amend                     # 审核Git更新提交后的信息
-$ arc list                      # 显示未提交修改的代码信息
-$ arc lint                      # 检查代码的语法
-$ arc get-config                # 查看已设置过的配置
-$ arc set-config &lt;key&gt; &lt;value&gt;  # 修改配置，使用--local参数为全局配置
-</code></pre>
 
 ]]></content>
   </entry>

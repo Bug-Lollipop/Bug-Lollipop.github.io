@@ -136,6 +136,92 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-07-31T18:53:02+08:00" itemprop="datePublished">2018/7/31</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='Git.html'>Git</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15330343829802.html" itemprop="url">
+		Git 笔记一 —— 对象类型</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>对象库是Git 版本库的心脏，包含所有舒适数据文件和所有日志消息、作业信息、日期、以及其他用来重建项目任何版本和分支的信息。</p>
+
+<p>Git 放在对象库的对象只有四种类型： 块（blob）、目录树（tree）、提交（commit）和标签（tag）。</p>
+
+<h4 id="toc_0">块（blob）</h4>
+
+<p>文件的每个版本表示为一个块（blob）。blob 是 “二进制大对象”（binary large object） </p>
+
+<h4 id="toc_1">目录树（tree）</h4>
+
+<p>一个目录树（tree）对象代表一层目录信息。它记录blob 标识符、路径名和在一个目录里所有文件的一些元数据</p>
+
+<h4 id="toc_2">提交（commit）</h4>
+
+<p>一个提交对象保存版本库中每一次变化的元数据，包括作者、提交者、提交日期和日志消息。每一个提交对象指向一个目录树对象</p>
+
+<h4 id="toc_3">标签（tag）</h4>
+
+<p>一个标签对象分配一个任意的且人类可读的名字给一个特定的对象，通常是一个提交对象。</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-07-31T14:09:19+08:00" itemprop="datePublished">2018/7/31</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15330173598963.html" itemprop="url">
+		【译】 理解JavaScript 对象</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>原文：<a href="https://blog.halolabs.io/understanding-javascript-objects-d31cd24ca60f">https://blog.halolabs.io/understanding-javascript-objects-d31cd24ca60f</a></p>
+
+<p>对象是JavaScript 中一个很核心的概念。当我刚开始学习对象的时候，它看起来似乎很简单，似乎就是一对 Key和Value。</p>
+
+<p>我花了很长时间才意识到这个话题对我想象的要复杂的多。然后我开始从不同的来源去学习更多的关于这方面的知识，但是总是感觉无法掌控全局。</p>
+
+<p>在这篇文章中，我会尽力在JS 中创建一个对象开始全面的概述，而不是太深入到任何一个主题，足够的深入去帮助你理解和感觉更舒适的去阅读学习。</p>
+
+<h3 id="toc_0">对象</h3>
+
+<p><strong>JavaScript对象只是属性的集合，每个属性都是一个键值对。</strong></p>
+
+<p>您可以使用点表示法（<code>obj.a</code>）或括号表示法（<code>obj [&#39;a&#39;]</code>）来访问键值。 请记住，如果您的密钥是以下之一，则应使用括号表示法：</p>
+
+<p>1.不是有效的JavaScript标识符（有空格，短划线，以数字开头……）<br/>
+2.是一个变量</p>
+
+<p>JS中的对象是使用一个名为<code>Prototype</code>的属性创建的，这是一个非常重要的模块。</p>
+
+
+
+			 
+			<a href="15330173598963.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-07-15T22:30:21+08:00" itemprop="datePublished">2018/7/15</time>
 			</div>
 			
@@ -370,72 +456,6 @@
 
 
 			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-06-02T15:30:14+08:00" itemprop="datePublished">2018/6/2</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15284430142953.html" itemprop="url">
-		应用包打包体积优化</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>一个接手的Vue外部项目，build 非常慢，试着去优化一波。<br/>
-首先使用 webpack-bundle-analyzer 来分析一波是哪些文件造成的：</p>
-
-<h3 id="toc_0">安装</h3>
-
-<p>项目根目录运行：</p>
-
-<pre><code>npm install --save-dev webpack-bundle-analyzer
-</code></pre>
-
-<h3 id="toc_1">配置</h3>
-
-<p>在使用vue-cli生成的脚手架文件中，通过修改build文件夹下的webpack.prod.conf.js：</p>
-
-
-
-			 
-			<a href="15284430142953.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-05-29T18:18:44+08:00" itemprop="datePublished">2018/5/29</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='Mac.html'>Mac</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15275891246807.html" itemprop="url">
-		Phabricator 代码审查工具</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>Phabricator是Facebook一个开源可视化的代码审查工具，它集成了一系列开源的Web应用，其中包括审查代码、代码（git/svn）托管、语法检查、单元测试、wiki等功能，还可以bug跟踪，直接做jira与代码review关联，支持两种代码审查工作流：“review”（提交前审查）和 “audit”（提交后审查）。</p>
-
-
-
-			 
-			<a href="15275891246807.html#more" class="more-link">Read on &rarr;</a>
-    		
 			
 		</div>
 

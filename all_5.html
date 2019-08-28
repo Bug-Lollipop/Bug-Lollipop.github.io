@@ -136,6 +136,82 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2017-11-11T17:08:12+08:00" itemprop="datePublished">2017/11/11</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15184264921234.html" itemprop="url">
+		正则表达式中的lastIndex</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>看到了一篇文章，想起了同事之前遇到的一个问题,了解了一下原因</p>
+
+<pre><code>var reg1 = /a/
+var reg2 = /a/g
+
+console.log(reg1.test(&#39;abcabc&#39;)) // true
+console.log(reg1.test(&#39;abcabc&#39;)) // true
+console.log(reg1.test(&#39;abcabc&#39;)) // true
+console.log(reg1.test(&#39;abcabc&#39;)) // true
+
+console.log(reg2.test(&#39;abcabc&#39;)); // true
+console.log(reg2.test(&#39;abcabc&#39;)); // true
+console.log(reg2.test(&#39;abcabc&#39;)); // false
+console.log(reg2.test(&#39;abcabc&#39;)); // true
+
+</code></pre>
+
+
+
+			 
+			<a href="15184264921234.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2017-11-02T16:02:37+08:00" itemprop="datePublished">2017/11/2</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='Git.html'>Git</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15184258575559.html" itemprop="url">
+		git bisect</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>git bisect 是 Git 提供的一种 二分法 的调试工具，它可以按照我们选定的提交，进行二分分割，快速定位出出错的提交。来帮我们缩小最小改动的代码，从而快速定位问题。</p>
+
+<p><code>git bisect</code> 基于几个基本命令：</p>
+
+<p>git bisect start：准备进行 bisect debug。<br/>
+git bisect good：标记一个提交为 “good”。<br/>
+git bisect bad：标记一个提交为 “bad”。<br/>
+git bisect reset：退出 bisect debug 的状态。</p>
+
+
+
+			 
+			<a href="15184258575559.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2017-10-15T21:24:39+08:00" itemprop="datePublished">2017/10/15</time>
 			</div>
 			<div class="tags">posted in 
@@ -409,66 +485,6 @@ user.indexOf(&quot;d&quot;) // -1
 
 			 
 			<a href="15184325893639.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2016-10-12T18:37:05+08:00" itemprop="datePublished">2016/10/12</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184318256826.html" itemprop="url">
-		CSS 半透明遮罩层</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>很多时候，我们需要通过一层半透明的遮罩层来把后面的一切整体调暗，以便凸显某个特定的UI元素，引导用户关注，比如弹出层或者交互指南。<br/>
-这个效果的传统方法就是增加一个额外的HTML元素用于遮挡背景添加如下样式：</p>
-
-
-
-			 
-			<a href="15184318256826.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2016-10-05T15:43:43+08:00" itemprop="datePublished">2016/10/5</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184214237286.html" itemprop="url">
-		CSS 设置垂直居中</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>html代码:</p>
-
-<pre><code>&lt;div class=&quot;parent&quot;&gt;
-&lt;div class=&quot;child&quot;&gt;Text here&lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-
-
-
-			 
-			<a href="15184214237286.html#more" class="more-link">Read on &rarr;</a>
     		
 			
 		</div>

@@ -136,6 +136,71 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-05-11T18:11:26+08:00" itemprop="datePublished">2018/5/11</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15260334862166.html" itemprop="url">
+		千分位分隔符</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>千位分隔符 是很常见的需求，但是输入文本千变万化，如何才能准确添加千分符呢？</p>
+
+<p>纯整数情况：</p>
+
+<p>纯整数大概是所有情况里最简单的一种，我们只要正确匹配出千分位就好了。</p>
+
+<p>观察上面的数字，我们可以得出千分位的特征是 到字符串终止位有 3n 个数字，不包括起始位 。于是可以得到这样的函数：</p>
+
+<pre><code>let miliFormat = (num) =&gt; {  
+    return num &amp;&amp; num.toString().replace(/(?=(?!^)(\d{3})+$)/g, &#39;,&#39;)
+}
+</code></pre>
+
+<p>但是往往现实没有那么乐观：</p>
+
+<p>小数的情况</p>
+
+<p>遇到小数时，我们的希望只针对整数部分添加千分符，这时问题就变得稍稍有些棘手了。</p>
+
+<p>如果正则引擎支持逆序环视 [2] ，我们可以这样构造正则表达式：</p>
+
+<p><code>(?&lt;=\d+)(?=(\d{3})+\b)</code></p>
+
+<p>但是多数语言并不支持逆序环视，所以我们要变通一下：</p>
+
+<ol>
+<li>拿到小数的整数部分
+也就是起始位到小数点（非数字）之间的部分，可以这样实现：</li>
+</ol>
+
+<p><code>^\d+</code><br/>
+2. 为整数部分添加千分符<br/>
+这一步可以利用我们之前的实现，整合在一起如下：</p>
+
+<pre><code>let miliFormat = (num) =&gt; {  
+    return num &amp;&amp; num
+        .toString()
+        .replace(/^\d+/, (m) =&gt; m.replace(/(?=(?!^)(\d{3})+$)/g, &#39;,&#39;))
+}
+</code></pre>
+
+<p>这个函数对整、小数都能正确处理。</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-04-27T14:36:50+08:00" itemprop="datePublished">2018/4/27</time>
 			</div>
 			<div class="tags">posted in 
@@ -461,53 +526,12 @@ console.log(reg2.test(&#39;abcabc&#39;)); // true
 		</div>
 
 	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2017-07-17T15:18:41+08:00" itemprop="datePublished">2017/7/17</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15318119213153.html" itemprop="url">
-		JS 数组查找符合的元素</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>整理了几种方法：</p>
-
-<h3 id="toc_0">indexOf</h3>
-
-<p>使用原生 JavaScript 的Array.prototype.indexOf()<br/>
-例如：该数组为：[a, b , c]</p>
-
-<pre><code>const users = [a, b, c]
-user.indexOf(&quot;a&quot;) // 0
-user.indexOf(&quot;b&quot;) // 1
-user.indexOf(&quot;c&quot;) // 2
-user.indexOf(&quot;d&quot;) // -1
-</code></pre>
-
-<p>如果返回是 -1，说明没有找到，如果返回值&gt;=0，表示已找到，并且返回的符合的值得索引</p>
-
-
-
-			 
-			<a href="15318119213153.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
   
 
 </div>
 <nav id="pagenavi">
 	 <a class="prev" href="JS.html">Prev</a>  
-	
+	 <a class="next" href="JS_2.html">Next</a> 
 	<div class="center"><a href="archives.html">Blog Archives</a></div>
 
 </nav>

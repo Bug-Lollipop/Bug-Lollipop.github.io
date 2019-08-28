@@ -136,6 +136,82 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2019-08-27T19:06:19+08:00" itemprop="datePublished">2019/8/27</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15669039790320.html" itemprop="url">
+		Common JS 、ES Module 差异</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2 id="toc_0">Common JS</h2>
+
+<p>CommonJS模块就是对象，每个文件就是一个模块，有自己的作用域</p>
+
+<h3 id="toc_1">特点</h3>
+
+<ul>
+<li><p>“运行时加载”，所有代码都运行在模块作用域，不会污染全局作用域</p></li>
+<li><p>模块可以多次加载，但是只会在第一次加载时运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果。要想让模块再次运行，必须清除缓存</p></li>
+<li><p>加载顺序按照其在代码中出现的顺序</p></li>
+</ul>
+
+<h3 id="toc_2">模块组成</h3>
+
+
+
+			 
+			<a href="15669039790320.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2019-08-17T15:13:09+08:00" itemprop="datePublished">2019/8/17</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15660259894496.html" itemprop="url">
+		document.getElementById（）VS getElementById（）</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>根据规范，getElementById 是一个 DOM 方法，常以 document.getElementById(id) 的形式调用。但在如下代码中，两种调用方式前均未写 document. 。两个按钮一个可以工作，另一个不能，原因是什么？</p>
+
+<pre><code>&lt;p id=&quot;text&quot;&gt;Click the button and I&#39;ll be blue.&lt;/p&gt;
+&lt;button onclick=&quot;getElementById(&#39;text&#39;).style.color = &#39;blue&#39;&quot;&gt;This works&lt;/button&gt;
+&lt;button onclick=&quot;changeColor(&#39;text&#39;, &#39;blue&#39;)&quot;&gt;This doesn&#39;t work&lt;/button&gt;
+&lt;script&gt;
+  function changeColor (id, color) {
+    getElementById(id).style.color = color
+  }
+&lt;/script&gt;
+</code></pre>
+
+
+
+			 
+			<a href="15660259894496.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2019-08-07T10:24:25+08:00" itemprop="datePublished">2019/8/7</time>
 			</div>
 			<div class="tags">posted in 
@@ -159,29 +235,11 @@
 
 <h3 id="toc_1">微任务</h3>
 
-<p>microtask（又称为微任务），可以理解是在当前 task 执行结束后立即执行的任务。也就是说，在当前task任务后，下一个task之前，在渲染之前。</p>
-
-<p>所以它的响应速度相比setTimeout（setTimeout是task）会更快，因为无需等渲染。也就是说，在某一个macrotask执行完后，就会将在它执行期间产生的所有microtask都执行完毕（在渲染前）。</p>
-
-<p>microtask：Promise.then、MutaionObserver、process.nextTick(Node.js 环境)</p>
-
-<h3 id="toc_2">运行机制</h3>
-
-<p><img src="media/15651446659023/15651452951715.jpg" alt=""/></p>
-
-<h3 id="toc_3">Promise和async中的立即执行</h3>
-
-<p>Promise 中的代码当做同步任务立即执行。<br/>
-async/await中，出现在 await之前的代码立即执行。await 之后的相当于 promise then。</p>
-
-<h4 id="toc_4">await 做了什么</h4>
-
-<p>await 让出线程的标志。await 后面的表达式会执行一遍，将await 后面的代码加入到microtask 中，然后await 后面的表达式执行完，就会跳出整个async 函数来执行后面的代码</p>
-
-<p>async await 本身就是promise+generator的语法糖</p>
 
 
-			
+			 
+			<a href="15651446659023.html#more" class="more-link">Read on &rarr;</a>
+    		
 			
 		</div>
 
@@ -206,43 +264,11 @@ async/await中，出现在 await之前的代码立即执行。await 之后的相
 
 <p>但是div 按钮只能点击起来像一个按钮，它并不具有按钮本身的附带功能，比如按钮的可访问性（）。那么如果让 div 按钮变得具有 button 按钮本身具有的功能呢？</p>
 
-<h3 id="toc_0">添加角色 role</h3>
-
-<blockquote>
-<p>添加role =“button”将使元素显示为屏幕阅读器的按钮控件。此角色可与aria-pressed属性结合使用以创建切换按钮。</p>
-</blockquote>
-
-<p>因此此时按钮可以表示为：</p>
-
-<pre><code>&lt;div class=&quot;btn&quot; role=&quot;button&quot;&gt;a Div&lt;/div&gt;
-</code></pre>
-
-<h3 id="toc_1">明确当前状态</h3>
-
-<p>使用 <code>aria-expanded</code> 属性，可以向屏幕阅读器明确定义该元素当前的折叠状态 【展开、关闭】。这样div 元素就可以和menu 有一样的功能，通过<code>aria-expanded = &quot;true&quot;</code> 展开和 aria-expanded = &quot;false&quot; 关闭折叠按钮。</p>
-
-<p>因此此时可以表示为：</p>
-
-<pre><code>&lt;div class=&quot;btn&quot; role=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;a div&lt;/div&gt;
-</code></pre>
-
-<h3 id="toc_2">tabIndex 属性聚焦</h3>
-
-<p>我们希望按键盘 <code>tab</code> 键时，按钮可以聚焦选中，默认情况将其设置为0，遵循正常顺序，表示可以聚焦，现在看起来是这样：</p>
-
-<pre><code>&lt;div class=&quot;btn&quot; role=&quot;button&quot; aria-pressed=&quot;false&quot; tabindex=&quot;0&quot;&gt;a div&lt;/div&gt;
-</code></pre>
-
-<h3 id="toc_3">制作disabled 效果</h3>
-
-<pre><code>[data-disabled] {
-  pointer-events: none;
-  opacity: 0.5;
-}
-</code></pre>
 
 
-			
+			 
+			<a href="15613630158706.html#more" class="more-link">Read on &rarr;</a>
+    		
 			
 		</div>
 
@@ -273,81 +299,11 @@ async/await中，出现在 await之前的代码立即执行。await 之后的相
 
 <p>当你第一次打开动画选项卡的时候，并不会看到和动画有关的内容，只会看到一个 Listening for animations...  的提示。如果要想运行这个工具，需要在第一次加载页面时打开选项卡</p>
 
-<p><img src="media/15438385685306/15438404296292.jpg" alt=""/></p>
-
-<p>要让Animations面板捕捉到消息，我们刷新一下再看一下：</p>
-
-<p><img src="media/15438385685306/15438405515477.jpg" alt=""/></p>
-
-<p>左上角的开始结束图标可以控制动画检查工具的打开和关闭</p>
-
-<p>点击开始图标打开该检查工具：</p>
-
-<p><img src="media/15438385685306/15438414390506.jpg" alt=""/></p>
-
-<p>点击播放按钮：<br/>
-<img src="media/15438385685306/15438415273008.jpg" alt=""/></p>
-
-<h3 id="toc_1">时间轴和关键帧</h3>
-
-<p>随着动画的播放，你回看到红色的【时间轴】会在时间轴上移动。可以用鼠标手动控制它的播放，将其放置到某个特定的点</p>
-
-<p>界面上每个条目的每一行代表了页面的单个动画。可以看到每条线都有个颜色更深更饱和的部分，这部分表示的是动画的长度，之后出现的较浅的部分表示重复该动画。</p>
-
-<p>每个动画线上有几个小圆圈，这些小圈与动画的关键帧相对应。实心的圈代表动画的开始和结束，「空心的圈表示内部关键帧的任意位置」</p>
-
-<h3 id="toc_2">内部关键帧</h3>
-
-<p>每行上的插页式关键帧（每个动画周期的开始和结束之间的关键帧）可以拖动到不同的位置，当您移动它们时，您将看到浏览器窗口中的动画更改其时间。这对于试验间隙关键帧的确切百分点来说非常有用。</p>
-
-<p>比较棘手的是，这些实验不会在&quot;样式&quot;选项卡中看到代码的任何更新。相反，当你将插页式关键帧放在正确位置时，你可以手动确定关键帧的百分比值。</p>
-
-<p>将播放头直接放在相关的关键帧上，您将在面板的左上角看到一个时间戳，告诉您动画在几秒钟内的距离。然后，您可以确定此时间占整个动画持续时间的百分比。在下面的示例中，播放头大约是1s动画的300ms，所以我们知道这个关键帧是33%。</p>
-
-<p><img src="media/15438385685306/15445092575812.jpg" alt=""/></p>
-
-<h3 id="toc_3">动画延迟和持续时间</h3>
-
-<p>在“动画”选项卡做的更改会更新“样式”选项卡的代码，以便我们能准确的查看移植到CSS的值。animation-delay是动画开始播放前的延迟，animation-duration是持续时间。</p>
-
-<p>要在播放动画之前调整延迟，请将鼠标悬停在其直线上，直到看到手形光标，然后水平拖动。您将在“ 样式”选项卡中看到更新延迟值：</p>
-
-<p>要修改动画的持续时间，请将鼠标悬停在其最后一个关键帧上，直到看到双端箭头光标，然后水平拖动。同样，将在“ 样式”选项卡中看到该值的更新。</p>
-
-<h3 id="toc_4">动画计时功能</h3>
-
-<p>您还可以使用Chrome的开发工具修改控制动画时序的速度曲线。首先检查应用了动画的元素。在当前指定的计时功能的左侧，您将看到一个带有“波浪形”的小盒子。单击它打开立方贝塞尔编辑器：</p>
-
-<p>将打开一个框，显示一条贝塞尔曲线，说明当前的计时功能。在这里，您可以通过单击左侧的缩略图之一来选择现有预​​设，也可以将主曲线图像的手柄拖动到左右，以创建自定义的cubic-bezier值，随后可以将其复制到CSS中：</p>
-
-<p>当你走的时候，你会看到一个紫色的小球在编辑器的顶部从左到右动画，让你预览你的计时功能。 </p>
-
-<h3 id="toc_5">可旋转图层可视化</h3>
-
-<p>另一个有用的功能是能够可视化动画中使用的图层，包括旋转所述可视化并从各个角度查看它以更好地了解事物的工作方式。</p>
-
-<p>要打开“ 图层”面板，请转到Chrome开发者工具菜单，然后选择更多工具&gt;图层。</p>
-
-<h3 id="toc_6">总结</h3>
-
-<p>让我们快速总结Chrome的动画开发工具：</p>
-
-<p>首先打开Chrome开发工具打开动画工具，然后在开发工具菜单下选择更多工具&gt;动画。<br/>
-该动画面板需要已被打开时，页面加载捕捉信息上的动画，刷新该页面以实现这一目标。<br/>
-单击小彩色图缩略图以查看动画信息。<br/>
-每一行代表一个动画。<br/>
-填充圆圈表示开始和结束关键帧。<br/>
-空心圆表示间隙关键帧。<br/>
-可以移动插页式关键帧，但是您不会在“ 样式”选项卡中看到相关的代码更新，而是手动计算它们所处的百分点。<br/>
-通过将鼠标悬停在其直线上来修改动画的延迟值，直到看到手形光标，然后水平拖动。<br/>
-通过将鼠标悬停在最后一个关键帧上来修改动画的持续时间值，直到看到双端箭头光标，然后将其水平拖动。<br/>
-在样式选项卡中，单击现有计时功能左侧的图标以打开立方贝塞尔编辑器。<br/>
-在此处选择计时功能预设，或通过修改主曲线图像创建自己的预设功能。<br/>
-转到Chrome开发者工具菜单，然后选择更多工具&gt;图层，打开“ 图层”面板。<br/>
-在此面板中，使用“ 旋转”模式从任何角度查看动画图层。</p>
 
 
-			
+			 
+			<a href="15438385685306.html#more" class="more-link">Read on &rarr;</a>
+    		
 			
 		</div>
 
@@ -384,327 +340,11 @@ function test(fruit) {
 }
 </code></pre>
 
-<p>乍一看，上面的例子看起来不错。 但是，如果我们得到更多的红色水果，cherry（樱桃）和 cranberries（蔓越莓）呢？ 我们是否要用更多的 <code>||</code> 扩展语句？</p>
 
-<p>我们可以使用Array.includes（<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes">Array.includes</a>）重写上面的条件。</p>
 
-<pre><code>function test(fruit) {
-  // extract conditions to array
-  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
-
-  if (redFruits.includes(fruit)) {
-    console.log(&#39;red&#39;);
-  }
-}
-</code></pre>
-
-<p>我们将红色水果（条件）提取到一个数组中。 通过这样做代码看起来更加整洁。</p>
-
-<h3 id="toc_1">2. 减少嵌套，更早return</h3>
-
-<p>让我们扩展前面的示例以包含另外两个条件：</p>
-
-<pre><code>function test(fruit, quantity) {
-  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
-
-  // 条件 1： 及早抛出错误
-  if (fruit) {
-    // 条件 2： 必须是红色
-    if (redFruits.includes(fruit)) {
-      console.log(&#39;red&#39;);
-
-      // 条件 3： 必须是大数量
-      if (quantity &gt; 10) {
-        console.log(&#39;big quantity&#39;);
-      }
-    }
-  } else {
-    throw(&#39;No fruit!&#39;);
-  }
-}
-
-// test results
-test(null); // error: No fruits
-test(&#39;apple&#39;); // print: red
-test(&#39;apple&#39;, 20); // print: red, big quantity
-</code></pre>
-
-<p>看看上面的代码，我们可以做：</p>
-
-<p>我个人遵循的一般规则是在发现无效条件时提前返回。</p>
-
-<pre><code>/_ 当无效的条件发生时，及早返回 _/
-
-function test(fruit, quantity) {
-  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
-
-  // 条件 1： 及早抛出错误
-  if (!fruit) throw(&#39;No fruit!&#39;);
-
-  // 条件 2： 必须是红色
-  if (redFruits.includes(fruit)) {
-    console.log(&#39;red&#39;);
-
-    // 条件 3： 必须是大数量
-    if (quantity &gt; 10) {
-      console.log(&#39;big quantity&#39;);
-    }
-  }
-}
-</code></pre>
-
-<p>通过这样做，我们有一个较少级别的嵌套语句。 这种编码风格很好，特别是当你有很长的if语句时（想象你需要滚动到最底层才知道有一个else语句，这一点都不酷）。</p>
-
-<p>如果通过反转条件并提前返回，我们可以进一步减少嵌套。 请查看下面的条件2，看看我们是如何做到的：</p>
-
-<pre><code>/_ 当无效的条件发生时，及早返回 _/
-
-function test(fruit, quantity) {
-  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
-
-  if (!fruit) throw(&#39;No fruit!&#39;); // 条件 1： 及早抛出错误
-  if (!redFruits.includes(fruit)) return; // 条件 2： 必须是红色
-
-  console.log(&#39;red&#39;);
-
-  // 条件 3: 必须是大数量
-  if (quantity &gt; 10) {
-    console.log(&#39;big quantity&#39;);
-  }
-}
-</code></pre>
-
-<p>通过反转条件2的条件，我们的代码现在没有嵌套语句。 当我们有很长的逻辑时，这种技术非常有用，我们希望在条件不满足时停止进一步的处理。</p>
-
-<p>这样看来，这并不是一件难事。 想一想，这个版本（没有嵌套）比前一个（条件2嵌套）版本是否更好，可读性更高？</p>
-
-<p>对我来说，我只是将它保留为以前的版本（条件2与嵌套），因为：<br/>
-- 代码简短直接，嵌套if更清晰<br/>
-- 反转条件可能会引发更多的思考过程（增加认知负荷）</p>
-
-<p>因此，始终瞄准较少的嵌套和早期返回，但不要过度。 如果您感兴趣，有一篇文章和StackOverflow讨论会进一步讨论这个主题：</p>
-
-<h3 id="toc_2">3. 使用默认函数参数和解构</h3>
-
-<p>我想下面的代码可能看起来很熟悉，我们总是需要检查null / undefined值并在使用JavaScript时分配默认值：</p>
-
-<pre><code>function test(fruit, quantity) {
-  if (!fruit) return;
-  const q = quantity || 1; // if quantity not provided, default to one
-
-  console.log(`We have ${q} ${fruit}!`);
-}
-
-//test results
-test(&#39;banana&#39;); // We have 1 banana!
-test(&#39;apple&#39;, 2); // We have 2 apple!
-</code></pre>
-
-<p>实际上，我们可以通过分配默认函数参数来消除变量q。</p>
-
-<pre><code>function test(fruit, quantity = 1) { // if quantity not provided, default to one
-  if (!fruit) return;
-  console.log(`We have ${quantity} ${fruit}!`);
-}
-
-//test results
-test(&#39;banana&#39;); // We have 1 banana!
-test(&#39;apple&#39;, 2); // We have 2 apple!
-</code></pre>
-
-<p>更简单直观不是吗？ 请注意，每个参数都有自己的默认函数参数。 例如，我们也可以为<code>fruit</code>分配默认值：test(fruit =&#39;unknown&#39;, quantity = 1)。</p>
-
-<p>如果我们的fruit是一个对象怎么办？ 我们可以指定默认参数吗？</p>
-
-<pre><code>function test(fruit) { 
-  // printing fruit name if value provided
-  if (fruit &amp;&amp; fruit.name)  {
-    console.log (fruit.name);
-  } else {
-    console.log(&#39;unknown&#39;);
-  }
-}
-
-//test results
-test(undefined); // unknown
-test({ }); // unknown
-test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
-</code></pre>
-
-<p>看看上面的例子，如果fruit.name对象和fruit.name 同时存在，打印fruit.name，反之打印出unknown。 我们可以使用默认函数参数＆拆分来避免使用条件fruit&amp;&amp; fruit.name 去检查。</p>
-
-<pre><code>// destructing - get name property only
-// assign default empty object {}
-function test({name} = {}) {
-  console.log (name || &#39;unknown&#39;);
-}
-
-//test results
-test(undefined); // unknown
-test({ }); // unknown
-test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
-</code></pre>
-
-<p>由于我们只需要来自fruit的属性<code>name</code>，我们可以使用<code>{ name }</code>来构造参数，然后我们可以在代码中使用<code>name</code>作为变量而不是<code>fruit.name</code>。</p>
-
-<p>我们还将空对象<code>{}</code>指定为默认值。 如果我们不这样做，你将在执行test(undefined) 时报错 - <code>Cannot destructure property name of &#39;undefined&#39; or &#39;null&#39;.</code>。 因为<code>undefined</code>中没有<code>name</code>属性。</p>
-
-<p>如果您不介意使用第三方库，有几种方法可以减少空检查：</p>
-
-<p>这是一个使用Lodash 的例子：</p>
-
-<pre><code>// Include lodash library, you will get _
-function test(fruit) {
-  console.log(_.get(fruit, &#39;name&#39;, &#39;unknown&#39;); // get property name, if not available, assign default value &#39;unknown&#39;
-}
-
-//test results
-test(undefined); // unknown
-test({ }); // unknown
-test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
-</code></pre>
-
-<p>您可以在<a href="http://jsbin.com/bopovajiye/edit?js,console">此处</a>运行演示代码。 此外，如果您是函数式编程（FP）的粉丝，您可以选择使用<a href="https://github.com/lodash/lodash/wiki/FP-Guide">Lodash fp</a>，这是Lodash的函数式版本（方法更改为get或getOr）。</p>
-
-<h3 id="toc_3">4. 支持Map / Object Literal而不是Switch语句</h3>
-
-<p>一起看下面的例子，我们想要打印出水果对应的基本颜色：</p>
-
-<pre><code>function test(color) {
-  // use switch case to find fruits in color
-  switch (color) {
-    case &#39;red&#39;:
-      return [&#39;apple&#39;, &#39;strawberry&#39;];
-    case &#39;yellow&#39;:
-      return [&#39;banana&#39;, &#39;pineapple&#39;];
-    case &#39;purple&#39;:
-      return [&#39;grape&#39;, &#39;plum&#39;];
-    default:
-      return [];
-  }
-}
-
-//test results
-test(null); // []
-test(&#39;yellow&#39;); // [&#39;banana&#39;, &#39;pineapple&#39;]
-</code></pre>
-
-<p>上面的代码看起来没有什么问题，但是我会觉得它比较冗长。使用具有更清晰语法——对象自变量 可以实现相同的结果：</p>
-
-<pre><code>function test(color) {
-  // use object literal to find fruits in color
-  const fruitColor = {
-    red: [&#39;apple&#39;, &#39;strawberry&#39;],
-    yellow: [&#39;banana&#39;, &#39;pineapple&#39;],
-    purple: [&#39;grape&#39;, &#39;plum&#39;]
-  };
-
-  return fruitColor[color] || [];
-}
-</code></pre>
-
-<p>或者，您可以使用<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"><code>Map</code></a>来实现相同的结果：</p>
-
-<pre><code>function test(color) {
-  // use Map to find fruits in color
-  const fruitColor = new Map()
-    .set(&#39;red&#39;, [&#39;apple&#39;, &#39;strawberry&#39;])
-    .set(&#39;yellow&#39;, [&#39;banana&#39;, &#39;pineapple&#39;])
-    .set(&#39;purple&#39;, [&#39;grape&#39;, &#39;plum&#39;]);
-
-  return fruitColor.get(color) || [];
-}
-</code></pre>
-
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>是自ES2015以来可用的对象类型，允许您存储键值对。</p>
-
-<p>我们应该禁止使用switch语句吗？ 不要局限于此。 就个人而言，我尽可能使用对象字变量，但我不会设置硬规则来阻止它，应根据不同场景选择适合的方式。</p>
-
-<p>Todd Motto有一篇深入研究switch语句与对象字变量的文章，你可以在<a href="https://toddmotto.com/deprecating-the-switch-statement-for-object-literals/">这里</a>阅读。</p>
-
-<h3 id="toc_4">5.代码重构</h3>
-
-<p>对于上面的示例，我们实际上可以重构我们的代码以使用<code>Array.filter</code>实现相同的结果</p>
-
-<pre><code>function test(color) {
-  // use Array filter to find fruits in color
-  const fruits = [
-    { name: &#39;apple&#39;, color: &#39;red&#39; }, 
-    { name: &#39;strawberry&#39;, color: &#39;red&#39; }, 
-    { name: &#39;banana&#39;, color: &#39;yellow&#39; }, 
-    { name: &#39;pineapple&#39;, color: &#39;yellow&#39; }, 
-    { name: &#39;grape&#39;, color: &#39;purple&#39; }, 
-    { name: &#39;plum&#39;, color: &#39;purple&#39; }   ];
-
-  return fruits.filter(f =&gt; f.color == color);
-}
-</code></pre>
-
-<p>总有不止一种方法可以达到相同的效果。 我们在这个例子中，展示了四种实现方式。 编码真的很有趣！</p>
-
-<h3 id="toc_5">6.对所有、部分标准使用Array.every和Array.some</h3>
-
-<p>最后一点更多是关于领用一个新的 javascript Array 函数去减少代码行。看下面的代码，我们想要去见检查在所有的水果中哪些是红颜色的：</p>
-
-<pre><code>function test(fruits) {
-  const fruits = [
-    { name: &#39;apple&#39;, color: &#39;red&#39; },
-    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
-    { name: &#39;grape&#39;, color: &#39;purple&#39; }
-  ];
-
-  let isAllRed = true;
-
-  // condition: all fruits must be red
-  for (let f of fruits) {
-    if (!isAllRed) break;
-    isAllRed = (f.color == &#39;red&#39;);
-  }
-
-  console.log(isAllRed); // false
-}
-</code></pre>
-
-<p>这个代码看起来太长了！我们可以使用 <code>Array.every</code> 减少代码行数量:</p>
-
-<pre><code>function test(fruits) {
-  const fruits = [
-    { name: &#39;apple&#39;, color: &#39;red&#39; },
-    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
-    { name: &#39;grape&#39;, color: &#39;purple&#39; }
-  ];
-
-  // condition: short way, all fruits must be red
-  const isAllRed = fruits.every(f =&gt; f.color == &#39;red&#39;);
-
-  console.log(isAllRed); // false
-}
-</code></pre>
-
-<p>现在是不是干净多了？ 以类似的方式，如果我们想测试水果中是否有红色的，我们可以使用<code>Array.some</code>用一行中实现它。</p>
-
-<pre><code>function test(fruits) {
-  const fruits = [
-    { name: &#39;apple&#39;, color: &#39;red&#39; },
-    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
-    { name: &#39;grape&#39;, color: &#39;purple&#39; }
-  ];
-
-  // condition: if any fruit is red
-  const isAnyRed = fruits.some(f =&gt; f.color == &#39;red&#39;);
-
-  console.log(isAnyRed); // true
-}
-</code></pre>
-
-<h3 id="toc_6">总结</h3>
-
-<p>让我们一起生成更多可读代码。 我希望你能在本文中学到一些新东西。</p>
-
-<p>就这样。 快乐的编码！</p>
-
-
-			
+			 
+			<a href="15374269260171.html#more" class="more-link">Read on &rarr;</a>
+    		
 			
 		</div>
 
@@ -741,452 +381,11 @@ test(&#39;yellow&#39;); // [&#39;banana&#39;, &#39;pineapple&#39;]
 <p>有时我们会遇到这种情况：我们从develop 分支新建一个名为feat/home 分支去做A功能，然后由于一些其他原因A 功能需要延后，然后我们新建一个分支去做B功能或者C功能，在多分支多功能开发时，就容易出现做B任务时，忘记切换分支，一直等做完了提交了push之后才发现 push 错了远端的分支，并且 push 的改动与该分支需要开发的功能并没有交集，因此我们需要将已经提交错的分支内容回滚并提交push 到正确的远端分支：<br/>
  此时有两种情况：</p>
 
-<p>【记得扩充索引和工作目录】</p>
 
-<h3 id="toc_1">场景1：已经commit，但是未push到远端</h3>
 
-<p>使用 <code>git reset</code> 命令，可以在提交层面在私有分支舍弃一些没有提交的更改：</p>
-
-<pre><code> git reset --hard HEAD^ // 回退到上一个版本
-</code></pre>
-
-<p>git reset 命令主要有三个选项： --soft、--mixed 、--hard。默认参数为 --mixed</p>
-
-<h4 id="toc_2">git reset --soft 提交：</h4>
-
-<p>--soft 会将 HEAD 指向引用给定提交。索引和工作目录内容保持不变。这个版本的命令有”最小“影响，只改变一个符号引用的状态使其指向一个新提交，不会改变其索引①和工作目录②<br/>
-具体体现如下：</p>
-
-<pre><code>git add 1.js &amp;&amp; git commit -m &quot;update part 1&quot;
-git add 2.js &amp;&amp; git commit -m &quot;update part 2&quot;
-git add 3.js &amp;&amp; git commit -m &quot;update part 3&quot;
-git add 4.js &amp;&amp; git commit -m &quot;update part 4&quot;
-git log --oneline --graph -4 --decorate
-</code></pre>
-
-<p><img src="media/15349302652828/15350139273772.jpg" alt=""/></p>
-
-<pre><code>git reset --soft HEAD~1
-</code></pre>
-
-<p>当我们执行--soft 命令时，可以看到控制台无任何输出，此时查看当前提交历史</p>
-
-<pre><code>git log --oneline --graph -4 --decorate
-</code></pre>
-
-<p>如下图，可以看到版本库已经回退了一个版本：</p>
-
-<p><img src="media/15349302652828/15350147685109.jpg" alt=""/></p>
-
-<p>执行 <code>git status</code>，可以看到SHA1为<code>54b1941</code> 的commit 上的更改回到了缓存区：<br/>
-<img src="media/15349302652828/15350166724510.jpg" alt=""/></p>
-
-<p>因此我们可以 --soft 操作是软重置，只撤销了<code>git commit</code>操作，保留了 <code>git add</code> 操作。</p>
-
-<h4 id="toc_3">git reset --hard 提交</h4>
-
-<p>此时接上面的流程，我们再次执行 <code>--hard</code> 操作，这次尝试回退两个版本：</p>
-
-<pre><code>git reset --hard HEAD~2
-</code></pre>
-
-<p>如下图，可以看到版本库回退了两个版本，并且将本地版本库的头指针全部重置到了指定版本，暂存区也会被重置，工作区的代码也回退到了这一版本：</p>
-
-<p><img src="media/15349302652828/15350151330324.jpg" alt=""/></p>
-
-<p>执行<code>git status</code> 可以看到 我们的 “54b1941” commit 上做的修改都&quot;丢失&quot;了，新的文件也被删除了。</p>
-
-<p><img src="media/15349302652828/15350164362840.jpg" alt=""/></p>
-
-<p>因此可以知道，<code>git commit --hard</code> 是具有破坏性，是很危险的操作，它很容易导致数据丢失，如果我们真的进行了该操作想要找回丢失的数据，那么此时可以使用<code>git reflog</code> 命令救命。这个命令的具体使用会在文章后面介绍。 </p>
-
-<h4 id="toc_4">git reset --mixed 提交：</h4>
-
-<p>我们重新造一系列 commit 历史：</p>
-
-<pre><code>git add 1.js &amp;&amp; git commit -m &quot;update 1.js&quot;
-git add 2.js &amp;&amp; git commit -m &quot;update 2.js&quot;
-git add 3.js &amp;&amp; git commit -m &quot;update 3.js&quot;
-git add 4.js &amp;&amp; git commit -m &quot;update 4.js&quot;
-git add 5.js &amp;&amp; git commit -m &quot;update 5.js&quot;
-git log --oneline --graph -4 --decorate
-</code></pre>
-
-<p>可以看到当前的 commit 历史如下：</p>
-
-<p><img src="media/15349302652828/15350212211180.jpg" alt=""/></p>
-
-<p>此时执行--mixed 操作，尝试回退两个版本：</p>
-
-<pre><code># 等价于 git reset HEAD~2
-git reset --mixed HEAD~2 
-</code></pre>
-
-<p>提交历史此时改变为下图所示：</p>
-
-<p><img src="media/15349302652828/15350216633387.jpg" alt=""/></p>
-
-<p>此时执行 <code>git status</code> ，命令行输出如下：</p>
-
-<p><img src="media/15349302652828/15350217304281.jpg" alt=""/></p>
-
-<p>SourceTree 工具上的直观显示如下：</p>
-
-<p><img src="media/15349302652828/15350220384972.jpg" alt=""/></p>
-
-<p>可以看出，该命令加上 --mixed 参数会保留提交的源码改动，只是将索引信息回退到了某一个版本，如果还需要继续提交，再次执行 <code>git add</code> 和 <code>git commit</code></p>
-
-<p>介绍完<code>git reset</code>，那么我们来说一下如何用该命令解决提交分支错误的问题：</p>
-
-<h5 id="toc_5">第一种方法：</h5>
-
-<p>适用于多个分支一起开发的时候将A分支的改动提交到B的场景：</p>
-
-<pre><code># 将该分支的本不应该提交的commit撤销
-git reset HEAD^
-
-# 按需选择想要回到哪个版本
-# 回到HEAD
-git reset --soft HEAD
-
-# 回到HEAD的前一个版本
-git reset --soft HEAD^
-
-# 回到HEAD的前10个版本
-git reset --soft HEAD~5 
-
-# 利用id回到指定版本
-git reset --soft a06ef2f
-
-# 将撤销的代码暂存起来
-git stash
-
-# 切换到正确的分支
-git checkout feat/xxx
-
-# 重新应用缓存
-git stash pop
-
-# 在正确的分支进行提交操作
-git add . &amp;&amp; git commit -m &quot;update xxxx&quot;
-</code></pre>
-
-<h5 id="toc_6">第二种方法：</h5>
-
-<p>适用于在不小心在master 分支上提交了代码，而实际想要在feature 分支上提交代码的场景：</p>
-
-<pre><code># 新检出一个新分支，但是仍在master 分支上，并不会切换到新分支
-git branch feat/update
-
-# 恢复master本身提交的状态
-git reset --hard origin/master
-
-# 提交错的代码已经在新检出的分支上面了，可以继续进行开发或者push
-git checkout feat/update
-</code></pre>
-
-<p>第三种方法：</p>
-
-<ol>
-<li>适用于想要对特定的某一个或几个commit 进行“嫁接”，使其复制一份到正确的feature 分支的场景；</li>
-<li>在功能性迭代开发中发现一个bug，并提交了一个commit 进行修复，但是发现该bug也存在线上的发布版本上，必须要尽快对线上进行修复，此时可以使用<code>git cherry-pick</code> 来将bug 修复的commit 嫁接到 fix 分支上进行代码修复，并及时发布，解决线上bug的场景。</li>
-</ol>
-
-<pre><code># 先切换到正确的分支
-git checkout feat/update
-
-# 取出提交错误的或bug fix的 commit 引入到feat/update 分支中
-git cherry-pick a06ef2f
-
-# 回到错误的分支
-git checkout feat/feedback
-
-# 将 a06ef2f 的改动从当前分支销毁
-git reset --head a06ef2f 
-</code></pre>
-
-<p>上面演示的是“嫁接” 一个commit，如果想要嫁接多个commit可以这样做：</p>
-
-<pre><code># 将三个commit 合并过来
-git cherry-pick b9dabf9 e2c739d dad9e51 
-</code></pre>
-
-<p>如果想加个一个应用范围内的commit，可以这样做：</p>
-
-<pre><code>git cherry-pick 422db47..e2c739d
-</code></pre>
-
-<p>需要主要的是无论是对单个 commit 进行 <code>git cherry-pick</code> ，还是批量处理，注意一定要根据时间线，依照 commit 的先后顺序来处理。</p>
-
-<p>如果你只想把改动转移到目标分支，但是并不想提交，可以这样做：</p>
-
-<pre><code># 嫁接过来的改动不会提交，只会放在暂存区
-git cherry-pick b9dabf9 --no-commit
-</code></pre>
-
-<h5 id="toc_7">第四种方法：</h5>
-
-<p>适用于当多个文件被缓存时，发现其中一个文件是其他分支的功能性改动，想直接取消该文件的缓存：</p>
-
-<pre><code># 编辑了 1.js 2.js 3.js
-# 缓存所有改动的文件
-git add .
-
-# 发现 3.js 不应该出现在此时提交的功能上，要取消它的缓存
-git reset 3.js
-
-# 此时3.js 被取消了缓存，我们继续提交1.js 2.js
-git commit -m &quot;Update 1.js 2.js&quot;
-
-# 将3.js 暂存起来
-git stash
-
-# 切换到提交 3.js 改动的分支
-git checkout feat/update
-
-# 重新应用缓存起来的 stash（3.js）
-#pop 参数会将缓存栈的第一个stash删除，并将对应修改应用到当前分支目录下
-git stash pop
-
-# 继续提交
-git add &amp;&amp; git commit -m &quot;update 3.js&quot;
-
-</code></pre>
-
-<h3 id="toc_8">场景2：Commit之后已经 push 到了远端</h3>
-
-<p>此时我们需要借助 <code>git revert</code> 命令来撤销我们的操作</p>
-
-<p>场景：假设我们在feat/feedback 分支上发现最后一次commit的功能是feat/update 分支的改动，此时想要取消这次commit（update 2.js）</p>
-
-<p>下图是feat/feedback 的提交历史：</p>
-
-<p><img src="media/15349302652828/15350814730126.jpg" alt=""/></p>
-
-<p>解决方式：</p>
-
-<pre><code># 撤销最近的一次提交
-git revert HEAD --no-edit
-</code></pre>
-
-<p>接着我们使用sourceTree ④查看撤销之后的提交历史：</p>
-
-<p><img src="media/15349302652828/15350902771287.jpg" alt=""/></p>
-
-<p>我们看到想要撤销的commit（Update 2.js）记录还在，并且多了一个新的commit（Revert &quot;Update 2.js&quot;），因此可以看出，git revert 是对给定的commit提交进行逆过程，该命令会引入一个新的提交来的小给定提交的影响。<br/>
-和 <code>git cherry-pick</code> 一样，revert命令不修改版本库的现存历史记录，相反它只会在记录添加新的提交</p>
-
-<p>接下来我们已经解决了错误分支的提交，但是还要把这次提交放到正确的分支上，依然可以使用git cherry pick 去操作：</p>
-
-<pre><code># 将revert commit push到远端
-git push origin feat/feedback
-
-# 切换到正确的分支
-git checkout feat/update
-
-将目标commit 嫁接到当前分支
-git cherry pick db6bb3f
-</code></pre>
-
-<p>git revert 后面可以加不同的参数达到不同的撤销效果，常用的如下：</p>
-
-<p><code>--edit</code> ：该参数为<code>git revert</code> 的默认参数，它会自动创建提交日志提醒，此时会弹出编辑器会话，可以在里面修改提交消息，然后再提交。</p>
-
-<p><code><br/>
-git revert 6ac5152 <br/>
-</code></p>
-
-<p><img src="media/15349302652828/15350916473467.jpg" alt=""/></p>
-
-<p><code>--no-edit</code> ：表示不編輯 Commit 訊息，revert的commit 会直接自动变回 Revert + 想要撤销的commit 的message 的格式。上面例子中使用的就是这种方式。</p>
-
-<p><code>--no-commit</code>：该命令会使撤销的commit 里面的改动放到暂存区，不进行提交，用户可以自行再次提交。这种参数并且适用于将多个commit 结果还原到索引中，集体放置在缓冲区，进行用户自定义的操作。</p>
-
-<pre><code>git revert 13b7faf --no-commit
-</code></pre>
-
-<p><img src="media/15349302652828/15350923959888.jpg" alt=""/></p>
-
-<p><img src="media/15349302652828/15350919592687.jpg" alt=""/></p>
-
-<h3 id="toc_9">场景3：改动不仅已经 push 到远端，并且已经合到主仓库</h3>
-
-<p>当我们把本不属于该分支的代码或者不需要提交的改动提交到主仓库，并合并到了develop 仓库之后，解决方式如下：</p>
-
-<h4 id="toc_10">以pull request 的方式进行的合并</h4>
-
-<p>在团队的github flow 流程中，若我们把问题分支的pull request 请求通过并合并到develop 之后，我们可以看到在 open pull request 页面有如下提示：</p>
-
-<p><img src="media/15349302652828/15350949829300.jpg" alt=""/></p>
-
-<p>这时我们可以直接点击 【Revert】按钮进行撤回。该撤回操作会提示你需要创建一个 revert pull request，格式默认为： <code>revert-${问题pr号}-${问题分支}</code></p>
-
-<p><img src="media/15349302652828/15350952135446.jpg" alt=""/></p>
-
-<p><img src="media/15349302652828/15350954062379.jpg" alt=""/></p>
-
-<p>最后我们将revert 产生的pull request 合并到develop 分支。</p>
-
-<p>因此对于团队协作中，推荐的工作流程是如上图所示在一个新分支中恢复错误的提交。在这里有人会问，为什么不直接在 develop 分支进行 git revert 操作，岂不是更方便？</p>
-
-<p>这么做的原因是：在拥有大量开发人员的团队中， develop、master 分支为保护分支，为了安全不允许或建议去直接修改。</p>
-
-<p>通过这次操作我们可以了解到：revert 分支的操作实际上是合并进develop 分支的逆操作，它会新产生一个新的分支，将 feat/feedback 的改动还原。</p>
-
-<p>在团队协作流程中，通常我们会使用 Github 的【Merge pull request】 绿色按钮进行合并pull request 的操作，因为这样会更简单直观，建议始终使用该绿色按钮进行操作。</p>
-
-<h4 id="toc_11">命令行合并</h4>
-
-<p>上面展示了通过界面按钮去操作如何撤销已经合并develop 分支的改动，那么在个人项目中用命令行操作是怎么样的呢？</p>
-
-<pre><code># 添加三个文件
-echo 1 &gt; 1.html
-echo 2 &gt; 2.html
-echo 3 &gt; 3.html
-
-# 以为提交的是1.html 2.html，将改动推到了远端分支
-git add . &amp;&amp; git commit -m &quot;Add 1.html 2.html&quot;
-git push origin feat/update
-
-# 将feat/update的改动创建一个“合并提交”合入develop 分支，生成的 Merge commit 的SHA1 为 f439c6f
-git checkout develop
-git merge feat/update --no-ff
-
-# 如果存在冲突，先解决冲突，然后继续请求合并
-git add . &amp;&amp; git merge --continue
-
-# 将develop 合并的最后结果提交到远端
-git push origin develop
-
-# 合并之后发现不应该将3.html 不应该放入功能迭代中。需要撤销本次合并
-# 做任何操作前，先保证本地的develop 代码是最新状态
-git pull --rebase origin develop
-
-# 从develop分支新建一个 revert 分支
-git checkout -b revert-feat/update
-
-# 用 -m 参数指定父编号（从1开始），因为它是“合并提交⑤”
-git revert -m 1 f439c6f
-
-# push revert 的改动
-git push origin revert-feat/update
-
-# 切换回 develop 分支，将 revert-feat/update 分支进行合并
-git checkout develop
-git merge revert-feat/update --no-ff
-git push origin develop
-</code></pre>
-
-<p>图为新建revert 分支：<br/>
-<img src="media/15349302652828/15351016084946.jpg" alt=""/></p>
-
-<p>图为<code>git revert</code> 弹出编辑器编辑 revert commit message 过程：<br/>
-<img src="media/15349302652828/15351016878245.jpg" alt=""/></p>
-
-<p>图为执行完<code>git revert</code> 之后的 commit 历史记录：<br/>
-<img src="media/15349302652828/15351017135058.jpg" alt=""/></p>
-
-<p>接下来我们想将3.html 的改动撤销的操作就变成了上面场景 2 的操作流程了。</p>
-
-<h3 id="toc_12">场景4 revert 错误，需要再次补救</h3>
-
-<p>当我们的代码合到主仓库，并且成功发布到生产环境，此时发现线上有集中报错，必须马上将线上代码回滚到最新版本。这是我们需要进行revert 操作。revert 的代码发布到生产之后，发现错误仍旧存在，最后排查到是某个外部服务依赖出现问题，本次revert 的改动无关，并且外部服务已经恢复。此时需要将 revert 的改动再次发布上生产环境。</p>
-
-<p>我们可以再用一次<code>git revert</code>，revert 掉我们之前的 revert commit：</p>
-
-<pre><code>git revert HEAD --no-edit
-</code></pre>
-
-<p>这样 revert 撤销的改动又回来了，此时会发现提交历史上又会出现一个新的revert commit。</p>
-
-<h2 id="toc_13">误删代码</h2>
-
-<p>介绍上面提交错误 commit的时候，我们提到了<code>git reset --hard</code>。<br/>
-如果我们真的使用了<code>git reset --hard</code> 之后，发现某些修改还有必要的，这时候就需要借助时光机 <code>git reflog</code> 了</p>
-
-<p><code>git reflog</code> 是非常好用的“后悔药”，它几乎可以恢复我们commit 过的改动，即使这条 commit 记录已经被我们 reset 掉了。</p>
-
-<p>具体演示如下：<br/>
-<img src="media/15349302652828/15351158334047.jpg" alt=""/></p>
-
-<p>如上图，在当前提交历史中，我们想回到 SHA1 为 <code>c48a245</code> 这个commit：</p>
-
-<pre><code># 回到 c48a245 commit
-git reset --hard c48a245
-</code></pre>
-
-<p>此时提交历史变为现在这样：<br/>
-<img src="media/15349302652828/15351159943422.jpg" alt=""/></p>
-
-<p>此时可以看到SHA1 为<code>c48a245</code> 的 commit 时间线之后的改动都已经被撤销了。<br/>
-这时候我们突然想到：commit 信息为 “Add 1.html 2.html” 的提交里面的改动很重要，需要被找回，但是我们使用 <code>git log</code> 已经找不到这条被我们reset 掉的历史记录了。这时候进行如下操作：</p>
-
-<pre><code>git reflog
-</code></pre>
-
-<p><img src="media/15349302652828/15351170241290.jpg" alt=""/></p>
-
-<p>我们看到了曾经提交过的这个想要找回的commit（commit: Add 1.html 2.html），它的 SHA1 为 <code>cf2e245</code></p>
-
-<p>接下来怎么做取决于你具体想要达到什么目的：</p>
-
-<ul>
-<li>想要回到<code>cf2e245</code> 这个特定的commit：</li>
-</ul>
-
-<pre><code>git reset --hard cf2e245
-</code></pre>
-
-<ul>
-<li>想要暂存 <code>cf2e245</code> 中的改动，并且不想马上提交：</li>
-</ul>
-
-<pre><code>git reset --soft cf2e245
-</code></pre>
-
-<ul>
-<li>想要把<code>cf2e245</code> 嫁接到某个分支目录下：</li>
-</ul>
-
-<pre><code>git checkout feat/xxx
-git cherry-pick cf2e245
-</code></pre>
-
-<ul>
-<li>想要找回 <code>cf2e245</code> 某个文件的改动，暂存起来：</li>
-</ul>
-
-<pre><code>git checkout cf2e245 1.html
-</code></pre>
-
-<p><img src="media/15349302652828/15351178789682.jpg" alt=""/></p>
-
-<p>对于 <code>git reflog</code> 需要注意的是： 它不是万能的。Git 会定期清理那些你已经不再用到的”对象“，如果你想找到几个月以前的提交，可能会指望不上它。</p>
-
-<h2 id="toc_14">写在后面</h2>
-
-<p>上面由于篇幅原因只总结了两种撤销操作，后续还会总结归纳一些网络上大家咨询最多的错误的解决方式。</p>
-
-<p>文中的一些想法都是笔者工作学习过程中的思考和一点小小的总结。笔者认为技术某些名词翻译过来可能会有些许词不达意，因此文中某些操作词并没有直接翻译成中文，而是直接以英文形式存在，如果对其中的命令有疑问的同学，可以利用搜索引擎去了解更多。如有错误，欢迎指正！</p>
-
-<hr/>
-
-<p>一些名词注解：</p>
-
-<p>① 索引：</p>
-
-<blockquote>
-<p>Git索引是一个在你的工作目录和项目仓库间的暂存区(staging area)。有了它， 你可以把许多内容的修改一起提交（commit）。 如果你创建了一个提交（commit），那么提交的是当前索引（index）里的内容，而不是工作目录中的内容。</p>
-</blockquote>
-
-<p>② 工作目录：</p>
-
-<blockquote>
-<p>Git工作目录存储着你现在签出(checkout)来用来编辑的文件. 当你在项目的不同分支间切换时， 工作目录里的文件经常会被替换和删除。 所有历史信息都保存在 &#39;Git目录&#39;中；　工作目录只用来临时保存签出（checkout） 文件的地方， 你可以编辑工作目录的文件直到下次提交（commit）为止。</p>
-</blockquote>
-
-
-			
+			 
+			<a href="15349302652828.html#more" class="more-link">Read on &rarr;</a>
+    		
 			
 		</div>
 
@@ -1274,92 +473,6 @@ git cherry-pick cf2e245
 
 
 			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-07-31T18:53:02+08:00" itemprop="datePublished">2018/7/31</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='Git.html'>Git</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15330343829802.html" itemprop="url">
-		Git 笔记一 —— 对象类型</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>对象库是Git 版本库的心脏，包含所有舒适数据文件和所有日志消息、作业信息、日期、以及其他用来重建项目任何版本和分支的信息。</p>
-
-<p>Git 放在对象库的对象只有四种类型： 块（blob）、目录树（tree）、提交（commit）和标签（tag）。</p>
-
-<h4 id="toc_0">块（blob）</h4>
-
-<p>文件的每个版本表示为一个块（blob）。blob 是 “二进制大对象”（binary large object） </p>
-
-<h4 id="toc_1">目录树（tree）</h4>
-
-<p>一个目录树（tree）对象代表一层目录信息。它记录blob 标识符、路径名和在一个目录里所有文件的一些元数据</p>
-
-<h4 id="toc_2">提交（commit）</h4>
-
-<p>一个提交对象保存版本库中每一次变化的元数据，包括作者、提交者、提交日期和日志消息。每一个提交对象指向一个目录树对象</p>
-
-<h4 id="toc_3">标签（tag）</h4>
-
-<p>一个标签对象分配一个任意的且人类可读的名字给一个特定的对象，通常是一个提交对象。</p>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-07-31T14:09:19+08:00" itemprop="datePublished">2018/7/31</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15330173598963.html" itemprop="url">
-		【译】 理解JavaScript 对象</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>原文：<a href="https://blog.halolabs.io/understanding-javascript-objects-d31cd24ca60f">https://blog.halolabs.io/understanding-javascript-objects-d31cd24ca60f</a></p>
-
-<p>对象是JavaScript 中一个很核心的概念。当我刚开始学习对象的时候，它看起来似乎很简单，似乎就是一对 Key和Value。</p>
-
-<p>我花了很长时间才意识到这个话题对我想象的要复杂的多。然后我开始从不同的来源去学习更多的关于这方面的知识，但是总是感觉无法掌控全局。</p>
-
-<p>在这篇文章中，我会尽力在JS 中创建一个对象开始全面的概述，而不是太深入到任何一个主题，足够的深入去帮助你理解和感觉更舒适的去阅读学习。</p>
-
-<h3 id="toc_0">对象</h3>
-
-<p><strong>JavaScript对象只是属性的集合，每个属性都是一个键值对。</strong></p>
-
-<p>您可以使用点表示法（<code>obj.a</code>）或括号表示法（<code>obj [&#39;a&#39;]</code>）来访问键值。 请记住，如果您的密钥是以下之一，则应使用括号表示法：</p>
-
-<p>1.不是有效的JavaScript标识符（有空格，短划线，以数字开头……）<br/>
-2.是一个变量</p>
-
-<p>JS中的对象是使用一个名为<code>Prototype</code>的属性创建的，这是一个非常重要的模块。</p>
-
-
-
-			 
-			<a href="15330173598963.html#more" class="more-link">Read on &rarr;</a>
-    		
 			
 		</div>
 

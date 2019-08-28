@@ -1,0 +1,493 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	Common JS 、ES Module 差异 - Akira's blog
+  	
+	</title
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="Akira's blog" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	#sub-nav .social a.weibo {
+		background: url('asset/images/social/weibo.png?1419407210') center no-repeat #4ec4fa;
+		border: 1px solid #4ec4fa;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	article .entry-content table th,article .entry-content table td{ padding: 4px;border-collapse: collapse; border:solid 1px #ddd;}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="asset/icon.jpg" style="width:160px;">
+					</div>
+					<h1><a href="index.html">Akira's blog</a></h1>
+					<p class="subtitle">记录一些技术文章</p>
+					<nav id="main-nav">
+						<ul class="main">
+							<li><a href="index.html">Home</a></li>
+						    <li><a href="all.html">Blog</a></li>
+						    <li><a href="archives.html">Archives</a></li>
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+<!-- 
+			<a class="email" href="mailto:" title="Email">Email</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+			<a class="google" href="https://plus.google.com/" rel="author" title="Google+">Google+</a>
+			<a class="twitter" href="http://twitter.com/" title="Twitter">Twitter</a>
+			<a class="github" href="https://github.com/" title="GitHub">GitHub</a>
+			<a class="coderwall" href="https://coderwall.com/" title="Coderwall">Coderwall</a>
+		    <a class="stackoverflow" href="http://stackoverflow.com/users/" title="StackOverflow"></a>
+			<a class="linkedin" href="http://www.linkedin.com/in/" title="LinkedIn">LinkedIn</a>
+			<a class="pinterest" href="https://pinterest.com/" title="Pinterest">Pinterest</a>
+			<a class="delicious" href="http://delicious.com/" title="Delicious">Delicious</a>
+			<a class="pinboard" href="https://pinboard.in/u:" title="Pinboard">Pinboard</a>
+			<a class="douban" href="https://www.douban.com/people/" title="Douban">Douban</a>
+			<a class="quora" href="https://quora.com/" title="Quora">Quora</a>
+			<a class="instagram" href="https://instagram.com/" title="Instagram">Instagram</a>
+			<a class="behance" href="https://www.behance.net/" title="Behance">Behance</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+-->	
+								<a class="email" href="mailto:huixiao1008@gmail.com" title="Email">Email</a>
+								<a class="weibo" target="_blank" href="https://weibo.com/u/2554601764" title="weibo">Weibo</a>
+								
+								<a class="github" target="_blank" href="https://github.com/Bug-Lollipop" title="GitHub">GitHub</a>
+								<!-- <a class="twitter" target="_blank" href="http://twitter.com/oulvhai" title="Twitter">Twitter</a> -->
+								<!-- <a class="rss" href="atom.xml" title="RSS">RSS</a> -->
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+
+			<div class="mid-col-container">
+		
+
+			
+ <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">Common JS 、ES Module 差异</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<h2 id="toc_0">Common JS</h2>
+
+<p>CommonJS模块就是对象，每个文件就是一个模块，有自己的作用域</p>
+
+<h3 id="toc_1">特点</h3>
+
+<ul>
+<li><p>“运行时加载”，所有代码都运行在模块作用域，不会污染全局作用域</p></li>
+<li><p>模块可以多次加载，但是只会在第一次加载时运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果。要想让模块再次运行，必须清除缓存</p></li>
+<li><p>加载顺序按照其在代码中出现的顺序</p></li>
+</ul>
+
+<h3 id="toc_2">模块组成</h3>
+
+<span id="more"></span><!-- more -->
+
+<h4 id="toc_3">模块导出（module、module.exports）</h4>
+
+<p>每个模块内部，module代表当前模块，是一个对象，它的exports属性（即module.exports）是对外的接口，其他文件加载该模块，实际上就是读取module.exports 变量；</p>
+
+<p>为了方便，Node为每个模块提供一个exports变量，指向module.exports，即<code>let exports = module.exports</code></p>
+
+<p>所以在对外输出模块接口时，可以向exports对象添加方法；</p>
+
+<p>注意：不能直接将exports变量指向一个值，因为这样等于切断了exports与module.exports的联系</p>
+
+<pre><code>// lib.js
+var counter = 3;
+function incCounter() {}
+// 单个导出
+module.exports.counter = counter
+module.exports.incCounter = incCounter
+// 或者导出一个对象
+module.exports = {
+  counter: counter,
+  incCounter: incCounter,
+}
+</code></pre>
+
+<h4 id="toc_4">模块导入</h4>
+
+<p><strong>require命令用于加载模块文件，脚本代码在require的时候，就会全部执行；</strong></p>
+
+<p>使用require多次加载同一个模块时，<strong>只会在加载第一次时执行一次，后面再加载，都是直接取第一次运行的结果，除非手动清除系统缓存</strong>；</p>
+
+<h3 id="toc_5">commonJS 的循环依赖</h3>
+
+<p>CommonJS模块的重要特性是加载时执行，即脚本代码在require的时候，就会全部执行。在执行过程中，一旦出现某个模块被”循环加载”，就只输出已经执行的部分，还未执行的部分不会输出。</p>
+
+<h4 id="toc_6">官网例子</h4>
+
+<p>a.js</p>
+
+<pre><code>console.log(&#39;a starting&#39;);
+exports.done = false;
+const b = require(&#39;./b.js&#39;);
+console.log(&#39;in a, b.done = %j&#39;, b.done);
+exports.done = true;
+console.log(&#39;a done&#39;);
+</code></pre>
+
+<p>b.js</p>
+
+<pre><code>console.log(&#39;b starting&#39;);
+exports.done = false;
+const a = require(&#39;./a.js&#39;);
+console.log(&#39;in b, a.done = %j&#39;, a.done);
+exports.done = true;
+console.log(&#39;b done&#39;);
+</code></pre>
+
+<p>main.js</p>
+
+<pre><code>console.log(&#39;main starting&#39;);
+const a = require(&#39;./a.js&#39;);
+const b = require(&#39;./b.js&#39;);
+console.log(&#39;in main, a.done = %j, b.done = %j&#39;, a.done, b.done);
+</code></pre>
+
+<p>这里在执行 a.js 时，依赖 b.js，而执行 b.js 时，反过来又依赖 a.js 的输出，造成了循环依赖</p>
+
+<p>当模块被循环依赖时，CommonJS的做法是，<strong>一旦出现某个模块被”循环加载”，就只输出当前执行完成的导出值，还未执行的部分不会输出</strong>。</p>
+
+<p>上面代码之中，b.js执行到第三行，就会去加载a.js，这时，就发生了”循环加载”。系统会去a.js模块对应对象的exports属性取值，可是因为a.js还没有执行完，从exports属性只能取回已经执行的部分，而不是最后的值。</p>
+
+<p>a.js已经执行的部分，只有一行。</p>
+
+<pre><code>exports.done = false;
+</code></pre>
+
+<p>因此，对于b.js来说，它从a.js只输入一个变量done，值为false。</p>
+
+<p>然后，b.js接着往下执行，等到全部执行完毕，再把执行权交还给a.js。于是，a.js接着往下执行，直到执行完毕。我们执行上方的main.js，运行结果如下：</p>
+
+<pre><code>$ node main.js
+
+main starting
+    
+a starting
+    
+b starting
+    
+in b, a.done = false
+    
+b done
+    
+in a, b.done = true
+    
+a done
+    
+in main, a.done = true, b.done = true
+
+</code></pre>
+
+<p>上面的代码证明了两件事：</p>
+
+<ul>
+<li>一是，在b.js之中，a.js没有执行完毕，只执行了第两行。</li>
+<li>二是，main.js执行到第三行时，不会再次执行b.js，而是输出缓存的b.js的执行结果，即它的第五行，即</li>
+</ul>
+
+<pre><code>exports.done = true;
+</code></pre>
+
+<h2 id="toc_7">ES6</h2>
+
+<p>可以取代 CommonJS和AMD规范，成为浏览器和服务器通用的模块解决方案。</p>
+
+<p>ES6 模块不是对象，而是通过export命令显式指定输出的代码，再通过import命令输入</p>
+
+<h3 id="toc_8">特点</h3>
+
+<ul>
+<li><p>它是编译时加载”或者静态加载；</p></li>
+<li><p>import 会自动提升到代码的顶层；</p></li>
+<li><p>输出的是值的引用，即原始值变化，import加载的值也会发生变化；</p></li>
+<li><p>export 和 import 只能出现在模块的顶层；</p></li>
+<li><p>ES6 模块之中，顶层的this指向undefined，即不应该在顶层代码使用this</p></li>
+</ul>
+
+<p>模块功能主要由两个命令构成：export 用于规定模块的对外接口 和 import用于引入其他模块提供的功能</p>
+
+<h3 id="toc_9">模块组成</h3>
+
+<h4 id="toc_10">export 命令</h4>
+
+<pre><code>// export.js  可以对外输出常量、方法和类
+// 变量
+export let a = &#39;xyz&#39;
+// 函数
+export function fn () {}
+// 类
+export class class1 {}
+// 需要特别注意的是，export命令规定的是对外的接口，必须与模块内部的变量建立一一对应关系
+export 1;   // 报错
+var m = 1;
+export m;   // 报错
+
+// 正确写法
+// 写法一
+export var m = 1;
+// 写法二
+var m = 1;
+export {m};
+// 写法三
+var n = 1;
+export {n as m};
+</code></pre>
+
+<h3 id="toc_11">import 命令</h3>
+
+<p>使用export命令定义了模块的对外接口以后，其他 JS 文件就可以通过import命令加载这个模块</p>
+
+<p>大括号里面的变量名，必须与被导入模块（export.js）对外接口的名称相同。<br/>
+import命令是编译阶段执行的，在代码运行之前，所以会被提升到模块的头部，首先执行</p>
+
+<p>import命令输入的变量都是只读的，因为它的本质是输入接口。也就是说，不允许在加载模块的脚本里面，改写接口</p>
+
+<pre><code>// 静态加载,只加载export.js 文件中两个变量，其他不加载
+import {a, fn} from &#39;./export.js&#39;
+a=22 // Syntax Error : &#39;a&#39; is read-only
+a.name = &#39;xyz&#39;  // 如果a是一个对象，改写a的属性是允许的
+
+//import命令要使用as关键字，将输入的变量重命名
+import {fn as fn1} from &#39;./export.js&#39;
+
+// 整体加载
+import * as all from &#39;./export.js&#39;
+</code></pre>
+
+<blockquote>
+<p>目前阶段，通过 Babel 转码，CommonJS 模块的require命令和 ES6 模块的import命令，可以写在同一个模块里面，但是最好不要这样做。因为import在静态解析阶段执行，所以它是一个模块之中最早执行的。</p>
+</blockquote>
+
+<h3 id="toc_12">export default 命令</h3>
+
+<p>模块指定默认输出</p>
+
+<p>本质上，<code>export default</code>就是输出一个叫做<code>default</code>的变量或方法</p>
+
+<p>1.使用<code>export default</code>时，对应的<code>import</code>语句不需要使用大括号</p>
+
+<pre><code>export default function crc32() { // 输出
+  // ...
+}
+import crc32 from &#39;crc32&#39;; // 输入
+</code></pre>
+
+<p>2.不使用<code>export default</code>时，对应的<code>import</code>语句需要使用大括号。</p>
+
+<pre><code>export function crc32() { // 输出
+  // ...
+};
+import { crc32 } from &#39;crc32&#39;; // 输入
+</code></pre>
+
+<p>正是因为export default命令其实只是输出一个叫做default的变量，所以它后面<strong>不能跟变量声明语句</strong>。</p>
+
+<pre><code>// 正确
+export var a = 1;
+// 正确
+var a = 1;
+export default a;   // 将变量a的值赋给变量default
+// 错误
+export default var a = 1;   
+// export default命令是输出一个叫做default的变量，所以它后面不能跟变量声明语句
+// 正确
+export default 42;  // 指定了对外接口为default
+// 报错
+export 42;  // 没有指定对外的接口
+</code></pre>
+
+<h3 id="toc_13">ES6模块的循环依赖</h3>
+
+<p>ES6模块的运行机制与CommonJS不一样，它遇到模块加载命令import时，不会去执行模块，而是只生成一个引用。等到真的需要用到时，再到模块里面去取值。<br/>
+因此，ES6模块是动态引用，不存在缓存值的问题，而且模块里面的变量，绑定其所在的模块。</p>
+
+<p>m1.js</p>
+
+<pre><code>export var foo = &#39;bar&#39;;
+setTimeout(() =&gt; foo = &#39;baz&#39;, 500);
+</code></pre>
+
+<p>m2.js</p>
+
+<pre><code>import { foo } from &#39;./m1.js&#39;;
+console.log(foo);
+setTimeout(() =&gt; console.log(foo), 500);
+
+$ babel-node m2.js
+bar
+baz
+</code></pre>
+
+<p>通过上述的输出可以看出：ES6模块不会缓存运行结果，而是动态地去被加载的模块取值，以及变量总是绑定其所在的模块</p>
+
+<p>ES6根本不会关心是否发生了”循环加载”，只是生成一个指向被加载模块的引用，需要开发者自己保证，真正取值的时候能够取到值。</p>
+
+<pre><code>// a.js
+import {bar} from &#39;./b.js&#39;;
+export function foo() {
+  bar();  
+  console.log(&#39;执行完毕&#39;);
+}
+foo();
+// b.js
+import {foo} from &#39;./a.js&#39;;
+export function bar() {  
+  if (Math.random() &gt; 0.5) {
+    foo();
+  }
+}
+</code></pre>
+
+<p>按照CommonJS规范，上面的代码是没法执行的。a先加载b，然后b又加载a，这时a还没有任何执行结果，所以输出结果为null，即对于b.js来说，变量foo的值等于null，后面的foo()就会报错。</p>
+
+<p>但是ES6可以执行上面的代码</p>
+
+<pre><code>$ babel-node a.js
+执行完毕
+</code></pre>
+
+<p>a.js之所以能够执行，原因就在于ES6加载的变量，都是动态引用其所在的模块。只要引用是存在的，代码就能执行。</p>
+
+<h2 id="toc_14">CommonJS  和ES6 模块的差异</h2>
+
+<ul>
+<li>CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
+<li>CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。</li>
+<li>ES6 中 import/export 最终都是编译为 CommonJS 中 require/exports 来执行的。</li>
+</ul>
+
+<h3 id="toc_15">CommonJS</h3>
+
+<p>CommonJS 模块输出的是值的拷贝，也就是说，一旦输出一个值，模块内部的变化就影响不到这个值：</p>
+
+<p>lib.js</p>
+
+<pre><code>var counter = 3;
+function incCounter() {
+  counter++;
+}
+module.exports = {
+  counter: counter,
+  incCounter: incCounter,
+};
+</code></pre>
+
+<p>main.js</p>
+
+<pre><code>var mod = require(&#39;./lib&#39;);
+console.log(mod.counter);  // 3
+mod.incCounter();
+console.log(mod.counter); // 3
+</code></pre>
+
+<p>lib.js模块加载以后，它的内部变化就影响不到输出的<code>mod.counter</code>了。<br/>
+这是因为<code>mod.counter</code>是一个原始类型的值，会被缓存。</p>
+
+<h3 id="toc_16">ES6</h3>
+
+<p>ES6 模块是动态引用，并且不会缓存值，模块里面的变量绑定其所在的模块。</p>
+
+<p>lib.js</p>
+
+<pre><code>export let counter = 3;
+export function incCounter() {
+  counter++;
+}
+</code></pre>
+
+<p>main.js</p>
+
+<pre><code>import { counter, incCounter } from &#39;./lib&#39;;
+console.log(counter); // 3
+incCounter();
+console.log(counter); // 4
+
+</code></pre>
+
+<p>ES6 模块输入的变量counter是活的，完全反应其所在模块lib.js内部的变化。</p>
+
+		</div>
+	</article>
+<div class="share-comment">
+
+</div>
+
+
+</div>        </div>
+	
+	</div>
+<script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

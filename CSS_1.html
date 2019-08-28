@@ -136,6 +136,54 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-04-28T18:09:41+08:00" itemprop="datePublished">2018/4/28</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15249101811632.html" itemprop="url">
+		min-width 与 width 之类的属性之间的相互覆盖</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2 id="toc_0">1.超越important</h2>
+
+<p>超越 <code>!important</code> 是指 <code>max-width</code> 会覆盖<code>width</code>，并且比 <code>!important</code> 的权重更高。<br/>
+例如下面的代码：</p>
+
+<pre><code>&lt;img src=&quot;1.jpg&quot; style=&quot;width: 480px!important&quot;&gt;
+img {
+  max-width: 250px;
+}
+</code></pre>
+
+<p>最终图片呈现的效果是 250px。因为 <code>max-width</code> 覆盖了 <code>width</code></p>
+
+<h2 id="toc_1">2.超越最大</h2>
+
+<p>超越最大是指 <code>min-width</code> 覆盖<code>max-width</code>，此规则发生在<code>min-width</code> 和<code>max-width</code> 冲突的时候，例如下面： </p>
+
+<pre><code>.container {
+  min-width: 1400px;
+  max-width: 1200px;
+}
+</code></pre>
+
+
+
+			 
+			<a href="15249101811632.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-04-24T11:45:05+08:00" itemprop="datePublished">2018/4/24</time>
 			</div>
 			<div class="tags">posted in 
@@ -466,37 +514,6 @@ h1 {
 
 			 
 			<a href="15184266353460.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2017-07-12T17:05:47+08:00" itemprop="datePublished">2017/7/12</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184263470634.html" itemprop="url">
-		利用 CSS 的 content 属性 attr 抓取资料</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>需求：鼠标悬浮实现一个提示文字的 tooltip</p>
-
-<p>想必大家都想到了伪元素 after ，但是文字怎么获得呢，又不能用 JS 。</p>
-
-<p>CSS 的伪元素是个很強大的东西，我们可以利用他做很多运用，通常为了做一些效果， <code>content: &quot; &quot;</code>多半会留空，但其实可以在里面写上 <code>attr</code>抓资料。</p>
-
-
-
-			 
-			<a href="15184263470634.html#more" class="more-link">Read on &rarr;</a>
     		
 			
 		</div>

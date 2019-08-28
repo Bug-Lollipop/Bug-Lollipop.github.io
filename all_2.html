@@ -136,6 +136,72 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-06-02T15:30:14+08:00" itemprop="datePublished">2018/6/2</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15284430142953.html" itemprop="url">
+		应用包打包体积优化</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>一个接手的Vue外部项目，build 非常慢，试着去优化一波。<br/>
+首先使用 webpack-bundle-analyzer 来分析一波是哪些文件造成的：</p>
+
+<h3 id="toc_0">安装</h3>
+
+<p>项目根目录运行：</p>
+
+<pre><code>npm install --save-dev webpack-bundle-analyzer
+</code></pre>
+
+<h3 id="toc_1">配置</h3>
+
+<p>在使用vue-cli生成的脚手架文件中，通过修改build文件夹下的webpack.prod.conf.js：</p>
+
+
+
+			 
+			<a href="15284430142953.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-05-29T18:18:44+08:00" itemprop="datePublished">2018/5/29</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='Mac.html'>Mac</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15275891246807.html" itemprop="url">
+		Phabricator 代码审查工具</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>Phabricator是Facebook一个开源可视化的代码审查工具，它集成了一系列开源的Web应用，其中包括审查代码、代码（git/svn）托管、语法检查、单元测试、wiki等功能，还可以bug跟踪，直接做jira与代码review关联，支持两种代码审查工作流：“review”（提交前审查）和 “audit”（提交后审查）。</p>
+
+
+
+			 
+			<a href="15275891246807.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-05-25T17:24:35+08:00" itemprop="datePublished">2018/5/25</time>
 			</div>
 			<div class="tags">posted in 
@@ -495,74 +561,6 @@ img {
 
 			 
 			<a href="15249101811632.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-04-27T14:36:50+08:00" itemprop="datePublished">2018/4/27</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15248110104895.html" itemprop="url">
-		【译】在不到5分钟的时间内学习这些简洁的JavaScript技巧</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>原文：<a href="https://medium.freecodecamp.org/9-neat-javascript-tricks-e2742f2735c3">https://medium.freecodecamp.org/9-neat-javascript-tricks-e2742f2735c3</a></p>
-
-<h2 id="toc_0">清空或截取数组</h2>
-
-<p>清除或截取数组而不重新分配数组的简单方法是更改其长度属性值：</p>
-
-<pre><code>const arr = [11, 22, 33, 44, 55, 66];
-// truncanting
-arr.length = 3;
-console.log(arr); //=&gt; [11, 22, 33]
-// clearing
-arr.length = 0;
-console.log(arr); //=&gt; []
-console.log(arr[2]); //=&gt; undefined
-</code></pre>
-
-
-
-			 
-			<a href="15248110104895.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-04-24T11:45:05+08:00" itemprop="datePublished">2018/4/24</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15245415058399.html" itemprop="url">
-		scroll 的发展史</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>大多数网页不适合在单个屏幕上显示，因此滚动信息的能力被所有用户视为是理所当然的。 不过，对于前端开发人员和用户体验设计人员来说，实现跨浏览器运行良好的滚动体验，很好地完成了设计想要的效果，并且仍然表现良好，这可能是一项挑战。 随着网络标准的演进速度比以往更快，编码实践往往相对比较落后。 请继续阅读以重新浏览一些常见的滚动案例，并检查您使用的解决方案是否已被更优雅的东西取代。</p>
-
-
-
-			 
-			<a href="15245415058399.html#more" class="more-link">Read on &rarr;</a>
     		
 			
 		</div>

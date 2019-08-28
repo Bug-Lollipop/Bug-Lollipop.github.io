@@ -136,6 +136,45 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2019-08-27T19:06:19+08:00" itemprop="datePublished">2019/8/27</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15669039790320.html" itemprop="url">
+		Common JS 、ES Module 差异</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2 id="toc_0">Common JS</h2>
+
+<p>CommonJS模块就是对象，每个文件就是一个模块，有自己的作用域</p>
+
+<h3 id="toc_1">特点</h3>
+
+<ul>
+<li><p>“运行时加载”，所有代码都运行在模块作用域，不会污染全局作用域</p></li>
+<li><p>模块可以多次加载，但是只会在第一次加载时运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果。要想让模块再次运行，必须清除缓存</p></li>
+<li><p>加载顺序按照其在代码中出现的顺序</p></li>
+</ul>
+
+<h3 id="toc_2">模块组成</h3>
+
+
+
+			 
+			<a href="15669039790320.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2019-08-07T10:24:25+08:00" itemprop="datePublished">2019/8/7</time>
 			</div>
 			<div class="tags">posted in 
@@ -159,29 +198,11 @@
 
 <h3 id="toc_1">微任务</h3>
 
-<p>microtask（又称为微任务），可以理解是在当前 task 执行结束后立即执行的任务。也就是说，在当前task任务后，下一个task之前，在渲染之前。</p>
-
-<p>所以它的响应速度相比setTimeout（setTimeout是task）会更快，因为无需等渲染。也就是说，在某一个macrotask执行完后，就会将在它执行期间产生的所有microtask都执行完毕（在渲染前）。</p>
-
-<p>microtask：Promise.then、MutaionObserver、process.nextTick(Node.js 环境)</p>
-
-<h3 id="toc_2">运行机制</h3>
-
-<p><img src="media/15651446659023/15651452951715.jpg" alt=""/></p>
-
-<h3 id="toc_3">Promise和async中的立即执行</h3>
-
-<p>Promise 中的代码当做同步任务立即执行。<br/>
-async/await中，出现在 await之前的代码立即执行。await 之后的相当于 promise then。</p>
-
-<h4 id="toc_4">await 做了什么</h4>
-
-<p>await 让出线程的标志。await 后面的表达式会执行一遍，将await 后面的代码加入到microtask 中，然后await 后面的表达式执行完，就会跳出整个async 函数来执行后面的代码</p>
-
-<p>async await 本身就是promise+generator的语法糖</p>
 
 
-			
+			 
+			<a href="15651446659023.html#more" class="more-link">Read on &rarr;</a>
+    		
 			
 		</div>
 
@@ -218,327 +239,11 @@ function test(fruit) {
 }
 </code></pre>
 
-<p>乍一看，上面的例子看起来不错。 但是，如果我们得到更多的红色水果，cherry（樱桃）和 cranberries（蔓越莓）呢？ 我们是否要用更多的 <code>||</code> 扩展语句？</p>
 
-<p>我们可以使用Array.includes（<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes">Array.includes</a>）重写上面的条件。</p>
 
-<pre><code>function test(fruit) {
-  // extract conditions to array
-  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
-
-  if (redFruits.includes(fruit)) {
-    console.log(&#39;red&#39;);
-  }
-}
-</code></pre>
-
-<p>我们将红色水果（条件）提取到一个数组中。 通过这样做代码看起来更加整洁。</p>
-
-<h3 id="toc_1">2. 减少嵌套，更早return</h3>
-
-<p>让我们扩展前面的示例以包含另外两个条件：</p>
-
-<pre><code>function test(fruit, quantity) {
-  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
-
-  // 条件 1： 及早抛出错误
-  if (fruit) {
-    // 条件 2： 必须是红色
-    if (redFruits.includes(fruit)) {
-      console.log(&#39;red&#39;);
-
-      // 条件 3： 必须是大数量
-      if (quantity &gt; 10) {
-        console.log(&#39;big quantity&#39;);
-      }
-    }
-  } else {
-    throw(&#39;No fruit!&#39;);
-  }
-}
-
-// test results
-test(null); // error: No fruits
-test(&#39;apple&#39;); // print: red
-test(&#39;apple&#39;, 20); // print: red, big quantity
-</code></pre>
-
-<p>看看上面的代码，我们可以做：</p>
-
-<p>我个人遵循的一般规则是在发现无效条件时提前返回。</p>
-
-<pre><code>/_ 当无效的条件发生时，及早返回 _/
-
-function test(fruit, quantity) {
-  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
-
-  // 条件 1： 及早抛出错误
-  if (!fruit) throw(&#39;No fruit!&#39;);
-
-  // 条件 2： 必须是红色
-  if (redFruits.includes(fruit)) {
-    console.log(&#39;red&#39;);
-
-    // 条件 3： 必须是大数量
-    if (quantity &gt; 10) {
-      console.log(&#39;big quantity&#39;);
-    }
-  }
-}
-</code></pre>
-
-<p>通过这样做，我们有一个较少级别的嵌套语句。 这种编码风格很好，特别是当你有很长的if语句时（想象你需要滚动到最底层才知道有一个else语句，这一点都不酷）。</p>
-
-<p>如果通过反转条件并提前返回，我们可以进一步减少嵌套。 请查看下面的条件2，看看我们是如何做到的：</p>
-
-<pre><code>/_ 当无效的条件发生时，及早返回 _/
-
-function test(fruit, quantity) {
-  const redFruits = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;cherry&#39;, &#39;cranberries&#39;];
-
-  if (!fruit) throw(&#39;No fruit!&#39;); // 条件 1： 及早抛出错误
-  if (!redFruits.includes(fruit)) return; // 条件 2： 必须是红色
-
-  console.log(&#39;red&#39;);
-
-  // 条件 3: 必须是大数量
-  if (quantity &gt; 10) {
-    console.log(&#39;big quantity&#39;);
-  }
-}
-</code></pre>
-
-<p>通过反转条件2的条件，我们的代码现在没有嵌套语句。 当我们有很长的逻辑时，这种技术非常有用，我们希望在条件不满足时停止进一步的处理。</p>
-
-<p>这样看来，这并不是一件难事。 想一想，这个版本（没有嵌套）比前一个（条件2嵌套）版本是否更好，可读性更高？</p>
-
-<p>对我来说，我只是将它保留为以前的版本（条件2与嵌套），因为：<br/>
-- 代码简短直接，嵌套if更清晰<br/>
-- 反转条件可能会引发更多的思考过程（增加认知负荷）</p>
-
-<p>因此，始终瞄准较少的嵌套和早期返回，但不要过度。 如果您感兴趣，有一篇文章和StackOverflow讨论会进一步讨论这个主题：</p>
-
-<h3 id="toc_2">3. 使用默认函数参数和解构</h3>
-
-<p>我想下面的代码可能看起来很熟悉，我们总是需要检查null / undefined值并在使用JavaScript时分配默认值：</p>
-
-<pre><code>function test(fruit, quantity) {
-  if (!fruit) return;
-  const q = quantity || 1; // if quantity not provided, default to one
-
-  console.log(`We have ${q} ${fruit}!`);
-}
-
-//test results
-test(&#39;banana&#39;); // We have 1 banana!
-test(&#39;apple&#39;, 2); // We have 2 apple!
-</code></pre>
-
-<p>实际上，我们可以通过分配默认函数参数来消除变量q。</p>
-
-<pre><code>function test(fruit, quantity = 1) { // if quantity not provided, default to one
-  if (!fruit) return;
-  console.log(`We have ${quantity} ${fruit}!`);
-}
-
-//test results
-test(&#39;banana&#39;); // We have 1 banana!
-test(&#39;apple&#39;, 2); // We have 2 apple!
-</code></pre>
-
-<p>更简单直观不是吗？ 请注意，每个参数都有自己的默认函数参数。 例如，我们也可以为<code>fruit</code>分配默认值：test(fruit =&#39;unknown&#39;, quantity = 1)。</p>
-
-<p>如果我们的fruit是一个对象怎么办？ 我们可以指定默认参数吗？</p>
-
-<pre><code>function test(fruit) { 
-  // printing fruit name if value provided
-  if (fruit &amp;&amp; fruit.name)  {
-    console.log (fruit.name);
-  } else {
-    console.log(&#39;unknown&#39;);
-  }
-}
-
-//test results
-test(undefined); // unknown
-test({ }); // unknown
-test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
-</code></pre>
-
-<p>看看上面的例子，如果fruit.name对象和fruit.name 同时存在，打印fruit.name，反之打印出unknown。 我们可以使用默认函数参数＆拆分来避免使用条件fruit&amp;&amp; fruit.name 去检查。</p>
-
-<pre><code>// destructing - get name property only
-// assign default empty object {}
-function test({name} = {}) {
-  console.log (name || &#39;unknown&#39;);
-}
-
-//test results
-test(undefined); // unknown
-test({ }); // unknown
-test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
-</code></pre>
-
-<p>由于我们只需要来自fruit的属性<code>name</code>，我们可以使用<code>{ name }</code>来构造参数，然后我们可以在代码中使用<code>name</code>作为变量而不是<code>fruit.name</code>。</p>
-
-<p>我们还将空对象<code>{}</code>指定为默认值。 如果我们不这样做，你将在执行test(undefined) 时报错 - <code>Cannot destructure property name of &#39;undefined&#39; or &#39;null&#39;.</code>。 因为<code>undefined</code>中没有<code>name</code>属性。</p>
-
-<p>如果您不介意使用第三方库，有几种方法可以减少空检查：</p>
-
-<p>这是一个使用Lodash 的例子：</p>
-
-<pre><code>// Include lodash library, you will get _
-function test(fruit) {
-  console.log(_.get(fruit, &#39;name&#39;, &#39;unknown&#39;); // get property name, if not available, assign default value &#39;unknown&#39;
-}
-
-//test results
-test(undefined); // unknown
-test({ }); // unknown
-test({ name: &#39;apple&#39;, color: &#39;red&#39; }); // apple
-</code></pre>
-
-<p>您可以在<a href="http://jsbin.com/bopovajiye/edit?js,console">此处</a>运行演示代码。 此外，如果您是函数式编程（FP）的粉丝，您可以选择使用<a href="https://github.com/lodash/lodash/wiki/FP-Guide">Lodash fp</a>，这是Lodash的函数式版本（方法更改为get或getOr）。</p>
-
-<h3 id="toc_3">4. 支持Map / Object Literal而不是Switch语句</h3>
-
-<p>一起看下面的例子，我们想要打印出水果对应的基本颜色：</p>
-
-<pre><code>function test(color) {
-  // use switch case to find fruits in color
-  switch (color) {
-    case &#39;red&#39;:
-      return [&#39;apple&#39;, &#39;strawberry&#39;];
-    case &#39;yellow&#39;:
-      return [&#39;banana&#39;, &#39;pineapple&#39;];
-    case &#39;purple&#39;:
-      return [&#39;grape&#39;, &#39;plum&#39;];
-    default:
-      return [];
-  }
-}
-
-//test results
-test(null); // []
-test(&#39;yellow&#39;); // [&#39;banana&#39;, &#39;pineapple&#39;]
-</code></pre>
-
-<p>上面的代码看起来没有什么问题，但是我会觉得它比较冗长。使用具有更清晰语法——对象自变量 可以实现相同的结果：</p>
-
-<pre><code>function test(color) {
-  // use object literal to find fruits in color
-  const fruitColor = {
-    red: [&#39;apple&#39;, &#39;strawberry&#39;],
-    yellow: [&#39;banana&#39;, &#39;pineapple&#39;],
-    purple: [&#39;grape&#39;, &#39;plum&#39;]
-  };
-
-  return fruitColor[color] || [];
-}
-</code></pre>
-
-<p>或者，您可以使用<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"><code>Map</code></a>来实现相同的结果：</p>
-
-<pre><code>function test(color) {
-  // use Map to find fruits in color
-  const fruitColor = new Map()
-    .set(&#39;red&#39;, [&#39;apple&#39;, &#39;strawberry&#39;])
-    .set(&#39;yellow&#39;, [&#39;banana&#39;, &#39;pineapple&#39;])
-    .set(&#39;purple&#39;, [&#39;grape&#39;, &#39;plum&#39;]);
-
-  return fruitColor.get(color) || [];
-}
-</code></pre>
-
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>是自ES2015以来可用的对象类型，允许您存储键值对。</p>
-
-<p>我们应该禁止使用switch语句吗？ 不要局限于此。 就个人而言，我尽可能使用对象字变量，但我不会设置硬规则来阻止它，应根据不同场景选择适合的方式。</p>
-
-<p>Todd Motto有一篇深入研究switch语句与对象字变量的文章，你可以在<a href="https://toddmotto.com/deprecating-the-switch-statement-for-object-literals/">这里</a>阅读。</p>
-
-<h3 id="toc_4">5.代码重构</h3>
-
-<p>对于上面的示例，我们实际上可以重构我们的代码以使用<code>Array.filter</code>实现相同的结果</p>
-
-<pre><code>function test(color) {
-  // use Array filter to find fruits in color
-  const fruits = [
-    { name: &#39;apple&#39;, color: &#39;red&#39; }, 
-    { name: &#39;strawberry&#39;, color: &#39;red&#39; }, 
-    { name: &#39;banana&#39;, color: &#39;yellow&#39; }, 
-    { name: &#39;pineapple&#39;, color: &#39;yellow&#39; }, 
-    { name: &#39;grape&#39;, color: &#39;purple&#39; }, 
-    { name: &#39;plum&#39;, color: &#39;purple&#39; }   ];
-
-  return fruits.filter(f =&gt; f.color == color);
-}
-</code></pre>
-
-<p>总有不止一种方法可以达到相同的效果。 我们在这个例子中，展示了四种实现方式。 编码真的很有趣！</p>
-
-<h3 id="toc_5">6.对所有、部分标准使用Array.every和Array.some</h3>
-
-<p>最后一点更多是关于领用一个新的 javascript Array 函数去减少代码行。看下面的代码，我们想要去见检查在所有的水果中哪些是红颜色的：</p>
-
-<pre><code>function test(fruits) {
-  const fruits = [
-    { name: &#39;apple&#39;, color: &#39;red&#39; },
-    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
-    { name: &#39;grape&#39;, color: &#39;purple&#39; }
-  ];
-
-  let isAllRed = true;
-
-  // condition: all fruits must be red
-  for (let f of fruits) {
-    if (!isAllRed) break;
-    isAllRed = (f.color == &#39;red&#39;);
-  }
-
-  console.log(isAllRed); // false
-}
-</code></pre>
-
-<p>这个代码看起来太长了！我们可以使用 <code>Array.every</code> 减少代码行数量:</p>
-
-<pre><code>function test(fruits) {
-  const fruits = [
-    { name: &#39;apple&#39;, color: &#39;red&#39; },
-    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
-    { name: &#39;grape&#39;, color: &#39;purple&#39; }
-  ];
-
-  // condition: short way, all fruits must be red
-  const isAllRed = fruits.every(f =&gt; f.color == &#39;red&#39;);
-
-  console.log(isAllRed); // false
-}
-</code></pre>
-
-<p>现在是不是干净多了？ 以类似的方式，如果我们想测试水果中是否有红色的，我们可以使用<code>Array.some</code>用一行中实现它。</p>
-
-<pre><code>function test(fruits) {
-  const fruits = [
-    { name: &#39;apple&#39;, color: &#39;red&#39; },
-    { name: &#39;banana&#39;, color: &#39;yellow&#39; },
-    { name: &#39;grape&#39;, color: &#39;purple&#39; }
-  ];
-
-  // condition: if any fruit is red
-  const isAnyRed = fruits.some(f =&gt; f.color == &#39;red&#39;);
-
-  console.log(isAnyRed); // true
-}
-</code></pre>
-
-<h3 id="toc_6">总结</h3>
-
-<p>让我们一起生成更多可读代码。 我希望你能在本文中学到一些新东西。</p>
-
-<p>就这样。 快乐的编码！</p>
-
-
-			
+			 
+			<a href="15374269260171.html#more" class="more-link">Read on &rarr;</a>
+    		
 			
 		</div>
 
@@ -779,71 +484,6 @@ test(&#39;yellow&#39;); // [&#39;banana&#39;, &#39;pineapple&#39;]
 <li>资源放到CDN</li>
 <li>接口</li>
 </ul>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-05-11T18:11:26+08:00" itemprop="datePublished">2018/5/11</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15260334862166.html" itemprop="url">
-		千分位分隔符</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>千位分隔符 是很常见的需求，但是输入文本千变万化，如何才能准确添加千分符呢？</p>
-
-<p>纯整数情况：</p>
-
-<p>纯整数大概是所有情况里最简单的一种，我们只要正确匹配出千分位就好了。</p>
-
-<p>观察上面的数字，我们可以得出千分位的特征是 到字符串终止位有 3n 个数字，不包括起始位 。于是可以得到这样的函数：</p>
-
-<pre><code>let miliFormat = (num) =&gt; {  
-    return num &amp;&amp; num.toString().replace(/(?=(?!^)(\d{3})+$)/g, &#39;,&#39;)
-}
-</code></pre>
-
-<p>但是往往现实没有那么乐观：</p>
-
-<p>小数的情况</p>
-
-<p>遇到小数时，我们的希望只针对整数部分添加千分符，这时问题就变得稍稍有些棘手了。</p>
-
-<p>如果正则引擎支持逆序环视 [2] ，我们可以这样构造正则表达式：</p>
-
-<p><code>(?&lt;=\d+)(?=(\d{3})+\b)</code></p>
-
-<p>但是多数语言并不支持逆序环视，所以我们要变通一下：</p>
-
-<ol>
-<li>拿到小数的整数部分
-也就是起始位到小数点（非数字）之间的部分，可以这样实现：</li>
-</ol>
-
-<p><code>^\d+</code><br/>
-2. 为整数部分添加千分符<br/>
-这一步可以利用我们之前的实现，整合在一起如下：</p>
-
-<pre><code>let miliFormat = (num) =&gt; {  
-    return num &amp;&amp; num
-        .toString()
-        .replace(/^\d+/, (m) =&gt; m.replace(/(?=(?!^)(\d{3})+$)/g, &#39;,&#39;))
-}
-</code></pre>
-
-<p>这个函数对整、小数都能正确处理。</p>
 
 
 			
