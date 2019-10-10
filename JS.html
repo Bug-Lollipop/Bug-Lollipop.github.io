@@ -136,6 +136,191 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2019-10-10T10:53:13+08:00" itemprop="datePublished">2019/10/10</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15706759935057.html" itemprop="url">
+		JS 类数组相关</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>先看一道题：</p>
+
+<p>输出以下代码执行的结果并解释为什么</p>
+
+<pre><code>
+var obj = {
+    &#39;2&#39;: 3,
+    &#39;3&#39;: 4,
+    &#39;length&#39;: 2,
+    &#39;splice&#39;: Array.prototype.splice,
+    &#39;push&#39;: Array.prototype.push
+}
+obj.push(1)
+obj.push(2)
+console.log(obj)
+</code></pre>
+
+<p>运行结果：<br/>
+<img src="media/15706759935057/15706788464078.jpg" alt=""/></p>
+
+<h3 id="toc_0">涉及知识点：</h3>
+
+<h4 id="toc_1">类数组（ArrayLike）：</h4>
+
+<p>一组数据，由数组来存，但是如果要对这组数据进行扩展，会影响到数组原型，ArrayLike的出现则提供了一个中间数据桥梁，ArrayLike有数组的特性，但是对ArrayLike的扩展并不会影响到原生的数组。</p>
+
+<h3 id="toc_2">push方法：</h3>
+
+<p>push 方法具有通用性。该方法和 call() 或 apply() 一起使用时，可应用在类似数组的对象上。push 方法根据 length 属性来决定从哪里开始插入给定的值。如果 length 不能被转成一个数值，则插入的元素索引为 0，包括 length 不存在时。当 length 不存在时，将会创建它。<br/>
+唯一的原生类数组（array-like）对象是 Strings，尽管如此，它们并不适用该方法，因为字符串是不可改变的。</p>
+
+<h3 id="toc_3">对象转数组的方式：</h3>
+
+<p>Array.from()、splice()、concat()等</p>
+
+
+
+			 
+			<a href="15706759935057.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2019-09-11T14:03:18+08:00" itemprop="datePublished">2019/9/11</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15681817980753.html" itemprop="url">
+		函数防抖 debounce 和函数节流throttle</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h3 id="toc_0">防抖和节流</h3>
+
+<p>窗口的resize、scroll，输入框内容校验等操作时，如果这些操作处理函数较为复杂或页面频繁重渲染等操作时，如果事件触发的频率无限制，会加重浏览器的负担，导致用户体验非常糟糕。此时我们可以采用debounce（防抖）和throttle（节流）的方式来减少触发的频率，同时又不影响实际效果。</p>
+
+<h2 id="toc_1">1. 函数防抖（debounce）</h2>
+
+<p>动作触发n毫秒之后调用func，如果在n毫秒之内连续触发操作，会以最后一次动作为定时器，n毫秒后再执行func。</p>
+
+<p>当事件被触发时，事件处理函数不会立即执行，而是会被放到setTimeout中延时delay执行；而当delay时间内再次触发事件，则前一个setTimeout生成的ID会被clearTimeout清除，同时生成新的ID。这样，只有在delay时间段内，没有新的event，n毫秒后事件处理函数才会真正执行。</p>
+
+<pre><code>function debounce (fn, delay){
+  let timeout
+  return function(){
+    const args = arguments
+    clearTimeout(timeout)
+    timeout = setTimeout(() =&gt; {
+      fn.apply(this, args)
+    }, delay)
+  }
+}
+</code></pre>
+
+<pre><code>
+var test = debounce(function (a) {console.log(a)}, 1000)
+test(1) // 不执行
+test(2) // 不执行
+test(3)
+=&gt; 3
+test = null // 不需要时释放内存
+</code></pre>
+
+<h3 id="toc_2">1.1 立即执行的函数防抖</h3>
+
+<p>和函数防抖思想一致，不过其策略是：函数第一次触发时立即执行，在之后的一段时间内，所有被触发的函数都不会被执行，直到出现“一次函数触发后的一段时间内没有触发该函数”，下一次函数触发才会被执行。</p>
+
+<h3 id="toc_3">1.2 场景</h3>
+
+<p>函数防抖可以用在输入框中，若是每次input事件触发时，都发送一个ajax操作，则会造成极大的性能浪费。使用debounce，则只会在用户停止输入后才会发送ajax请求。</p>
+
+<h3 id="toc_4">1.3 缺点</h3>
+
+<p>但是这一方式也有自己的问题：如果事件一直源源不断的触发，则可能导致在很长一段时间内，事件处理程序都不会被调用。在某些场景下，这可能会导致用户体验不佳。比如说，需要为dialog弹窗增加鼠标拖动的功能，如果使用debounce的方法，则可能会导致在鼠标移动期间，弹窗一直不动，直到鼠标停止移动，弹窗会一下子跳到终止位置。这显然是不合理的。</p>
+
+<p>debounce解决了短时间内大量事件触发的问题，只有当delay时间段内，没有新的事件触发，才会真正执行事件处理函数；但是，极端情况下，事件处理函数可能一直得不到执行。</p>
+
+<h2 id="toc_5">2. 函数节流（throttle）</h2>
+
+<p>在n毫秒内最多执行一次func</p>
+
+<pre><code>function throttle (fn, delay) {
+  // 利用闭包变量时效性
+  let timeout
+  let arg
+  return function () {
+    arg = arguments
+    if (!timeout) {
+      timeout = setTimeout(() =&gt; {
+        fn.apply(this, arg)
+        timeout = null
+      }, delay)
+    }
+  }
+}
+
+</code></pre>
+
+<pre><code>var test = throttle(function (a) {console.log(a)}, 1000)
+test(1) // 不执行
+test(2) // 不执行
+test(3)
+=&gt; 3
+test = null // 不需要时释放内存
+</code></pre>
+
+<p>简单来说，函数的节流就是通过闭包保存一个标记（canRun = true），在函数的开头判断这个标记是否为 true，如果为 true 的话就继续执行函数，否则则 return 掉，判断完标记后立即把这个标记设为 false，然后把外部传入的函数的执行包在一个 setTimeout 中，最后在 setTimeout 执行完毕后再把标记设置为 true（这里很关键），表示可以执行下一次的循环了。当 setTimeout 还未执行的时候，canRun 这个标记始终为 false，在开头的判断中被 return 掉。</p>
+
+<pre><code>function throttle(fn, interval = 300) {
+    let canRun = true;
+    return function () {
+        if (!canRun) return;
+        canRun = false;
+        setTimeout(() =&gt; {
+            fn.apply(this, arguments);
+            canRun = true;
+        }, interval);
+    };
+}
+</code></pre>
+
+<h3 id="toc_6">场景</h3>
+
+<p>throttle可以用在滚屏预加载，弹窗拖动等场景。这些场景的特征是，在事件节流的基础上，要求每隔一段时间，至少执行一次事件处理函数。</p>
+
+<h2 id="toc_7">选择合适的方法</h2>
+
+<p>函数节流和函数防抖都能限制函数的高频重复执行，那么应该选用哪一种方法呢？这个需要根据实际情况选择合适的方法，具体情况具体分析。</p>
+
+<p>场景1：联动索引条，使用touchmove事件监听用户在索引条上的触摸移动。由于touchmove事件的触发频率比较高，所以会产生很多无用的函数调用。此时，可以通过使用函数节流，限制事件的触发频率。</p>
+
+<p>情形2：分页组件，监听scroll事件，计算页面滚动位置，滚动到页面最下方时触发下一页的加载。因为scroll事件的频繁触发，需要频繁计算页面位置。因此可以使用函数防抖，在持续滚动结束后只对最后一次scroll事件进行位置计算和判断。</p>
+
+<p>情形3：关注button，防止用户的快速连击。很明显，这个问题用“立即执行的函数防抖”可以轻松解决问题。</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2019-08-27T19:06:19+08:00" itemprop="datePublished">2019/8/27</time>
 			</div>
 			<div class="tags">posted in 
@@ -416,74 +601,6 @@ function test(fruit) {
 <li>A记录和NS记录的区别是，A记录直接给出目的IP，NS记录将DNS解析任务交给特定的服务器，NS记录中记录的IP即为该特定服务器的IP地址。 </li>
 <li>NS记录优先于A记录，A记录优先于CNAME记录 </li>
 </ol>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-06-02T15:30:14+08:00" itemprop="datePublished">2018/6/2</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15284430142953.html" itemprop="url">
-		应用包打包体积优化</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>一个接手的Vue外部项目，build 非常慢，试着去优化一波。<br/>
-首先使用 webpack-bundle-analyzer 来分析一波是哪些文件造成的：</p>
-
-<h3 id="toc_0">安装</h3>
-
-<p>项目根目录运行：</p>
-
-<pre><code>npm install --save-dev webpack-bundle-analyzer
-</code></pre>
-
-<h3 id="toc_1">配置</h3>
-
-<p>在使用vue-cli生成的脚手架文件中，通过修改build文件夹下的webpack.prod.conf.js：</p>
-
-
-
-			 
-			<a href="15284430142953.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-05-21T13:57:44+08:00" itemprop="datePublished">2018/5/21</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15268822646837.html" itemprop="url">
-		Vue 首屏加载速度</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<ul>
-<li>缩小vendor 体积，拆包</li>
-<li>外部组件按需加载</li>
-<li>资源放到CDN</li>
-<li>接口</li>
-</ul>
 
 
 			

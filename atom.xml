@@ -4,7 +4,7 @@
   <title><![CDATA[Akira's blog]]></title>
   <link href="http://233px.com/atom.xml" rel="self"/>
   <link href="http://233px.com/"/>
-  <updated>2019-08-28T19:25:35+08:00</updated>
+  <updated>2019-10-10T15:45:55+08:00</updated>
   <id>http://233px.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,506 @@
   </author>
   <generator uri="http://www.coderforart.com/">CoderForArt</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[JS 类数组相关]]></title>
+    <link href="http://233px.com/15706759935057.html"/>
+    <updated>2019-10-10T10:53:13+08:00</updated>
+    <id>http://233px.com/15706759935057.html</id>
+    <content type="html"><![CDATA[
+<p>先看一道题：</p>
+
+<p>输出以下代码执行的结果并解释为什么</p>
+
+<pre><code>
+var obj = {
+    &#39;2&#39;: 3,
+    &#39;3&#39;: 4,
+    &#39;length&#39;: 2,
+    &#39;splice&#39;: Array.prototype.splice,
+    &#39;push&#39;: Array.prototype.push
+}
+obj.push(1)
+obj.push(2)
+console.log(obj)
+</code></pre>
+
+<p>运行结果：<br/>
+<img src="media/15706759935057/15706788464078.jpg" alt=""/></p>
+
+<h3 id="toc_0">涉及知识点：</h3>
+
+<h4 id="toc_1">类数组（ArrayLike）：</h4>
+
+<p>一组数据，由数组来存，但是如果要对这组数据进行扩展，会影响到数组原型，ArrayLike的出现则提供了一个中间数据桥梁，ArrayLike有数组的特性，但是对ArrayLike的扩展并不会影响到原生的数组。</p>
+
+<h3 id="toc_2">push方法：</h3>
+
+<p>push 方法具有通用性。该方法和 call() 或 apply() 一起使用时，可应用在类似数组的对象上。push 方法根据 length 属性来决定从哪里开始插入给定的值。如果 length 不能被转成一个数值，则插入的元素索引为 0，包括 length 不存在时。当 length 不存在时，将会创建它。<br/>
+唯一的原生类数组（array-like）对象是 Strings，尽管如此，它们并不适用该方法，因为字符串是不可改变的。</p>
+
+<h3 id="toc_3">对象转数组的方式：</h3>
+
+<p>Array.from()、splice()、concat()等</p>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_4">题分析：</h3>
+
+<p>这个<code>obj</code>中定义了两个key值，分别为<code>splice</code>和<code>push</code>分别对应数组原型中的<code>splice</code>和<code>push</code>方法，因此这个<code>obj</code>可以调用数组中的<code>push</code>和<code>splice</code>方法，调用对象的<code>push</code>方法：<code>push(1)</code>，因为此时<code>obj</code>中定义<code>length</code>为<code>2</code>，所以从数组中的第二项开始插入，也就是数组的第三项（下标为<code>2</code>的那一项），因为数组是从第<code>0</code>项开始的，这时已经定义了下标为<code>2</code>和<code>3</code>这两项，所以它会替换第三项也就是下标为<code>2</code>的值，第一次执行<code>push</code>完，此时<code>key</code>为2的属性值为<code>1</code>，同理：第二次执行<code>push</code>方法，<code>key</code>为<code>3</code>的属性值为<code>2</code>。</p>
+
+<p>此时的输出结果就是：</p>
+
+<pre><code>Object(4) [empty × 2, 1, 2, splice: ƒ, push: ƒ]----&gt;
+[
+2: 1,
+3: 2,
+length: 4,
+push: ƒ push(),
+splice: ƒ splice()
+]
+</code></pre>
+
+<p>因为只是定义了2和3两项，没有定义0和1这两项，所以前面会是empty。<br/>
+如果讲这道题改为：</p>
+
+<pre><code>var obj = {
+    &#39;2&#39;: 3,
+    &#39;3&#39;: 4,
+    &#39;length&#39;: 0,
+    &#39;splice&#39;: Array.prototype.splice,
+    &#39;push&#39;: Array.prototype.push
+}
+obj.push(1)
+obj.push(2)
+console.log(obj)
+此时的打印结果就是：
+Object(2) [1, 2, 2: 3, 3: 4, splice: ƒ, push: ƒ]----&gt;
+[
+0: 1,
+1: 2,
+2: 3,
+3: 4,
+length: 2,
+push: ƒ push(),
+splice: ƒ splice()
+]
+</code></pre>
+
+<p>原理：此时<code>length</code>长度设置为0，<code>push</code>方法从第0项开始插入，所以填充了第0项的empty</p>
+
+<p>至于为什么对象添加了<code>splice</code>属性后并没有调用就会变成类数组对象这个问题，这是控制台中<code>DevTools</code>猜测类数组的一个方式：</p>
+
+<p><a href="https://github.com/ChromeDevTools/devtools-frontend/blob/master/front_end/event_listeners/EventListenersUtils.js#L330">https://github.com/ChromeDevTools/devtools-frontend/blob/master/front_end/event_listeners/EventListenersUtils.js#L330</a></p>
+
+<p>关键代码入下：</p>
+
+<pre><code>/**
+     * @param {?Object} obj
+     * @return {boolean}
+     */
+    function isArrayLike(obj) {
+      if (!obj || typeof obj !== &#39;object&#39;) {
+        return false;
+      }
+      try {
+        if (typeof obj.splice === &#39;function&#39;) {
+          const len = obj.length;
+          return typeof len === &#39;number&#39; &amp;&amp; (len &gt;&gt;&gt; 0 === len &amp;&amp; (len &gt; 0 || 1 / len &gt; 0));
+        }
+      } catch (e) {
+      }
+      return false;
+    }
+
+</code></pre>
+
+<p>判断的过程：</p>
+
+<ul>
+<li>存在且是对象</li>
+<li>对象上的splice 属性是函数类型</li>
+<li>对象上有 length 属性且为正整数</li>
+</ul>
+
+<h3 id="toc_5">另一种解释</h3>
+
+<pre><code>/** 
+ * 1. 当一个对象拥有length属性，并且splice属性是个函数，对我们来说就可以看作是一个类数组
+ * 2. 既然是类数组，对象的键就是数组的下标，对象的值就是数组当前下标的值
+ * 3. 此时撇开length属性不管，这个类数组可以看作：[empty, empty, 3, 4]
+ * 4. 当length属性起作用时，它将这个类数组的长度截断了，此时可以看作：[empty, empty]
+ * 5. 之后这个类数组进行了两次push操作，结果可以看作：[empty, empty, 1, 2]
+ * 6. 当然，这个类数组中还包含push和splice函数以及它的length，但并没有数组的其它方法，所以实 
+ * 际上它只是一个对象而已
+ */
+let obj = {
+    &#39;2&#39;: 3,
+    &#39;3&#39;: 4,
+    length: 2,
+    splice: [].splice,
+    push: [].push
+};
+
+obj.push(1);
+obj.push(2);
+console.log(obj); // [empty, empty, 1, 2]
+console.log(Object.prototype.toString.call(obj)); // [object Object]
+</code></pre>
+
+<h3 id="toc_6">注</h3>
+
+<p>控制台输出结果不同浏览器可能预期的结果不一样，说白了就是浏览器特性</p>
+
+<blockquote>
+<p><a href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/76">https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/76</a></p>
+</blockquote>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[前端必学 - 移动端用户体验总结]]></title>
+    <link href="http://233px.com/15693160874166.html"/>
+    <updated>2019-09-24T17:08:07+08:00</updated>
+    <id>http://233px.com/15693160874166.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">布局</h2>
+
+<h3 id="toc_1">响应式布局</h3>
+
+<p>自行识别设备屏幕尺寸并做出相应调整的网页设计，从而提高网页在移动端的用户体验。</p>
+
+<h4 id="toc_2">Responsive Web Design</h4>
+
+<ul>
+<li>采用 CSS 的 media query 技术</li>
+<li>流体布局（ fluid grids ）</li>
+<li>自适应的图片/视频等资源素材</li>
+</ul>
+
+<h4 id="toc_3">Adaptive Web Design</h4>
+
+<ul>
+<li>CSS media query 技术（仅针对有限几种预设的屏幕尺寸设计）</li>
+<li>用 Javascript 来操作 HTML 内容</li>
+<li>在服务器端操作 HTML 内容（比如为移动端减少内容，为桌面端提供更多内容）</li>
+</ul>
+
+<h3 id="toc_4">单位</h3>
+
+<h4 id="toc_5">rem</h4>
+
+<p>font size of the root element，是相对长度单位。相对于根元素（即html元素）font-size计算值的倍数。<br/>
+rem 为元素设定字体大小时，仍然是相对大小，但相对的只是HTML根元素。这个单位可谓集相对大小和绝对大小的优点于一身，通过它既可以做到只修改根元素就成比例地调整所有字体大小，又可以避免字体大小逐层复合的连锁反应。</p>
+
+<h4 id="toc_6">px</h4>
+
+<p>Pixel，相对长度单位，像素 px 是相对于显示器屏幕分辨率而言的。<br/>
+（需要注意的是 Weex 环境下的 px 实际是 750 等分屏幕宽度）</p>
+
+<h4 id="toc_7">vh/vw</h4>
+
+<p>Viewport Height 和 Viewport Width，相对于视窗的宽高。</p>
+
+<h4 id="toc_8">rpx</h4>
+
+<p>responsive pixel 可以根据屏幕宽度进行自适应。规定屏幕宽为 750rpx。如在 iPhone6 上，屏幕宽度为 375px，共有750 个物理像素，则 750rpx = 375px = 750 物理像素，1rpx = 0.5px = 1 物理像素。<br/>
+rpx 为小程序中使用的相对单位，用法和 rem 类似， 1rpx = 屏幕宽度/750 px, 所以在屏幕宽度为 750 的设计稿中，1rpx = 1px。</p>
+
+<h4 id="toc_9">Flex</h4>
+
+<p>Flex 是 Flexible Box 的缩写，意为&quot;弹性布局&quot;，用来为盒状模型提供最大的灵活性，详细参考下方扩展阅读内容。</p>
+
+<h2 id="toc_10">移动设备</h2>
+
+<ul>
+<li>设备：我们所能接触到的无线设备其实很多、手机、pad、TV、线下屏等等，我们需要了解其各自的特点。日常业务中我们接触最多的就是手机上的适配问题
+
+<ul>
+<li>屏幕尺寸：需要了解不同型号型号的差异，关注各种不同的设备屏幕尺寸，尤其是安卓设备的厂商繁多，屏幕尺寸也五花八门</li>
+<li>内存：低端机器，尤其是低端安卓机最容器出现卡顿的情况，需要好好检查一下内存占用</li>
+<li>Pad：Pad 的适配与手机相似，需要着重注意的地方时横竖屏变换是对于整个页面尺寸的影响</li>
+</ul></li>
+<li>系统：iOS 与 Android 兼容问题
+
+<ul>
+<li>iOS 系统的兼容上很多问题会出现在 iOS 8、9 的系统，会遇到一些样式的兼容以及 JS API 的支持问题（欣慰的是 iOS 8 目前也在逐步退出历史舞台）</li>
+<li>Android 尤其是低端机重点测试，尤其是性能。</li>
+</ul></li>
+<li>屏幕：不同屏幕的兼容问题
+
+<ul>
+<li>刘海屏：iPhone X 刘海屏，各种安卓设备的刘海也紧随其后，需要对「安全距离」有一定了解</li>
+<li>折叠屏：根据业务特点也可能会出现特殊的适配情况</li>
+</ul></li>
+</ul>
+
+<h2 id="toc_11">可用</h2>
+
+<ul>
+<li>无障碍性（前端的修养，将在 1.7 的章节中展开介绍）</li>
+<li>网页逻辑上的清晰度（对于视觉和交互的还原）</li>
+<li>有容易使用的导航（注重体验）</li>
+<li>没有无意义的，难以阅读的内容</li>
+<li><p>用户的问题及时解决，给用户提供安全安心的保障（快速迭代）</p>
+
+<h3 id="toc_12">异常处理</h3>
+
+<p>针对任何一种异常，至少要向用户展示合适的文案，并让用户有重试的机会。在实现上引导用户去做什么，让用户了解当前的状态，此处让产品的逻辑更加清晰。</p>
+
+<h3 id="toc_13">降级处理</h3>
+
+<p>容错降级主要是预防出现一些错误导致页面异常而采用降级的方案来保障页面的可用性。一般是采用了某些比较新的功能 API，而需要在老的版本里降级。</p></li>
+</ul>
+
+<h2 id="toc_14">体验</h2>
+
+<h3 id="toc_15">动画</h3>
+
+<p>动画是引导用户阅读体验的常用方式</p>
+
+<h3 id="toc_16">操作响应（包括收拾、滚动）</h3>
+
+<p>页面的滚动来控制列表内元素的展现，给不变的信息展现赋予生命</p>
+
+<h3 id="toc_17">设备方向</h3>
+
+<p>设备手持方向进行反馈，让生活中的互动体现到页面上</p>
+
+<h2 id="toc_18">性能</h2>
+
+<h3 id="toc_19">加载性能</h3>
+
+<h4 id="toc_20">网络优化</h4>
+
+<ul>
+<li>HTTP DNS 域名解析服务</li>
+<li>MTOP</li>
+<li>一个稳定的高性能无线 RPC 网关，支持海量的并发调用和水平扩展能力</li>
+<li>图片优化
+
+<ul>
+<li>按需加载（图片的懒加载方案）</li>
+<li>选择正确的图片格式
+
+<ul>
+<li>WebP 的使用</li>
+</ul></li>
+<li>加载合适的图片
+
+<ul>
+<li>二倍图的使用、弱网环境图片的处理等</li>
+</ul></li>
+</ul></li>
+<li>接口收敛</li>
+<li>资源预加载
+
+<ul>
+<li>资源缓存，减少网络请求，避免网络环境对页面的影响，目前看是行之有效的改进方案</li>
+</ul></li>
+<li>JS Prefetch
+
+<ul>
+<li>页面跳转前，事先发送下一个页面 bundle 的下载请求</li>
+</ul></li>
+<li>数据预加载（Data Prefetch）
+
+<ul>
+<li>将页面中需要请求的数据提前请求，大幅缩短用户看到页面效数据的等待时间</li>
+</ul></li>
+<li>减少 bundle size
+
+<ul>
+<li>依赖废弃替换</li>
+<li>依赖去重</li>
+<li>JS Service 内置</li>
+<li>code split</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_21">渲染性能</h3>
+
+<ul>
+<li>避免不必要的更新对比
+
+<ul>
+<li>浅比较 与 避免部分组件的更新</li>
+</ul></li>
+<li>唯一 key 值
+
+<ul>
+<li>对于同一层次的一组子节点，它们可以通过唯一的 id 进行区分</li>
+</ul></li>
+<li>不要渲染空字符串
+可以用 null 替代不必要的空字符串</li>
+<li>减少 render 方法的复杂度
+
+<ul>
+<li>如果是跟组件状态无关的函数，建议不要放到 render 方法中</li>
+</ul></li>
+<li>jsx no bind
+
+<ul>
+<li>使用 bind 或者内联的箭头函数，在每次 render 的时候都会创建一个全新的函数，造成额外的消耗</li>
+</ul></li>
+<li>减少 console.log</li>
+<li>优先使用 RecyclerView</li>
+<li>控制嵌套层级
+
+<ul>
+<li>推荐页面的 vdom 层级控制在 14 层以下</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_22">内存</h3>
+
+<ul>
+<li>视频优化
+
+<ul>
+<li>减少视频的大小，不推荐同时播放多个视频</li>
+</ul></li>
+<li>图片优化
+
+<ul>
+<li>减小图片大小，禁止使用 gif</li>
+</ul></li>
+<li>动画优化
+
+<ul>
+<li>当动画不可见时，你需要停止动画</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_23">无障碍</h3>
+
+<p>无障碍，即「accessibility」（常常缩写成「a11y」），是相对有障碍访问而言的，常见的有障碍访问场景有两类。<br/>
+一种是用户因为生理缺陷，没有能力按正常的交互方式访问，举几个例子：</p>
+
+<ul>
+<li>视障人士看不见或看不清，无法感受手淘上的信息，动效，氛围；</li>
+<li>听障人士听不见或听不清，无法听到音乐以及视频的语音部分；</li>
+<li>老年人视力和听力的退化。</li>
+<li>一种是用户因为客观原因短时间内无法按正常的交互方式访问，比如开车的时候不方便看着屏幕操作。</li>
+</ul>
+
+<p>无障碍的基本目标是使用户接收到产品想要传达的信息，更高的目标则是所有用户接收到的信息是同等的。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[函数防抖 debounce 和函数节流throttle]]></title>
+    <link href="http://233px.com/15681817980753.html"/>
+    <updated>2019-09-11T14:03:18+08:00</updated>
+    <id>http://233px.com/15681817980753.html</id>
+    <content type="html"><![CDATA[
+<h3 id="toc_0">防抖和节流</h3>
+
+<p>窗口的resize、scroll，输入框内容校验等操作时，如果这些操作处理函数较为复杂或页面频繁重渲染等操作时，如果事件触发的频率无限制，会加重浏览器的负担，导致用户体验非常糟糕。此时我们可以采用debounce（防抖）和throttle（节流）的方式来减少触发的频率，同时又不影响实际效果。</p>
+
+<h2 id="toc_1">1. 函数防抖（debounce）</h2>
+
+<p>动作触发n毫秒之后调用func，如果在n毫秒之内连续触发操作，会以最后一次动作为定时器，n毫秒后再执行func。</p>
+
+<p>当事件被触发时，事件处理函数不会立即执行，而是会被放到setTimeout中延时delay执行；而当delay时间内再次触发事件，则前一个setTimeout生成的ID会被clearTimeout清除，同时生成新的ID。这样，只有在delay时间段内，没有新的event，n毫秒后事件处理函数才会真正执行。</p>
+
+<pre><code>function debounce (fn, delay){
+  let timeout
+  return function(){
+    const args = arguments
+    clearTimeout(timeout)
+    timeout = setTimeout(() =&gt; {
+      fn.apply(this, args)
+    }, delay)
+  }
+}
+</code></pre>
+
+<pre><code>
+var test = debounce(function (a) {console.log(a)}, 1000)
+test(1) // 不执行
+test(2) // 不执行
+test(3)
+=&gt; 3
+test = null // 不需要时释放内存
+</code></pre>
+
+<h3 id="toc_2">1.1 立即执行的函数防抖</h3>
+
+<p>和函数防抖思想一致，不过其策略是：函数第一次触发时立即执行，在之后的一段时间内，所有被触发的函数都不会被执行，直到出现“一次函数触发后的一段时间内没有触发该函数”，下一次函数触发才会被执行。</p>
+
+<h3 id="toc_3">1.2 场景</h3>
+
+<p>函数防抖可以用在输入框中，若是每次input事件触发时，都发送一个ajax操作，则会造成极大的性能浪费。使用debounce，则只会在用户停止输入后才会发送ajax请求。</p>
+
+<h3 id="toc_4">1.3 缺点</h3>
+
+<p>但是这一方式也有自己的问题：如果事件一直源源不断的触发，则可能导致在很长一段时间内，事件处理程序都不会被调用。在某些场景下，这可能会导致用户体验不佳。比如说，需要为dialog弹窗增加鼠标拖动的功能，如果使用debounce的方法，则可能会导致在鼠标移动期间，弹窗一直不动，直到鼠标停止移动，弹窗会一下子跳到终止位置。这显然是不合理的。</p>
+
+<p>debounce解决了短时间内大量事件触发的问题，只有当delay时间段内，没有新的事件触发，才会真正执行事件处理函数；但是，极端情况下，事件处理函数可能一直得不到执行。</p>
+
+<h2 id="toc_5">2. 函数节流（throttle）</h2>
+
+<p>在n毫秒内最多执行一次func</p>
+
+<pre><code>function throttle (fn, delay) {
+  // 利用闭包变量时效性
+  let timeout
+  let arg
+  return function () {
+    arg = arguments
+    if (!timeout) {
+      timeout = setTimeout(() =&gt; {
+        fn.apply(this, arg)
+        timeout = null
+      }, delay)
+    }
+  }
+}
+
+</code></pre>
+
+<pre><code>var test = throttle(function (a) {console.log(a)}, 1000)
+test(1) // 不执行
+test(2) // 不执行
+test(3)
+=&gt; 3
+test = null // 不需要时释放内存
+</code></pre>
+
+<p>简单来说，函数的节流就是通过闭包保存一个标记（canRun = true），在函数的开头判断这个标记是否为 true，如果为 true 的话就继续执行函数，否则则 return 掉，判断完标记后立即把这个标记设为 false，然后把外部传入的函数的执行包在一个 setTimeout 中，最后在 setTimeout 执行完毕后再把标记设置为 true（这里很关键），表示可以执行下一次的循环了。当 setTimeout 还未执行的时候，canRun 这个标记始终为 false，在开头的判断中被 return 掉。</p>
+
+<pre><code>function throttle(fn, interval = 300) {
+    let canRun = true;
+    return function () {
+        if (!canRun) return;
+        canRun = false;
+        setTimeout(() =&gt; {
+            fn.apply(this, arguments);
+            canRun = true;
+        }, interval);
+    };
+}
+</code></pre>
+
+<h3 id="toc_6">场景</h3>
+
+<p>throttle可以用在滚屏预加载，弹窗拖动等场景。这些场景的特征是，在事件节流的基础上，要求每隔一段时间，至少执行一次事件处理函数。</p>
+
+<h2 id="toc_7">选择合适的方法</h2>
+
+<p>函数节流和函数防抖都能限制函数的高频重复执行，那么应该选用哪一种方法呢？这个需要根据实际情况选择合适的方法，具体情况具体分析。</p>
+
+<p>场景1：联动索引条，使用touchmove事件监听用户在索引条上的触摸移动。由于touchmove事件的触发频率比较高，所以会产生很多无用的函数调用。此时，可以通过使用函数节流，限制事件的触发频率。</p>
+
+<p>情形2：分页组件，监听scroll事件，计算页面滚动位置，滚动到页面最下方时触发下一页的加载。因为scroll事件的频繁触发，需要频繁计算页面位置。因此可以使用函数防抖，在持续滚动结束后只对最后一次scroll事件进行位置计算和判断。</p>
+
+<p>情形3：关注button，防止用户的快速连击。很明显，这个问题用“立即执行的函数防抖”可以轻松解决问题。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Common JS 、ES Module 差异]]></title>
@@ -2132,239 +2632,6 @@ optimization: {
 <p>问题：在使用 <code>&lt;input type=&quot;number&quot;&gt;</code>输入框时，如果输入了当前输入框中值不以1为单位增减的值时会出现：请输入有效值 两个最接近的有效分别为...的提示，这是因为浏览器默认认为<code>&lt;input type=&quot;number&quot;&gt;</code>的步长为1。</p>
 
 <p>解决办法：指定<code>&lt;input type=&quot;number&quot;&gt;</code>输入框的步长，如果增加属性<code>step=&quot;0.01&quot;</code>，可以根据具体的精度调整step属性的值。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CSS outline 自动填满屏幕剩余空间]]></title>
-    <link href="http://233px.com/15284430152022.html"/>
-    <updated>2018-06-08T15:30:15+08:00</updated>
-    <id>http://233px.com/15284430152022.html</id>
-    <content type="html"><![CDATA[
-<p>有不少网站的主要背景是白色的，底部是深色的，于是就会出现这样一个场景，当主内容很少的时候，包括底部在内的都不足一瓶，或者用户的显示器是竖屏，则很可能出现下图所示的情况：</p>
-
-<p><img src="media/15284430152022/15284588736488.jpg" alt="img" style="width:300px;"/></p>
-
-<span id="more"></span><!-- more -->
-
-<p>如何让底部背景颜色正好填满剩余屏幕区域呢？这个时候可以用 <code>outline</code> 属性。假设HTML代码是这样的：</p>
-
-<pre><code>&lt;div class=&quot;header&quot;&gt;
-  &lt;h1&gt;header&lt;/h1&gt;
-&lt;/div&gt;
-&lt;div class=&quot;main&quot;&gt;
-  &lt;p&gt;main&lt;/p&gt;   
-&lt;/div&gt;
-&lt;div class=&quot;footer&quot;&gt;
-  &lt;p&gt;footer&lt;/p&gt;  
-&lt;/div&gt;
-</code></pre>
-
-<p>然后设置的CSS为：</p>
-
-<pre><code>.header {
-  height: 66px;
-  background: #0097ff;
-  color: #fff;
-  text-align: center;
-}
-.main {
-  text-align: center;
-}
-
-.footer {
-  height: 50px;
-}
-
-.footer &gt; p {
-  position: absolute;
-  left: 0; 
-  right: 0;
-  text-align: center;
-  padding: 15px 0;
-  background-color: #3b4045;
-  outline: 9999px solid #3b4045;
-  clip: rect(0 9999px 9999px 0);
-  color: #fff;
-} 
-
-</code></pre>
-
-<p>实现效果的关键 CSS 就是设置一个超大轮廓范围的 <code>outline</code> 属性。例如这里设置成9999px，作用是保证无论屏幕多高，轮廓色块也一定能够覆盖。</p>
-
-<p>但是和 border 属性不一样，outline 是无法指定方位的，只是被动地向四周扩散。因此<code>outline: 9999px solid #3b4045;</code> 不仅会填满底部方位的屏幕空间，还会把上面的空间内容也填满。因此还要进一步进行处理。这里可以用 <code>clip</code> 剪裁策略，让底部元素绝对定位，同时以上边缘和左边缘为界进行裁剪，这样完全不用担心outline 会覆盖上面的内容。代码组合为：</p>
-
-<pre><code>position: absolute;
-clip: rect(0 9999px 9999px 0);
-</code></pre>
-
-<p>使用 9999px 这么大的值也是为了确保100% 填满屏幕。于是最终效果图为：</p>
-
-<p><img src="media/15284430152022/15284586407309.jpg" alt="img" style="width:300px;"/></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[多种方式判断Javascript 对象中属性值为空]]></title>
-    <link href="http://233px.com/15282775980505.html"/>
-    <updated>2018-06-06T17:33:18+08:00</updated>
-    <id>http://233px.com/15282775980505.html</id>
-    <content type="html"><![CDATA[
-<p>我们在做接口请求的时候，会出现在某种条件下某个参数是不需要传的，一般情况下，赋值时不需要的参数的属性值为null，undefined。这个时候需要过滤出属性值为null，undefined 的key，并删除。</p>
-
-<p>下面总结了几种方式：</p>
-
-<span id="more"></span><!-- more -->
-
-<h3 id="toc_0">遍历该对象</h3>
-
-<pre><code>const test = {
-  test1 : null,
-  test2 : &#39;somestring&#39;,
-  test3 : 3,
-}
-function removeNullsInObject(obj) {
-  for (var propName in obj) { 
-    if (obj[propName] === null || obj[propName] === undefined) {
-      delete obj[propName];
-    }
-  }
-}
-clean(removeNullsInObject);
-
-</code></pre>
-
-<p>如果担心此属性删除未运行对象的propttype 链，还可以：</p>
-
-<pre><code>function removeNullsInObject(obj) {
-  const propNames = Object.getOwnPropertyNames(obj);
-  for (var i = 0; i &lt; propNames.length; i++) {
-    let propName = propNames[i];
-    if (obj[propName] === null || obj[propName] === undefined) {
-      delete obj[propName];
-    }
-  }
-}
-</code></pre>
-
-<h3 id="toc_1">使用lodash</h3>
-
-<p>lodash 中提供了 深度搜索对象中移除undefined值的方法：</p>
-
-<pre><code>var _ = require(&#39;lodash&#39;);
-
-const test = {
-  test1 : null,
-  test2 : &#39;somestring&#39;,
-  test3 : 3,
-}
-
-var compacted = _.pick(obj, function(value) {
-  return value !== null &amp;&amp; value !== undefined;
-});
-
-console.log(compacted)
-</code></pre>
-
-<h3 id="toc_2">使用JSON.stringify</h3>
-
-<p>将对象JSON.stringify之后，在JSON.parse组合将其重新转换为对象：</p>
-
-<pre><code>const test = {
-    test1 : null,
-    test2 : &#39;somestring&#39;,
-    test3 : 3,
-}
-function removeNullsInObject(key, value) {
-  if (value === null || value === undefined) {
-    return undefined;
-  }
-return value;
-}
-
-console.log(JSON.parse(JSON.stringify(test, removeNullsInObject)));
-</code></pre>
-
-<p>看一下官方定义：</p>
-
-<blockquote>
-<p>JSON.stringify(value[, replacer [, space]]) 的第二个参数replacer 可以是一个函数或者一个数组。<br/>
-作为函数，它有两个参数，键(key)值(value)都会被序列化。<br/>
-如果返回一个 Number, 转换成相应的字符串被添加入JSON字符串。<br/>
-如果返回一个 String, 该字符串作为属性值被添加入JSON。<br/>
-如果返回一个 Boolean, &quot;true&quot; 或者 &quot;false&quot;被作为属性值被添加入JSON字符串。<br/>
-如果返回任何其他对象，该对象递归地序列化成JSON字符串，对每个属性调用replacer方法。除非该对象是一个函数，这种情况将不会被序列化成JSON字符串。<br/>
-如果返回undefined，该属性值不会在JSON字符串中输出。<br/>
-注意: 不能用replacer方法，从数组中移除值(values)，如若返回undefined或者一个函数，将会被null取代。</p>
-</blockquote>
-
-<p>因此首先replacer 参数将值为null 或者undefined 通通转换成 undefined，然后其undefined 属性值不会在JSON字符串中输出的特性使得 值为null 的属性删除，然后再通过JSON.parse 还原成对象。</p>
-
-<h3 id="toc_3">使用非空的键创建新对象</h3>
-
-<pre><code>const test = {
-    test1 : null,
-    test2 : &#39;somestring&#39;,
-    test3 : 3,
-}
-const removeNullsInObject = (obj) =&gt; {
-  return Object.keys(obj).filter(key =&gt; obj[key]).reduce(
-    (newObj, key) =&gt; {
-      newObj[key] = obj[key]
-      return newObj
-    }, {}
-  )
-}
-
-console.log(removeNullsInObject(test))
-</code></pre>
-
-<h3 id="toc_4">ES7/2016 Object.entries</h3>
-
-<pre><code>const test = {
-    test1 : null,
-    test2 : &#39;somestring&#39;,
-    test3 : 3,
-}
-const removeNullsInObject = (obj) =&gt; {
-  Object.entries(obj).forEach(([key, val]) =&gt;
-    if (val &amp;&amp; typeof val === &#39;object&#39;) removeEmpty(val)
-    else if (val == null) delete obj[key]
-  );
-  return obj;
-};
-
-console.log(removeNullsInObject(test))
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CDN 是如何工作的]]></title>
-    <link href="http://233px.com/15281031874240.html"/>
-    <updated>2018-06-04T17:06:27+08:00</updated>
-    <id>http://233px.com/15281031874240.html</id>
-    <content type="html"><![CDATA[
-<ol>
-<li><p>CDN的实现基础是通过将DNS的域名设置为CNAME(就是指向另一个域名，但这个域名也是有A记录的（就是域名对应IP）)。</p></li>
-<li><p>CNAME的作用就是要求浏览器发送域名到CNAME这个域名的服务器去解析得到域名的IP，就是本地DNS不作IP解析，而由CNAME指定的服务器去解析。</p></li>
-<li><p>CNAME指定的服务器去解析的IP地址是CDN的全局负载均衡设备IP </p></li>
-<li><p>浏览器得到这个全局负载均衡设备IP就向这个IP发起内容请求，全局负载均衡设备会跟据IP将请求交给它的区域负载均衡设备处理，区域负载均衡设备会选择一个最近用户的缓存服务器IP返回给全局负载均衡设备,全局负载均衡设备叫用户重定向到缓存服务器获取请求的内容。 </p></li>
-<li><p>这样做需然请求经过了几个服务器的来回碾转，但对于请求内容（数据量）较多的情况还是会缩短内容的下载时间的，毕竟下载内容的距离变短了，网速快了，特别数据量大时前面的开销更显得微不足道。</p></li>
-<li><p>最初缓存服务器是没有数据内容的，但会从CDN中的你指定的目标服务器去获取内容并缓存到缓存服务器中，以便为后面进行服务。 </p></li>
-</ol>
-
-<p>注：</p>
-
-<ol>
-<li>A记录是名称解析的重要记录，它用于将特定的主机名映射到对应主机的IP地址上。你可以在DNS服务器中手动创建或通过DNS客户端动态更新来创建。 </li>
-<li>NS记录此记录指定负责此DNS区域的权威名称服务器。 </li>
-<li>A记录和NS记录的区别是，A记录直接给出目的IP，NS记录将DNS解析任务交给特定的服务器，NS记录中记录的IP即为该特定服务器的IP地址。 </li>
-<li>NS记录优先于A记录，A记录优先于CNAME记录 </li>
-</ol>
 
 ]]></content>
   </entry>

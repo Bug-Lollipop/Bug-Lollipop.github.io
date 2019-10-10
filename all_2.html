@@ -136,6 +136,106 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-06-08T15:30:15+08:00" itemprop="datePublished">2018/6/8</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15284430152022.html" itemprop="url">
+		CSS outline 自动填满屏幕剩余空间</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>有不少网站的主要背景是白色的，底部是深色的，于是就会出现这样一个场景，当主内容很少的时候，包括底部在内的都不足一瓶，或者用户的显示器是竖屏，则很可能出现下图所示的情况：</p>
+
+<p><img src="media/15284430152022/15284588736488.jpg" alt="img" style="width:300px;"/></p>
+
+
+
+			 
+			<a href="15284430152022.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-06-06T17:33:18+08:00" itemprop="datePublished">2018/6/6</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15282775980505.html" itemprop="url">
+		多种方式判断Javascript 对象中属性值为空</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>我们在做接口请求的时候，会出现在某种条件下某个参数是不需要传的，一般情况下，赋值时不需要的参数的属性值为null，undefined。这个时候需要过滤出属性值为null，undefined 的key，并删除。</p>
+
+<p>下面总结了几种方式：</p>
+
+
+
+			 
+			<a href="15282775980505.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-06-04T17:06:27+08:00" itemprop="datePublished">2018/6/4</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15281031874240.html" itemprop="url">
+		CDN 是如何工作的</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<ol>
+<li><p>CDN的实现基础是通过将DNS的域名设置为CNAME(就是指向另一个域名，但这个域名也是有A记录的（就是域名对应IP）)。</p></li>
+<li><p>CNAME的作用就是要求浏览器发送域名到CNAME这个域名的服务器去解析得到域名的IP，就是本地DNS不作IP解析，而由CNAME指定的服务器去解析。</p></li>
+<li><p>CNAME指定的服务器去解析的IP地址是CDN的全局负载均衡设备IP </p></li>
+<li><p>浏览器得到这个全局负载均衡设备IP就向这个IP发起内容请求，全局负载均衡设备会跟据IP将请求交给它的区域负载均衡设备处理，区域负载均衡设备会选择一个最近用户的缓存服务器IP返回给全局负载均衡设备,全局负载均衡设备叫用户重定向到缓存服务器获取请求的内容。 </p></li>
+<li><p>这样做需然请求经过了几个服务器的来回碾转，但对于请求内容（数据量）较多的情况还是会缩短内容的下载时间的，毕竟下载内容的距离变短了，网速快了，特别数据量大时前面的开销更显得微不足道。</p></li>
+<li><p>最初缓存服务器是没有数据内容的，但会从CDN中的你指定的目标服务器去获取内容并缓存到缓存服务器中，以便为后面进行服务。 </p></li>
+</ol>
+
+<p>注：</p>
+
+<ol>
+<li>A记录是名称解析的重要记录，它用于将特定的主机名映射到对应主机的IP地址上。你可以在DNS服务器中手动创建或通过DNS客户端动态更新来创建。 </li>
+<li>NS记录此记录指定负责此DNS区域的权威名称服务器。 </li>
+<li>A记录和NS记录的区别是，A记录直接给出目的IP，NS记录将DNS解析任务交给特定的服务器，NS记录中记录的IP即为该特定服务器的IP地址。 </li>
+<li>NS记录优先于A记录，A记录优先于CNAME记录 </li>
+</ol>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-06-02T15:30:14+08:00" itemprop="datePublished">2018/6/2</time>
 			</div>
 			<div class="tags">posted in 
@@ -406,162 +506,6 @@ upstream    git@github.com:fe/github-flow.git (push)
 
 
 			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-05-11T18:11:26+08:00" itemprop="datePublished">2018/5/11</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15260334862166.html" itemprop="url">
-		千分位分隔符</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>千位分隔符 是很常见的需求，但是输入文本千变万化，如何才能准确添加千分符呢？</p>
-
-<p>纯整数情况：</p>
-
-<p>纯整数大概是所有情况里最简单的一种，我们只要正确匹配出千分位就好了。</p>
-
-<p>观察上面的数字，我们可以得出千分位的特征是 到字符串终止位有 3n 个数字，不包括起始位 。于是可以得到这样的函数：</p>
-
-<pre><code>let miliFormat = (num) =&gt; {  
-    return num &amp;&amp; num.toString().replace(/(?=(?!^)(\d{3})+$)/g, &#39;,&#39;)
-}
-</code></pre>
-
-<p>但是往往现实没有那么乐观：</p>
-
-<p>小数的情况</p>
-
-<p>遇到小数时，我们的希望只针对整数部分添加千分符，这时问题就变得稍稍有些棘手了。</p>
-
-<p>如果正则引擎支持逆序环视 [2] ，我们可以这样构造正则表达式：</p>
-
-<p><code>(?&lt;=\d+)(?=(\d{3})+\b)</code></p>
-
-<p>但是多数语言并不支持逆序环视，所以我们要变通一下：</p>
-
-<ol>
-<li>拿到小数的整数部分
-也就是起始位到小数点（非数字）之间的部分，可以这样实现：</li>
-</ol>
-
-<p><code>^\d+</code><br/>
-2. 为整数部分添加千分符<br/>
-这一步可以利用我们之前的实现，整合在一起如下：</p>
-
-<pre><code>let miliFormat = (num) =&gt; {  
-    return num &amp;&amp; num
-        .toString()
-        .replace(/^\d+/, (m) =&gt; m.replace(/(?=(?!^)(\d{3})+$)/g, &#39;,&#39;))
-}
-</code></pre>
-
-<p>这个函数对整、小数都能正确处理。</p>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-05-04T15:49:54+08:00" itemprop="datePublished">2018/5/4</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15254201948309.html" itemprop="url">
-		CSS writing-mode 的更多使用</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>writing-mode 通常可以用来实现文字的竖向呈现。<br/>
-属性对应的关键字有下面几个：</p>
-
-<pre><code>writing-mode: horizonal-tb;  /* 默认值，表示文本流是水平方向的，元素是从上向下的*/
-writing-mode: vertical-rl;  /* 表示文本是垂直方向展示 ，阅读顺序是从右向左（right-left）*/
-writing-mode: vertival-lr;  /* 表示文本是垂直方向展示 ，阅读顺序是从左向右（left-right）*/
-</code></pre>
-
-<p>除了竖直排版的时候需要writing-mode，其实还可以实现很多其他的效果。</p>
-
-<p>writing-mode 将页面默认的水平文档流改成了垂直流，基于水平方向的规则都可以适用于垂直方向，比如：</p>
-
-<ul>
-<li>margin 合并</li>
-<li>用 text-align: center  实现图片垂直居中</li>
-<li>使用 text-indent 实现文字下沉效果</li>
-<li>可以实现全兼容的 icon-fonts 图标的旋转效果</li>
-</ul>
-
-<p>具体的各个效果可以看这个 <a href="http://demo.cssworld.cn/">http://demo.cssworld.cn/</a> 中的 （12-2-1） ~ （12-2-5） 里面的代码效果</p>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-04-28T18:09:41+08:00" itemprop="datePublished">2018/4/28</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15249101811632.html" itemprop="url">
-		min-width 与 width 之类的属性之间的相互覆盖</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h2 id="toc_0">1.超越important</h2>
-
-<p>超越 <code>!important</code> 是指 <code>max-width</code> 会覆盖<code>width</code>，并且比 <code>!important</code> 的权重更高。<br/>
-例如下面的代码：</p>
-
-<pre><code>&lt;img src=&quot;1.jpg&quot; style=&quot;width: 480px!important&quot;&gt;
-img {
-  max-width: 250px;
-}
-</code></pre>
-
-<p>最终图片呈现的效果是 250px。因为 <code>max-width</code> 覆盖了 <code>width</code></p>
-
-<h2 id="toc_1">2.超越最大</h2>
-
-<p>超越最大是指 <code>min-width</code> 覆盖<code>max-width</code>，此规则发生在<code>min-width</code> 和<code>max-width</code> 冲突的时候，例如下面： </p>
-
-<pre><code>.container {
-  min-width: 1400px;
-  max-width: 1200px;
-}
-</code></pre>
-
-
-
-			 
-			<a href="15249101811632.html#more" class="more-link">Read on &rarr;</a>
-    		
 			
 		</div>
 

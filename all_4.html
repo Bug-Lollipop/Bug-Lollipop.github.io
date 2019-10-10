@@ -136,6 +136,202 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-03-26T20:02:19+08:00" itemprop="datePublished">2018/3/26</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='Mobile.html'>Mobile</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15220657399375.html" itemprop="url">
+		快应用的实践</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2 id="toc_0">面向的场景？</h2>
+
+<p>目前快应用在饿了么中的用户场景为： <br/>
+用户在【应用商店】【浏览器】【自带搜索助手】搜索饿了么，出现快应用的条目，用户点击饿了么快应用，无需安装，直接打开快应用。同时会提示用户是否生成桌面图标，并且用户可以收到来自服务进行的推送，体验和原生APP 相差无异。</p>
+
+<h2 id="toc_1">开发工具与条件</h2>
+
+<p>开发快应用的前提是拥有一台九大厂商品牌之一的安卓手机，然后注册快应用联盟账号，接着与该手机对应品牌的开发者账号进行绑定，然后照着快应用的开发文档进行开发，最后上传至快应用官网进行测试审核并分发。目前快应用还不能实现自动统一分发到各个平台去审核。如果想要在每个品牌的应用市场都上架自己的快应用，就需要每个平台的开发者账号都要去填写开发者信息，1-2工作日审核，然后再上架自己的快应用。</p>
+
+
+
+			 
+			<a href="15220657399375.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-03-10T23:23:11+08:00" itemprop="datePublished">2018/3/10</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15225673917175.html" itemprop="url">
+		flex + margin: auto 实现完全居中</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>通常用<code>flex</code> 实现居中的方案都是这样纸的：</p>
+
+<pre><code>header {
+  display: flex;
+  align-items: center;
+  justify-centent： center;
+}
+</code></pre>
+
+<p>但是还有一种很简单的写法：容器元素设置为 <code>flex</code> 布局。子元素只要写 <code>margin: auto</code> 即可。</p>
+
+<pre><code>&lt;header&gt;
+ &lt;h1&gt;bamboo&lt;/h1&gt;
+&lt;/header&gt;
+
+header {
+  display: flex;
+}
+h1 {
+  margin: auto;
+}
+
+</code></pre>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-03-02T17:09:41+08:00" itemprop="datePublished">2018/3/2</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='LeetCode.html'>LeetCode</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15199817815367.html" itemprop="url">
+		229. Maximum Subarray</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>Find the contiguous subarray within an array (containing at least one number) which has the largest sum.</p>
+
+<p>For example, given the array [-2,1,-3,4,-1,2,1,-5,4],<br/>
+the contiguous subarray [4,-1,2,1] has the largest sum = 6.</p>
+
+<h3 id="toc_0">嵌套for 循环</h3>
+
+<pre><code>/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+    var len = nums.length
+    var maxNum = nums[0]
+    var curNum = 0
+    var endSum = nums[len-1]
+    if (len === 1) maxNum = nums[0]
+    else {
+        for (var i = 0; i&lt;len; i++) {
+        curNum = nums[i]
+        maxNum = Math.max(maxNum, curNum)
+        for (var j = i+1; j&lt; len; j++) {
+            curNum = curNum + nums[j]
+            maxNum = Math.max(maxNum, curNum)
+        }
+
+     }
+   }
+   return maxNum
+};
+</code></pre>
+
+<h3 id="toc_1">单个for 循环</h3>
+
+<pre><code>/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+    var sum = 0;
+    var max = nums[0];
+    for (var i = 0; i &lt; nums.length; i++) {
+        sum += nums[i];
+        if (sum &gt; max)
+            max = sum;
+        if (sum &lt; 0)
+            sum = 0;
+    }
+    return max;
+};
+</code></pre>
+
+<h3 id="toc_2">forEach</h3>
+
+<pre><code>/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+    var sum = 0;
+    var max = nums[0];
+    nums.forEach((item, index) =&gt; {
+        sum += item
+        if (sum &gt; max)
+            max = sum
+        if (sum &lt; 0)
+            sum = 0    
+    })
+    return max;
+};
+</code></pre>
+
+<h3 id="toc_3">优化后的for 循环</h3>
+
+<pre><code>/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+    var sum = 0;
+    var max = nums[0];
+    var len = nums.length
+    for (i = 0; i &lt; len; i++) {
+        sum += nums[i];
+        if (sum &gt; max)
+            max = sum;
+        if (sum &lt; 0)
+            sum = 0;
+    }
+    return max;
+
+};
+</code></pre>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-02-13T17:31:43+08:00" itemprop="datePublished">2018/2/13</time>
 			</div>
 			<div class="tags">posted in 
@@ -368,104 +564,6 @@ Sun Nov 05 2017 00:00:00 GMT+0800 (CST)
 
 			 
 			<a href="15184261250859.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-01-02T15:43:04+08:00" itemprop="datePublished">2018/1/2</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184213848817.html" itemprop="url">
-		IOS input readonly 时， 隐藏键盘上的上下箭头</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>业务中在一定场景中会将input 设置为只读状态，在IOS safari上当input 输入框focus 时，仍会出现键盘上的上下箭头，这种用户体验非常不好，如何干掉呢？</p>
-
-<p><code>&lt;input readonly=&quot;readonly&quot;/&gt;</code></p>
-
-<p><img src="media/15184199644363/15184199736759.png" alt=""/></p>
-
-<p>说一下思路，上下箭头是无法通过 设置html属性，meta标签或者监听事件来解决，因为这些箭头并没有可以监听它的事件。</p>
-
-
-
-			 
-			<a href="15184213848817.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2017-12-12T17:04:14+08:00" itemprop="datePublished">2017/12/12</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184262543059.html" itemprop="url">
-		position: sticky 粘性定位</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h4 id="toc_0">需求</h4>
-
-<p>很多网站在页面滚动的时候，都希望一直显示侧边栏的区域。</p>
-
-<p>以往我们要去实现这个布局，会去用 <code>posiiton: fixed</code> 结合 js 去实现,这就用起来很难受了，<br/>
-为了解决元素在容器中被滚动超过指定的偏移值时，元素在容器内固定在指定位置这种状态，position:sticky诞生了。</p>
-
-
-
-			 
-			<a href="15184262543059.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2017-11-21T17:07:17+08:00" itemprop="datePublished">2017/11/21</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184264378416.html" itemprop="url">
-		千位分隔符(逗号)表示web网页中的大数字的原因</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h3 id="toc_0">起因</h3>
-
-<p>我们写的金融组的项目，所有的金额数值都是使用千分位分隔符去格式化，但是也没太想过原因，可能觉得是约定俗成吧，看到<a href="http://www.zhangxinxu.com/wordpress/?p=6418">张鑫旭的文章</a>，了解了为什么要这么用：</p>
-
-<h4 id="toc_1">1. 移动端大数值会默认当作电话号码</h4>
-
-<p>在手机等移动设备上，对于超过一定个数的数值，系统默认会当做电话号码处理，而不是一个数字。而且在移动端 这一串数字会自动高亮，并且颜色无法使用CSS重置。</p>
-
-
-
-			 
-			<a href="15184264378416.html#more" class="more-link">Read on &rarr;</a>
     		
 			
 		</div>

@@ -136,6 +136,114 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2017-07-17T15:18:41+08:00" itemprop="datePublished">2017/7/17</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15318119213153.html" itemprop="url">
+		JS 数组查找符合的元素</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>整理了几种方法：</p>
+
+<h3 id="toc_0">indexOf</h3>
+
+<p>使用原生 JavaScript 的Array.prototype.indexOf()<br/>
+例如：该数组为：[a, b , c]</p>
+
+<pre><code>const users = [a, b, c]
+user.indexOf(&quot;a&quot;) // 0
+user.indexOf(&quot;b&quot;) // 1
+user.indexOf(&quot;c&quot;) // 2
+user.indexOf(&quot;d&quot;) // -1
+</code></pre>
+
+<p>如果返回是 -1，说明没有找到，如果返回值&gt;=0，表示已找到，并且返回的符合的值得索引</p>
+
+
+
+			 
+			<a href="15318119213153.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2017-07-12T17:05:47+08:00" itemprop="datePublished">2017/7/12</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15184263470634.html" itemprop="url">
+		利用 CSS 的 content 属性 attr 抓取资料</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>需求：鼠标悬浮实现一个提示文字的 tooltip</p>
+
+<p>想必大家都想到了伪元素 after ，但是文字怎么获得呢，又不能用 JS 。</p>
+
+<p>CSS 的伪元素是个很強大的东西，我们可以利用他做很多运用，通常为了做一些效果， <code>content: &quot; &quot;</code>多半会留空，但其实可以在里面写上 <code>attr</code>抓资料。</p>
+
+
+
+			 
+			<a href="15184263470634.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2017-05-12T18:49:49+08:00" itemprop="datePublished">2017/5/12</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15184325893639.html" itemprop="url">
+		currentColor - CSS 变量</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>在<a href="http://w3.org/TR/css3-color">CSS 颜色（第三版)</a>规范中，增加了很多颜色关键字，比如<code>lightgoldenrodyellow</code>等，不是很常用，但是我们还得到了一个特殊的关键字<code>currentColor</code>，他是从SVG那里借鉴来的。这个关键字并没有绑定到一个固定的颜色值，而是一直被解析为color。实际上，这个特性让它成为<strong><em>CSS中有史以来的第一个变量</em></strong>。</p>
+
+<p>比如我们想让所有的水平分割线（所有的<code>&lt;hr&gt;</code>元素）自动与文本的颜色保持一致。<br/>
+用currentColor我们可以这样写：</p>
+
+<pre><code class="language-css">hr {
+    height: .5em;
+    backgorund: currentColor;
+}
+</code></pre>
+
+
+
+			 
+			<a href="15184325893639.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2016-10-12T18:37:05+08:00" itemprop="datePublished">2016/10/12</time>
 			</div>
 			<div class="tags">posted in 

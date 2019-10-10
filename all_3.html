@@ -136,6 +136,162 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-05-11T18:11:26+08:00" itemprop="datePublished">2018/5/11</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15260334862166.html" itemprop="url">
+		千分位分隔符</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>千位分隔符 是很常见的需求，但是输入文本千变万化，如何才能准确添加千分符呢？</p>
+
+<p>纯整数情况：</p>
+
+<p>纯整数大概是所有情况里最简单的一种，我们只要正确匹配出千分位就好了。</p>
+
+<p>观察上面的数字，我们可以得出千分位的特征是 到字符串终止位有 3n 个数字，不包括起始位 。于是可以得到这样的函数：</p>
+
+<pre><code>let miliFormat = (num) =&gt; {  
+    return num &amp;&amp; num.toString().replace(/(?=(?!^)(\d{3})+$)/g, &#39;,&#39;)
+}
+</code></pre>
+
+<p>但是往往现实没有那么乐观：</p>
+
+<p>小数的情况</p>
+
+<p>遇到小数时，我们的希望只针对整数部分添加千分符，这时问题就变得稍稍有些棘手了。</p>
+
+<p>如果正则引擎支持逆序环视 [2] ，我们可以这样构造正则表达式：</p>
+
+<p><code>(?&lt;=\d+)(?=(\d{3})+\b)</code></p>
+
+<p>但是多数语言并不支持逆序环视，所以我们要变通一下：</p>
+
+<ol>
+<li>拿到小数的整数部分
+也就是起始位到小数点（非数字）之间的部分，可以这样实现：</li>
+</ol>
+
+<p><code>^\d+</code><br/>
+2. 为整数部分添加千分符<br/>
+这一步可以利用我们之前的实现，整合在一起如下：</p>
+
+<pre><code>let miliFormat = (num) =&gt; {  
+    return num &amp;&amp; num
+        .toString()
+        .replace(/^\d+/, (m) =&gt; m.replace(/(?=(?!^)(\d{3})+$)/g, &#39;,&#39;))
+}
+</code></pre>
+
+<p>这个函数对整、小数都能正确处理。</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-05-04T15:49:54+08:00" itemprop="datePublished">2018/5/4</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15254201948309.html" itemprop="url">
+		CSS writing-mode 的更多使用</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>writing-mode 通常可以用来实现文字的竖向呈现。<br/>
+属性对应的关键字有下面几个：</p>
+
+<pre><code>writing-mode: horizonal-tb;  /* 默认值，表示文本流是水平方向的，元素是从上向下的*/
+writing-mode: vertical-rl;  /* 表示文本是垂直方向展示 ，阅读顺序是从右向左（right-left）*/
+writing-mode: vertival-lr;  /* 表示文本是垂直方向展示 ，阅读顺序是从左向右（left-right）*/
+</code></pre>
+
+<p>除了竖直排版的时候需要writing-mode，其实还可以实现很多其他的效果。</p>
+
+<p>writing-mode 将页面默认的水平文档流改成了垂直流，基于水平方向的规则都可以适用于垂直方向，比如：</p>
+
+<ul>
+<li>margin 合并</li>
+<li>用 text-align: center  实现图片垂直居中</li>
+<li>使用 text-indent 实现文字下沉效果</li>
+<li>可以实现全兼容的 icon-fonts 图标的旋转效果</li>
+</ul>
+
+<p>具体的各个效果可以看这个 <a href="http://demo.cssworld.cn/">http://demo.cssworld.cn/</a> 中的 （12-2-1） ~ （12-2-5） 里面的代码效果</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-04-28T18:09:41+08:00" itemprop="datePublished">2018/4/28</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15249101811632.html" itemprop="url">
+		min-width 与 width 之类的属性之间的相互覆盖</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2 id="toc_0">1.超越important</h2>
+
+<p>超越 <code>!important</code> 是指 <code>max-width</code> 会覆盖<code>width</code>，并且比 <code>!important</code> 的权重更高。<br/>
+例如下面的代码：</p>
+
+<pre><code>&lt;img src=&quot;1.jpg&quot; style=&quot;width: 480px!important&quot;&gt;
+img {
+  max-width: 250px;
+}
+</code></pre>
+
+<p>最终图片呈现的效果是 250px。因为 <code>max-width</code> 覆盖了 <code>width</code></p>
+
+<h2 id="toc_1">2.超越最大</h2>
+
+<p>超越最大是指 <code>min-width</code> 覆盖<code>max-width</code>，此规则发生在<code>min-width</code> 和<code>max-width</code> 冲突的时候，例如下面： </p>
+
+<pre><code>.container {
+  min-width: 1400px;
+  max-width: 1200px;
+}
+</code></pre>
+
+
+
+			 
+			<a href="15249101811632.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-04-27T14:36:50+08:00" itemprop="datePublished">2018/4/27</time>
 			</div>
 			<div class="tags">posted in 
@@ -402,202 +558,6 @@ export const convertBase64UrlToBlob = dataURI =&gt; {
 			 
 			<a href="15222272275286.html#more" class="more-link">Read on &rarr;</a>
     		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-03-26T20:02:19+08:00" itemprop="datePublished">2018/3/26</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='Mobile.html'>Mobile</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15220657399375.html" itemprop="url">
-		快应用的实践</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h2 id="toc_0">面向的场景？</h2>
-
-<p>目前快应用在饿了么中的用户场景为： <br/>
-用户在【应用商店】【浏览器】【自带搜索助手】搜索饿了么，出现快应用的条目，用户点击饿了么快应用，无需安装，直接打开快应用。同时会提示用户是否生成桌面图标，并且用户可以收到来自服务进行的推送，体验和原生APP 相差无异。</p>
-
-<h2 id="toc_1">开发工具与条件</h2>
-
-<p>开发快应用的前提是拥有一台九大厂商品牌之一的安卓手机，然后注册快应用联盟账号，接着与该手机对应品牌的开发者账号进行绑定，然后照着快应用的开发文档进行开发，最后上传至快应用官网进行测试审核并分发。目前快应用还不能实现自动统一分发到各个平台去审核。如果想要在每个品牌的应用市场都上架自己的快应用，就需要每个平台的开发者账号都要去填写开发者信息，1-2工作日审核，然后再上架自己的快应用。</p>
-
-
-
-			 
-			<a href="15220657399375.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-03-10T23:23:11+08:00" itemprop="datePublished">2018/3/10</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15225673917175.html" itemprop="url">
-		flex + margin: auto 实现完全居中</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>通常用<code>flex</code> 实现居中的方案都是这样纸的：</p>
-
-<pre><code>header {
-  display: flex;
-  align-items: center;
-  justify-centent： center;
-}
-</code></pre>
-
-<p>但是还有一种很简单的写法：容器元素设置为 <code>flex</code> 布局。子元素只要写 <code>margin: auto</code> 即可。</p>
-
-<pre><code>&lt;header&gt;
- &lt;h1&gt;bamboo&lt;/h1&gt;
-&lt;/header&gt;
-
-header {
-  display: flex;
-}
-h1 {
-  margin: auto;
-}
-
-</code></pre>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-03-02T17:09:41+08:00" itemprop="datePublished">2018/3/2</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='LeetCode.html'>LeetCode</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15199817815367.html" itemprop="url">
-		229. Maximum Subarray</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>Find the contiguous subarray within an array (containing at least one number) which has the largest sum.</p>
-
-<p>For example, given the array [-2,1,-3,4,-1,2,1,-5,4],<br/>
-the contiguous subarray [4,-1,2,1] has the largest sum = 6.</p>
-
-<h3 id="toc_0">嵌套for 循环</h3>
-
-<pre><code>/**
- * @param {number[]} nums
- * @return {number}
- */
-var maxSubArray = function(nums) {
-    var len = nums.length
-    var maxNum = nums[0]
-    var curNum = 0
-    var endSum = nums[len-1]
-    if (len === 1) maxNum = nums[0]
-    else {
-        for (var i = 0; i&lt;len; i++) {
-        curNum = nums[i]
-        maxNum = Math.max(maxNum, curNum)
-        for (var j = i+1; j&lt; len; j++) {
-            curNum = curNum + nums[j]
-            maxNum = Math.max(maxNum, curNum)
-        }
-
-     }
-   }
-   return maxNum
-};
-</code></pre>
-
-<h3 id="toc_1">单个for 循环</h3>
-
-<pre><code>/**
- * @param {number[]} nums
- * @return {number}
- */
-var maxSubArray = function(nums) {
-    var sum = 0;
-    var max = nums[0];
-    for (var i = 0; i &lt; nums.length; i++) {
-        sum += nums[i];
-        if (sum &gt; max)
-            max = sum;
-        if (sum &lt; 0)
-            sum = 0;
-    }
-    return max;
-};
-</code></pre>
-
-<h3 id="toc_2">forEach</h3>
-
-<pre><code>/**
- * @param {number[]} nums
- * @return {number}
- */
-var maxSubArray = function(nums) {
-    var sum = 0;
-    var max = nums[0];
-    nums.forEach((item, index) =&gt; {
-        sum += item
-        if (sum &gt; max)
-            max = sum
-        if (sum &lt; 0)
-            sum = 0    
-    })
-    return max;
-};
-</code></pre>
-
-<h3 id="toc_3">优化后的for 循环</h3>
-
-<pre><code>/**
- * @param {number[]} nums
- * @return {number}
- */
-var maxSubArray = function(nums) {
-    var sum = 0;
-    var max = nums[0];
-    var len = nums.length
-    for (i = 0; i &lt; len; i++) {
-        sum += nums[i];
-        if (sum &gt; max)
-            max = sum;
-        if (sum &lt; 0)
-            sum = 0;
-    }
-    return max;
-
-};
-</code></pre>
-
-
-			
 			
 		</div>
 

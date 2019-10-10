@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>  
 	  
-  	JS - Akira's blog
+  	函数防抖 debounce 和函数节流throttle - Akira's blog
   	
 	</title
 
@@ -130,135 +130,121 @@
 
 			
  <div id="content" class="inner">
-<div itemscope itemtype="http://schema.org/Blog">
 
-
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2017-10-04T17:08:48+08:00" itemprop="datePublished">2017/10/4</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184265283661.html" itemprop="url">
-		~~的应用—— 对象数组Array 根据对象object key的值进行排序</a></h1>
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">函数防抖 debounce 和函数节流throttle</h1>
 		<div class="entry-content" itemprop="articleBody">
-			
-			<h3 id="toc_0">按位非运算符“~”</h3>
+			<h3 id="toc_0">防抖和节流</h3>
 
-<p>简单说按位取反运算符(~) 的 法则 是 <strong>向下取整 后 求负 减1</strong> ( -(x + 1))，如果说 单次 使用 Not 是 求负减1   ，那连续使用 2次 Not 对于 整型 的数字 就是它本身(-(-(x+1) + 1))，那么对于浮点型就是向下取整，布尔型转为数字</p>
+<p>窗口的resize、scroll，输入框内容校验等操作时，如果这些操作处理函数较为复杂或页面频繁重渲染等操作时，如果事件触发的频率无限制，会加重浏览器的负担，导致用户体验非常糟糕。此时我们可以采用debounce（防抖）和throttle（节流）的方式来减少触发的频率，同时又不影响实际效果。</p>
 
-<p>因此，对于浮点数，~~value可以代替parseInt(value)，而且前者效率更高些</p>
+<h2 id="toc_1">1. 函数防抖（debounce）</h2>
 
+<p>动作触发n毫秒之后调用func，如果在n毫秒之内连续触发操作，会以最后一次动作为定时器，n毫秒后再执行func。</p>
 
+<p>当事件被触发时，事件处理函数不会立即执行，而是会被放到setTimeout中延时delay执行；而当delay时间内再次触发事件，则前一个setTimeout生成的ID会被clearTimeout清除，同时生成新的ID。这样，只有在delay时间段内，没有新的event，n毫秒后事件处理函数才会真正执行。</p>
 
-			 
-			<a href="15184265283661.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2017-09-15T13:48:04+08:00" itemprop="datePublished">2017/9/15</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184213845783.html" itemprop="url">
-		CSS In JS</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h4 id="toc_0">概念由来</h4>
-
-<p>最早是2014年11月一个Facebook的员工发布的PPT <a href="https://speakerdeck.com/vjeux/react-css-in-js">React: CSS in JS by vjeux</a> </p>
-
-<p>PPT 上列举了 CSS 目前面临的一些问题：<br/>
-1. Global Namespace （全局命名空间）<br/>
-2. Dependencies （依赖）<br/>
-3. Dead Code Elimination （无用代码移除）<br/>
-4. Minification （压缩）<br/>
-5. Sharing Constants （共享常量）<br/>
-6. Bon-deterministic Resolution （定制化）<br/>
-7. Isolation （隔离）</p>
-
-<p>Vjeux 认为，我们应该使用 Javascript 编写CSS，以获得使用真正的编程语言带来的好处，然后建议我们使用内联样式，他认为类名现在是无意义的，因为我们不再有HTML，都是用JS 和 React 去实现，所以使用内联样式的缺点也就不存在了</p>
-
-
-
-			 
-			<a href="15184213845783.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2017-07-17T15:18:41+08:00" itemprop="datePublished">2017/7/17</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15318119213153.html" itemprop="url">
-		JS 数组查找符合的元素</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>整理了几种方法：</p>
-
-<h3 id="toc_0">indexOf</h3>
-
-<p>使用原生 JavaScript 的Array.prototype.indexOf()<br/>
-例如：该数组为：[a, b , c]</p>
-
-<pre><code>const users = [a, b, c]
-user.indexOf(&quot;a&quot;) // 0
-user.indexOf(&quot;b&quot;) // 1
-user.indexOf(&quot;c&quot;) // 2
-user.indexOf(&quot;d&quot;) // -1
+<pre><code>function debounce (fn, delay){
+  let timeout
+  return function(){
+    const args = arguments
+    clearTimeout(timeout)
+    timeout = setTimeout(() =&gt; {
+      fn.apply(this, args)
+    }, delay)
+  }
+}
 </code></pre>
 
-<p>如果返回是 -1，说明没有找到，如果返回值&gt;=0，表示已找到，并且返回的符合的值得索引</p>
+<pre><code>
+var test = debounce(function (a) {console.log(a)}, 1000)
+test(1) // 不执行
+test(2) // 不执行
+test(3)
+=&gt; 3
+test = null // 不需要时释放内存
+</code></pre>
 
+<h3 id="toc_2">1.1 立即执行的函数防抖</h3>
 
+<p>和函数防抖思想一致，不过其策略是：函数第一次触发时立即执行，在之后的一段时间内，所有被触发的函数都不会被执行，直到出现“一次函数触发后的一段时间内没有触发该函数”，下一次函数触发才会被执行。</p>
 
-			 
-			<a href="15318119213153.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
+<h3 id="toc_3">1.2 场景</h3>
+
+<p>函数防抖可以用在输入框中，若是每次input事件触发时，都发送一个ajax操作，则会造成极大的性能浪费。使用debounce，则只会在用户停止输入后才会发送ajax请求。</p>
+
+<h3 id="toc_4">1.3 缺点</h3>
+
+<p>但是这一方式也有自己的问题：如果事件一直源源不断的触发，则可能导致在很长一段时间内，事件处理程序都不会被调用。在某些场景下，这可能会导致用户体验不佳。比如说，需要为dialog弹窗增加鼠标拖动的功能，如果使用debounce的方法，则可能会导致在鼠标移动期间，弹窗一直不动，直到鼠标停止移动，弹窗会一下子跳到终止位置。这显然是不合理的。</p>
+
+<p>debounce解决了短时间内大量事件触发的问题，只有当delay时间段内，没有新的事件触发，才会真正执行事件处理函数；但是，极端情况下，事件处理函数可能一直得不到执行。</p>
+
+<h2 id="toc_5">2. 函数节流（throttle）</h2>
+
+<p>在n毫秒内最多执行一次func</p>
+
+<pre><code>function throttle (fn, delay) {
+  // 利用闭包变量时效性
+  let timeout
+  let arg
+  return function () {
+    arg = arguments
+    if (!timeout) {
+      timeout = setTimeout(() =&gt; {
+        fn.apply(this, arg)
+        timeout = null
+      }, delay)
+    }
+  }
+}
+
+</code></pre>
+
+<pre><code>var test = throttle(function (a) {console.log(a)}, 1000)
+test(1) // 不执行
+test(2) // 不执行
+test(3)
+=&gt; 3
+test = null // 不需要时释放内存
+</code></pre>
+
+<p>简单来说，函数的节流就是通过闭包保存一个标记（canRun = true），在函数的开头判断这个标记是否为 true，如果为 true 的话就继续执行函数，否则则 return 掉，判断完标记后立即把这个标记设为 false，然后把外部传入的函数的执行包在一个 setTimeout 中，最后在 setTimeout 执行完毕后再把标记设置为 true（这里很关键），表示可以执行下一次的循环了。当 setTimeout 还未执行的时候，canRun 这个标记始终为 false，在开头的判断中被 return 掉。</p>
+
+<pre><code>function throttle(fn, interval = 300) {
+    let canRun = true;
+    return function () {
+        if (!canRun) return;
+        canRun = false;
+        setTimeout(() =&gt; {
+            fn.apply(this, arguments);
+            canRun = true;
+        }, interval);
+    };
+}
+</code></pre>
+
+<h3 id="toc_6">场景</h3>
+
+<p>throttle可以用在滚屏预加载，弹窗拖动等场景。这些场景的特征是，在事件节流的基础上，要求每隔一段时间，至少执行一次事件处理函数。</p>
+
+<h2 id="toc_7">选择合适的方法</h2>
+
+<p>函数节流和函数防抖都能限制函数的高频重复执行，那么应该选用哪一种方法呢？这个需要根据实际情况选择合适的方法，具体情况具体分析。</p>
+
+<p>场景1：联动索引条，使用touchmove事件监听用户在索引条上的触摸移动。由于touchmove事件的触发频率比较高，所以会产生很多无用的函数调用。此时，可以通过使用函数节流，限制事件的触发频率。</p>
+
+<p>情形2：分页组件，监听scroll事件，计算页面滚动位置，滚动到页面最下方时触发下一页的加载。因为scroll事件的频繁触发，需要频繁计算页面位置。因此可以使用函数防抖，在持续滚动结束后只对最后一次scroll事件进行位置计算和判断。</p>
+
+<p>情形3：关注button，防止用户的快速连击。很明显，这个问题用“立即执行的函数防抖”可以轻松解决问题。</p>
+
 		</div>
-
 	</article>
-  
-
-</div>
-<nav id="pagenavi">
-	 <a class="prev" href="JS_1.html">Prev</a>  
-	
-	<div class="center"><a href="archives.html">Blog Archives</a></div>
-
-</nav>
+<div class="share-comment">
 
 </div>
 
 
-
-        </div>
+</div>        </div>
 	
 	</div>
 <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>

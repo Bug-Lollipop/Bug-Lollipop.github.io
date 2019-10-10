@@ -136,6 +136,104 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-01-02T15:43:04+08:00" itemprop="datePublished">2018/1/2</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15184213848817.html" itemprop="url">
+		IOS input readonly 时， 隐藏键盘上的上下箭头</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>业务中在一定场景中会将input 设置为只读状态，在IOS safari上当input 输入框focus 时，仍会出现键盘上的上下箭头，这种用户体验非常不好，如何干掉呢？</p>
+
+<p><code>&lt;input readonly=&quot;readonly&quot;/&gt;</code></p>
+
+<p><img src="media/15184199644363/15184199736759.png" alt=""/></p>
+
+<p>说一下思路，上下箭头是无法通过 设置html属性，meta标签或者监听事件来解决，因为这些箭头并没有可以监听它的事件。</p>
+
+
+
+			 
+			<a href="15184213848817.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2017-12-12T17:04:14+08:00" itemprop="datePublished">2017/12/12</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15184262543059.html" itemprop="url">
+		position: sticky 粘性定位</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h4 id="toc_0">需求</h4>
+
+<p>很多网站在页面滚动的时候，都希望一直显示侧边栏的区域。</p>
+
+<p>以往我们要去实现这个布局，会去用 <code>posiiton: fixed</code> 结合 js 去实现,这就用起来很难受了，<br/>
+为了解决元素在容器中被滚动超过指定的偏移值时，元素在容器内固定在指定位置这种状态，position:sticky诞生了。</p>
+
+
+
+			 
+			<a href="15184262543059.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2017-11-21T17:07:17+08:00" itemprop="datePublished">2017/11/21</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15184264378416.html" itemprop="url">
+		千位分隔符(逗号)表示web网页中的大数字的原因</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h3 id="toc_0">起因</h3>
+
+<p>我们写的金融组的项目，所有的金额数值都是使用千分位分隔符去格式化，但是也没太想过原因，可能觉得是约定俗成吧，看到<a href="http://www.zhangxinxu.com/wordpress/?p=6418">张鑫旭的文章</a>，了解了为什么要这么用：</p>
+
+<h4 id="toc_1">1. 移动端大数值会默认当作电话号码</h4>
+
+<p>在手机等移动设备上，对于超过一定个数的数值，系统默认会当做电话号码处理，而不是一个数字。而且在移动端 这一串数字会自动高亮，并且颜色无法使用CSS重置。</p>
+
+
+
+			 
+			<a href="15184264378416.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2017-11-11T17:08:12+08:00" itemprop="datePublished">2017/11/11</time>
 			</div>
 			<div class="tags">posted in 
@@ -377,114 +475,6 @@ git bisect reset：退出 bisect debug 的状态。</p>
 
 			 
 			<a href="15184266353460.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2017-07-17T15:18:41+08:00" itemprop="datePublished">2017/7/17</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15318119213153.html" itemprop="url">
-		JS 数组查找符合的元素</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>整理了几种方法：</p>
-
-<h3 id="toc_0">indexOf</h3>
-
-<p>使用原生 JavaScript 的Array.prototype.indexOf()<br/>
-例如：该数组为：[a, b , c]</p>
-
-<pre><code>const users = [a, b, c]
-user.indexOf(&quot;a&quot;) // 0
-user.indexOf(&quot;b&quot;) // 1
-user.indexOf(&quot;c&quot;) // 2
-user.indexOf(&quot;d&quot;) // -1
-</code></pre>
-
-<p>如果返回是 -1，说明没有找到，如果返回值&gt;=0，表示已找到，并且返回的符合的值得索引</p>
-
-
-
-			 
-			<a href="15318119213153.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2017-07-12T17:05:47+08:00" itemprop="datePublished">2017/7/12</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184263470634.html" itemprop="url">
-		利用 CSS 的 content 属性 attr 抓取资料</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>需求：鼠标悬浮实现一个提示文字的 tooltip</p>
-
-<p>想必大家都想到了伪元素 after ，但是文字怎么获得呢，又不能用 JS 。</p>
-
-<p>CSS 的伪元素是个很強大的东西，我们可以利用他做很多运用，通常为了做一些效果， <code>content: &quot; &quot;</code>多半会留空，但其实可以在里面写上 <code>attr</code>抓资料。</p>
-
-
-
-			 
-			<a href="15184263470634.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2017-05-12T18:49:49+08:00" itemprop="datePublished">2017/5/12</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184325893639.html" itemprop="url">
-		currentColor - CSS 变量</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>在<a href="http://w3.org/TR/css3-color">CSS 颜色（第三版)</a>规范中，增加了很多颜色关键字，比如<code>lightgoldenrodyellow</code>等，不是很常用，但是我们还得到了一个特殊的关键字<code>currentColor</code>，他是从SVG那里借鉴来的。这个关键字并没有绑定到一个固定的颜色值，而是一直被解析为color。实际上，这个特性让它成为<strong><em>CSS中有史以来的第一个变量</em></strong>。</p>
-
-<p>比如我们想让所有的水平分割线（所有的<code>&lt;hr&gt;</code>元素）自动与文本的颜色保持一致。<br/>
-用currentColor我们可以这样写：</p>
-
-<pre><code class="language-css">hr {
-    height: .5em;
-    backgorund: currentColor;
-}
-</code></pre>
-
-
-
-			 
-			<a href="15184325893639.html#more" class="more-link">Read on &rarr;</a>
     		
 			
 		</div>

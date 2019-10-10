@@ -136,6 +136,74 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-06-02T15:30:14+08:00" itemprop="datePublished">2018/6/2</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15284430142953.html" itemprop="url">
+		应用包打包体积优化</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>一个接手的Vue外部项目，build 非常慢，试着去优化一波。<br/>
+首先使用 webpack-bundle-analyzer 来分析一波是哪些文件造成的：</p>
+
+<h3 id="toc_0">安装</h3>
+
+<p>项目根目录运行：</p>
+
+<pre><code>npm install --save-dev webpack-bundle-analyzer
+</code></pre>
+
+<h3 id="toc_1">配置</h3>
+
+<p>在使用vue-cli生成的脚手架文件中，通过修改build文件夹下的webpack.prod.conf.js：</p>
+
+
+
+			 
+			<a href="15284430142953.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-05-21T13:57:44+08:00" itemprop="datePublished">2018/5/21</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='JS.html'>JS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15268822646837.html" itemprop="url">
+		Vue 首屏加载速度</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<ul>
+<li>缩小vendor 体积，拆包</li>
+<li>外部组件按需加载</li>
+<li>资源放到CDN</li>
+<li>接口</li>
+</ul>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-05-11T18:11:26+08:00" itemprop="datePublished">2018/5/11</time>
 			</div>
 			<div class="tags">posted in 
@@ -450,77 +518,6 @@ console.log(reg2.test(&#39;abcabc&#39;)); // true
 
 			 
 			<a href="15184264921234.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2017-10-04T17:08:48+08:00" itemprop="datePublished">2017/10/4</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184265283661.html" itemprop="url">
-		~~的应用—— 对象数组Array 根据对象object key的值进行排序</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h3 id="toc_0">按位非运算符“~”</h3>
-
-<p>简单说按位取反运算符(~) 的 法则 是 <strong>向下取整 后 求负 减1</strong> ( -(x + 1))，如果说 单次 使用 Not 是 求负减1   ，那连续使用 2次 Not 对于 整型 的数字 就是它本身(-(-(x+1) + 1))，那么对于浮点型就是向下取整，布尔型转为数字</p>
-
-<p>因此，对于浮点数，~~value可以代替parseInt(value)，而且前者效率更高些</p>
-
-
-
-			 
-			<a href="15184265283661.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2017-09-15T13:48:04+08:00" itemprop="datePublished">2017/9/15</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='JS.html'>JS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184213845783.html" itemprop="url">
-		CSS In JS</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h4 id="toc_0">概念由来</h4>
-
-<p>最早是2014年11月一个Facebook的员工发布的PPT <a href="https://speakerdeck.com/vjeux/react-css-in-js">React: CSS in JS by vjeux</a> </p>
-
-<p>PPT 上列举了 CSS 目前面临的一些问题：<br/>
-1. Global Namespace （全局命名空间）<br/>
-2. Dependencies （依赖）<br/>
-3. Dead Code Elimination （无用代码移除）<br/>
-4. Minification （压缩）<br/>
-5. Sharing Constants （共享常量）<br/>
-6. Bon-deterministic Resolution （定制化）<br/>
-7. Isolation （隔离）</p>
-
-<p>Vjeux 认为，我们应该使用 Javascript 编写CSS，以获得使用真正的编程语言带来的好处，然后建议我们使用内联样式，他认为类名现在是无意义的，因为我们不再有HTML，都是用JS 和 React 去实现，所以使用内联样式的缺点也就不存在了</p>
-
-
-
-			 
-			<a href="15184213845783.html#more" class="more-link">Read on &rarr;</a>
     		
 			
 		</div>
