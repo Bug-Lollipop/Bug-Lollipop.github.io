@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	position: fixed not working ? - Akira's blog
+  	
+	</title
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="Akira's blog" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	#sub-nav .social a.weibo {
+		background: url('asset/images/social/weibo.png?1419407210') center no-repeat #4ec4fa;
+		border: 1px solid #4ec4fa;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	article .entry-content table th,article .entry-content table td{ padding: 4px;border-collapse: collapse; border:solid 1px #ddd;}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="asset/icon.jpg" style="width:160px;">
+					</div>
+					<h1><a href="index.html">Akira's blog</a></h1>
+					<p class="subtitle">记录一些技术文章</p>
+					<nav id="main-nav">
+						<ul class="main">
+							<li><a href="index.html">Home</a></li>
+						    <li><a href="all.html">Blog</a></li>
+						    <li><a href="archives.html">Archives</a></li>
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+<!-- 
+			<a class="email" href="mailto:" title="Email">Email</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+			<a class="google" href="https://plus.google.com/" rel="author" title="Google+">Google+</a>
+			<a class="twitter" href="http://twitter.com/" title="Twitter">Twitter</a>
+			<a class="github" href="https://github.com/" title="GitHub">GitHub</a>
+			<a class="coderwall" href="https://coderwall.com/" title="Coderwall">Coderwall</a>
+		    <a class="stackoverflow" href="http://stackoverflow.com/users/" title="StackOverflow"></a>
+			<a class="linkedin" href="http://www.linkedin.com/in/" title="LinkedIn">LinkedIn</a>
+			<a class="pinterest" href="https://pinterest.com/" title="Pinterest">Pinterest</a>
+			<a class="delicious" href="http://delicious.com/" title="Delicious">Delicious</a>
+			<a class="pinboard" href="https://pinboard.in/u:" title="Pinboard">Pinboard</a>
+			<a class="douban" href="https://www.douban.com/people/" title="Douban">Douban</a>
+			<a class="quora" href="https://quora.com/" title="Quora">Quora</a>
+			<a class="instagram" href="https://instagram.com/" title="Instagram">Instagram</a>
+			<a class="behance" href="https://www.behance.net/" title="Behance">Behance</a>
+			<a class="facebook" href="http://www.facebook.com/" title="Facebook">Facebook</a>
+-->	
+								<a class="email" href="mailto:huixiao1008@gmail.com" title="Email">Email</a>
+								<a class="weibo" target="_blank" href="https://weibo.com/u/2554601764" title="weibo">Weibo</a>
+								
+								<a class="github" target="_blank" href="https://github.com/Bug-Lollipop" title="GitHub">GitHub</a>
+								<!-- <a class="twitter" target="_blank" href="http://twitter.com/oulvhai" title="Twitter">Twitter</a> -->
+								<!-- <a class="rss" href="atom.xml" title="RSS">RSS</a> -->
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+
+			<div class="mid-col-container">
+		
+
+			
+ <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">position: fixed not working ?</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<pre><code>&lt;div class=&quot;wrap&quot;&gt;
+    &lt;div class=&quot;inner&quot;&gt;inner&lt;/div&gt;
+  &lt;/div&gt;
+</code></pre>
+
+<pre><code>body {
+background: #f5f5f5;
+}
+.wrap {
+  width: 100px;
+  height: 200px;
+  border: 1px red solid;
+  transform: translate3d(0, 0, 0);
+ // 将把GPU转化为CSS转换的动作，使它们更平滑(更高的FPS)。
+}
+
+.inner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(1, 1, 1, .3);
+}
+</code></pre>
+
+<span id="more"></span><!-- more -->
+
+<p>效果图：<br/>
+<img src="media/15712024843646/15712032571712.jpg" alt=""/></p>
+
+<p>明显看到蒙层没有完全覆盖视口，只在inner 容器上生效，原因是什么呢？</p>
+
+<h3 id="toc_0">解析</h3>
+
+<p>如果 position:fixed 的父元素加了 transform：xxx 之后 position:fixed 会根据父元素定位。<br/>
+原因应该是 transform：xxx 形成了 Stacking Context -- 堆叠上下文。</p>
+
+<p>堆叠上下文（Stacking Context）：堆叠上下文是 HTML 元素的三维概念，这些 HTML 元素在一条假想的相对于面向（电脑屏幕的）视窗或者网页的用户的 z 轴上延伸，HTML 元素依据其自身属性按照优先级顺序占用层叠上下文的空间。<br/>
+堆叠上下文的创建，该元素会影响其子元素的固定定位。设置了 position:fixed 的子元素将不会基于 viewport 定位，而是基于这个父元素。</p>
+
+<p>So，如何触发一个元素形成层叠上下文 ？方法如下（参考自 MDN）：</p>
+
+<ul>
+<li>z-index 值不为 &quot;auto&quot;的 绝对/相对定位元素，</li>
+<li>固定（fixed） / 沾滞（sticky）定位（沾滞定位适配所有移动设备上的浏览器，但老的桌面浏览器不支持）</li>
+<li>z-index 值不为 &quot;auto&quot;的 flex 子项 (flex item)，即：父元素 display: flex|inline-flex，</li>
+<li>z-index 值不为“auto”的grid子项，即：父元素display：grid</li>
+<li>opacity 属性值小于 1 的元素（参考 the specification for opacity）</li>
+<li>transform 属性值不为 &quot;none&quot;的元素</li>
+<li>mix-blend-mode 属性值不为 &quot;normal&quot;的元素，</li>
+<li>transform 属性值不为“none”的元素 </li>
+<li>filter 值不为“none”的元素，</li>
+<li>perspective 值不为“none”的元素</li>
+<li>clip-path 值不为“none”的元素</li>
+<li>mask / mask-image / mask-border不为“none”的元素</li>
+<li>isolation 属性被设置为 &quot;isolate&quot;的元素</li>
+<li>在 will-change 中指定了任意CSS属性</li>
+<li>webkit-overflow-scrolling 属性被设置 &quot;touch&quot;的元素</li>
+<li>contain 属性值为“layout”，“paint”，或者综合值比如“strict”，“content”</li>
+</ul>
+
+<p>上面这些都会影响position:fixed 定位吗？不是<br/>
+会影响的只有：</p>
+
+<ul>
+<li>transform 属性值不为&quot;none&quot;的元素 </li>
+<li>perspective值不为&quot;none&quot;的元素</li>
+<li>在 will-change 中指定为&quot;transform&quot;属性</li>
+<li>filter 属性</li>
+</ul>
+
+<h3 id="toc_1">四个属性影响的原因</h3>
+
+<h4 id="toc_2">transform</h4>
+
+<p>根据 W3C 对 <a href="https://www.w3.org/TR/css-transforms-1/#propdef-transform">transform</a>的描述：</p>
+
+<blockquote>
+<p>Specifying a value other than none for the transform property establishes a new local coordinate system at the element that it is applied to.</p>
+</blockquote>
+
+<p>对于指定了 transform 特性且值不为 none，会将在应用它的元素处建立新的局部坐标系。</p>
+
+<p>因此，position:fixed 的元素，如果其祖先元素存在非 none 的 transform 值 ，那么该元素将相对于设定了 transform 的祖先元素进行定位，此时 <code>position:fixed</code> 定位基于父容器，而不是整个视口。</p>
+
+<h4 id="toc_3">perspective</h4>
+
+<blockquote>
+<p>The use of this property with any value other than none establishes a stacking context. It also establishes a containing block (somewhat similar to position: relative), just like the transform property does.</p>
+</blockquote>
+
+<p>将此属性在非 none 时，将建立层叠上下文。就像 transform 属性一样，它也建立了一个包含块（有点类似于position：relative）。</p>
+
+<h4 id="toc_4">will-change</h4>
+
+<p>根据 W3C 对 <a href="https://drafts.csswg.org/css-will-change/">will-change</a>的描述</p>
+
+<blockquote>
+<p>If any non-initial value of a property would cause the element to generate a containing block for fixed positioned elements, specifying that property in will-change must cause the element to generate a containing block for fixed positioned elements.</p>
+</blockquote>
+
+<p>其思想是，一旦指定了<code>will-change: transform</code>，就应该随意地添加、删除、更改转换，而不需要定义为 fixed 定位的元素后代重新布局。<br/>
+请注意，使用<code>will-change</code>的其他值（例如，opacity, top）不会更改 fixed 定位的后代的位置。</p>
+
+<h4 id="toc_5">filter</h4>
+
+<p>根据 W3C 对 <a href="https://drafts.fxtf.org/filter-effects/#FilterProperty">filter</a> 的描述：</p>
+
+<blockquote>
+<p>A value other than none for the filter property results in the creation of a containing block for absolute and fixed positioned descendants unless the element it applies to is a document root element in the current browsing context. The list of functions are applied in the order provided.</p>
+</blockquote>
+
+<p>对于指定了 filter 样式且值不为 none 时，被应用该样式的元素其子元素中如果有 position 为 absolute 或 fixed 的元素，会为这些元素创建一个新的容器，使得这些绝对或固定定位的元素其定位的基准相对于这个新创建的容器。</p>
+
+		</div>
+	</article>
+<div class="share-comment">
+
+</div>
+
+
+</div>        </div>
+	
+	</div>
+<script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>
