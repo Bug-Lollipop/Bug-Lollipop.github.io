@@ -136,6 +136,45 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-05-14T14:51:05+08:00" itemprop="datePublished">2018/5/14</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15262806655861.html" itemprop="url">
+		没必要的 currentColor 变量</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>我们知道 currentColor 变量是个好东西，可以使用当前 color 计算值，IE9 + 都能支持。 <br/>
+实际上， CSS 中很多属性值默认就是 <code>currentColor</code>的表现，我们一般 无需再画蛇添足去再声明这个关键字。如 <code>border</code> 、 <code>text-shadow</code>、 <code>box-shadow</code> 等，尤其是 <code>border</code>。<br/>
+因此有需要元素 hover 改变颜色和边框的情况，只需要控制 <code>color</code> 的值就可以了，例如：</p>
+
+<pre><code>.btn {
+  color: red;
+  border: 2px solid;
+}
+
+.btn:hover {
+  color: blue;
+}
+</code></pre>
+
+<p>而不需要去这样加：<br/>
+ <code>border: 2px solid currentColor</code></p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-05-11T18:11:26+08:00" itemprop="datePublished">2018/5/11</time>
 			</div>
 			<div class="tags">posted in 
@@ -524,40 +563,6 @@ export const convertBase64UrlToBlob = dataURI =&gt; {
 
 
 			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-03-28T16:53:47+08:00" itemprop="datePublished">2018/3/28</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15222272275286.html" itemprop="url">
-		【译】display: content 是如何工作的</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>原文： <a href="https://bitsofco.de/how-display-contents-works/">https://bitsofco.de/how-display-contents-works/</a></p>
-
-<p>就像经常提到的那样，每个元素在文档流中都是一个长方形的盒子，简单解释是：这个“长方形的盒子” 由两部分组成。第一部分是一个真实的盒子，由border， padding 和 margin 的区域组成。接下来一部分是盒子的内容区域。</p>
-
-<p><img src="media/15222272275286/15222278110836.png" alt=""/></p>
-
-<p>CSS <code>display</code> 属性可以让我们去控制如何在这个盒子中及它的子元素在页面上的排列，我们可以用<code>inline</code> 属性使这个盒子和兄弟元素在同一行，也可以用 <code>table</code> 属性使其呈现表格的状态，我们甚至可以用 <code>absolute</code> 属性，在不同事物 Z 轴上堆叠这个盒子。<br/>
-<code>display</code> 属性有两个可能值可以控制并标记指定的元素生成方框。<code>none</code> 值 会使盒子和内容都不在页面中绘制。另一方面，<code>content</code> 值是一个新的特性，盒子中的文本将会被正常绘制，而围绕在盒子中的框并不会生成。</p>
-
-
-
-			 
-			<a href="15222272275286.html#more" class="more-link">Read on &rarr;</a>
-    		
 			
 		</div>
 

@@ -136,6 +136,47 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-08-22T17:31:05+08:00" itemprop="datePublished">2018/8/22</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='Git.html'>Git</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15349302652828.html" itemprop="url">
+		Git 误操作如何将改动撤销？</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>上一篇我们介绍了<a href="https://zhuanlan.zhihu.com/p/39148914">团队工作的github flow 流程</a>，文中主要介绍了主流程，对于开发人员主流程的提交每天都会高频去做，熟练于心。但是在主流程操作中产生失误，遇到的情况相比主流程频率很低很多，对于这些低频失误，相信可能大部分人第一时间会去 Google，寻求解决方案。因此，本文对大家在 Git 使用中遇到的常见的误操作问题做总结归纳，并提供救命建议。</p>
+
+<p>笔者本来打算在一篇文章中介绍全基本的误操作解决方式，但奈何每一种方式都扩充较多，为了让大家更理解，本篇只着重讲解两个方面的误操作。后续的其他方面的解决方式会以连载的方式分享给大家。</p>
+
+<p>本篇介绍的误操作类型主要有以下两个方面：</p>
+
+<ul>
+<li>commit - 分支提交错误</li>
+<li>reset - 误删代码 </li>
+</ul>
+
+<h2 id="toc_0">分支提交错误</h2>
+
+<p>有时我们会遇到这种情况：我们从develop 分支新建一个名为feat/home 分支去做A功能，然后由于一些其他原因A 功能需要延后，然后我们新建一个分支去做B功能或者C功能，在多分支多功能开发时，就容易出现做B任务时，忘记切换分支，一直等做完了提交了push之后才发现 push 错了远端的分支，并且 push 的改动与该分支需要开发的功能并没有交集，因此我们需要将已经提交错的分支内容回滚并提交push 到正确的远端分支：<br/>
+ 此时有两种情况：</p>
+
+
+
+			 
+			<a href="15349302652828.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-08-15T16:26:28+08:00" itemprop="datePublished">2018/8/15</time>
 			</div>
 			<div class="tags">posted in 
@@ -417,32 +458,6 @@
 			 
 			<a href="15295515875535.html#more" class="more-link">Read on &rarr;</a>
     		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-06-20T17:34:09+08:00" itemprop="datePublished">2018/6/20</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15294872496049.html" itemprop="url">
-		input 输入框的步长问题</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>问题：在使用 <code>&lt;input type=&quot;number&quot;&gt;</code>输入框时，如果输入了当前输入框中值不以1为单位增减的值时会出现：请输入有效值 两个最接近的有效分别为...的提示，这是因为浏览器默认认为<code>&lt;input type=&quot;number&quot;&gt;</code>的步长为1。</p>
-
-<p>解决办法：指定<code>&lt;input type=&quot;number&quot;&gt;</code>输入框的步长，如果增加属性<code>step=&quot;0.01&quot;</code>，可以根据具体的精度调整step属性的值。</p>
-
-
-			
 			
 		</div>
 

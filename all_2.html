@@ -136,6 +136,32 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-06-20T17:34:09+08:00" itemprop="datePublished">2018/6/20</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15294872496049.html" itemprop="url">
+		input 输入框的步长问题</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>问题：在使用 <code>&lt;input type=&quot;number&quot;&gt;</code>输入框时，如果输入了当前输入框中值不以1为单位增减的值时会出现：请输入有效值 两个最接近的有效分别为...的提示，这是因为浏览器默认认为<code>&lt;input type=&quot;number&quot;&gt;</code>的步长为1。</p>
+
+<p>解决办法：指定<code>&lt;input type=&quot;number&quot;&gt;</code>输入框的步长，如果增加属性<code>step=&quot;0.01&quot;</code>，可以根据具体的精度调整step属性的值。</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-06-08T15:30:15+08:00" itemprop="datePublished">2018/6/8</time>
 			</div>
 			<div class="tags">posted in 
@@ -464,45 +490,6 @@ upstream    git@github.com:fe/github-flow.git (push)
   border: 11px solid transparent;
 }
 </code></pre>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-05-14T14:51:05+08:00" itemprop="datePublished">2018/5/14</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15262806655861.html" itemprop="url">
-		没必要的 currentColor 变量</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>我们知道 currentColor 变量是个好东西，可以使用当前 color 计算值，IE9 + 都能支持。 <br/>
-实际上， CSS 中很多属性值默认就是 <code>currentColor</code>的表现，我们一般 无需再画蛇添足去再声明这个关键字。如 <code>border</code> 、 <code>text-shadow</code>、 <code>box-shadow</code> 等，尤其是 <code>border</code>。<br/>
-因此有需要元素 hover 改变颜色和边框的情况，只需要控制 <code>color</code> 的值就可以了，例如：</p>
-
-<pre><code>.btn {
-  color: red;
-  border: 2px solid;
-}
-
-.btn:hover {
-  color: blue;
-}
-</code></pre>
-
-<p>而不需要去这样加：<br/>
- <code>border: 2px solid currentColor</code></p>
 
 
 			

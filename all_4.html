@@ -136,6 +136,40 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-03-28T16:53:47+08:00" itemprop="datePublished">2018/3/28</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15222272275286.html" itemprop="url">
+		【译】display: content 是如何工作的</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>原文： <a href="https://bitsofco.de/how-display-contents-works/">https://bitsofco.de/how-display-contents-works/</a></p>
+
+<p>就像经常提到的那样，每个元素在文档流中都是一个长方形的盒子，简单解释是：这个“长方形的盒子” 由两部分组成。第一部分是一个真实的盒子，由border， padding 和 margin 的区域组成。接下来一部分是盒子的内容区域。</p>
+
+<p><img src="media/15222272275286/15222278110836.png" alt=""/></p>
+
+<p>CSS <code>display</code> 属性可以让我们去控制如何在这个盒子中及它的子元素在页面上的排列，我们可以用<code>inline</code> 属性使这个盒子和兄弟元素在同一行，也可以用 <code>table</code> 属性使其呈现表格的状态，我们甚至可以用 <code>absolute</code> 属性，在不同事物 Z 轴上堆叠这个盒子。<br/>
+<code>display</code> 属性有两个可能值可以控制并标记指定的元素生成方框。<code>none</code> 值 会使盒子和内容都不在页面中绘制。另一方面，<code>content</code> 值是一个新的特性，盒子中的文本将会被正常绘制，而围绕在盒子中的框并不会生成。</p>
+
+
+
+			 
+			<a href="15222272275286.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-03-26T20:02:19+08:00" itemprop="datePublished">2018/3/26</time>
 			</div>
 			<div class="tags">posted in 
@@ -534,37 +568,6 @@ Sun Nov 05 2017 00:00:00 GMT+0800 (CST)
 
 
 			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2018-01-05T18:02:05+08:00" itemprop="datePublished">2018/1/5</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='HTML.html'>HTML</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184261250859.html" itemprop="url">
-		HTML5 桌面通知：Notification API</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>最近授权 gitlab <code>Notification</code> 通知栏，感觉还不错。</p>
-
-<p>相比传统的页面内嵌入固定定位的<code>div</code>来展示通知的方式，<code>Notification</code>的一大特色在于：即便用户在浏览其他页卡或将浏览器最小化，仍然可以及时收到桌面通知。因此工作时也可以收到最新的新闻、新邮件的提醒等等。</p>
-
-<p>也正是由<code>Notification</code>有如此高的优先级，所以浏览器出于安全限制，对通知的弹出增加了用户的授权。</p>
-
-
-
-			 
-			<a href="15184261250859.html#more" class="more-link">Read on &rarr;</a>
-    		
 			
 		</div>
 

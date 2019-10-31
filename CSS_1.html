@@ -136,6 +136,49 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-05-04T15:49:54+08:00" itemprop="datePublished">2018/5/4</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15254201948309.html" itemprop="url">
+		CSS writing-mode 的更多使用</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>writing-mode 通常可以用来实现文字的竖向呈现。<br/>
+属性对应的关键字有下面几个：</p>
+
+<pre><code>writing-mode: horizonal-tb;  /* 默认值，表示文本流是水平方向的，元素是从上向下的*/
+writing-mode: vertical-rl;  /* 表示文本是垂直方向展示 ，阅读顺序是从右向左（right-left）*/
+writing-mode: vertival-lr;  /* 表示文本是垂直方向展示 ，阅读顺序是从左向右（left-right）*/
+</code></pre>
+
+<p>除了竖直排版的时候需要writing-mode，其实还可以实现很多其他的效果。</p>
+
+<p>writing-mode 将页面默认的水平文档流改成了垂直流，基于水平方向的规则都可以适用于垂直方向，比如：</p>
+
+<ul>
+<li>margin 合并</li>
+<li>用 text-align: center  实现图片垂直居中</li>
+<li>使用 text-indent 实现文字下沉效果</li>
+<li>可以实现全兼容的 icon-fonts 图标的旋转效果</li>
+</ul>
+
+<p>具体的各个效果可以看这个 <a href="http://demo.cssworld.cn/">http://demo.cssworld.cn/</a> 中的 （12-2-1） ~ （12-2-5） 里面的代码效果</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-04-28T18:09:41+08:00" itemprop="datePublished">2018/4/28</time>
 			</div>
 			<div class="tags">posted in 
@@ -469,51 +512,6 @@ h1 {
 
 			 
 			<a href="15184262543059.html#more" class="more-link">Read on &rarr;</a>
-    		
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2017-07-17T15:44:35+08:00" itemprop="datePublished">2017/7/17</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='CSS.html'>CSS</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15184266353460.html" itemprop="url">
-		使用CSS计数器</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>昨天和同事讨论一个问题，就是用 <code>ol</code> 有序标签，实现</p>
-
-<pre><code>1、🍎
-2、🍌
-3、🍓
-4、🍇
-</code></pre>
-
-<p>因为正常情况下，默认样式是</p>
-
-<pre><code>1. 🍎
-2. 🍌
-3. 🍓
-4. 🍇
-</code></pre>
-
-<p>而现在的需求是将数字后面的  &quot; . &quot;  替换成&quot; 、&quot;<br/>
-我们知道用<code>list-style-type</code>属性去设置不同的列表样式，但是 这个和我们的需求不一样，我们期望修改的是序列后面的点，而不是序列的样式。<br/>
-在网上翻找，找到了一种解决办法，就是使用CSS计数器</p>
-
-
-
-			 
-			<a href="15184266353460.html#more" class="more-link">Read on &rarr;</a>
     		
 			
 		</div>
