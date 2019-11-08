@@ -213,7 +213,7 @@
 			</div>
 		</div>
 		<h1 class="title" itemprop="name"><a href="15260334862166.html" itemprop="url">
-		千分位分隔符</a></h1>
+		正则实现千分位分隔符，正负数都可</a></h1>
 		<div class="entry-content" itemprop="articleBody">
 			
 			<p>千位分隔符 是很常见的需求，但是输入文本千变万化，如何才能准确添加千分符呢？</p>
@@ -257,7 +257,20 @@
 }
 </code></pre>
 
-<p>这个函数对整、小数都能正确处理。</p>
+<p>这个函数对整、小数都能正确处理。 </p>
+
+<p>如果要支持负数，可以这样</p>
+
+<p><img src="media/15260334862166/15732020658682.jpg" alt=""/></p>
+
+<p>加上上图的反向否定查找：</p>
+
+<pre><code>let miliFormat = (num) =&gt; {  
+return num &amp;&amp; num
+        .toString()
+        .replace(/^-?\d+/, (m) =&gt; m.replace(/(?=(?!^)((?&lt;!-)\d{3})+$)/g, &#39;,&#39;))
+}
+</code></pre>
 
 
 			
